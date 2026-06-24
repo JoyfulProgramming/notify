@@ -1,0 +1,1260 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notify MVP — Phoenix Architecture Plan</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="sidebar">
+  <h1>Notify MVP</h1>
+  <p class="subtitle">Phoenix Architecture · Go · Google Cloud Pub/Sub<br>Draft for review before any code is written</p>
+
+  <div class="group-label">Overview</div>
+  <ul>
+    <li><button class="nav-link" data-target="overview"><span class="bc-dot bc-meta"></span>The MVP in one picture</button></li>
+    <li><button class="nav-link" data-target="scope"><span class="bc-dot bc-meta"></span>Out of scope</button></li>
+  </ul>
+
+  <div class="group-label">Architecture</div>
+  <ul>
+    <li><button class="nav-link" data-target="architecture"><span class="bc-dot bc-meta"></span>Bounded contexts &amp; pace layers</button></li>
+    <li><button class="nav-link" data-target="repo"><span class="bc-dot bc-meta"></span>Repository structure</button></li>
+  </ul>
+
+  <div class="group-label">Conserved layer</div>
+  <ul>
+    <li><button class="nav-link" data-target="contracts"><span class="bc-dot bc-meta"></span>Contracts (schemas)</button></li>
+    <li><button class="nav-link" data-target="auth"><span class="bc-dot bc-meta"></span>Authentication</button></li>
+    <li><button class="nav-link" data-target="invariants"><span class="bc-dot bc-meta"></span>System invariants</button></li>
+  </ul>
+
+  <div class="group-label">Components</div>
+  <ul>
+    <li><button class="nav-link" data-target="ingestor"><span class="bc-dot bc-capture"></span>notification-ingestor</button></li>
+    <li><button class="nav-link" data-target="filter"><span class="bc-dot bc-matching"></span>filter-service</button></li>
+    <li><button class="nav-link" data-target="rules"><span class="bc-dot bc-matching"></span>rule-api</button></li>
+    <li><button class="nav-link" data-target="delivery"><span class="bc-dot bc-delivery"></span>delivery-service</button></li>
+    <li><button class="nav-link" data-target="system-properties"><span class="bc-dot bc-meta"></span>System-wide properties</button></li>
+  </ul>
+
+  <div class="group-label">Build &amp; operate</div>
+  <ul>
+    <li><button class="nav-link" data-target="implementation-order"><span class="bc-dot bc-meta"></span>Implementation order</button></li>
+    <li><button class="nav-link" data-target="dev-env"><span class="bc-dot bc-meta"></span>Dev environment</button></li>
+    <li><button class="nav-link" data-target="live-evals"><span class="bc-dot bc-meta"></span>Live evaluations</button></li>
+    <li><button class="nav-link" data-target="dod"><span class="bc-dot bc-meta"></span>Definition of done</button></li>
+    <li><button class="nav-link" data-target="open-questions"><span class="bc-dot bc-meta"></span>Open questions</button></li>
+  </ul>
+
+  <div class="group-label">Reference</div>
+  <ul>
+    <li><button class="nav-link" data-target="appendix"><span class="bc-dot bc-meta"></span>Appendix</button></li>
+  </ul>
+</nav>
+
+<main class="content">
+
+  <!-- ============ OVERVIEW ============ -->
+  <section class="pane" id="pane-overview">
+    <p class="pane-kicker">Notify MVP</p>
+    <h2>The smallest system that proves the architecture</h2>
+    <p>A minimal but real pipeline that accepts a notification from an app, routes it through Google Cloud Pub/Sub,
+       evaluates it against user-defined rules, and delivers matched notifications to the user via Server-Sent Events.
+       It also supports basic rule management (create, list, delete) via an HTTP API.</p>
+
+    <div class="diagram-wrap">
+<svg class="diagram-svg" viewBox="0 0 880 870" role="img" aria-label="Pipeline overview: client posts to the ingestor, which publishes to notifications.captured; filter-service evaluates against rules and publishes to notifications.matched or notifications.discarded; delivery-service streams matched notifications to the browser via SSE.">
+  <defs>
+    <marker id="arrow-ov" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+    </marker>
+  </defs>
+
+  <rect x="310" y="108" width="280" height="96" rx="8" fill="#4f8a8b22" stroke="#4f8a8b"/>
+  <text x="324" y="126" font-size="12" fill="#1f2d2d" font-weight="600">CAPTURE — what an app generated</text>
+
+  <rect x="40" y="320" width="800" height="320" rx="8" fill="#b8860b22" stroke="#b8860b"/>
+  <text x="55" y="340" font-size="12" fill="#2d2410" font-weight="600">MATCHING — does it qualify for delivery?</text>
+
+  <rect x="310" y="680" width="280" height="190" rx="8" fill="#6b5b9522" stroke="#6b5b95"/>
+  <text x="324" y="698" font-size="12" fill="#241f33" font-weight="600">DELIVERY — worth the user's attention</text>
+
+  <line x1="450" y1="70" x2="450" y2="136" stroke="#555" marker-end="url(#arrow-ov)"/>
+  <text x="460" y="105" font-size="11" fill="#333">POST /notifications</text>
+
+  <line x1="450" y1="186" x2="450" y2="224" stroke="#555" marker-end="url(#arrow-ov)"/>
+  <text x="460" y="208" font-size="11" fill="#333">publishes notification.v1</text>
+
+  <line x1="450" y1="280" x2="450" y2="376" stroke="#555" marker-end="url(#arrow-ov)"/>
+
+  <line x1="270" y1="400" x2="348" y2="403" stroke="#555" stroke-dasharray="4 3" marker-end="url(#arrow-ov)"/>
+
+  <line x1="170" y1="480" x2="170" y2="430" stroke="#555" marker-end="url(#arrow-ov)"/>
+  <text x="178" y="458" font-size="11" fill="#333">writes</text>
+
+  <line x1="270" y1="505" x2="318" y2="502" stroke="#555" marker-end="url(#arrow-ov)"/>
+  <text x="272" y="495" font-size="11" fill="#333">RuleChangedEvent</text>
+
+  <line x1="550" y1="403" x2="608" y2="400" stroke="#555" marker-end="url(#arrow-ov)"/>
+  <text x="558" y="393" font-size="11" fill="#333">matched</text>
+
+  <polyline points="550,420 580,420 580,508 608,508" fill="none" stroke="#555" marker-end="url(#arrow-ov)"/>
+  <text x="584" y="470" font-size="11" fill="#333">no match</text>
+
+  <polyline points="715,428 715,660 450,660 450,712" fill="none" stroke="#555" marker-end="url(#arrow-ov)"/>
+
+  <line x1="450" y1="762" x2="450" y2="790" stroke="#555" marker-end="url(#arrow-ov)"/>
+  <text x="460" y="780" font-size="11" fill="#333">SSE</text>
+
+  <rect x="350" y="20" width="200" height="50" rx="6" fill="#fff" stroke="#888"/>
+  <text x="450" y="40" font-size="12" text-anchor="middle">HTTP client</text>
+  <text x="450" y="56" font-size="11" text-anchor="middle" fill="#666">(simulated app)</text>
+
+  <rect x="340" y="136" width="220" height="50" rx="6" fill="#fff" stroke="#4f8a8b"/>
+  <text x="450" y="166" font-size="12" text-anchor="middle">notification-ingestor</text>
+
+  <rect x="340" y="224" width="220" height="56" rx="8" fill="#f5f5f5" stroke="#888"/>
+  <line x1="348" y1="234" x2="552" y2="234" stroke="#bbb"/>
+  <text x="450" y="258" font-size="11.5" text-anchor="middle">notifications.captured</text>
+
+  <rect x="350" y="378" width="200" height="50" rx="6" fill="#fff" stroke="#b8860b"/>
+  <text x="450" y="408" font-size="12" text-anchor="middle">filter-service</text>
+
+  <rect x="70" y="372" width="200" height="56" rx="8" fill="#f5f5f5" stroke="#888"/>
+  <line x1="78" y1="382" x2="262" y2="382" stroke="#bbb"/>
+  <text x="170" y="402" font-size="11" text-anchor="middle">rule-store</text>
+  <text x="170" y="416" font-size="10" text-anchor="middle" fill="#666">(SQLite)</text>
+
+  <rect x="70" y="480" width="200" height="50" rx="6" fill="#fff" stroke="#b8860b"/>
+  <text x="170" y="510" font-size="12" text-anchor="middle">rule-api</text>
+
+  <rect x="320" y="474" width="200" height="56" rx="8" fill="#f5f5f5" stroke="#888"/>
+  <line x1="328" y1="484" x2="512" y2="484" stroke="#bbb"/>
+  <text x="420" y="508" font-size="11.5" text-anchor="middle">rules.changed</text>
+
+  <rect x="610" y="372" width="210" height="56" rx="8" fill="#f5f5f5" stroke="#888"/>
+  <line x1="618" y1="382" x2="812" y2="382" stroke="#bbb"/>
+  <text x="715" y="406" font-size="11" text-anchor="middle">notifications.matched</text>
+
+  <rect x="610" y="480" width="210" height="56" rx="8" fill="#f5f5f5" stroke="#888"/>
+  <line x1="618" y1="490" x2="812" y2="490" stroke="#bbb"/>
+  <text x="715" y="514" font-size="11" text-anchor="middle">notifications.discarded</text>
+
+  <rect x="340" y="712" width="220" height="50" rx="6" fill="#fff" stroke="#6b5b95"/>
+  <text x="450" y="742" font-size="12" text-anchor="middle">delivery-service</text>
+
+  <rect x="340" y="790" width="220" height="50" rx="6" fill="#fff" stroke="#6b5b95"/>
+  <text x="450" y="820" font-size="12" text-anchor="middle">Browser</text>
+</svg>
+    </div>
+
+    <h3>What the MVP supports</h3>
+    <ol>
+      <li>Accepts a notification from an app (simulated via HTTP POST — no Android required yet)</li>
+      <li>Routes it through Google Cloud Pub/Sub</li>
+      <li>Evaluates it against user-defined rules (filter-service + rule-api)</li>
+      <li>Delivers matched notifications to the user via SSE</li>
+      <li>Supports basic rule management (create, list, delete) via HTTP API</li>
+    </ol>
+
+    <div class="spec-box">
+      <p>This is real software, not a prototype. The conserved layer built here is the same one that survives into
+         v2, v3, and beyond — every component must pass the <strong>deletion test</strong>: can it be completely
+         regenerated from its one-sentence spec plus the shared invariants?</p>
+    </div>
+  </section>
+
+  <!-- ============ SCOPE ============ -->
+  <section class="pane" id="pane-scope">
+    <p class="pane-kicker">Section 2</p>
+    <h2>What we are <em>not</em> building yet</h2>
+    <p>Listed explicitly so the plan stays honest. None of these invalidate the architecture — the conserved layer
+       is designed to accommodate them as additions, not changes.</p>
+
+    <table class="scope-table">
+      <thead><tr><th>Out of scope</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Android notification listener</td><td>Fast layer — add after the cloud pipeline is stable</td></tr>
+        <tr><td>Projects and schedules</td><td>Core domain complexity — adds significantly to the rule schema; add in v2</td></tr>
+        <tr><td>Contacts, groups, specificity rules</td><td>Same — powerful domain logic, layered on top of basic rules</td></tr>
+        <tr><td>FCM push (mobile delivery)</td><td>Add after SSE delivery is working</td></tr>
+        <tr><td>Authentication / multi-user</td><td>Start with a single hardcoded <code>user_id = "local"</code></td></tr>
+        <tr><td>Focus mode / batching</td><td>Post-MVP feature</td></tr>
+        <tr><td>Tasks / Intend integration</td><td>Post-MVP feature</td></tr>
+        <tr><td>Notification importance / Eisenhower classification</td><td>Add in v2 once projects exist</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ ARCHITECTURE ============ -->
+  <section class="pane" id="pane-architecture">
+    <p class="pane-kicker">Section 3</p>
+    <h2>Bounded contexts &amp; pace layers</h2>
+    <p>The components are deliberately separated by the Pub/Sub boundary. A developer who has never seen the
+       filter-service code can replace it entirely — as long as the replacement subscribes to
+       <code>notifications.captured</code> and publishes to <code>notifications.matched</code> or
+       <code>notifications.discarded</code> according to the same contracts.</p>
+
+    <div class="diagram-wrap">
+<svg class="diagram-svg" viewBox="0 0 1000 380" role="img" aria-label="Three bounded contexts: Capture context containing notification-ingestor, publishing notifications.captured to the Matching context (filter-service, rule-api), which publishes notifications.matched to the Delivery context (delivery-service).">
+  <defs>
+    <marker id="arrow-arch" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+    </marker>
+  </defs>
+
+  <rect x="20" y="30" width="260" height="300" rx="8" fill="#4f8a8b22" stroke="#4f8a8b"/>
+  <text x="35" y="55" font-size="13" font-weight="600" fill="#1f2d2d">CAPTURE CONTEXT</text>
+  <text x="35" y="72" font-size="10.5" fill="#1f2d2d">notification, source app,</text>
+  <text x="35" y="86" font-size="10.5" fill="#1f2d2d">ingestion, dedup</text>
+  <rect x="40" y="185" width="220" height="50" rx="6" fill="#fff" stroke="#4f8a8b"/>
+  <text x="150" y="215" font-size="12" text-anchor="middle">notification-ingestor</text>
+
+  <rect x="380" y="30" width="260" height="300" rx="8" fill="#b8860b22" stroke="#b8860b"/>
+  <text x="395" y="55" font-size="13" font-weight="600" fill="#2d2410">MATCHING CONTEXT</text>
+  <text x="395" y="72" font-size="10.5" fill="#2d2410">rule, match, specificity,</text>
+  <text x="395" y="86" font-size="10.5" fill="#2d2410">evaluation</text>
+  <rect x="400" y="130" width="220" height="50" rx="6" fill="#fff" stroke="#b8860b"/>
+  <text x="510" y="160" font-size="12" text-anchor="middle">filter-service</text>
+  <rect x="400" y="210" width="220" height="50" rx="6" fill="#fff" stroke="#b8860b"/>
+  <text x="510" y="240" font-size="12" text-anchor="middle">rule-api</text>
+
+  <rect x="740" y="30" width="260" height="300" rx="8" fill="#6b5b9522" stroke="#6b5b95"/>
+  <text x="755" y="55" font-size="13" font-weight="600" fill="#241f33">DELIVERY CONTEXT</text>
+  <text x="755" y="72" font-size="10.5" fill="#241f33">notification, delivery,</text>
+  <text x="755" y="86" font-size="10.5" fill="#241f33">acknowledgement</text>
+  <rect x="760" y="185" width="220" height="50" rx="6" fill="#fff" stroke="#6b5b95"/>
+  <text x="870" y="215" font-size="12" text-anchor="middle">delivery-service</text>
+
+  <line x1="280" y1="210" x2="380" y2="210" stroke="#555" marker-end="url(#arrow-arch)"/>
+  <text x="330" y="190" font-size="10.5" text-anchor="middle">notifications.captured</text>
+  <text x="330" y="203" font-size="10.5" text-anchor="middle">(notification.v1)</text>
+
+  <line x1="640" y1="210" x2="740" y2="210" stroke="#555" marker-end="url(#arrow-arch)"/>
+  <text x="690" y="190" font-size="10.5" text-anchor="middle">notifications.matched</text>
+  <text x="690" y="203" font-size="10.5" text-anchor="middle">(notification.v1)</text>
+</svg>
+    </div>
+
+    <p>The same word — <strong>Notification</strong> — appears in all three contexts. The Pub/Sub topic is what
+       makes the meaning unambiguous:</p>
+    <ul>
+      <li><code>notifications.captured</code> — a Capture-context Notification: what an app generated</li>
+      <li><code>notifications.matched</code> — a Delivery-context Notification: cleared by the Matching context</li>
+      <li><code>notifications.discarded</code> — a Notification that the Matching context ruled out</li>
+    </ul>
+
+    <div class="callout-grid two-col">
+      <div class="callout">
+        <header>Why rule-api belongs in Matching</header>
+        <p>The Rule is the core aggregate of the Matching context. filter-service evaluates it; rule-api manages
+           its lifecycle. Placing rule-api in Delivery would split the Rule aggregate's ownership across contexts.</p>
+      </div>
+      <div class="callout">
+        <header>Why filter-service isn't a pure context mapper</header>
+        <p>It does translate at the Capture boundary, but it also owns evaluation logic using Matching's Rule
+           aggregate — making it a full member of the Matching context, not a stateless translator.</p>
+      </div>
+    </div>
+
+    <h3>Pace layers</h3>
+    <p>Layers that change at different speeds. The slow layer is the conserved boundary; almost nothing in this
+       plan touches it once code-writing begins.</p>
+
+    <div class="pace-layers">
+      <div class="pace-layer slow">
+        <h4>🐢 Slow layer — almost never changes</h4>
+        <ul>
+          <li><code class="inline-path">pkg/contracts/notification.go</code> — notification.v1 schema</li>
+          <li><code class="inline-path">pkg/contracts/rule.go</code> — Rule schema</li>
+          <li><code class="inline-path">pkg/contracts/events.go</code> — rule-changed event schema</li>
+          <li>Pub/Sub topic names — <code>notifications.captured</code>, <code>notifications.matched</code>, <code>notifications.discarded</code>, <code>rules.changed</code></li>
+        </ul>
+      </div>
+      <div class="pace-layer mid">
+        <h4>🚶 Mid layer — changes monthly (the services)</h4>
+        <ul>
+          <li><code class="inline-path">cmd/ingestor/</code> — HTTP → Pub/Sub <em>(Capture)</em></li>
+          <li><code class="inline-path">cmd/filter/</code> — Pub/Sub → rule evaluation → Pub/Sub <em>(Matching)</em></li>
+          <li><code class="inline-path">cmd/rules/</code> — Rule CRUD HTTP API <em>(Matching)</em></li>
+          <li><code class="inline-path">cmd/deliver/</code> — Pub/Sub → SSE <em>(Delivery)</em></li>
+        </ul>
+      </div>
+      <div class="pace-layer fast">
+        <h4>🏃 Fast layer — changes weekly or daily</h4>
+        <ul>
+          <li><code class="inline-path">web/</code> — minimal HTML/SSE page</li>
+          <li><code class="inline-path">cmd/deliver/</code> SSE handler — adapts as browser requirements change</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REPO STRUCTURE ============ -->
+  <section class="pane" id="pane-repo">
+    <p class="pane-kicker">Section 4</p>
+    <h2>Repository structure</h2>
+    <pre><code class="language-plaintext">notify/
+├── pkg/
+│   └── contracts/
+│       ├── notification.go    # notification.v1 — the slow layer
+│       ├── rule.go            # Rule schema — the slow layer
+│       └── events.go          # rule-changed event
+│
+├── cmd/
+│   ├── ingestor/main.go
+│   ├── filter/main.go
+│   ├── rules/main.go
+│   └── deliver/main.go
+│
+├── internal/
+│   ├── pubsubclient/          # thin wrapper, not conserved layer
+│   └── rulestore/             # SQLite adapter
+│
+├── web/
+│   └── index.html             # minimal SSE display page
+│
+├── evaluations/               # durable evaluations — contract & property tests
+│   ├── contract_ingestor_test.go
+│   ├── contract_filter_test.go
+│   ├── contract_rules_test.go
+│   ├── contract_delivery_test.go
+│   └── property_test.go
+│
+├── docker-compose.yml         # Pub/Sub emulator + SQLite volume
+├── go.mod
+└── go.sum</code></pre>
+    <div class="spec-box">
+      <p>The <code>evaluations/</code> directory contains only durable evaluations — tests that speak exclusively
+         in public contracts. These do not import any <code>cmd/</code> or <code>internal/</code> package. They are
+         the evaluations that survive any code regeneration.</p>
+    </div>
+  </section>
+
+  <!-- ============ CONTRACTS ============ -->
+  <section class="pane" id="pane-contracts">
+    <p class="pane-kicker">Section 5 · The conserved layer</p>
+    <h2>pkg/contracts</h2>
+    <p>These structs are the slow layer. Changing them requires a new schema version.</p>
+
+    <h3>notification.v1</h3>
+    <pre><code class="language-go">type Notification struct {
+    ID              string            `json:"id"`               // UUID v7, dedup key
+    UserID          string            `json:"user_id"`          // set by ingestor; trusted downstream
+    SourceApp       string            `json:"source_app"`       // e.g. "com.whatsapp"
+    SourceAccount   string            `json:"source_account"`   // account within app; "" = unspecified
+    SourceID        string            `json:"source_id"`        // item id in source system; "" = unavailable
+    SentBy          string            `json:"sent_by"`          // phone/email/username/bot id; "" = unspecified
+    SentIn          string            `json:"sent_in"`          // group/channel/thread; "" = direct/none
+    Title           string            `json:"title"`            // may be empty
+    Body            string            `json:"body"`             // may be empty
+    DeviceID        string            `json:"device_id"`        // UUID identifying source device
+    DeviceTimestamp time.Time         `json:"device_timestamp"` // when it appeared on device
+    ReceivedAt      time.Time         `json:"received_at"`      // when this system first ingested it
+    Metadata        map[string]string `json:"metadata"`         // arbitrary k/v; no service may fail on unknown keys
+}</code></pre>
+    <ul>
+      <li><strong>ID</strong> is assigned once at ingestion and never changes — the dedup key for the entire system.</li>
+      <li><strong>UserID</strong> is set by the ingestor from the authenticated token. No service may accept an empty <code>user_id</code>.</li>
+      <li><strong>SourceAccount</strong> + <strong>SourceApp</strong> together uniquely identify the origin.</li>
+      <li><strong>SentBy</strong> / <strong>SentIn</strong> enable the full specificity rule set (sender+group) in v2 — the fields exist now so the schema doesn't need versioning later.</li>
+      <li>No service may error or panic on an unknown <code>metadata</code> key.</li>
+      <li>Adding optional fields is backward-compatible. Removing/renaming fields requires <code>notification.v2</code>.</li>
+    </ul>
+
+    <h3>Rule schema</h3>
+    <pre><code class="language-go">type Rule struct {
+    ID            string // UUID, stable identifier
+    UserID        string // owner; "local" for MVP
+    SourceApp     string // see matching semantics
+    SourceAccount string // see matching semantics
+    Title         string // see matching semantics
+}
+// No Action field in v1 — a rule means "surface this."
+// Matching any rule = deliver. No matching rule = discard.</code></pre>
+
+    <table class="scope-table">
+      <thead><tr><th>Field value</th><th>Semantics</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><code>""</code></td><td>empty — ignore this field; matches any value</td><td><code>SourceApp: ""</code> matches any app</td></tr>
+        <tr><td><code>"com.google.gmail"</code></td><td>exact — field must equal this value exactly</td><td>matches Gmail only</td></tr>
+        <tr><td><code>"com.google.*"</code></td><td>pattern — glob match (<code>*</code> = any chars)</td><td>matches any Google app</td></tr>
+      </tbody>
+    </table>
+    <p>No <code>Priority</code> field ever exists. When multiple rules match, specificity is derived purely from
+       the rule's shape — see <button class="inline-link" data-target="invariants">INV-6</button>.</p>
+
+    <h3>rule-changed event</h3>
+    <pre><code class="language-go">type RuleChangedKind string
+const (
+    RuleCreated RuleChangedKind = "CREATED"
+    RuleUpdated RuleChangedKind = "UPDATED"
+    RuleDeleted RuleChangedKind = "DELETED"
+)
+
+type RuleChangedEvent struct {
+    EventID   string          `json:"event_id"`
+    Kind      RuleChangedKind `json:"kind"`
+    Rule      Rule            `json:"rule"`
+    ChangedAt time.Time       `json:"changed_at"`
+}</code></pre>
+
+    <h3>Pub/Sub topic names — the boundary</h3>
+    <table class="scope-table">
+      <thead><tr><th>Topic</th><th>Marks</th><th>Published by</th></tr></thead>
+      <tbody>
+        <tr><td><code>notifications.captured</code></td><td>Capture → Matching boundary</td><td>ingestor</td></tr>
+        <tr><td><code>notifications.matched</code></td><td>Matching → Delivery boundary</td><td>filter-service</td></tr>
+        <tr><td><code>notifications.discarded</code></td><td>Matching context — ruled out</td><td>filter-service</td></tr>
+        <tr><td><code>rules.changed</code></td><td>Matching context — RuleChangedEvent stream</td><td>rule-api</td></tr>
+      </tbody>
+    </table>
+    <div class="spec-box">
+      <p>Only the filter-service may publish to <code>notifications.matched</code> or <code>notifications.discarded</code>.
+         Any service that publishes to or subscribes from these topics is implicitly depending on this contract.</p>
+    </div>
+  </section>
+
+  <!-- ============ AUTH ============ -->
+  <section class="pane" id="pane-auth">
+    <p class="pane-kicker">Section 5 · Conserved decision</p>
+    <h2>Authentication architecture</h2>
+    <p>Decided in the conserved layer because the pattern affects <code>user_id</code> on every Notification and
+       the delivery-service fan-out model. Getting this wrong later requires a schema migration.</p>
+
+    <div class="spec-box">
+      <p><strong>The pattern:</strong> authenticate once at the boundary, propagate identity on the message.</p>
+    </div>
+
+    <div class="diagram-wrap">
+<svg class="diagram-svg" viewBox="0 0 1040 580" role="img" aria-label="Sequence diagram: client posts to ingestor with a bearer token; ingestor stamps user_id and publishes; filter-service loads rules and publishes matched notifications; browser connects to delivery-service which streams SSE events filtered by user_id.">
+  <defs>
+    <marker id="arrow-seq" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+    </marker>
+  </defs>
+
+  <!-- lifelines -->
+  <g stroke="#bbb" stroke-dasharray="3 3">
+    <line x1="60" y1="45" x2="60" y2="540"/>
+    <line x1="213" y1="45" x2="213" y2="540"/>
+    <line x1="367" y1="45" x2="367" y2="540"/>
+    <line x1="520" y1="45" x2="520" y2="540"/>
+    <line x1="673" y1="45" x2="673" y2="540"/>
+    <line x1="827" y1="45" x2="827" y2="540"/>
+    <line x1="980" y1="45" x2="980" y2="540"/>
+  </g>
+
+  <!-- headers -->
+  <g font-size="11.5" text-anchor="middle">
+    <rect x="10" y="15" width="100" height="30" rx="4" fill="#fff" stroke="#888"/>
+    <text x="60" y="35">Client</text>
+    <rect x="158" y="15" width="110" height="30" rx="4" fill="#fff" stroke="#4f8a8b"/>
+    <text x="213" y="35">notification-ingestor</text>
+    <rect x="312" y="15" width="110" height="30" rx="4" fill="#f5f5f5" stroke="#888"/>
+    <text x="367" y="35">notifications.captured</text>
+    <rect x="465" y="15" width="110" height="30" rx="4" fill="#fff" stroke="#b8860b"/>
+    <text x="520" y="35">filter-service</text>
+    <rect x="618" y="15" width="110" height="30" rx="4" fill="#f5f5f5" stroke="#888"/>
+    <text x="673" y="35">notifications.matched</text>
+    <rect x="772" y="15" width="110" height="30" rx="4" fill="#fff" stroke="#6b5b95"/>
+    <text x="827" y="35">delivery-service</text>
+    <rect x="930" y="15" width="100" height="30" rx="4" fill="#fff" stroke="#888"/>
+    <text x="980" y="35">Browser</text>
+  </g>
+
+  <!-- 1. Client -> Ingestor -->
+  <line x1="60" y1="80" x2="213" y2="80" stroke="#555" marker-end="url(#arrow-seq)"/>
+  <text x="136" y="72" font-size="10.5" text-anchor="middle">POST /notifications (Bearer token)</text>
+
+  <!-- 2. Note over Ingestor -->
+  <rect x="148" y="100" width="130" height="34" rx="4" fill="#fff8e1" stroke="#e0d090"/>
+  <text x="213" y="113" font-size="9.5" text-anchor="middle">validates token → resolves user_id</text>
+  <text x="213" y="126" font-size="9.5" text-anchor="middle">stamps user_id on message</text>
+
+  <!-- 3. Ingestor -> Raw -->
+  <line x1="213" y1="165" x2="367" y2="165" stroke="#555" marker-end="url(#arrow-seq)"/>
+  <text x="290" y="157" font-size="10.5" text-anchor="middle">publish (body.user_id + attrs.user_id)</text>
+
+  <!-- 4. Raw -> Filter -->
+  <line x1="367" y1="205" x2="520" y2="205" stroke="#555" marker-end="url(#arrow-seq)"/>
+  <text x="443" y="197" font-size="10.5" text-anchor="middle">deliver</text>
+
+  <!-- 5. Note over Filter -->
+  <rect x="455" y="225" width="130" height="34" rx="4" fill="#fff8e1" stroke="#e0d090"/>
+  <text x="520" y="245" font-size="9.5" text-anchor="middle">loads rules WHERE user_id = "..."</text>
+
+  <!-- 6. Filter -> Filtered -->
+  <line x1="520" y1="290" x2="673" y2="290" stroke="#555" marker-end="url(#arrow-seq)"/>
+  <text x="596" y="282" font-size="10.5" text-anchor="middle">publish (attrs.user_id preserved)</text>
+
+  <!-- 7. Browser -> Deliver -->
+  <line x1="980" y1="330" x2="827" y2="330" stroke="#555" marker-end="url(#arrow-seq)"/>
+  <text x="903" y="322" font-size="10.5" text-anchor="middle">GET /events (Bearer token)</text>
+
+  <!-- 8. Note over Deliver -->
+  <rect x="762" y="350" width="130" height="34" rx="4" fill="#fff8e1" stroke="#e0d090"/>
+  <text x="827" y="363" font-size="9.5" text-anchor="middle">validates token once per connection</text>
+  <text x="827" y="376" font-size="9.5" text-anchor="middle">resolves user_id</text>
+
+  <!-- 9. Filtered -> Deliver -->
+  <line x1="673" y1="430" x2="827" y2="430" stroke="#555" marker-end="url(#arrow-seq)"/>
+  <text x="750" y="422" font-size="10.5" text-anchor="middle">subscription filter: attributes.user_id="..."</text>
+
+  <!-- 10. Deliver -> Browser -->
+  <line x1="827" y1="470" x2="980" y2="470" stroke="#555" marker-end="url(#arrow-seq)"/>
+  <text x="903" y="462" font-size="10.5" text-anchor="middle">SSE event</text>
+</svg>
+    </div>
+
+    <h3>Delivery-service fan-out model (locked in now)</h3>
+    <p>When multiple users are connected, delivery-service must not fan out every <code>notifications.matched</code>
+       message to every client. The correct approach is <strong>Pub/Sub message filtering on the <code>user_id</code>
+       attribute</strong> — each user's SSE session uses a subscription filtered to <code>attributes.user_id = "&lt;id&gt;"</code>.
+       This scales without per-user topics.</p>
+    <div class="topic-flow">notifications.matched topic
+  subscription: deliver-user-abc123  filter: attributes.user_id="abc123"
+  subscription: deliver-user-def456  filter: attributes.user_id="def456"</div>
+    <p>The ingestor must set <code>user_id</code> as both a JSON field on the message body <strong>and</strong> as
+       a Pub/Sub message attribute when publishing — this is a publishing contract, not just a schema contract.</p>
+
+    <h3>MVP implementation</h3>
+    <p>Trivially simple, architecturally complete:</p>
+    <pre><code class="language-plaintext">API key in Authorization header
+  → static map: {"local-key": "local"}
+  → user_id = "local"</code></pre>
+    <p>The infrastructure is real (middleware validates the header, <code>user_id</code> is stamped, subscriptions
+       are filtered) but the implementation is a one-liner. Swapping in JWT validation changes only the
+       token-validation function — nothing else in the architecture moves.</p>
+  </section>
+
+  <!-- ============ INVARIANTS ============ -->
+  <section class="pane" id="pane-invariants">
+    <p class="pane-kicker">Section 6 · The constitution of the system</p>
+    <h2>System invariants</h2>
+    <p>These must hold across <strong>any</strong> implementation, in any language, across any regeneration cycle.
+       Every contract test and property test maps to one of these.</p>
+
+    <div class="behavior-card">
+      <header>INV-1 — Nothing is silently lost</header>
+      <p>A notification that enters the Capture context is never silently lost. It is either present in
+         <code>notifications.matched</code>, present in <code>notifications.discarded</code>, or causes an explicit
+         error. It is never simply absent.</p>
+    </div>
+    <div class="behavior-card">
+      <header>INV-2 — Rules are the single source of truth</header>
+      <p>No implementation may place a notification on <code>notifications.matched</code> unless at least one rule
+         matches it.</p>
+    </div>
+    <div class="behavior-card">
+      <header>INV-3 — At most one delivery per client per session</header>
+      <p>A notification in the Delivery context is surfaced at most once per SSE client per session. Duplicates are
+         suppressed by id.</p>
+    </div>
+    <div class="behavior-card">
+      <header>INV-4 — Deterministic routing</header>
+      <p>The filter-service (Matching BC) is deterministic: given the same Capture-context notification and the
+         same set of active rules, it always produces the same routing decision.</p>
+    </div>
+    <div class="behavior-card">
+      <header>INV-5 — Rule changes apply prospectively only</header>
+      <p>A rule change takes effect for all future notifications immediately. It does not retroactively promote
+         already-discarded notifications into the Delivery context.</p>
+    </div>
+    <div class="behavior-card">
+      <header>INV-6 — Any match delivers; specificity is reserved for v2</header>
+      <p>In v1, all rules deliver. If any rule matches, it is delivered. Multiple matching rules cannot conflict —
+         they all say the same thing, so specificity resolution is not needed in v1.</p>
+      <p>Specificity rules are documented here for v2, when DISCARD (exception) rules introduce conflicts:</p>
+      <ol>
+        <li>More fields populated = more specific: <code>SourceApp+SourceAccount+Title</code> &gt; <code>SourceApp+SourceAccount</code> &gt; <code>SourceApp+Title</code> &gt; <code>SourceApp</code> only &gt; all empty</li>
+        <li>Within the same field: exact &gt; pattern &gt; empty</li>
+      </ol>
+      <p>These two dimensions combine. No user-assigned priority number ever exists — specificity is always derived
+         from the rule's shape alone.</p>
+    </div>
+  </section>
+
+  <!-- ============ INGESTOR ============ -->
+  <section class="pane" id="pane-ingestor">
+    <p class="pane-kicker bc-capture">Capture bounded context</p>
+    <h2>notification-ingestor</h2>
+    <div class="spec-box">
+      <p>Accepts a JSON notification body via <code>POST /notifications</code>, authenticates the caller and stamps
+         <code>user_id</code>, assigns an <code>id</code> (UUID v7) and <code>received_at</code> if absent,
+         validates against <code>notification.v1</code>, and publishes to <code>notifications.captured</code> with
+         <code>user_id</code> as a message attribute.</p>
+    </div>
+    <div class="invariant-tags"><span class="tag">INV-1</span></div>
+
+    <h3>Behavioral examples</h3>
+    <div class="behavior-card">
+      <header>Basic ingestion publishes to notifications.captured</header>
+      <ol>
+        <li>Given the ingestor is running</li>
+        <li>When I POST <code>{"source_app": "com.whatsapp", "title": "Alice: hey", "body": "Are you free?"}</code> to <code>/notifications</code></li>
+        <li class="then">Then the response status is 202, the body contains an <code>id</code>, and a message appears on <code>notifications.captured</code> within 2s carrying that same id</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Rejects malformed input</header>
+      <ol>
+        <li>When I POST an empty body to <code>/notifications</code></li>
+        <li class="then">Then the response status is 400</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Assigns received_at</header>
+      <ol>
+        <li>When I POST a notification without a <code>received_at</code> field</li>
+        <li class="then">Then the published message's <code>received_at</code> is within 1s of the current time</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Deduplicates by id</header>
+      <ol>
+        <li>Given a notification with id "abc-123" has already been published</li>
+        <li>When I POST the same id again</li>
+        <li class="then">Then only one message appears on <code>notifications.captured</code></li>
+      </ol>
+    </div>
+
+    <h3>Contract test</h3>
+    <pre><code class="language-go">func TestContract_IngestorAssignsReceivedAt(t *testing.T) {
+    before := time.Now()
+    id := publishViaHTTP(t, Notification{SourceApp: "com.whatsapp", Title: "Test"})
+    msg := waitForMessageOnTopic(t, "notifications.captured", id, 3*time.Second)
+    after := time.Now()
+
+    if msg.ReceivedAt.Before(before) || msg.ReceivedAt.After(after) {
+        t.Fatalf("received_at %v is outside the expected window [%v, %v]", msg.ReceivedAt, before, after)
+    }
+}</code></pre>
+
+    <h3>Provenance</h3>
+    <div class="provenance-grid">
+      <div class="prov-why">
+        <strong>Why it exists</strong>
+        <p>The entry point for the Capture bounded context and the single auth boundary. Separating this from
+           filter-service means filter-service can be regenerated freely without risk of losing or mangling
+           incoming notifications.</p>
+      </div>
+      <div class="prov-rejected">
+        <strong>Rejected alternatives</strong>
+        <p><em>Filter directly on write:</em> couples validation to business logic, increasing blast radius on
+           regeneration. <em>Let clients publish directly to Pub/Sub:</em> removes the validation boundary entirely.</p>
+      </div>
+      <div class="prov-assumptions">
+        <strong>Active assumptions</strong>
+        <p>A single instance is sufficient for MVP. HTTP is the ingestion protocol (not gRPC, not Android Intents).
+           id uniqueness is enforced by dedup, not a uniqueness constraint.</p>
+      </div>
+      <div class="prov-wrong">
+        <strong>What would make this wrong</strong>
+        <p>If the Android listener must publish directly to Pub/Sub (bypassing the ingestor), the validation
+           contract needs to live elsewhere — perhaps a Pub/Sub schema registry.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FILTER ============ -->
+  <section class="pane" id="pane-filter">
+    <p class="pane-kicker bc-matching">Matching bounded context</p>
+    <h2>filter-service</h2>
+    <div class="spec-box">
+      <p>Subscribes to <code>notifications.captured</code>, loads the owner's rules from the rule store, and publishes
+         the notification to <code>notifications.matched</code> if any rule matches, or
+         <code>notifications.discarded</code> if none match.</p>
+    </div>
+    <div class="invariant-tags">
+      <span class="tag">INV-1</span><span class="tag">INV-2</span><span class="tag">INV-4</span>
+      <span class="tag">INV-5</span><span class="tag">INV-6</span>
+    </div>
+
+    <div class="diagram-wrap">
+<svg class="diagram-svg" viewBox="0 0 760 280" role="img" aria-label="Filter decision diagram: a notification is checked against the user's rules; a match routes it to notifications.matched, no match routes it to notifications.discarded.">
+  <defs>
+    <marker id="arrow-filt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+    </marker>
+  </defs>
+
+  <line x1="180" y1="135" x2="260" y2="135" stroke="#555" marker-end="url(#arrow-filt)"/>
+  <line x1="330" y1="66" x2="330" y2="92" stroke="#555" stroke-dasharray="4 3" marker-end="url(#arrow-filt)"/>
+  <text x="340" y="82" font-size="10.5" fill="#333">load</text>
+  <line x1="372" y1="108" x2="520" y2="78" stroke="#555" marker-end="url(#arrow-filt)"/>
+  <text x="440" y="82" font-size="11" fill="#333">yes</text>
+  <line x1="372" y1="162" x2="520" y2="205" stroke="#555" marker-end="url(#arrow-filt)"/>
+  <text x="440" y="198" font-size="11" fill="#333">no</text>
+
+  <rect x="20" y="110" width="160" height="50" rx="6" fill="#fff" stroke="#888"/>
+  <text x="100" y="130" font-size="11" text-anchor="middle">Notification</text>
+  <text x="100" y="144" font-size="9.5" text-anchor="middle" fill="#666">(notifications.captured)</text>
+
+  <polygon points="260,135 330,90 400,135 330,180" fill="#fff" stroke="#b8860b"/>
+  <text x="330" y="131" font-size="10.5" text-anchor="middle">Any rule</text>
+  <text x="330" y="144" font-size="10.5" text-anchor="middle">matches?</text>
+
+  <rect x="260" y="20" width="140" height="46" rx="8" fill="#f5f5f5" stroke="#888"/>
+  <line x1="268" y1="30" x2="392" y2="30" stroke="#bbb"/>
+  <text x="330" y="48" font-size="10.5" text-anchor="middle">rules for user_id</text>
+
+  <rect x="520" y="50" width="200" height="50" rx="8" fill="#f5f5f5" stroke="#888"/>
+  <line x1="528" y1="60" x2="712" y2="60" stroke="#bbb"/>
+  <text x="620" y="80" font-size="11" text-anchor="middle">notifications.matched</text>
+
+  <rect x="520" y="190" width="200" height="50" rx="8" fill="#f5f5f5" stroke="#888"/>
+  <line x1="528" y1="200" x2="712" y2="200" stroke="#bbb"/>
+  <text x="620" y="220" font-size="11" text-anchor="middle">notifications.discarded</text>
+</svg>
+    </div>
+
+    <h3>Behavioral examples</h3>
+    <div class="behavior-card">
+      <header>Notification matching a rule is delivered</header>
+      <ol>
+        <li>Given the user has a rule <code>{source_app: "com.whatsapp"}</code></li>
+        <li>When a notification with that source_app arrives on <code>notifications.captured</code></li>
+        <li class="then">Then within 3s it appears on <code>notifications.matched</code> and not on <code>notifications.discarded</code></li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>No matching rule → discarded</header>
+      <ol>
+        <li>Given no rules exist for source_app "com.instagram"</li>
+        <li>When such a notification arrives</li>
+        <li class="then">Then it appears on <code>notifications.discarded</code> only</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Catch-all rule (all fields empty) matches anything</header>
+      <ol>
+        <li>Given a rule <code>{source_app: ""}</code></li>
+        <li class="then">Then any notification appears on <code>notifications.matched</code></li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Pattern rule matches on glob</header>
+      <ol>
+        <li>Given a rule <code>{source_app: "com.google.*"}</code></li>
+        <li class="then">Then "com.google.gmail" is filtered in; "com.whatsapp" is discarded</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Title pattern narrows matching</header>
+      <ol>
+        <li>Given a rule <code>{source_app: "com.google.gmail", title: "*invoice*"}</code></li>
+        <li class="then">Then "Your invoice is ready" is filtered in; "Newsletter: weekly digest" is discarded</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Rule change takes immediate, non-retroactive effect</header>
+      <ol>
+        <li>Given a notification was discarded before a matching rule existed</li>
+        <li>When the rule is added and a second, identical-shaped notification arrives</li>
+        <li class="then">Then the second is filtered in, and the first remains discarded — no retroactive change</li>
+      </ol>
+    </div>
+
+    <h3>Contract test</h3>
+    <pre><code class="language-go">func TestContract_RuleChangeAppliesToFutureOnly(t *testing.T) {
+    clearAllRules(t)
+    id1 := publishViaHTTP(t, Notification{SourceApp: "com.slack", Title: "Message from Dave"})
+    assertPresentInStream(t, id1, "notifications.discarded", 5*time.Second)
+
+    setUserRule(t, Rule{SourceApp: "com.slack"})
+
+    id2 := publishViaHTTP(t, Notification{SourceApp: "com.slack", Title: "Another message"})
+    assertPresentInStream(t, id2, "notifications.matched", 5*time.Second)
+
+    // First notification remains discarded — no retroactive change
+    assertAbsentFromStream(t, id1, "notifications.matched", 1*time.Second)
+}</code></pre>
+
+    <h3>Property test</h3>
+    <pre><code class="language-go">// PROPERTY: Filter service is deterministic. Maps to INV-4.
+func TestProperty_FilterIsDeterministic(t *testing.T) {
+    rapid.Check(t, func(t *rapid.T) {
+        n := generateArbitraryNotification(t)
+        rules := generateArbitraryRuleSet(t)
+        setUserRules(t, rules)
+
+        id1 := publishNotification(t, n)
+        outcome1 := observeRouting(t, id1, 5*time.Second)
+
+        n2 := n
+        n2.ID = newUUID()
+        id2 := publishNotification(t, n2)
+        outcome2 := observeRouting(t, id2, 5*time.Second)
+
+        if outcome1 != outcome2 {
+            t.Fatalf("same notification routed differently: first=%s second=%s", outcome1, outcome2)
+        }
+    })
+}</code></pre>
+
+    <h3>Provenance</h3>
+    <div class="provenance-grid">
+      <div class="prov-why">
+        <strong>Why it exists</strong>
+        <p>The core evaluation service of Matching, and the boundary adapter at the Capture→Matching crossing.
+           Filtering happens in the cloud so rule changes apply to all devices simultaneously and the audit log is
+           centralised.</p>
+      </div>
+      <div class="prov-rejected">
+        <strong>Rejected alternatives</strong>
+        <p><em>On-device filtering only:</em> rules diverge between devices. <em>Filter inside the ingestor:</em>
+           prevents replaying historical events against new rules (a v2 capability). <em>Filter inside delivery:</em>
+           routing and delivery have different failure modes.</p>
+      </div>
+      <div class="prov-assumptions">
+        <strong>Active assumptions</strong>
+        <p>~50 active rules max in MVP. Specificity derives from rule shape alone. Evaluation is stateless. SQLite
+           rule store is local to filter-service in MVP.</p>
+      </div>
+      <div class="prov-wrong">
+        <strong>What would make this wrong</strong>
+        <p>Retroactive rule application would need a replay capability. Thousands of rules would need an indexed
+           evaluation approach.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RULES ============ -->
+  <section class="pane" id="pane-rules">
+    <p class="pane-kicker bc-matching">Matching bounded context</p>
+    <h2>rule-api</h2>
+    <div class="spec-box">
+      <p>Provides <code>POST /rules</code>, <code>GET /rules</code>, <code>DELETE /rules/{id}</code> for managing a
+         user's filter rules in SQLite, and publishes a <code>RuleChangedEvent</code> to <code>rules.changed</code>
+         on every successful mutation.</p>
+    </div>
+    <div class="invariant-tags"><span class="tag">INV-5</span></div>
+
+    <h3>Behavioral examples</h3>
+    <div class="behavior-card">
+      <header>Create a rule persists it and emits an event</header>
+      <ol>
+        <li>When I POST <code>{source_app: "com.whatsapp"}</code> to <code>/rules</code></li>
+        <li class="then">Then status 201, the response has an id, GET /rules includes it, and a CREATED event appears on <code>rules.changed</code></li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Delete a rule removes it and emits an event</header>
+      <ol>
+        <li>Given a rule "xyz" exists</li>
+        <li>When I DELETE /rules/xyz</li>
+        <li class="then">Then GET /rules no longer returns it, and a DELETED event appears on <code>rules.changed</code></li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Create with missing required field is rejected</header>
+      <ol>
+        <li>When I POST <code>{}</code> to <code>/rules</code></li>
+        <li class="then">Then the response status is 400</li>
+      </ol>
+    </div>
+
+    <h3>Contract test</h3>
+    <pre><code class="language-go">func TestContract_CreateRuleEmitsEvent(t *testing.T) {
+    id := createRuleViaHTTP(t, Rule{SourceApp: "com.whatsapp"})
+    assertRuleExistsViaHTTP(t, id)
+    waitForRuleEvent(t, id, RuleCreated, 3*time.Second)
+}</code></pre>
+
+    <h3>Provenance</h3>
+    <div class="provenance-grid">
+      <div class="prov-why">
+        <strong>Why it exists</strong>
+        <p>Rules are the core aggregate of Matching. They must be manageable without restarting any services. This
+           is the single point of mutation, so audit events are always emitted and filter-service can stay
+           stateless.</p>
+      </div>
+      <div class="prov-rejected">
+        <strong>Rejected alternatives</strong>
+        <p><em>Config file:</em> can't change rules at runtime without redeploy. <em>filter-service owns mutation:</em>
+           couples CRUD and evaluation logic, which change at different times.</p>
+      </div>
+      <div class="prov-assumptions">
+        <strong>Active assumptions</strong>
+        <p><code>user_id = "local"</code> for MVP. SQLite is sufficient; a Postgres swap is a mid-layer change, not
+           a conserved-layer one.</p>
+      </div>
+      <div class="prov-wrong">
+        <strong>What would make this wrong</strong>
+        <p>Concurrent writers would hit SQLite's single-writer bottleneck — Postgres + advisory locks, or an
+           event-sourced rule store, would be needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DELIVERY ============ -->
+  <section class="pane" id="pane-delivery">
+    <p class="pane-kicker bc-delivery">Delivery bounded context</p>
+    <h2>delivery-service</h2>
+    <div class="spec-box">
+      <p>Subscribes to <code>notifications.matched</code>, deduplicates by <code>id</code> per connected client,
+         and streams matching notifications to all active SSE connections as JSON-encoded events.</p>
+    </div>
+    <div class="invariant-tags"><span class="tag">INV-3</span></div>
+
+    <div class="diagram-wrap">
+<svg class="diagram-svg" viewBox="0 0 860 280" role="img" aria-label="Fan-out diagram: the notifications.matched topic feeds two per-user filtered subscriptions, each streaming to its own browser over SSE.">
+  <defs>
+    <marker id="arrow-del" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+    </marker>
+  </defs>
+
+  <line x1="190" y1="128" x2="290" y2="58" stroke="#555" marker-end="url(#arrow-del)"/>
+  <text x="200" y="78" font-size="10" fill="#333">filter: user_id=abc123</text>
+  <line x1="190" y1="148" x2="290" y2="212" stroke="#555" marker-end="url(#arrow-del)"/>
+  <text x="200" y="190" font-size="10" fill="#333">filter: user_id=def456</text>
+  <line x1="520" y1="55" x2="620" y2="55" stroke="#555" marker-end="url(#arrow-del)"/>
+  <line x1="520" y1="215" x2="620" y2="215" stroke="#555" marker-end="url(#arrow-del)"/>
+
+  <rect x="20" y="110" width="170" height="56" rx="8" fill="#f5f5f5" stroke="#888"/>
+  <line x1="28" y1="120" x2="182" y2="120" stroke="#bbb"/>
+  <text x="105" y="144" font-size="11" text-anchor="middle">notifications.matched</text>
+
+  <rect x="290" y="30" width="230" height="50" rx="6" fill="#fff" stroke="#6b5b95"/>
+  <text x="405" y="49" font-size="11" text-anchor="middle">subscription:</text>
+  <text x="405" y="63" font-size="11" text-anchor="middle">deliver-user-abc123</text>
+
+  <rect x="290" y="190" width="230" height="50" rx="6" fill="#fff" stroke="#6b5b95"/>
+  <text x="405" y="209" font-size="11" text-anchor="middle">subscription:</text>
+  <text x="405" y="223" font-size="11" text-anchor="middle">deliver-user-def456</text>
+
+  <rect x="620" y="30" width="210" height="50" rx="6" fill="#fff" stroke="#888"/>
+  <text x="725" y="49" font-size="11" text-anchor="middle">Browser A</text>
+  <text x="725" y="63" font-size="9.5" text-anchor="middle" fill="#666">(SSE, dedup by id)</text>
+
+  <rect x="620" y="190" width="210" height="50" rx="6" fill="#fff" stroke="#888"/>
+  <text x="725" y="209" font-size="11" text-anchor="middle">Browser B</text>
+  <text x="725" y="223" font-size="9.5" text-anchor="middle" fill="#666">(SSE, dedup by id)</text>
+</svg>
+    </div>
+
+    <h3>Behavioral examples</h3>
+    <div class="behavior-card">
+      <header>Notification on filtered stream reaches SSE client</header>
+      <ol>
+        <li>Given a browser is connected to <code>/events</code></li>
+        <li>When a notification appears on <code>notifications.matched</code></li>
+        <li class="then">Then within 3s the browser receives it as a JSON event with id, source_app, title, body</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Not delivered twice to the same client in a session</header>
+      <ol>
+        <li>When the same id appears on <code>notifications.matched</code> twice</li>
+        <li class="then">Then the browser receives it exactly once</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Multiple connected clients each receive it</header>
+      <ol>
+        <li>Given two browsers are connected to <code>/events</code></li>
+        <li class="then">Then both receive the notification within 3s</li>
+      </ol>
+    </div>
+
+    <h3>Property test</h3>
+    <pre><code class="language-go">// PROPERTY: Deduplication by id. Maps to INV-3.
+func TestProperty_DeduplicationByID(t *testing.T) {
+    rapid.Check(t, func(t *rapid.T) {
+        n := generateArbitraryDeliverableNotification(t)
+        clientEvents := subscribeSSE(t)
+
+        count := rapid.IntRange(2, 5).Draw(t, "count")
+        for i := 0; i < count; i++ {
+            publishNotification(t, n) // same id each time
+        }
+
+        seen := collectSSEEventsWithID(t, clientEvents, n.ID, 5*time.Second)
+        if len(seen) != 1 {
+            t.Fatalf("expected exactly 1 delivery, got %d", len(seen))
+        }
+    })
+}</code></pre>
+
+    <h3>Provenance</h3>
+    <div class="provenance-grid">
+      <div class="prov-why">
+        <strong>Why it exists</strong>
+        <p>The outward face of Delivery — takes notifications that cleared Matching and surfaces them to the user.
+           A fast layer that adapts to the delivery channel (SSE today, FCM/WebSocket later) as an addition, not a
+           change.</p>
+      </div>
+      <div class="prov-rejected">
+        <strong>Rejected alternatives</strong>
+        <p><em>filter-service publishes directly to SSE:</em> couples a stateless cloud process to stateful client
+           connections. <em>Deliver from the ingestor:</em> the ingestor shouldn't know about connected clients.</p>
+      </div>
+      <div class="prov-assumptions">
+        <strong>Active assumptions</strong>
+        <p>SSE is the only channel in MVP. Each connection authenticates once at upgrade. Dedup is tracked in memory
+           per connection. Disconnected clients may miss notifications — replay is v2.</p>
+      </div>
+      <div class="prov-wrong">
+        <strong>What would make this wrong</strong>
+        <p>Guaranteed delivery across reconnects would need a durable per-client queue (Redis, or a Pub/Sub
+           subscription per client).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SYSTEM PROPERTIES ============ -->
+  <section class="pane" id="pane-system-properties">
+    <p class="pane-kicker">Section 11</p>
+    <h2>System-wide property tests</h2>
+    <p>These properties span multiple components and cannot be attributed to any single service.</p>
+
+    <pre><code class="language-go">// PROPERTY: No notification matching a rule is ever silently absent.
+// Maps to: INV-1, INV-2
+//
+// For any arbitrarily generated notification, if at least one rule matches,
+// the notification must appear in notifications.matched. It must never be
+// absent from both notifications.matched AND notifications.discarded.
+func TestProperty_NoSilentDiscard(t *testing.T) {
+    rapid.Check(t, func(t *rapid.T) {
+        n := generateArbitraryNotification(t)
+        rule := generateMatchingDeliverRule(t, n)
+        setUserRule(t, rule)
+
+        id := publishNotification(t, n)
+
+        assertPresentInAtLeastOneStream(t, id,
+            []string{"notifications.matched", "notifications.discarded"},
+            10*time.Second,
+        )
+    })
+}</code></pre>
+  </section>
+
+  <!-- ============ IMPLEMENTATION ORDER ============ -->
+  <section class="pane" id="pane-implementation-order">
+    <p class="pane-kicker">Section 12</p>
+    <h2>Implementation order</h2>
+    <p>Follow the Phoenix sequence: invariants and contracts first, code last.</p>
+
+    <div class="checklist-group">
+      <h4>Pre-code (days 1–2)</h4>
+      <ul>
+        <li>Review and agree on the plan document. Revise until it feels right.</li>
+        <li>Set up the development environment.</li>
+        <li>Commit <code>pkg/contracts/</code> — the slow layer — before anything else.</li>
+        <li>Write the evaluation test files as failing tests — the acceptance criteria, before any service code.</li>
+      </ul>
+    </div>
+    <div class="checklist-group">
+      <h4>Week 1 — Core pipeline</h4>
+      <ul>
+        <li><strong>filter-service:</strong> pure function (Notification, []Rule) → matched | no match. Pass contract tests.</li>
+        <li><strong>notification-ingestor:</strong> HTTP handler + Pub/Sub publisher, wired to the local emulator.</li>
+        <li><strong>rule-api:</strong> SQLite-backed CRUD + rule-changed events; filter-service reflects changes without restart.</li>
+      </ul>
+    </div>
+    <div class="checklist-group">
+      <h4>Week 2 — Delivery and end-to-end</h4>
+      <ul>
+        <li><strong>delivery-service:</strong> Pub/Sub subscriber + SSE handler to a minimal HTML page.</li>
+        <li>End-to-end test: POST /notifications → browser receives SSE event.</li>
+        <li>All contract tests green. All property tests green.</li>
+      </ul>
+    </div>
+    <div class="checklist-group">
+      <h4>Week 3 — Operational readiness</h4>
+      <ul>
+        <li>Live evaluation: delivery latency from device_timestamp to SSE receipt, logged.</li>
+        <li>Dead-letter logging: anything on notifications.discarded logged with reason.</li>
+        <li>Duplicate delivery tracking: log any SSE event delivered more than once per client.</li>
+        <li><code>docker-compose up</code> starts the full system in one command.</li>
+      </ul>
+    </div>
+
+    <div class="spec-box">
+      <p><strong>The n=1 test at day 14:</strong> could a new Go developer, given only the specs, invariants, and
+         evaluations (not the code), regenerate the filter-service from scratch, run it, and pass all contract and
+         property tests? If yes — the MVP is complete. If no — improve the specs, not the code.</p>
+    </div>
+  </section>
+
+  <!-- ============ DEV ENV ============ -->
+  <section class="pane" id="pane-dev-env">
+    <p class="pane-kicker">Section 13</p>
+    <h2>Development environment</h2>
+
+    <h3>Prerequisites</h3>
+    <ul>
+      <li>Go 1.22+</li>
+      <li>Docker (for Pub/Sub emulator)</li>
+      <li><code>gcloud</code> CLI or just the emulator Docker image</li>
+    </ul>
+
+    <h3>Local Pub/Sub emulator</h3>
+    <pre><code class="language-yaml"># docker-compose.yml
+services:
+  pubsub-emulator:
+    image: gcr.io/google.com/cloudsdktool/google-cloud-cli:emulators
+    command: gcloud beta emulators pubsub start --host-port=0.0.0.0:8085
+    ports:
+      - "8085:8085"
+    environment:
+      - PUBSUB_PROJECT_ID=notify-local</code></pre>
+    <p>Set in all services:</p>
+    <pre><code class="language-bash">PUBSUB_EMULATOR_HOST=localhost:8085
+PUBSUB_PROJECT_ID=notify-local</code></pre>
+    <p>The Go Pub/Sub client automatically uses the emulator when <code>PUBSUB_EMULATOR_HOST</code> is set.</p>
+
+    <h3>Running the full stack locally</h3>
+    <pre><code class="language-bash">docker-compose up -d          # start Pub/Sub emulator
+go run ./cmd/rules/           # starts rule-api on :8081
+go run ./cmd/ingestor/        # starts ingestor on :8080
+go run ./cmd/filter/          # starts filter subscriber
+go run ./cmd/deliver/         # starts delivery-service with SSE on :8082
+open web/index.html           # or serve it on :8083</code></pre>
+
+    <h3>Running evaluations</h3>
+    <pre><code class="language-bash">go test ./evaluations/... -v -timeout 60s</code></pre>
+    <p>Evaluations require all services running (they are integration tests against the real pipeline). Set
+       <code>NOTIFY_TEST_INGESTOR=http://localhost:8080</code> etc. in your shell.</p>
+  </section>
+
+  <!-- ============ LIVE EVALS ============ -->
+  <section class="pane" id="pane-live-evals">
+    <p class="pane-kicker">Section 14</p>
+    <h2>Live evaluations (invariant monitoring)</h2>
+    <p>These run in the background during development and will become production monitors.</p>
+    <table class="scope-table">
+      <thead><tr><th>Metric</th><th>What it measures</th><th>Alert threshold</th></tr></thead>
+      <tbody>
+        <tr><td>Delivery latency</td><td>device_timestamp → SSE receipt (p99)</td><td>&gt; 5 seconds</td></tr>
+        <tr><td>Dead-letter rate</td><td>% of notifications on notifications.discarded vs. total</td><td>&gt; 80% (rules too restrictive/misconfigured)</td></tr>
+        <tr><td>Duplicate SSE delivery</td><td>Any id delivered &gt; 1× to a client</td><td>Any occurrence</td></tr>
+        <tr><td>Rule API error rate</td><td>5xx responses on /rules</td><td>&gt; 1%</td></tr>
+        <tr><td>Pub/Sub consumer lag</td><td>Age of oldest unprocessed message on notifications.captured</td><td>&gt; 10 seconds</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ DOD ============ -->
+  <section class="pane" id="pane-dod">
+    <p class="pane-kicker">Section 15</p>
+    <h2>Definition of done (MVP)</h2>
+    <div class="checklist-group">
+      <ul>
+        <li>All 6 system invariants are verified by at least one contract test or property test.</li>
+        <li>All behavioral examples (ingestor, filter-service, rule-api, delivery-service) pass as automated tests.</li>
+        <li>The n=1 test passes: a new Go developer can regenerate filter-service from spec + evaluations alone.</li>
+        <li><code>docker-compose up</code> + <code>go run ./cmd/...</code> (five commands) starts the full system.</li>
+        <li>Posting via <code>curl -X POST localhost:8080/notifications</code> results in an SSE event in the browser within 5 seconds.</li>
+        <li>A rule change via the API takes effect for the next signal posted, without restarting any service.</li>
+        <li>The deletion test passes for each component: its one-sentence spec is sufficient to regenerate it.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ OPEN QUESTIONS ============ -->
+  <section class="pane" id="pane-open-questions">
+    <p class="pane-kicker">Section 16 · Resolve before coding</p>
+    <h2>Open questions</h2>
+    <p>Decisions that affect the conserved layer. Get them right before building.</p>
+
+    <div class="qa-item">
+      <strong>1. Topic naming convention</strong> — flat kebab-case (<code>notification-raw</code>), dot-namespaced
+      hierarchy (<code>notify.notification.raw</code>), or DDD-style past-tense events? Whatever we choose becomes
+      a conserved boundary.
+      <div class="decision">Decision: DDD-style past-tense events — <code>notifications.captured</code>,
+        <code>notifications.matched</code>, <code>notifications.discarded</code>, <code>rules.changed</code>.
+        Chosen because it encodes the bounded-context language (capture/match/discard/rule-changed) directly in
+        the topic name, and because renaming <code>filtered</code> → <code>matched</code> removes a real
+        ambiguity in the original draft — "filtered" could be misread as "filtered out," the opposite of what the
+        topic carries.</div>
+    </div>
+    <div class="qa-item">
+      <strong>2. Rule store startup</strong> — query SQLite on every message, or maintain an in-memory cache
+      refreshed on rules.changed?
+      <div class="decision">For MVP: querying on every message is simpler. Cache adds complexity but reduces latency.</div>
+    </div>
+    <div class="qa-item">
+      <strong>3. Notification id assignment</strong> — does the HTTP client supply the id, or does the ingestor
+      always generate it?
+      <div class="decision">Decision: allow client-supplied IDs; ingestor generates one if absent.</div>
+    </div>
+    <div class="qa-item">
+      <strong>4. Error handling on filter failure</strong> — if filter-service can't reach SQLite, nack the message
+      (retry) or ack and route to dead-letter?
+      <div class="decision">Decision needed — these have different retry semantics.</div>
+    </div>
+    <div class="qa-item">
+      <strong>5. SSE reconnection</strong> — replay recent notifications or start fresh?
+      <div class="decision">For MVP: start fresh. Replay is v2.</div>
+    </div>
+    <div class="qa-item">
+      <strong>6. Local SQLite file location</strong> — shared between rule-api and filter-service, or separate
+      copies synced via rules.changed?
+      <div class="decision">Decision: shared file at a known path in dev. In production this becomes Postgres.</div>
+    </div>
+  </section>
+
+  <!-- ============ APPENDIX ============ -->
+  <section class="pane" id="pane-appendix">
+    <p class="pane-kicker">Appendix</p>
+    <h2>Domain concepts &amp; dependencies</h2>
+
+    <h3>A — Domain concepts and their MVP mapping</h3>
+    <table class="scope-table">
+      <thead><tr><th>Domain concept</th><th>In MVP?</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Notification (Capture BC)</td><td>Yes</td><td>What apps generate. No sender/project/priority yet</td></tr>
+        <tr><td>Notification (Delivery BC)</td><td>Yes</td><td>What the user sees — same struct, different context</td></tr>
+        <tr><td>Rule</td><td>Yes</td><td>source_app, source_account, title (exact/pattern/empty); "surface this"</td></tr>
+        <tr><td>Project</td><td>No</td><td>Post-MVP; adds schedule-based delivery</td></tr>
+        <tr><td>Schedule</td><td>No</td><td>Post-MVP; affects when filtered events are pushed</td></tr>
+        <tr><td>Contact / Sender</td><td>No</td><td>Post-MVP; specificity rule system</td></tr>
+        <tr><td>Group</td><td>No</td><td>Post-MVP</td></tr>
+        <tr><td>Priority / Eisenhower matrix</td><td>No</td><td>Post-MVP</td></tr>
+        <tr><td>Task / Intend integration</td><td>No</td><td>Post-MVP</td></tr>
+        <tr><td>Focus mode / batching</td><td>No</td><td>Post-MVP</td></tr>
+        <tr><td>Android listener</td><td>No</td><td>Fast layer; add after cloud pipeline is stable</td></tr>
+        <tr><td>Multi-user / auth</td><td>No</td><td><code>user_id = "local"</code> throughout</td></tr>
+      </tbody>
+    </table>
+    <div class="spec-box">
+      <p>The MVP is explicitly designed so that adding Projects, Schedules, Contacts, and the full specificity rule
+         system are additions to the rule schema (a mid-layer change) and do not require touching the conserved
+         layer.</p>
+    </div>
+
+    <h3>B — Key Go dependencies</h3>
+    <table class="scope-table">
+      <thead><tr><th>Package</th><th>Purpose</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><code>cloud.google.com/go/pubsub</code></td><td>Pub/Sub client</td><td>Works against emulator automatically</td></tr>
+        <tr><td><code>github.com/google/uuid</code></td><td>UUID v7 generation</td><td>Or <code>github.com/oklog/ulid</code> for sortable IDs</td></tr>
+        <tr><td><code>modernc.org/sqlite</code></td><td>SQLite — pure Go, no CGo</td><td>Easier cross-platform builds</td></tr>
+        <tr><td><code>github.com/flyingmutant/rapid</code></td><td>Property-based testing</td><td>Recommended for Go property tests</td></tr>
+        <tr><td><code>net/http</code></td><td>HTTP server — stdlib</td><td>No framework needed for MVP</td></tr>
+      </tbody>
+    </table>
+    <p>Avoid adding dependencies until a standard library option is clearly insufficient. Every dependency is
+       conceptual mass.</p>
+  </section>
+
+  <nav class="pill-nav">
+    <button id="prev-btn" class="secondary outline"></button>
+    <button id="next-btn"></button>
+  </nav>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

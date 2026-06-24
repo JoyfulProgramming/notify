@@ -1,0 +1,397 @@
+:root {
+  --nav-width: 260px;
+  --panel-bg: var(--pico-code-background-color);
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* ---- Sidebar ---- */
+
+nav.sidebar {
+  display: block; /* Pico defaults nav to display:flex for navbars; we want a vertical list */
+  width: var(--nav-width);
+  flex: 0 0 var(--nav-width);
+  height: 100vh;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  padding: 1.25rem 1rem;
+  border-right: 1px solid var(--pico-muted-border-color);
+  background: var(--pico-background-color);
+}
+
+nav.sidebar ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+nav.sidebar li {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+nav.sidebar h1 {
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}
+
+nav.sidebar .subtitle {
+  font-size: 0.78rem;
+  color: var(--pico-muted-color);
+  margin-bottom: 1.25rem;
+  line-height: 1.3;
+}
+
+nav.sidebar .group-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--pico-muted-color);
+  margin: 1rem 0 0.35rem;
+}
+
+nav.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav.sidebar li {
+  margin: 0;
+}
+
+nav.sidebar button.nav-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  border: none;
+  background: none;
+  border-radius: var(--pico-border-radius);
+  /* Pico's button{} rule redefines --pico-color to white for filled buttons;
+     reset it here too, not just `color`, or the var still resolves to white. */
+  --pico-color: var(--pico-contrast);
+  color: var(--pico-contrast);
+  font-size: 0.88rem;
+  font-weight: 400;
+  cursor: pointer;
+  margin-bottom: 0.1rem;
+}
+
+nav.sidebar button.nav-link:hover {
+  background: var(--panel-bg);
+}
+
+nav.sidebar button.nav-link.active {
+  background: var(--pico-primary);
+  color: var(--pico-primary-inverse);
+}
+
+nav.sidebar button.nav-link .bc-dot {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  margin-right: 0.45rem;
+}
+
+.bc-dot.bc-capture { background: #4f8a8b; }
+.bc-dot.bc-matching { background: #b8860b; }
+.bc-dot.bc-delivery { background: #6b5b95; }
+.bc-dot.bc-meta { background: var(--pico-muted-color); }
+
+/* ---- Main content ---- */
+
+main.content {
+  flex: 1 1 auto;
+  padding: 2rem 2.5rem 4rem;
+  max-width: 980px;
+}
+
+section.pane {
+  display: none;
+}
+
+section.pane.active {
+  display: block;
+  animation: fade-in 0.15s ease-in;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.pane-kicker {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pico-muted-color);
+  margin-bottom: 0.25rem;
+}
+
+.pane-kicker.bc-capture { color: #4f8a8b; }
+.pane-kicker.bc-matching { color: #b8860b; }
+.pane-kicker.bc-delivery { color: #6b5b95; }
+
+.spec-box {
+  border-left: 4px solid var(--pico-primary);
+  background: var(--panel-bg);
+  padding: 0.85rem 1rem;
+  border-radius: var(--pico-border-radius);
+  margin: 1rem 0 1.5rem;
+}
+
+.spec-box p {
+  margin: 0;
+}
+
+.invariant-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.invariant-tags .tag {
+  font-size: 0.74rem;
+  background: var(--pico-primary-background);
+  color: var(--pico-primary-inverse);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+}
+
+.behavior-card {
+  border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--pico-border-radius);
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 0.9rem;
+}
+
+.behavior-card header {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  font-size: 0.92rem;
+}
+
+.behavior-card ol {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.88rem;
+  color: var(--pico-color);
+}
+
+.behavior-card li {
+  margin-bottom: 0.15rem;
+}
+
+.behavior-card .then {
+  color: var(--pico-primary);
+  font-weight: 600;
+}
+
+.provenance-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.provenance-grid > div {
+  border-radius: var(--pico-border-radius);
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+}
+
+.prov-why { background: var(--panel-bg); }
+.prov-rejected { background: var(--panel-bg); }
+.prov-assumptions { background: var(--panel-bg); }
+.prov-wrong { border: 1px dashed var(--pico-del-color); }
+
+.diagram-wrap {
+  background: var(--pico-card-background-color);
+  border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--pico-border-radius);
+  padding: 1rem;
+  margin: 1rem 0 1.5rem;
+  overflow-x: auto;
+}
+
+.diagram-svg {
+  display: block;
+  width: 100%;
+  min-width: 560px;
+  height: auto;
+  font-family: var(--pico-font-family, sans-serif);
+}
+
+/* Let highlight.js's .hljs own the box styling; strip Pico's default
+   code/pre background so there's no double-box (gray pre, white code). */
+pre:not(.mermaid) {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+pre:not(.mermaid) code {
+  display: block;
+  padding: 1rem 1.1rem;
+  border-radius: var(--pico-border-radius);
+  border: 1px solid var(--pico-muted-border-color);
+  overflow-x: auto;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+table.scope-table th, table.scope-table td {
+  font-size: 0.88rem;
+}
+
+.pill-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--pico-muted-border-color);
+  padding-top: 1rem;
+}
+
+code.inline-path {
+  font-size: 0.85em;
+}
+
+.topic-flow {
+  font-family: var(--pico-font-family-monospace, monospace);
+  font-size: 0.85rem;
+  background: var(--panel-bg);
+  padding: 0.75rem 1rem;
+  border-radius: var(--pico-border-radius);
+  white-space: pre-wrap;
+}
+
+.pace-layers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.pace-layer {
+  border-radius: var(--pico-border-radius);
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--pico-muted-border-color);
+}
+
+.pace-layer h4 {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+}
+
+.pace-layer ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.85rem;
+}
+
+.pace-layer.slow { background: rgba(79, 138, 139, 0.1); border-color: #4f8a8b; }
+.pace-layer.mid { background: rgba(184, 134, 11, 0.1); border-color: #b8860b; }
+.pace-layer.fast { background: rgba(107, 91, 149, 0.1); border-color: #6b5b95; }
+
+.callout-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+
+@media (min-width: 700px) {
+  .callout-grid.two-col { grid-template-columns: 1fr 1fr; }
+}
+
+.callout {
+  border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--pico-border-radius);
+  padding: 0.85rem 1rem;
+  font-size: 0.88rem;
+}
+
+.callout header {
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.checklist-group {
+  margin-bottom: 1.25rem;
+}
+
+.checklist-group h4 {
+  margin-bottom: 0.4rem;
+  font-size: 0.92rem;
+}
+
+.checklist-group ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.checklist-group li {
+  font-size: 0.88rem;
+  margin-bottom: 0.3rem;
+  padding-left: 1.6rem;
+  position: relative;
+}
+
+.checklist-group li::before {
+  content: "\2610";
+  position: absolute;
+  left: 0;
+  color: var(--pico-muted-color);
+}
+
+.qa-item {
+  border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--pico-border-radius);
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.88rem;
+}
+
+button.inline-link {
+  display: inline;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: var(--pico-primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.qa-item .decision {
+  margin-top: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  background: var(--panel-bg);
+  border-radius: var(--pico-border-radius);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 860px) {
+  body { flex-direction: column; }
+  nav.sidebar {
+    width: 100%;
+    flex-basis: auto;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--pico-muted-border-color);
+  }
+  main.content { padding: 1.5rem; }
+}
