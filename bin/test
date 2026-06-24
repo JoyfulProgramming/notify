@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Runs the evaluations suite (contract tests + rapid property tests).
+# No Docker, no Pub/Sub emulator, no env vars — pkg/testharness boots the
+# whole pipeline in-process per test run.
+#
+# Extra args are passed through to `go test`, e.g.:
+#   bin/test -run TestContract -v          # just the fast contract tests
+#   bin/test -run TestProperty -v          # just the property tests
+#   bin/test -rapid.checks=20              # fewer randomized iterations
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT_DIR"
+
+go test ./... -v "$@"

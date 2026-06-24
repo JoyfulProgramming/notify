@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Runs go vet and checks gofmt formatting across the module.
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT_DIR"
+
+echo "go vet ./..."
+go vet ./...
+
+echo "gofmt check"
+# Restrict to this module's own package directories — excludes GOMODCACHE
+# dependency source if GOMODCACHE happens to be redirected under the repo.
+unformatted="$(gofmt -l $(go list -f '{{.Dir}}' ./...))"
+if [ -n "$unformatted" ]; then
+  echo "not gofmt-formatted:" >&2
+  echo "$unformatted" >&2
+  exit 1
+fi
+
+echo "OK"

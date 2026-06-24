@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Serves docs/ (the interactive HTML plan viewer) and opens it in the browser.
+set -euo pipefail
+
+PORT="${1:-8000}"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+DOCS_DIR="$ROOT_DIR/docs"
+URL="http://localhost:$PORT"
+
+cd "$DOCS_DIR"
+
+if command -v open >/dev/null 2>&1; then
+  ( sleep 0.5 && open "$URL" ) &
+fi
+
+echo "Serving $DOCS_DIR at $URL (Ctrl-C to stop)"
+exec python3 -m http.server "$PORT"

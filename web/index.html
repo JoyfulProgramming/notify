@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Notify — live feed</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
+  h1 { font-size: 1.2rem; }
+  #status { color: #666; font-size: 0.9rem; }
+  ul { list-style: none; padding: 0; }
+  li { border: 1px solid #ddd; border-radius: 6px; padding: 0.75rem; margin-bottom: 0.5rem; }
+  .source { color: #666; font-size: 0.8rem; }
+  .title { font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>Notify</h1>
+<div id="status">connecting…</div>
+<ul id="feed"></ul>
+<script>
+  const params = new URLSearchParams(location.search);
+  const token = params.get("token") || "local-key";
+  const status = document.getElementById("status");
+  const feed = document.getElementById("feed");
+
+  const source = new EventSource(`/events?token=${encodeURIComponent(token)}`);
+
+  source.onopen = () => { status.textContent = "connected"; };
+  source.onerror = () => { status.textContent = "disconnected — retrying…"; };
+
+  source.onmessage = (event) => {
+    const n = JSON.parse(event.data);
+    const li = document.createElement("li");
+    li.innerHTML = `<div class="source">${n.source_app}</div>
+      <div class="title">${n.title || "(no title)"}</div>
+      <div>${n.body || ""}</div>`;
+    feed.prepend(li);
+  };
+</script>
+</body>
+</html>

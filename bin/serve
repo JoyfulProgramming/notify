@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
-# Serves docs/ (the interactive HTML plan viewer) and opens it in the browser.
+# Runs the whole Notify pipeline in one process: ingestor (:8080), rule-api
+# (:8081), delivery-service + web UI (:8082). No Docker, no Pub/Sub emulator
+# — everything is wired to an in-memory bus (see pkg/bus).
 set -euo pipefail
 
-PORT="${1:-8000}"
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-DOCS_DIR="$ROOT_DIR/docs"
-URL="http://localhost:$PORT"
+cd "$ROOT_DIR"
 
-cd "$DOCS_DIR"
+URL="http://localhost:8082/?token=local-key"
 
 if command -v open >/dev/null 2>&1; then
-  ( sleep 0.5 && open "$URL" ) &
+  ( sleep 1 && open "$URL" ) &
 fi
 
-echo "Serving $DOCS_DIR at $URL (Ctrl-C to stop)"
-exec python3 -m http.server "$PORT"
+echo "Starting notify-local — ingestor :8080, rule-api :8081, deliver+web :8082"
+echo "Web UI: $URL"
+exec go run ./cmd/notify-local
