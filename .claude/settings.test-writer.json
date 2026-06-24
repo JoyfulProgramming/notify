@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/pkg/contracts/**)",
+      "Read(/pkg/bus/bus.go)",
+      "Read(/pkg/testharness/**)",
+      "Read(/notify_mvp_plan.md)",
+      "Bash(go test*)",
+      "Bash(go build*)",
+      "Bash(go vet*)"
+    ],
+    "deny": [
+      "Read(/internal/**)",
+      "Read(/cmd/**)",
+      "Read(/pkg/bus/memory.go)"
+    ]
+  }
+}

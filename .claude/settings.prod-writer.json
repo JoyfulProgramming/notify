@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/evaluations/**)",
+      "Read(/notify_mvp_plan.md)"
+    ],
+    "deny": [
+      "Edit(/evaluations/**)",
+      "Write(/evaluations/**)"
+    ]
+  }
+}
