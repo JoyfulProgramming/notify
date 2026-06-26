@@ -47,3 +47,14 @@ func generateMatchingRule(t *rapid.T, n contracts.Notification) contracts.Rule {
 func generateMatchingDeliverRule(t *rapid.T, n contracts.Notification) contracts.Rule {
 	return generateMatchingRule(t, n)
 }
+
+// generateArbitraryRule generates a rule with arbitrary non-catch-all fields,
+// suitable for creation via the HTTP API (which rejects all-fields-empty rules).
+// Used by the subset/superset property test (INV-7).
+func generateArbitraryRule(t *rapid.T) contracts.Rule {
+	titlePool := []string{"", "*invoice*", "Weekly digest"}
+	return contracts.Rule{
+		SourceApp: rapid.SampledFrom(sourceApps).Draw(t, "new_rule_source_app"),
+		Title:     rapid.SampledFrom(titlePool).Draw(t, "new_rule_title"),
+	}
+}

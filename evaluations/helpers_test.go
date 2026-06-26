@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"net/http"
+	"path"
 	"strings"
 	"sync"
 	"testing"
@@ -393,6 +394,44 @@ func waitForSSEEventWithID(t testing.TB, c *sseClient, id string, timeout time.D
 			t.Fatalf("SSE event %s not received within %v", id, timeout)
 		}
 	}
+}
+
+// ---- INV-7: subset/superset overlap detection ----
+
+// fieldCovers reports whether field value r "covers" s: every value satisfying
+// s as a matching criterion also satisfies r.
+//   - empty r ("") matches anything, so it covers any s
+//   - a glob pattern r covers an exact s if s matches the pattern
+//   - exact r covers only itself
+func fieldCovers(r, s string) bool {
+	if r == s {
+		return true
+	}
+	if r == "" {
+		return true
+	}
+	if s == "" {
+		return false // s matches anything; only "" could cover that
+	}
+	if strings.Contains(r, "*") && !strings.Contains(s, "*") {
+		ok, _ := path.Match(r, s)
+		return ok
+	}
+	return false
+}
+
+// ruleCovers reports whether rule r covers rule s: every notification matched
+// by s is also matched by r, field by field.
+func ruleCovers(r, s ruleWire) bool {
+	return fieldCovers(r.SourceApp, s.SourceApp) &&
+		fieldCovers(r.SourceAccount, s.SourceAccount) &&
+		fieldCovers(r.Title, s.Title)
+}
+
+// rulesOverlap reports whether r and s are in a subset-or-superset
+// relationship — i.e. one covers the other.
+func rulesOverlap(r, s ruleWire) bool {
+	return ruleCovers(r, s) || ruleCovers(s, r)
 }
 
 func collectSSEEventsWithID(t testing.TB, c *sseClient, id string, window time.Duration) []contracts.Notification {

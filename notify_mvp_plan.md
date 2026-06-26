@@ -450,6 +450,26 @@ INV-6: In v1, all rules deliver. If any rule matches a notification, it is
 
        These two dimensions combine. No user-assigned priority number ever
        exists — specificity is always derived from the rule's shape alone.
+
+INV-7: The rule store never contains two rules in a subset-or-superset
+       relationship. When a rule is created via the rule API, any existing rule
+       that is a superset or subset of the new rule is automatically removed.
+       This keeps the rule set non-redundant and predictable — the user always
+       sees exactly what is active, without hidden shadowing.
+
+       A rule R is a superset of rule S if every notification matched by S is
+       also matched by R. This is evaluated field-by-field:
+         - An empty field in R ("") covers any value in S.
+         - A glob pattern in R covers an exact value in S if the value matches
+           the pattern (e.g. "com.google.*" covers "com.google.gmail").
+         - An exact value in R covers only the same exact value in S.
+       All three fields (SourceApp, SourceAccount, Title) must satisfy the
+       coverage relation for R to be considered a superset of S.
+
+       Consequence: adding a more generic rule (e.g. "com.google.*") removes any
+       existing exact rules it covers (e.g. "com.google.gmail"). Adding a more
+       specific rule removes any existing rule it falls within. Unrelated rules
+       (no coverage in either direction) are never affected.
 ```
 
 ---
@@ -765,6 +785,29 @@ BEHAVIOR: Delete a rule removes it and emits an event
 BEHAVIOR: Create rule with missing required field is rejected
   When I POST {} to /rules (empty body)
   Then the response status is 400
+
+BEHAVIOR: Adding a more generic rule removes specific rules it covers (INV-7)
+  Given a rule {source_app: "com.google.gmail"} exists
+  When I create a rule {source_app: "com.google.*"}
+  Then the pattern rule is created
+  And the Gmail-specific rule is automatically removed
+
+BEHAVIOR: Adding a more specific rule removes any generic rule it falls within (INV-7)
+  Given a rule {source_app: "com.google.*"} exists
+  When I create a rule {source_app: "com.google.gmail"}
+  Then the exact rule is created
+  And the pattern rule is automatically removed
+
+BEHAVIOR: Adding a specific rule removes a catch-all rule that covers it (INV-7)
+  Given a catch-all rule {source_app: ""} exists
+  When I create a rule {source_app: "com.whatsapp"}
+  Then the WhatsApp rule is created
+  And the catch-all rule is automatically removed
+
+BEHAVIOR: Unrelated rules coexist without affecting each other (INV-7)
+  Given rules {source_app: "com.whatsapp"} and {source_app: "com.slack"} exist
+  When I create a rule {source_app: "com.github"}
+  Then all three rules exist
 ```
 
 ### Contract Tests
@@ -786,6 +829,29 @@ func TestContract_DeleteRuleEmitsEvent(t *testing.T) {
     assertRuleAbsentViaHTTP(t, id)
     waitForRuleEvent(t, id, RuleDeleted, 3*time.Second)
 }
+
+// TestContract_AddingPatternRuleRemovesExactSubset maps to INV-7.
+func TestContract_AddingPatternRuleRemovesExactSubset(t *testing.T) { ... }
+
+// TestContract_AddingExactRuleRemovesMatchingPattern maps to INV-7.
+func TestContract_AddingExactRuleRemovesMatchingPattern(t *testing.T) { ... }
+
+// TestContract_AddingSpecificRuleRemovesGenericCatchAll maps to INV-7.
+func TestContract_AddingSpecificRuleRemovesGenericCatchAll(t *testing.T) { ... }
+
+// TestContract_UnrelatedRulesArePreserved maps to INV-7.
+func TestContract_UnrelatedRulesArePreserved(t *testing.T) { ... }
+```
+
+### Property Test
+
+```go
+// evaluations/property_test.go
+
+// TestProperty_NoSubsetOrSupersetRulesAfterCreate maps to INV-7.
+// After creating any rule via the API, no remaining rule is a subset or
+// superset of the newly added rule.
+func TestProperty_NoSubsetOrSupersetRulesAfterCreate(t *testing.T) { ... }
 ```
 
 ### Provenance
@@ -1056,7 +1122,7 @@ These run in the background during development and will become production monito
 
 The MVP is done when all of the following are true:
 
-- [ ] All 6 system invariants (section 6) are verified by at least one contract test or property test.
+- [ ] All 7 system invariants (section 6) are verified by at least one contract test or property test.
 - [ ] All behavioral examples (sections 7–10) pass as automated tests.
 - [ ] The n=1 test passes: a new Go developer can regenerate the filter-service from its spec and evaluations without reading the existing code.
 - [ ] `docker-compose up` + `go run ./cmd/...` (five commands) starts the full system.

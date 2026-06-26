@@ -8,6 +8,8 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"path"
+	"strings"
 	"time"
 
 	"github.com/google/uuid"
@@ -84,6 +86,21 @@ func (s *Service) handleCreate(w http.ResponseWriter, r *http.Request) {
 		Title:         dto.Title,
 	}
 
+	existing, err := s.store.List(userID)
+	if err != nil {
+		http.Error(w, "internal error", http.StatusInternalServerError)
+		return
+	}
+	for _, ex := range existing {
+		if rulesOverlap(ex, rule) {
+			if _, err := s.store.Delete(userID, ex.ID); err != nil {
+				http.Error(w, "internal error", http.StatusInternalServerError)
+				return
+			}
+			s.publishChange(contracts.RuleDeleted, ex)
+		}
+	}
+
 	if err := s.store.Create(rule); err != nil {
 		http.Error(w, "internal error", http.StatusInternalServerError)
 		return
@@ -139,6 +156,33 @@ func (s *Service) handleDelete(w http.ResponseWriter, r *http.Request) {
 	s.publishChange(contracts.RuleDeleted, contracts.Rule{ID: id, UserID: userID})
 
 	w.WriteHeader(http.StatusNoContent)
+}
+
+func fieldCovers(r, s string) bool {
+	if r == s {
+		return true
+	}
+	if r == "" {
+		return true
+	}
+	if s == "" {
+		return false
+	}
+	if strings.Contains(r, "*") && !strings.Contains(s, "*") {
+		ok, _ := path.Match(r, s)
+		return ok
+	}
+	return false
+}
+
+func ruleCovers(r, s contracts.Rule) bool {
+	return fieldCovers(r.SourceApp, s.SourceApp) &&
+		fieldCovers(r.SourceAccount, s.SourceAccount) &&
+		fieldCovers(r.Title, s.Title)
+}
+
+func rulesOverlap(r, s contracts.Rule) bool {
+	return ruleCovers(r, s) || ruleCovers(s, r)
 }
 
 func (s *Service) publishChange(kind contracts.RuleChangedKind, rule contracts.Rule) {

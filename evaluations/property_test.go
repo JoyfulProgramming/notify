@@ -107,3 +107,33 @@ func TestProperty_NoSilentDiscard(t *testing.T) {
 		)
 	})
 }
+
+// TestProperty_NoSubsetOrSupersetRulesAfterCreate maps to INV-7: after creating
+// any rule via the API, no remaining rule in the store is a subset or superset
+// of the newly added rule.
+func TestProperty_NoSubsetOrSupersetRulesAfterCreate(t *testing.T) {
+	rapid.Check(t, func(rt *rapid.T) {
+		clearAllRules(t)
+		setUserRules(t, generateArbitraryRuleSet(rt)) // existing rules, may include catch-alls
+
+		newRule := generateArbitraryRule(rt)
+		newID := createRuleViaHTTP(t, newRule)
+
+		newWire := ruleWire{
+			ID:        newID,
+			SourceApp: newRule.SourceApp,
+			Title:     newRule.Title,
+		}
+		for _, r := range listRulesViaHTTP(t) {
+			if r.ID == newID {
+				continue
+			}
+			if rulesOverlap(r, newWire) {
+				rt.Fatalf(
+					"rule {SourceApp:%q Title:%q} overlaps with new rule {SourceApp:%q Title:%q} — INV-7 violated",
+					r.SourceApp, r.Title, newRule.SourceApp, newRule.Title,
+				)
+			}
+		}
+	})
+}
