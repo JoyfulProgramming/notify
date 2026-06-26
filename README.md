@@ -15,18 +15,84 @@ bin/rules list     # see active rules
 
 ## Scripts
 
-| Script | What it does |
-|---|---|
-| `bin/serve` | Runs the full pipeline in one process: ingestor on `:8080`, rule-api on `:8081`, delivery + web UI on `:8082`. Opens the browser automatically. |
-| `bin/serve-docs` | Serves the interactive HTML plan viewer from `docs/` on `:8000`. |
-| `bin/notify send` | Sends a notification to the local ingestor. Flags: `-s` (source app), `-a` (account), `-t` (title), `-b` (body), `-f` (sent-by), `-i` (sent-in), `--source-id`, `--id`. Unset flags fall back to `notify-defaults.toml`. |
-| `bin/rules create` | Creates a delivery rule via the rule API. Flags: `-s` (source app), `-a` (account), `-t` (title). Wildcards: `*` matches anything, `com.google.*` is a glob. |
-| `bin/rules list` | Lists all active rules. |
-| `bin/rules delete <ID>` | Deletes a rule by ID. |
-| `bin/test` | Runs the full evaluation suite — contract tests and rapid property tests — in-process, no infra needed. Extra args are passed through to `go test`. |
-| `bin/build` | Builds all Go packages (`go build ./...`). |
-| `bin/lint` | Runs `go vet` and checks `gofmt` formatting. |
-| `bin/check-specs` | Checks that `specs/` is in sync with `pkg/contracts/`. Run as a Claude Code stop hook. |
+### bin/serve
+
+Runs the full pipeline in one process and opens the web UI.
+
+```sh
+bin/serve
+# ingestor :8080 · rule-api :8081 · delivery + web :8082
+```
+
+### bin/serve-docs
+
+Serves the interactive HTML plan viewer from `docs/`.
+
+```sh
+bin/serve-docs        # opens http://localhost:8000
+bin/serve-docs 9000   # custom port
+```
+
+### bin/notify
+
+Sends notifications to the local ingestor. Unset flags fall back to `notify-defaults.toml`.
+
+```sh
+bin/notify send                          # send with defaults from notify-defaults.toml
+bin/notify send -s com.google.gmail      # -s  source app
+                -a john@example.com      # -a  account within the app
+                -t "New message"         # -t  title
+                -b "Hey, are you free?"  # -b  body
+                -f alice@example.com     # -f  sent-by (sender)
+                -i "thread-42"           # -i  sent-in (thread/channel)
+                --source-id msg-001      # original ID in the source system
+                --id <uuid>              # provide your own ID (useful for dedup testing)
+```
+
+### bin/rules
+
+Manages delivery rules against the local rule API.
+
+```sh
+bin/rules create                        # create with defaults from notify-defaults.toml
+bin/rules create -s com.google.gmail    # -s  source app (* = wildcard, com.google.* = glob)
+                 -a john@example.com    # -a  account
+                 -t "*invoice*"         # -t  title pattern
+
+bin/rules list                          # list all active rules
+bin/rules delete <ID>                   # delete a rule by ID
+```
+
+### bin/test
+
+Runs the full evaluation suite — contract tests and rapid property tests — in-process, no infra needed.
+
+```sh
+bin/test                              # run everything
+bin/test -run TestContract -v         # just the contract tests
+bin/test -run TestProperty -v         # just the property tests
+bin/test -rapid.checks=20             # fewer randomised iterations
+```
+
+### bin/build
+
+```sh
+bin/build   # go build ./...
+```
+
+### bin/lint
+
+```sh
+bin/lint    # go vet + gofmt check
+```
+
+### bin/check-specs
+
+Checks that `specs/` is in sync with `pkg/contracts/`. Intended as a Claude Code stop hook.
+
+```sh
+bin/check-specs   # exit 0 = in sync, exit 2 = specs need updating
+```
 
 ## Rule matching
 
