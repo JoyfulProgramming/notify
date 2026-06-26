@@ -2,15 +2,15 @@
 # Edit freely — these are just test/dev convenience values.
 
 [notify.send]
-source_app     = "com.example.test"
-account        = ""
-title          = "Test notification"
-body           = "This is a test body"
-sent_by        = ""
+source_app     = "com.google.gmail"
+account        = "john@synapticmishap.co.uk"
+title          = "New message from Alice"
+body           = "Hey, are we still on for tomorrow?"
+sent_by        = "alice@example.com"
 sent_in        = ""
-source_id      = ""
+source_id      = "msg-001"
 
 [rules.create]
-source_app     = "com.example.test"
-account        = ""
+source_app     = "com.google.gmail"
+account        = "john@synapticmishap.co.uk"
 title          = ""
