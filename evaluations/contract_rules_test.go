@@ -64,7 +64,7 @@ func TestContract_AddingExactRuleRemovesMatchingPattern(t *testing.T) {
 func TestContract_AddingSpecificRuleRemovesGenericCatchAll(t *testing.T) {
 	clearAllRules(t)
 	catchAllID := newUUID(t)
-	setUserRule(t, contracts.Rule{ID: catchAllID, SourceApp: ""})
+	setUserRule(t, contracts.Rule{ID: catchAllID, SourceApp: "*"})
 	assertRuleExistsViaHTTP(t, catchAllID)
 
 	createRuleViaHTTP(t, contracts.Rule{SourceApp: "com.whatsapp"})

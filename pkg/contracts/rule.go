@@ -27,18 +27,18 @@ type Rule struct {
 
 // Matching semantics for SourceApp, SourceAccount, and Title:
 //
-//	""                 empty   — ignore this field; matches any value
-//	"com.google.gmail" exact   — field must equal this value exactly
-//	"com.google.*"     pattern — field must match this glob pattern (* = any chars)
+//	"*"                wildcard — matches any value for this field
+//	"com.google.gmail" exact    — field must equal this value exactly
+//	"com.google.*"     pattern  — field must match this glob pattern (* = any chars)
 //
 // Examples:
 //
-//	SourceApp: ""              matches any app
+//	SourceApp: "*"              matches any app
 //	SourceApp: "com.whatsapp"  matches WhatsApp only
 //	SourceApp: "com.google.*"  matches any Google app
-//	SourceAccount: ""          matches any account
+//	SourceAccount: "*"          matches any account
 //	SourceAccount: "*@work.com" matches any work email account
-//	Title: ""                  matches any title
+//	Title: "*"                 matches any title
 //	Title: "*invoice*"         matches any title containing "invoice"
 //	Title: "Invoice ready"     matches this exact title only
 //

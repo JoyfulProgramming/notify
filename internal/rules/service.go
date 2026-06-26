@@ -162,13 +162,7 @@ func fieldCovers(r, s string) bool {
 	if r == s {
 		return true
 	}
-	if r == "" {
-		return true
-	}
-	if s == "" {
-		return false
-	}
-	if strings.Contains(r, "*") && !strings.Contains(s, "*") {
+	if strings.Contains(r, "*") {
 		ok, _ := path.Match(r, s)
 		return ok
 	}

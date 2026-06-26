@@ -38,7 +38,7 @@ func TestContract_NoRuleDefaultsToDiscarded(t *testing.T) {
 // fields empty matches any notification.
 func TestContract_CatchAllRuleMatchesAnyNotification(t *testing.T) {
 	clearAllRules(t)
-	setUserRule(t, contracts.Rule{SourceApp: ""})
+	setUserRule(t, contracts.Rule{SourceApp: "*"})
 
 	id := publishViaHTTP(t, contracts.Notification{SourceApp: "com.example.anything"})
 	assertPresentInStream(t, id, bus.TopicNotificationsMatched, 5*time.Second)

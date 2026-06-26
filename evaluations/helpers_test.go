@@ -400,20 +400,13 @@ func waitForSSEEventWithID(t testing.TB, c *sseClient, id string, timeout time.D
 
 // fieldCovers reports whether field value r "covers" s: every value satisfying
 // s as a matching criterion also satisfies r.
-//   - empty r ("") matches anything, so it covers any s
-//   - a glob pattern r covers an exact s if s matches the pattern
+//   - "*" or any glob in r covers s if path.Match(r, s) is true
 //   - exact r covers only itself
 func fieldCovers(r, s string) bool {
 	if r == s {
 		return true
 	}
-	if r == "" {
-		return true
-	}
-	if s == "" {
-		return false // s matches anything; only "" could cover that
-	}
-	if strings.Contains(r, "*") && !strings.Contains(s, "*") {
+	if strings.Contains(r, "*") {
 		ok, _ := path.Match(r, s)
 		return ok
 	}

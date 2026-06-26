@@ -26,7 +26,7 @@ func generateArbitraryDeliverableNotification(t *rapid.T) contracts.Notification
 
 func generateArbitraryRuleSet(t *rapid.T) []contracts.Rule {
 	n := rapid.IntRange(0, 4).Draw(t, "rule_count")
-	pool := append([]string{""}, sourceApps...)
+	pool := append([]string{"*"}, sourceApps...)
 	rules := make([]contracts.Rule, 0, n)
 	for i := 0; i < n; i++ {
 		rules = append(rules, contracts.Rule{
@@ -52,7 +52,7 @@ func generateMatchingDeliverRule(t *rapid.T, n contracts.Notification) contracts
 // suitable for creation via the HTTP API (which rejects all-fields-empty rules).
 // Used by the subset/superset property test (INV-7).
 func generateArbitraryRule(t *rapid.T) contracts.Rule {
-	titlePool := []string{"", "*invoice*", "Weekly digest"}
+	titlePool := []string{"*", "*invoice*", "Weekly digest"}
 	return contracts.Rule{
 		SourceApp: rapid.SampledFrom(sourceApps).Draw(t, "new_rule_source_app"),
 		Title:     rapid.SampledFrom(titlePool).Draw(t, "new_rule_title"),
