@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+# Manage Notify rules against the local rule-api (:8081).
+#
+# Usage:
+#   bin/rules create [-s APP] [-a ACCOUNT] [-t TITLE]
+#   bin/rules list
+#   bin/rules delete <ID>
+#
+# Unset fields fall back to values in notify-defaults.toml (project root).
+# At least one non-empty field is required by the API.
+set -euo pipefail
+
+RULES_URL="${NOTIFY_RULES_URL:-http://localhost:8081}"
+API_KEY="${NOTIFY_API_KEY:-local-key}"
+DEFAULTS_FILE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/notify-defaults.toml"
+
+usage() {
+  cat >&2 <<EOF
+usage:
+  bin/rules create [-s SOURCE_APP] [-a ACCOUNT] [-t TITLE]
+  bin/rules list
+  bin/rules delete <ID>
+
+  -s, --source-app   app identifier (e.g. com.google.gmail)
+  -a, --account      account within the app
+  -t, --title        notification title to match
+
+Unset fields fall back to notify-defaults.toml in the project root.
+EOF
+  exit 1
+}
+
+require_jq() {
+  if ! command -v jq >/dev/null 2>&1; then
+    echo "error: jq is required (brew install jq)" >&2
+    exit 1
+  fi
+}
+
+toml_get() {
+  local section="$1" key="$2"
+  [[ -f "$DEFAULTS_FILE" ]] || return 0
+  awk -v section="[$section]" -v key="$key" '
+    $0 == section        { in_section=1; next }
+    /^\[/                { in_section=0 }
+    in_section && $0 ~ "^"key"[ \t]*=" {
+      sub(/^[^=]*=[ \t]*/, "")
+      gsub(/^[[:space:]]*"|"[[:space:]]*$/, "")
+      print
+      exit
+    }
+  ' "$DEFAULTS_FILE"
+}
+
+subcmd="${1:-}"
+shift || true
+
+case "$subcmd" in
+  create)
+    app=""
+    account=""
+    title=""
+
+    while [[ $# -gt 0 ]]; do
+      case "$1" in
+        -s|--source-app)  app="${2:?$1 requires a value}";     shift 2 ;;
+        -a|--account)     account="${2:?$1 requires a value}"; shift 2 ;;
+        -t|--title)       title="${2:?$1 requires a value}";   shift 2 ;;
+        *) echo "unknown option: $1" >&2; usage ;;
+      esac
+    done
+
+    # Fill gaps from defaults file
+    [[ -n "$app" ]]     || app="$(toml_get     "rules.create" "source_app")"
+    [[ -n "$account" ]] || account="$(toml_get "rules.create" "account")"
+    [[ -n "$title" ]]   || title="$(toml_get   "rules.create" "title")"
+
+    require_jq
+    body="$(jq -n \
+      --arg a "$app" \
+      --arg c "$account" \
+      --arg t "$title" \
+      '{source_app: $a, source_account: $c, title: $t}')"
+
+    curl -sf -X POST "$RULES_URL/rules" \
+      -H "Authorization: Bearer $API_KEY" \
+      -H "Content-Type: application/json" \
+      -d "$body" | jq .
+    ;;
+
+  list)
+    require_jq
+    curl -sf "$RULES_URL/rules" \
+      -H "Authorization: Bearer $API_KEY" | jq .
+    ;;
+
+  delete)
+    id="${1:?delete requires an ID}"
+    curl -sf -X DELETE "$RULES_URL/rules/$id" \
+      -H "Authorization: Bearer $API_KEY" \
+      -o /dev/null -w "deleted %{http_code}\n"
+    ;;
+
+  ""|--help|-h)
+    usage
+    ;;
+
+  *)
+    echo "unknown subcommand: $subcmd" >&2
+    usage
+    ;;
+esac

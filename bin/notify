@@ -1,0 +1,137 @@
+#!/usr/bin/env bash
+# Send notifications to the local Notify ingestor (:8080).
+#
+# Usage:
+#   bin/notify send [-s APP] [-a ACCOUNT] [-t TITLE] [-b BODY]
+#                   [-f SENT_BY] [-i SENT_IN] [--source-id ID] [--id ID]
+#
+# Unset fields fall back to values in notify-defaults.toml (project root).
+# source_app is required; the default file provides it if -s is omitted.
+set -euo pipefail
+
+INGESTOR_URL="${NOTIFY_INGESTOR_URL:-http://localhost:8080}"
+API_KEY="${NOTIFY_API_KEY:-local-key}"
+DEFAULTS_FILE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/notify-defaults.toml"
+
+usage() {
+  cat >&2 <<EOF
+usage:
+  bin/notify send [-s SOURCE_APP] [-a ACCOUNT] [-t TITLE] [-b BODY]
+                  [-f SENT_BY] [-i SENT_IN] [--source-id SOURCE_ID] [--id ID]
+
+  -s, --source-app   app identifier (e.g. com.google.gmail)
+  -a, --account      account within the app
+  -t, --title        notification title
+  -b, --body         notification body
+  -f, --sent-by      sender identifier
+  -i, --sent-in      group/channel/thread context
+      --source-id    item ID in the source system
+      --id           provide your own notification ID (useful for dedup testing)
+
+Unset fields fall back to notify-defaults.toml in the project root.
+EOF
+  exit 1
+}
+
+require_jq() {
+  if ! command -v jq >/dev/null 2>&1; then
+    echo "error: jq is required (brew install jq)" >&2
+    exit 1
+  fi
+}
+
+# Read a value from a [section] in the TOML defaults file.
+# Usage: toml_get "notify.send" "source_app"
+toml_get() {
+  local section="$1" key="$2"
+  [[ -f "$DEFAULTS_FILE" ]] || return 0
+  awk -v section="[$section]" -v key="$key" '
+    $0 == section        { in_section=1; next }
+    /^\[/                { in_section=0 }
+    in_section && $0 ~ "^"key"[ \t]*=" {
+      sub(/^[^=]*=[ \t]*/, "")
+      gsub(/^[[:space:]]*"|"[[:space:]]*$/, "")
+      print
+      exit
+    }
+  ' "$DEFAULTS_FILE"
+}
+
+subcmd="${1:-}"
+shift || true
+
+case "$subcmd" in
+  send)
+    app=""
+    account=""
+    title=""
+    body=""
+    sent_by=""
+    sent_in=""
+    source_id=""
+    id=""
+
+    while [[ $# -gt 0 ]]; do
+      case "$1" in
+        -s|--source-app)  app="${2:?$1 requires a value}";       shift 2 ;;
+        -a|--account)     account="${2:?$1 requires a value}";   shift 2 ;;
+        -t|--title)       title="${2:?$1 requires a value}";     shift 2 ;;
+        -b|--body)        body="${2:?$1 requires a value}";      shift 2 ;;
+        -f|--sent-by)     sent_by="${2:?$1 requires a value}";   shift 2 ;;
+        -i|--sent-in)     sent_in="${2:?$1 requires a value}";   shift 2 ;;
+        --source-id)      source_id="${2:?$1 requires a value}"; shift 2 ;;
+        --id)             id="${2:?$1 requires a value}";        shift 2 ;;
+        *) echo "unknown option: $1" >&2; usage ;;
+      esac
+    done
+
+    # Fill gaps from defaults file
+    [[ -n "$app" ]]       || app="$(toml_get       "notify.send" "source_app")"
+    [[ -n "$account" ]]   || account="$(toml_get   "notify.send" "account")"
+    [[ -n "$title" ]]     || title="$(toml_get     "notify.send" "title")"
+    [[ -n "$body" ]]      || body="$(toml_get      "notify.send" "body")"
+    [[ -n "$sent_by" ]]   || sent_by="$(toml_get   "notify.send" "sent_by")"
+    [[ -n "$sent_in" ]]   || sent_in="$(toml_get   "notify.send" "sent_in")"
+    [[ -n "$source_id" ]] || source_id="$(toml_get "notify.send" "source_id")"
+
+    if [[ -z "$app" ]]; then
+      echo "error: --source-app is required (or set source_app in notify-defaults.toml)" >&2
+      usage
+    fi
+
+    require_jq
+    body_json="$(jq -n \
+      --arg app       "$app" \
+      --arg account   "$account" \
+      --arg title     "$title" \
+      --arg body      "$body" \
+      --arg sent_by   "$sent_by" \
+      --arg sent_in   "$sent_in" \
+      --arg source_id "$source_id" \
+      --arg id        "$id" \
+      '{
+        source_app:     $app,
+        source_account: $account,
+        title:          $title,
+        body:           $body,
+        sent_by:        $sent_by,
+        sent_in:        $sent_in,
+        source_id:      $source_id,
+        id:             $id
+      } | with_entries(select(.value != ""))')"
+
+    curl -sf -X POST "$INGESTOR_URL/notifications" \
+      -H "Authorization: Bearer $API_KEY" \
+      -H "Content-Type: application/json" \
+      -d "$body_json" | jq .
+    ;;
+
+  ""|--help|-h)
+    usage
+    ;;
+
+  *)
+    echo "unknown subcommand: $subcmd" >&2
+    usage
+    ;;
+esac
