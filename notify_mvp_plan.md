@@ -288,17 +288,17 @@ type Rule struct {
 
 // Matching semantics for SourceApp, SourceAccount, and Title:
 //
-//   ""                 empty   — ignore this field; matches any value
-//   "com.google.gmail" exact   — field must equal this value exactly
-//   "com.google.*"     pattern — field must match this glob pattern (* = any chars)
+//   "*"                wildcard — matches any value for this field
+//   "com.google.gmail" exact    — field must equal this value exactly
+//   "com.google.*"     pattern  — field must match this glob pattern (* = any chars)
 //
 // Examples:
-//   SourceApp: ""              matches any app
+//   SourceApp: "*"              matches any app
 //   SourceApp: "com.whatsapp"  matches WhatsApp only
 //   SourceApp: "com.google.*"  matches any Google app
-//   SourceAccount: ""          matches any account
+//   SourceAccount: "*"          matches any account
 //   SourceAccount: "*@work.com" matches any work email account
-//   Title: ""                  matches any title
+//   Title: "*"                 matches any title
 //   Title: "*invoice*"         matches any title containing "invoice"
 //   Title: "Invoice ready"     matches this exact title only
 //
@@ -446,7 +446,7 @@ INV-6: In v1, all rules deliver. If any rule matches a notification, it is
        2. Within the same field, exact > pattern > empty:
             "com.google.gmail"   exact
             "com.google.*"       pattern
-            ""                   empty
+            "*"                  wildcard (matches any value)
 
        These two dimensions combine. No user-assigned priority number ever
        exists — specificity is always derived from the rule's shape alone.
@@ -459,9 +459,9 @@ INV-7: The rule store never contains two rules in a subset-or-superset
 
        A rule R is a superset of rule S if every notification matched by S is
        also matched by R. This is evaluated field-by-field:
-         - An empty field in R ("") covers any value in S.
-         - A glob pattern in R covers an exact value in S if the value matches
-           the pattern (e.g. "com.google.*" covers "com.google.gmail").
+         - A wildcard "*" in R covers any value in S.
+         - A glob pattern in R covers a value in S if that value matches the
+           pattern (e.g. "com.google.*" covers "com.google.gmail").
          - An exact value in R covers only the same exact value in S.
        All three fields (SourceApp, SourceAccount, Title) must satisfy the
        coverage relation for R to be considered a superset of S.
@@ -587,7 +587,7 @@ BEHAVIOR: Notification with no matching rule is discarded
   And it does not appear on notifications.matched
 
 BEHAVIOR: Catch-all rule (all fields empty) matches any notification
-  Given the user has a rule: {source_app: ""}
+  Given the user has a rule: {source_app: "*"}
   When a notification with source_app "com.example.anything" arrives on notifications.captured
   Then the notification appears on notifications.matched
 
@@ -799,7 +799,7 @@ BEHAVIOR: Adding a more specific rule removes any generic rule it falls within (
   And the pattern rule is automatically removed
 
 BEHAVIOR: Adding a specific rule removes a catch-all rule that covers it (INV-7)
-  Given a catch-all rule {source_app: ""} exists
+  Given a catch-all rule {source_app: "*"} exists
   When I create a rule {source_app: "com.whatsapp"}
   Then the WhatsApp rule is created
   And the catch-all rule is automatically removed
