@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Hard-blocks prod-writer from touching evaluations/.
+# Receives hook input JSON on stdin.
+
+INPUT=$(cat)
+TOOL=$(echo "$INPUT" | jq -r '.tool_name // empty')
+FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')
+
+case "$TOOL" in
+  Write|Edit)
+    if [[ "$FILE_PATH" =~ /evaluations/ ]]; then
+      echo "Blocked: prod-writer may not modify evaluations/. Got: $FILE_PATH" >&2
+      exit 2
+    fi
+    ;;
+esac
+
+exit 0
