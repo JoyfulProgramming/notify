@@ -1,0 +1,46 @@
+{
+  "domain_object": "RuleChangedEvent",
+  "schema_version": "v1",
+  "source_of_truth": "pkg/contracts/events.go",
+  "bounded_context": "Matching BC",
+  "topic": "rules.changed",
+  "description": "Published to rules.changed on every successful rule mutation. Enables the filter-service to invalidate its rule cache without polling.",
+  "fields": [
+    {
+      "name": "event_id",
+      "json_key": "event_id",
+      "go_type": "string",
+      "format": "uuid",
+      "required": true,
+      "description": "UUID uniquely identifying this event."
+    },
+    {
+      "name": "kind",
+      "json_key": "kind",
+      "go_type": "string",
+      "required": true,
+      "enum": ["CREATED", "UPDATED", "DELETED"],
+      "description": "The type of mutation."
+    },
+    {
+      "name": "rule",
+      "json_key": "rule",
+      "go_type": "Rule",
+      "required": true,
+      "description": "Full snapshot of the rule at the time of the event. Not a diff."
+    },
+    {
+      "name": "changed_at",
+      "json_key": "changed_at",
+      "go_type": "time.Time",
+      "format": "RFC3339",
+      "required": true,
+      "description": "When the mutation occurred."
+    }
+  ],
+  "invariants": [
+    "A RuleChangedEvent is published for every successful POST /rules and DELETE /rules/{id}.",
+    "The rule field contains the full rule snapshot, not a diff.",
+    "Consumers must be idempotent — the bus delivers at least once."
+  ]
+}

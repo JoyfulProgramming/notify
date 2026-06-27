@@ -1,0 +1,81 @@
+{
+  "domain_object": "Rule",
+  "schema_version": "v1",
+  "source_of_truth": "pkg/contracts/rule.go",
+  "bounded_context": "Matching BC",
+  "description": "A rule means 'surface this notification'. In v1 all rules deliver: matching any rule = deliver, no match = discard. No DISCARD (exception) action exists in v1.",
+  "fields": [
+    {
+      "name": "id",
+      "go_type": "string",
+      "format": "uuid",
+      "required": true,
+      "description": "Stable UUID identifier assigned at creation."
+    },
+    {
+      "name": "user_id",
+      "go_type": "string",
+      "required": true,
+      "description": "Owner. MVP value: 'local'."
+    },
+    {
+      "name": "source_app",
+      "go_type": "string",
+      "required": false,
+      "description": "Matched against the notification's source_app field. See matching_semantics."
+    },
+    {
+      "name": "source_account",
+      "go_type": "string",
+      "required": false,
+      "description": "Matched against the notification's source_account field. See matching_semantics."
+    },
+    {
+      "name": "title",
+      "go_type": "string",
+      "required": false,
+      "description": "Matched against the notification's title field. See matching_semantics."
+    }
+  ],
+  "matching_semantics": {
+    "note": "Applies to source_app, source_account, and title fields.",
+    "wildcard": {
+      "syntax": "*",
+      "meaning": "Matches any value for this field."
+    },
+    "pattern": {
+      "syntax": "<glob containing *>",
+      "meaning": "Field must match this glob pattern. * = any sequence of characters.",
+      "examples": ["com.google.*", "*@work.com", "*invoice*"]
+    },
+    "exact": {
+      "syntax": "<value with no *>",
+      "meaning": "Field must equal this value exactly.",
+      "examples": ["com.google.gmail", "john@work.com", "Invoice ready"]
+    }
+  },
+  "specificity_ordering": [
+    "exact (most specific)",
+    "pattern",
+    "wildcard * (least specific, matches anything)"
+  ],
+  "coverage_relation": {
+    "description": "Rule R covers rule S if every notification matched by S is also matched by R, field-by-field.",
+    "rules": [
+      "* in R covers any value in S (including other patterns).",
+      "A pattern in R covers an exact value in S if the value matches the pattern.",
+      "An exact value in R covers only the same exact value in S."
+    ]
+  },
+  "http_api": {
+    "create": "POST /rules — 201 with {id}. 400 if no fields are set.",
+    "list":   "GET /rules — 200 with array of rules for the authenticated user.",
+    "delete": "DELETE /rules/{id} — 204."
+  },
+  "invariants": [
+    "In v1, all rules deliver. Multiple matching rules cannot conflict.",
+    "Specificity resolution is reserved for v2 when DISCARD exception rules are introduced.",
+    "INV-5: A rule change takes effect for all future notifications immediately; it does not retroactively affect already-routed notifications.",
+    "INV-7: The rule store never contains two rules in a subset-or-superset relationship. Creating a rule automatically removes any existing rule that is a superset or subset of the new rule."
+  ]
+}

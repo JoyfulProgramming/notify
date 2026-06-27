@@ -1,0 +1,119 @@
+{
+  "domain_object": "Notification",
+  "schema_version": "v1",
+  "source_of_truth": "pkg/contracts/notification.go",
+  "description": "The published language crossing all three bounded context boundaries. On notifications.captured it is what an app generated. On notifications.matched it has cleared the Matching context and is worth the user's attention.",
+  "bounded_context_meanings": {
+    "notifications.captured": "Capture BC — what an app generated; makes no claim about relevance",
+    "notifications.matched": "Delivery BC — cleared by Matching context; explicitly worth the user's attention",
+    "notifications.discarded": "Matching context — ruled out; no matching rule found"
+  },
+  "fields": [
+    {
+      "name": "id",
+      "json_key": "id",
+      "go_type": "string",
+      "format": "uuid-v7",
+      "required": true,
+      "immutable": true,
+      "set_by": "ingestor (generated if absent from client)",
+      "description": "System-wide deduplication key. Assigned once at ingestion and never changed."
+    },
+    {
+      "name": "user_id",
+      "json_key": "user_id",
+      "go_type": "string",
+      "required": true,
+      "set_by": "ingestor",
+      "description": "Owner. Set from the authenticated caller's token. Trusted by all downstream services without re-authentication. MVP value: 'local'."
+    },
+    {
+      "name": "source_app",
+      "json_key": "source_app",
+      "go_type": "string",
+      "required": true,
+      "description": "Reverse-DNS app identifier, e.g. 'com.whatsapp', 'com.google.gmail'."
+    },
+    {
+      "name": "source_account",
+      "json_key": "source_account",
+      "go_type": "string",
+      "required": false,
+      "description": "Account within the app, e.g. 'john@work.com'. Empty = unspecified or single-account app. Together with source_app uniquely identifies the origin."
+    },
+    {
+      "name": "source_id",
+      "json_key": "source_id",
+      "go_type": "string",
+      "required": false,
+      "description": "Item identifier in the source system (e.g. Gmail message ID, GitHub notification ID). Empty = source does not expose a stable identifier. Opaque string; its format is implicit in source_app."
+    },
+    {
+      "name": "sent_by",
+      "json_key": "sent_by",
+      "go_type": "string",
+      "required": false,
+      "description": "Raw identifier of who sent the notification — phone number, email, username, or bot ID. Empty = unknown or system notification with no individual sender."
+    },
+    {
+      "name": "sent_in",
+      "json_key": "sent_in",
+      "go_type": "string",
+      "required": false,
+      "description": "Group/channel/thread context, e.g. WhatsApp group ID. Empty = direct message or no group context. Together with sent_by enables the full specificity rule set (sender+group, sender-only, group-only) in v2."
+    },
+    {
+      "name": "title",
+      "json_key": "title",
+      "go_type": "string",
+      "required": false,
+      "description": "Notification title. May be empty."
+    },
+    {
+      "name": "body",
+      "json_key": "body",
+      "go_type": "string",
+      "required": false,
+      "description": "Notification body text. May be empty."
+    },
+    {
+      "name": "device_id",
+      "json_key": "device_id",
+      "go_type": "string",
+      "format": "uuid",
+      "required": false,
+      "description": "UUID identifying the source device."
+    },
+    {
+      "name": "device_timestamp",
+      "json_key": "device_timestamp",
+      "go_type": "time.Time",
+      "format": "RFC3339",
+      "required": true,
+      "description": "When the notification appeared on the device (as reported by the client)."
+    },
+    {
+      "name": "received_at",
+      "json_key": "received_at",
+      "go_type": "time.Time",
+      "format": "RFC3339",
+      "required": true,
+      "set_by": "ingestor",
+      "description": "When the ingestor first received this notification."
+    },
+    {
+      "name": "metadata",
+      "json_key": "metadata",
+      "go_type": "map[string]string",
+      "required": false,
+      "description": "Arbitrary key-value pairs. No service may fail on encountering an unknown key."
+    }
+  ],
+  "invariants": [
+    "id is assigned once at ingestion and never changes.",
+    "user_id is set by the ingestor; downstream services trust it without re-authenticating.",
+    "No service may accept a Notification with an absent or empty user_id.",
+    "No service may fail on encountering an unknown metadata key.",
+    "Adding new optional fields is backward-compatible. Removing or renaming fields requires schema version v2."
+  ]
+}
