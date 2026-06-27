@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Checks whether pkg/contracts/ was modified in the working tree without a
+# corresponding update to specs/. Run as a Claude Code Stop hook so every
+# session is reminded to keep specs in sync with the contracts they describe.
+#
+# Covers both modified tracked files (git diff HEAD) and new untracked files
+# (git ls-files --others) so creating a new spec file is always detected.
+#
+# Exit 0 = nothing to do.
+# Exit 2 = contracts changed, specs not updated — prints a reminder.
+
+changed() {
+  { git diff HEAD --name-only 2>/dev/null; git ls-files --others --exclude-standard 2>/dev/null; } \
+    | grep "^$1/" || true
+}
+
+contracts_changed=$(changed pkg/contracts)
+
+if [ -z "$contracts_changed" ]; then
+  exit 0
+fi
+
+specs_changed=$(changed specs)
+
+if [ -n "$specs_changed" ]; then
+  exit 0
+fi
+
+echo "SPEC SYNC REQUIRED"
+echo ""
+echo "pkg/contracts/ changed but specs/ was not updated."
+echo ""
+echo "Changed contracts:"
+echo "$contracts_changed" | sed 's/^/  /'
+echo ""
+echo "Update the relevant file(s) in specs/ before finishing this session:"
+echo "  specs/notification.json       → pkg/contracts/notification.go"
+echo "  specs/rule.json               → pkg/contracts/rule.go"
+echo "  specs/rule_changed_event.json → pkg/contracts/events.go"
+exit 2
