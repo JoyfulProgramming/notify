@@ -39,8 +39,8 @@ func newNotificationRecorder(b bus.Bus, topic string) *notificationRecorder {
 			var n contracts.Notification
 			if err := json.Unmarshal(msg.Data, &n); err == nil {
 				rec.mu.Lock()
-				rec.seen[n.ID] = n
-				rec.counts[n.ID]++
+				rec.seen[n.ID()] = n
+				rec.counts[n.ID()]++
 				rec.mu.Unlock()
 			}
 			ack()
@@ -100,10 +100,10 @@ func newRuleEventRecorder(b bus.Bus) *ruleEventRecorder {
 			var ev contracts.RuleChangedEvent
 			if err := json.Unmarshal(msg.Data, &ev); err == nil {
 				rec.mu.Lock()
-				if rec.events[ev.Rule.ID] == nil {
-					rec.events[ev.Rule.ID] = make(map[contracts.RuleChangedKind]bool)
+				if rec.events[ev.Rule().ID()] == nil {
+					rec.events[ev.Rule().ID()] = make(map[contracts.RuleChangedKind]bool)
 				}
-				rec.events[ev.Rule.ID][ev.Kind] = true
+				rec.events[ev.Rule().ID()][ev.Kind()] = true
 				rec.mu.Unlock()
 			}
 			ack()

@@ -5,15 +5,14 @@ import (
 	"time"
 
 	"notify/pkg/bus"
-	"notify/pkg/contracts"
 )
 
 // TestContract_MatchingRuleLeadsToDelivery maps to INV-2.
 func TestContract_MatchingRuleLeadsToDelivery(t *testing.T) {
 	clearAllRules(t)
-	setUserRule(t, contracts.Rule{SourceApp: "com.whatsapp"})
+	setUserRule(t, ruleWire{SourceApp: "com.whatsapp"})
 
-	id := publishViaHTTP(t, contracts.Notification{SourceApp: "com.whatsapp", Title: "Alice: hey"})
+	id := publishViaHTTP(t, notificationWire{SourceApp: "com.whatsapp", Title: "Alice: hey"})
 	assertPresentInStream(t, id, bus.TopicNotificationsMatched, 5*time.Second)
 }
 
@@ -21,7 +20,7 @@ func TestContract_MatchingRuleLeadsToDelivery(t *testing.T) {
 func TestContract_NoMatchingRuleRoutesToDiscarded(t *testing.T) {
 	clearAllRules(t)
 
-	id := publishViaHTTP(t, contracts.Notification{SourceApp: "com.twitter", Title: "Someone liked your tweet"})
+	id := publishViaHTTP(t, notificationWire{SourceApp: "com.twitter", Title: "Someone liked your tweet"})
 	assertPresentInStream(t, id, bus.TopicNotificationsDiscarded, 5*time.Second)
 	assertAbsentFromStream(t, id, bus.TopicNotificationsMatched, 1*time.Second)
 }
@@ -30,7 +29,7 @@ func TestContract_NoMatchingRuleRoutesToDiscarded(t *testing.T) {
 func TestContract_NoRuleDefaultsToDiscarded(t *testing.T) {
 	clearAllRules(t)
 
-	id := publishViaHTTP(t, contracts.Notification{SourceApp: "com.example.unknown"})
+	id := publishViaHTTP(t, notificationWire{SourceApp: "com.example.unknown"})
 	assertPresentInStream(t, id, bus.TopicNotificationsDiscarded, 5*time.Second)
 }
 
@@ -38,35 +37,35 @@ func TestContract_NoRuleDefaultsToDiscarded(t *testing.T) {
 // fields empty matches any notification.
 func TestContract_CatchAllRuleMatchesAnyNotification(t *testing.T) {
 	clearAllRules(t)
-	setUserRule(t, contracts.Rule{SourceApp: "*"})
+	setUserRule(t, ruleWire{SourceApp: "*"})
 
-	id := publishViaHTTP(t, contracts.Notification{SourceApp: "com.example.anything"})
+	id := publishViaHTTP(t, notificationWire{SourceApp: "com.example.anything"})
 	assertPresentInStream(t, id, bus.TopicNotificationsMatched, 5*time.Second)
 }
 
 // TestContract_PatternRuleMatchesGlob — BEHAVIOR: pattern rule matches on glob.
 func TestContract_PatternRuleMatchesGlob(t *testing.T) {
 	clearAllRules(t)
-	setUserRule(t, contracts.Rule{SourceApp: "com.google.*"})
+	setUserRule(t, ruleWire{SourceApp: "com.google.*"})
 
-	matchedID := publishViaHTTP(t, contracts.Notification{SourceApp: "com.google.gmail"})
+	matchedID := publishViaHTTP(t, notificationWire{SourceApp: "com.google.gmail"})
 	assertPresentInStream(t, matchedID, bus.TopicNotificationsMatched, 5*time.Second)
 
-	discardedID := publishViaHTTP(t, contracts.Notification{SourceApp: "com.whatsapp"})
+	discardedID := publishViaHTTP(t, notificationWire{SourceApp: "com.whatsapp"})
 	assertPresentInStream(t, discardedID, bus.TopicNotificationsDiscarded, 5*time.Second)
 }
 
 // TestContract_TitlePatternNarrowsMatching — BEHAVIOR: title pattern narrows matching.
 func TestContract_TitlePatternNarrowsMatching(t *testing.T) {
 	clearAllRules(t)
-	setUserRule(t, contracts.Rule{SourceApp: "com.google.gmail", Title: "*invoice*"})
+	setUserRule(t, ruleWire{SourceApp: "com.google.gmail", Title: "*invoice*"})
 
-	matchedID := publishViaHTTP(t, contracts.Notification{
+	matchedID := publishViaHTTP(t, notificationWire{
 		SourceApp: "com.google.gmail", Title: "Your invoice is ready",
 	})
 	assertPresentInStream(t, matchedID, bus.TopicNotificationsMatched, 5*time.Second)
 
-	discardedID := publishViaHTTP(t, contracts.Notification{
+	discardedID := publishViaHTTP(t, notificationWire{
 		SourceApp: "com.google.gmail", Title: "Newsletter: weekly digest",
 	})
 	assertPresentInStream(t, discardedID, bus.TopicNotificationsDiscarded, 5*time.Second)
@@ -76,12 +75,12 @@ func TestContract_TitlePatternNarrowsMatching(t *testing.T) {
 func TestContract_RuleChangeAppliesToFutureOnly(t *testing.T) {
 	clearAllRules(t)
 
-	id1 := publishViaHTTP(t, contracts.Notification{SourceApp: "com.slack", Title: "Message from Dave"})
+	id1 := publishViaHTTP(t, notificationWire{SourceApp: "com.slack", Title: "Message from Dave"})
 	assertPresentInStream(t, id1, bus.TopicNotificationsDiscarded, 5*time.Second)
 
-	setUserRule(t, contracts.Rule{SourceApp: "com.slack"})
+	setUserRule(t, ruleWire{SourceApp: "com.slack"})
 
-	id2 := publishViaHTTP(t, contracts.Notification{SourceApp: "com.slack", Title: "Another message"})
+	id2 := publishViaHTTP(t, notificationWire{SourceApp: "com.slack", Title: "Another message"})
 	assertPresentInStream(t, id2, bus.TopicNotificationsMatched, 5*time.Second)
 
 	// First notification remains discarded — no retroactive change.

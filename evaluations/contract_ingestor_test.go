@@ -6,20 +6,19 @@ import (
 	"time"
 
 	"notify/pkg/bus"
-	"notify/pkg/contracts"
 )
 
 // TestContract_BasicIngestionPublishes maps to INV-1 (plan section 7,
 // "Basic ingestion publishes to notifications.captured").
 func TestContract_BasicIngestionPublishes(t *testing.T) {
-	id := publishViaHTTP(t, contracts.Notification{
+	id := publishViaHTTP(t, notificationWire{
 		SourceApp: "com.whatsapp",
 		Title:     "Alice: hey",
 		Body:      "Are you free?",
 	})
 	n := waitForMessageOnTopic(t, bus.TopicNotificationsCaptured, id, 2*time.Second)
-	if n.ID != id {
-		t.Fatalf("expected captured message id %s, got %s", id, n.ID)
+	if n.ID() != id {
+		t.Fatalf("expected captured message id %s, got %s", id, n.ID())
 	}
 }
 
@@ -36,12 +35,12 @@ func TestContract_IngestorRejectsMalformed(t *testing.T) {
 // TestContract_IngestorAssignsReceivedAt maps to the schema contract.
 func TestContract_IngestorAssignsReceivedAt(t *testing.T) {
 	before := time.Now()
-	id := publishViaHTTP(t, contracts.Notification{SourceApp: "com.whatsapp", Title: "Test"})
+	id := publishViaHTTP(t, notificationWire{SourceApp: "com.whatsapp", Title: "Test"})
 	msg := waitForMessageOnTopic(t, bus.TopicNotificationsCaptured, id, 3*time.Second)
 	after := time.Now()
 
-	if msg.ReceivedAt.Before(before) || msg.ReceivedAt.After(after) {
-		t.Fatalf("received_at %v is outside the expected window [%v, %v]", msg.ReceivedAt, before, after)
+	if msg.ReceivedAt().Before(before) || msg.ReceivedAt().After(after) {
+		t.Fatalf("received_at %v is outside the expected window [%v, %v]", msg.ReceivedAt(), before, after)
 	}
 }
 
@@ -49,7 +48,7 @@ func TestContract_IngestorAssignsReceivedAt(t *testing.T) {
 // id that's POSTed twice must only appear once on notifications.captured.
 func TestContract_IngestorDeduplicatesByID(t *testing.T) {
 	id := newUUID(t)
-	n := contracts.Notification{ID: id, SourceApp: "com.whatsapp", Title: "First"}
+	n := notificationWire{ID: id, SourceApp: "com.whatsapp", Title: "First"}
 
 	got1 := publishViaHTTP(t, n)
 	got2 := publishViaHTTP(t, n)

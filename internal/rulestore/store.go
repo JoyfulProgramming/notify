@@ -5,6 +5,7 @@ package rulestore
 
 import (
 	"database/sql"
+	"fmt"
 
 	"notify/pkg/contracts"
 
@@ -49,7 +50,7 @@ func (s *Store) Close() error {
 func (s *Store) Create(r contracts.Rule) error {
 	_, err := s.db.Exec(
 		`INSERT INTO rules (id, user_id, source_app, source_account, title) VALUES (?, ?, ?, ?, ?)`,
-		r.ID, r.UserID, r.SourceApp, r.SourceAccount, r.Title,
+		r.ID(), r.UserID(), r.SourceApp(), r.SourceAccount(), r.Title(),
 	)
 	return err
 }
@@ -66,9 +67,13 @@ func (s *Store) List(userID string) ([]contracts.Rule, error) {
 
 	var rules []contracts.Rule
 	for rows.Next() {
-		var r contracts.Rule
-		if err := rows.Scan(&r.ID, &r.UserID, &r.SourceApp, &r.SourceAccount, &r.Title); err != nil {
+		var id, owner, sourceApp, sourceAccount, title string
+		if err := rows.Scan(&id, &owner, &sourceApp, &sourceAccount, &title); err != nil {
 			return nil, err
+		}
+		r, err := contracts.NewRule(id, owner, sourceApp, sourceAccount, title)
+		if err != nil {
+			return nil, fmt.Errorf("rulestore: stored rule %s is invalid: %w", id, err)
 		}
 		rules = append(rules, r)
 	}

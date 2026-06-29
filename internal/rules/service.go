@@ -48,7 +48,7 @@ type ruleDTO struct {
 }
 
 func toDTO(r contracts.Rule) ruleDTO {
-	return ruleDTO{ID: r.ID, SourceApp: r.SourceApp, SourceAccount: r.SourceAccount, Title: r.Title}
+	return ruleDTO{ID: r.ID(), SourceApp: r.SourceApp(), SourceAccount: r.SourceAccount(), Title: r.Title()}
 }
 
 func (s *Service) handleCreate(w http.ResponseWriter, r *http.Request) {
@@ -78,12 +78,10 @@ func (s *Service) handleCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rule := contracts.Rule{
-		ID:            id.String(),
-		UserID:        userID,
-		SourceApp:     dto.SourceApp,
-		SourceAccount: dto.SourceAccount,
-		Title:         dto.Title,
+	rule, err := contracts.NewRule(id.String(), userID, dto.SourceApp, dto.SourceAccount, dto.Title)
+	if err != nil {
+		http.Error(w, "internal error", http.StatusInternalServerError)
+		return
 	}
 
 	existing, err := s.store.List(userID)
@@ -93,7 +91,7 @@ func (s *Service) handleCreate(w http.ResponseWriter, r *http.Request) {
 	}
 	for _, ex := range existing {
 		if rulesOverlap(ex, rule) {
-			if _, err := s.store.Delete(userID, ex.ID); err != nil {
+			if _, err := s.store.Delete(userID, ex.ID()); err != nil {
 				http.Error(w, "internal error", http.StatusInternalServerError)
 				return
 			}
@@ -153,7 +151,15 @@ func (s *Service) handleDelete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	s.publishChange(contracts.RuleDeleted, contracts.Rule{ID: id, UserID: userID})
+	// id is only reached here once store.Delete confirms a row with that id
+	// existed, i.e. it's a previously-assigned valid UUID — NewRule cannot
+	// fail on it.
+	tombstone, err := contracts.NewRule(id, userID, "", "", "")
+	if err != nil {
+		log.Printf("rules: building delete tombstone: %v", err)
+	} else {
+		s.publishChange(contracts.RuleDeleted, tombstone)
+	}
 
 	w.WriteHeader(http.StatusNoContent)
 }
@@ -170,9 +176,9 @@ func fieldCovers(r, s string) bool {
 }
 
 func ruleCovers(r, s contracts.Rule) bool {
-	return fieldCovers(r.SourceApp, s.SourceApp) &&
-		fieldCovers(r.SourceAccount, s.SourceAccount) &&
-		fieldCovers(r.Title, s.Title)
+	return fieldCovers(r.SourceApp(), s.SourceApp()) &&
+		fieldCovers(r.SourceAccount(), s.SourceAccount()) &&
+		fieldCovers(r.Title(), s.Title())
 }
 
 func rulesOverlap(r, s contracts.Rule) bool {
@@ -185,19 +191,19 @@ func (s *Service) publishChange(kind contracts.RuleChangedKind, rule contracts.R
 		log.Printf("rules: failed to generate event id: %v", err)
 		return
 	}
-	data, err := json.Marshal(contracts.RuleChangedEvent{
-		EventID:   eventID.String(),
-		Kind:      kind,
-		Rule:      rule,
-		ChangedAt: time.Now().UTC(),
-	})
+	event, err := contracts.NewRuleChangedEvent(eventID.String(), kind, rule, time.Now().UTC())
+	if err != nil {
+		log.Printf("rules: building rule-changed event: %v", err)
+		return
+	}
+	data, err := json.Marshal(event)
 	if err != nil {
 		log.Printf("rules: failed to marshal rule-changed event: %v", err)
 		return
 	}
 	if err := s.bus.Publish(bus.TopicRulesChanged, bus.Message{
 		Data:       data,
-		Attributes: map[string]string{"user_id": rule.UserID},
+		Attributes: map[string]string{"user_id": rule.UserID()},
 	}); err != nil {
 		log.Printf("rules: failed to publish rule-changed event: %v", err)
 	}

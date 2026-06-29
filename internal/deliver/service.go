@@ -79,11 +79,11 @@ func (s *Service) handleEvents(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 
-		if seen[n.ID] {
+		if seen[n.ID()] {
 			ack()
 			continue
 		}
-		seen[n.ID] = true
+		seen[n.ID()] = true
 
 		fmt.Fprintf(w, "data: %s\n\n", msg.Data)
 		flusher.Flush()

@@ -10,14 +10,14 @@ import (
 
 // TestContract_CreateRuleEmitsEvent maps to INV-5.
 func TestContract_CreateRuleEmitsEvent(t *testing.T) {
-	id := createRuleViaHTTP(t, contracts.Rule{SourceApp: "com.whatsapp"})
+	id := createRuleViaHTTP(t, ruleWire{SourceApp: "com.whatsapp"})
 	assertRuleExistsViaHTTP(t, id)
 	waitForRuleEvent(t, id, contracts.RuleCreated, 3*time.Second)
 }
 
 // TestContract_DeleteRuleEmitsEvent maps to INV-5.
 func TestContract_DeleteRuleEmitsEvent(t *testing.T) {
-	id := createRuleViaHTTP(t, contracts.Rule{SourceApp: "com.whatsapp"})
+	id := createRuleViaHTTP(t, ruleWire{SourceApp: "com.whatsapp"})
 	deleteRuleViaHTTP(t, id)
 	assertRuleAbsentViaHTTP(t, id)
 	waitForRuleEvent(t, id, contracts.RuleDeleted, 3*time.Second)
@@ -37,10 +37,10 @@ func TestContract_CreateRuleWithMissingFieldRejected(t *testing.T) {
 // generic rule (pattern) supersedes exact rules it covers.
 func TestContract_AddingPatternRuleRemovesExactSubset(t *testing.T) {
 	clearAllRules(t)
-	exactID := createRuleViaHTTP(t, contracts.Rule{SourceApp: "com.google.gmail"})
+	exactID := createRuleViaHTTP(t, ruleWire{SourceApp: "com.google.gmail"})
 	assertRuleExistsViaHTTP(t, exactID)
 
-	createRuleViaHTTP(t, contracts.Rule{SourceApp: "com.google.*"})
+	createRuleViaHTTP(t, ruleWire{SourceApp: "com.google.*"})
 
 	assertRuleAbsentViaHTTP(t, exactID)
 }
@@ -49,10 +49,10 @@ func TestContract_AddingPatternRuleRemovesExactSubset(t *testing.T) {
 // specific rule (exact) displaces any pattern rule it falls within.
 func TestContract_AddingExactRuleRemovesMatchingPattern(t *testing.T) {
 	clearAllRules(t)
-	patternID := createRuleViaHTTP(t, contracts.Rule{SourceApp: "com.google.*"})
+	patternID := createRuleViaHTTP(t, ruleWire{SourceApp: "com.google.*"})
 	assertRuleExistsViaHTTP(t, patternID)
 
-	createRuleViaHTTP(t, contracts.Rule{SourceApp: "com.google.gmail"})
+	createRuleViaHTTP(t, ruleWire{SourceApp: "com.google.gmail"})
 
 	assertRuleAbsentViaHTTP(t, patternID)
 }
@@ -64,10 +64,10 @@ func TestContract_AddingExactRuleRemovesMatchingPattern(t *testing.T) {
 func TestContract_AddingSpecificRuleRemovesGenericCatchAll(t *testing.T) {
 	clearAllRules(t)
 	catchAllID := newUUID(t)
-	setUserRule(t, contracts.Rule{ID: catchAllID, SourceApp: "*"})
+	setUserRule(t, ruleWire{ID: catchAllID, SourceApp: "*"})
 	assertRuleExistsViaHTTP(t, catchAllID)
 
-	createRuleViaHTTP(t, contracts.Rule{SourceApp: "com.whatsapp"})
+	createRuleViaHTTP(t, ruleWire{SourceApp: "com.whatsapp"})
 
 	assertRuleAbsentViaHTTP(t, catchAllID)
 }
@@ -76,10 +76,10 @@ func TestContract_AddingSpecificRuleRemovesGenericCatchAll(t *testing.T) {
 // subset-or-superset relationship coexist without affecting each other.
 func TestContract_UnrelatedRulesArePreserved(t *testing.T) {
 	clearAllRules(t)
-	whatsappID := createRuleViaHTTP(t, contracts.Rule{SourceApp: "com.whatsapp"})
-	slackID := createRuleViaHTTP(t, contracts.Rule{SourceApp: "com.slack"})
+	whatsappID := createRuleViaHTTP(t, ruleWire{SourceApp: "com.whatsapp"})
+	slackID := createRuleViaHTTP(t, ruleWire{SourceApp: "com.slack"})
 
-	createRuleViaHTTP(t, contracts.Rule{SourceApp: "com.github"})
+	createRuleViaHTTP(t, ruleWire{SourceApp: "com.github"})
 
 	assertRuleExistsViaHTTP(t, whatsappID)
 	assertRuleExistsViaHTTP(t, slackID)

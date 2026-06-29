@@ -63,8 +63,21 @@ func httpPost(t testing.TB, url, body string) *http.Response {
 
 // ---- ingestor (Capture BC) ----
 
+// notificationWire is the test-side mirror of the ingestor's inbound POST
+// body shape (see internal/ingestor/service.go's notificationWire) — tests
+// only ever need a notification as JSON over HTTP, never as a constructed
+// contracts.Notification, so they speak this wire shape directly.
+type notificationWire struct {
+	ID            string            `json:"id,omitempty"`
+	SourceApp     string            `json:"source_app"`
+	SourceAccount string            `json:"source_account"`
+	Title         string            `json:"title"`
+	Body          string            `json:"body,omitempty"`
+	Metadata      map[string]string `json:"metadata,omitempty"`
+}
+
 // publishViaHTTP posts a notification to the ingestor and returns its id.
-func publishViaHTTP(t testing.TB, n contracts.Notification) string {
+func publishViaHTTP(t testing.TB, n notificationWire) string {
 	t.Helper()
 	body, err := json.Marshal(n)
 	if err != nil {
@@ -88,7 +101,7 @@ func publishViaHTTP(t testing.TB, n contracts.Notification) string {
 }
 
 // publishNotification is the property-test alias for publishViaHTTP.
-func publishNotification(t testing.TB, n contracts.Notification) string {
+func publishNotification(t testing.TB, n notificationWire) string {
 	return publishViaHTTP(t, n)
 }
 
@@ -107,19 +120,22 @@ type ruleWire struct {
 // all-fields-empty catch-all rule — see internal/rules/service.go), and
 // keeps fixture setup fast. The HTTP API surface itself is exercised
 // separately by createRuleViaHTTP/deleteRuleViaHTTP in contract_rules_test.go.
-func setUserRule(t testing.TB, r contracts.Rule) {
+func setUserRule(t testing.TB, r ruleWire) {
 	t.Helper()
-	setUserRules(t, []contracts.Rule{r})
+	setUserRules(t, []ruleWire{r})
 }
 
-func setUserRules(t testing.TB, rules []contracts.Rule) {
+func setUserRules(t testing.TB, rules []ruleWire) {
 	t.Helper()
-	for _, r := range rules {
-		if r.UserID == "" {
-			r.UserID = "local"
+	for _, w := range rules {
+		userID := "local"
+		id := w.ID
+		if id == "" {
+			id = newUUID(t)
 		}
-		if r.ID == "" {
-			r.ID = newUUID(t)
+		r, err := contracts.NewRule(id, userID, w.SourceApp, w.SourceAccount, w.Title)
+		if err != nil {
+			t.Fatalf("setUserRule: building rule: %v", err)
 		}
 		if err := sys.Store.Create(r); err != nil {
 			t.Fatalf("setUserRule: %v", err)
@@ -134,13 +150,13 @@ func clearAllRules(t testing.TB) {
 		t.Fatalf("clearAllRules: listing: %v", err)
 	}
 	for _, r := range existing {
-		if _, err := sys.Store.Delete("local", r.ID); err != nil {
-			t.Fatalf("clearAllRules: deleting %s: %v", r.ID, err)
+		if _, err := sys.Store.Delete("local", r.ID()); err != nil {
+			t.Fatalf("clearAllRules: deleting %s: %v", r.ID(), err)
 		}
 	}
 }
 
-func createRuleViaHTTP(t testing.TB, r contracts.Rule) string {
+func createRuleViaHTTP(t testing.TB, r ruleWire) string {
 	t.Helper()
 	body, err := json.Marshal(ruleWire{SourceApp: r.SourceApp, SourceAccount: r.SourceAccount, Title: r.Title})
 	if err != nil {
@@ -387,7 +403,7 @@ func waitForSSEEventWithID(t testing.TB, c *sseClient, id string, timeout time.D
 			if !ok {
 				t.Fatalf("SSE stream closed before event %s arrived", id)
 			}
-			if n.ID == id {
+			if n.ID() == id {
 				return n
 			}
 		case <-timer.C:
@@ -438,7 +454,7 @@ func collectSSEEventsWithID(t testing.TB, c *sseClient, id string, window time.D
 			if !ok {
 				return got
 			}
-			if n.ID == id {
+			if n.ID() == id {
 				got = append(got, n)
 			}
 		case <-timer.C:
