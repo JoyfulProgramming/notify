@@ -1,10 +1,11 @@
 name: Deploy
 
-# Single job, no artifact hand-off between jobs: checkout, compile a static
-# linux/amd64 binary, and scp+restart it directly from the same runner. Go's
-# build cache (keyed by go.sum via actions/setup-go) makes the compile step
-# the cheap part; the bottleneck is network time getting the ~15MB binary to
-# the box, not CPU.
+# The build happens locally, not here: .githooks/pre-push runs bin/build and
+# uploads the linux/amd64 artifact to a GitHub Release tagged with the commit
+# SHA before the push completes. This job just downloads that exact release
+# asset and scp+restarts it — no Go toolchain, no checkout, no compiling. It
+# also means no third-party JS actions (actions/checkout, actions/setup-go)
+# pinning us to their Node runtime version.
 on:
   push:
     branches: [main]
@@ -20,19 +21,25 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 3
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
-      - uses: actions/setup-go@v5
-        with:
-          go-version-file: go.mod
-          cache: true
-
-      - name: Build
-        run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o notify-local ./cmd/notify-local
+      - name: Download build artifact
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release download "deploy-$GITHUB_SHA" \
+            --repo "$GITHUB_REPOSITORY" \
+            --pattern notify-local-linux-amd64 \
+            --output notify-local \
+          || {
+            echo "::error::No release artifact found for commit $GITHUB_SHA." \
+                 "This commit wasn't pushed through the pre-push hook — run" \
+                 "'git config core.hooksPath .githooks' and push again." >&2
+            exit 1
+          }
+          chmod +x notify-local
 
       - name: Deploy
         env:

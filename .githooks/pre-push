@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Installed via: git config core.hooksPath .githooks (run once per clone).
+#
+# Deterministically builds notify-local on every push (bin/build — a failed
+# build blocks the push), and for pushes that move refs/heads/main, uploads
+# the linux/amd64 artifact to a GitHub Release tagged with the commit SHA.
+# .github/workflows/deploy.yml downloads that release asset instead of
+# compiling anything, so CI deploys are just a download + copy + restart.
+#
+# Note: the release's target_commitish is intentionally left as the repo's
+# current default branch rather than the pushed SHA — GitHub has to already
+# know about a commit to point a tag at it, and at pre-push time this commit
+# hasn't reached the remote yet. The tag *name* ("deploy-<sha>") is all
+# deploy.yml actually keys off, so this doesn't matter functionally.
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT_DIR"
+
+"$ROOT_DIR/bin/build"
+
+# stdin: "<local ref> <local sha1> <remote ref> <remote sha1>" per pushed ref
+main_sha=""
+while read -r local_ref local_sha remote_ref _remote_sha; do
+  if [[ "$remote_ref" == "refs/heads/main" && "$local_sha" != "0000000000000000000000000000000000000000" ]]; then
+    main_sha="$local_sha"
+  fi
+done
+
+[[ -n "$main_sha" ]] || exit 0
+
+if ! command -v gh >/dev/null 2>&1; then
+  echo "pre-push: gh CLI is required to publish the deploy artifact (brew install gh)" >&2
+  exit 1
+fi
+
+repo="$(gh repo view --json nameWithOwner -q .nameWithOwner)"
+
+# GitHub (git, really) rejects ref names that are exactly 40 hex chars, since
+# they're indistinguishable from a raw commit SHA — hence the "deploy-" prefix.
+tag="deploy-$main_sha"
+
+if gh release view "$tag" --repo "$repo" >/dev/null 2>&1; then
+  echo "pre-push: release $tag already exists, skipping artifact upload"
+else
+  echo "pre-push: publishing deploy artifact as release $tag"
+  gh release create "$tag" \
+    "$ROOT_DIR/dist/notify-local-linux-amd64" \
+    --repo "$repo" \
+    --title "$tag" \
+    --notes "Deploy artifact, built locally by bin/build (pre-push hook)." \
+    --prerelease
+fi

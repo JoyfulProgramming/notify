@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-# Builds all Go packages and binaries (mainly cmd/notify-local).
+# Builds all Go packages (compile check), then builds notify-local binaries
+# for the local machine and for the Hetzner deploy target (linux/amd64) into
+# dist/. .githooks/pre-push runs this and uploads the linux/amd64 artifact to
+# a GitHub Release before pushing, so .github/workflows/deploy.yml only ever
+# downloads and copies a binary — it never compiles one.
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -7,3 +11,30 @@ cd "$ROOT_DIR"
 
 echo "go build ./..."
 go build ./...
+
+DIST_DIR="$ROOT_DIR/dist"
+mkdir -p "$DIST_DIR"
+
+build_target() {
+  local goos="$1"
+  local goarch="$2"
+  local out="$DIST_DIR/notify-local-$goos-$goarch"
+  echo "building $out"
+  CGO_ENABLED=0 GOOS="$goos" GOARCH="$goarch" go build -trimpath -o "$out" ./cmd/notify-local
+}
+
+host_goos="$(go env GOOS)"
+host_goarch="$(go env GOARCH)"
+
+build_target "$host_goos" "$host_goarch"
+
+# The Hetzner deploy target is linux/amd64 (see conversation history / project
+# memory for provisioning details). Skip a duplicate build if that's also the
+# host platform.
+if [[ "$host_goos/$host_goarch" != "linux/amd64" ]]; then
+  build_target linux amd64
+fi
+
+echo
+echo "dist/:"
+ls -la "$DIST_DIR"

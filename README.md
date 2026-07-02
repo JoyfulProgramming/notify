@@ -76,8 +76,20 @@ bin/test -rapid.checks=20             # fewer randomised iterations
 
 ### bin/build
 
+Compile-checks everything, then builds notify-local for the local machine and
+for the deploy target (linux/amd64) into `dist/`.
+
 ```sh
-bin/build   # go build ./...
+bin/build
+```
+
+Runs automatically on `git push` via `.githooks/pre-push`, which also
+publishes the linux/amd64 build to a GitHub Release tagged with the commit
+SHA so `.github/workflows/deploy.yml` only ever downloads a binary, never
+compiles one. Enable it once per clone:
+
+```sh
+git config core.hooksPath .githooks
 ```
 
 ### bin/lint

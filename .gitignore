@@ -35,3 +35,7 @@ go.work.sum
 /.gocache/
 *.db
 /bin/notify-local
+
+# bin/build output — uploaded to GitHub Releases by .githooks/pre-push,
+# never committed
+/dist/
