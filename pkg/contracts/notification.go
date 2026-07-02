@@ -58,28 +58,11 @@ type NotificationParams struct {
 // and received_at are required; device_id, if present, must be a UUID.
 // Everything else is optional and unconstrained.
 func NewNotification(p NotificationParams) (Notification, error) {
-	if p.ID == "" {
-		return Notification{}, errors.New("notification: id is required")
+	if err := validateNotificationRequired(p); err != nil {
+		return Notification{}, err
 	}
-	if _, err := uuid.Parse(p.ID); err != nil {
-		return Notification{}, fmt.Errorf("notification: id must be a valid UUID: %w", err)
-	}
-	if p.UserID == "" {
-		return Notification{}, errors.New("notification: user_id is required")
-	}
-	if p.SourceApp == "" {
-		return Notification{}, errors.New("notification: source_app is required")
-	}
-	if p.DeviceTimestamp.IsZero() {
-		return Notification{}, errors.New("notification: device_timestamp is required")
-	}
-	if p.ReceivedAt.IsZero() {
-		return Notification{}, errors.New("notification: received_at is required")
-	}
-	if p.DeviceID != "" {
-		if _, err := uuid.Parse(p.DeviceID); err != nil {
-			return Notification{}, fmt.Errorf("notification: device_id must be a valid UUID: %w", err)
-		}
+	if err := validateNotificationUUIDs(p); err != nil {
+		return Notification{}, err
 	}
 	return Notification{
 		id:              p.ID,
@@ -96,6 +79,38 @@ func NewNotification(p NotificationParams) (Notification, error) {
 		receivedAt:      p.ReceivedAt,
 		metadata:        p.Metadata,
 	}, nil
+}
+
+func validateNotificationRequired(p NotificationParams) error {
+	required := []struct{ name, value string }{
+		{"id", p.ID},
+		{"user_id", p.UserID},
+		{"source_app", p.SourceApp},
+	}
+	for _, r := range required {
+		if r.value == "" {
+			return fmt.Errorf("notification: %s is required", r.name)
+		}
+	}
+	if p.DeviceTimestamp.IsZero() {
+		return errors.New("notification: device_timestamp is required")
+	}
+	if p.ReceivedAt.IsZero() {
+		return errors.New("notification: received_at is required")
+	}
+	return nil
+}
+
+func validateNotificationUUIDs(p NotificationParams) error {
+	if _, err := uuid.Parse(p.ID); err != nil {
+		return fmt.Errorf("notification: id must be a valid UUID: %w", err)
+	}
+	if p.DeviceID != "" {
+		if _, err := uuid.Parse(p.DeviceID); err != nil {
+			return fmt.Errorf("notification: device_id must be a valid UUID: %w", err)
+		}
+	}
+	return nil
 }
 
 func (n Notification) ID() string                  { return n.id }

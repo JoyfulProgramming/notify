@@ -48,11 +48,8 @@ func TestContract_PatternRuleMatchesGlob(t *testing.T) {
 	clearAllRules(t)
 	setUserRule(t, ruleWire{SourceApp: "com.google.*"})
 
-	matchedID := publishViaHTTP(t, notificationWire{SourceApp: "com.google.gmail"})
-	assertPresentInStream(t, matchedID, bus.TopicNotificationsMatched, 5*time.Second)
-
-	discardedID := publishViaHTTP(t, notificationWire{SourceApp: "com.whatsapp"})
-	assertPresentInStream(t, discardedID, bus.TopicNotificationsDiscarded, 5*time.Second)
+	assertRoutesTo(t, notificationWire{SourceApp: "com.google.gmail"}, bus.TopicNotificationsMatched)
+	assertRoutesTo(t, notificationWire{SourceApp: "com.whatsapp"}, bus.TopicNotificationsDiscarded)
 }
 
 // TestContract_TitlePatternNarrowsMatching — BEHAVIOR: title pattern narrows matching.
@@ -60,15 +57,13 @@ func TestContract_TitlePatternNarrowsMatching(t *testing.T) {
 	clearAllRules(t)
 	setUserRule(t, ruleWire{SourceApp: "com.google.gmail", Title: "*invoice*"})
 
-	matchedID := publishViaHTTP(t, notificationWire{
+	assertRoutesTo(t, notificationWire{
 		SourceApp: "com.google.gmail", Title: "Your invoice is ready",
-	})
-	assertPresentInStream(t, matchedID, bus.TopicNotificationsMatched, 5*time.Second)
+	}, bus.TopicNotificationsMatched)
 
-	discardedID := publishViaHTTP(t, notificationWire{
+	assertRoutesTo(t, notificationWire{
 		SourceApp: "com.google.gmail", Title: "Newsletter: weekly digest",
-	})
-	assertPresentInStream(t, discardedID, bus.TopicNotificationsDiscarded, 5*time.Second)
+	}, bus.TopicNotificationsDiscarded)
 }
 
 // TestContract_RuleChangeAppliesToFutureOnly maps to INV-5.

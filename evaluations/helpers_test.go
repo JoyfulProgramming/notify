@@ -241,6 +241,14 @@ func assertPresentInStream(t testing.TB, id, topic string, timeout time.Duration
 	}
 }
 
+// assertRoutesTo publishes n and asserts it lands on topic, returning its id.
+func assertRoutesTo(t testing.TB, n notificationWire, topic string) string {
+	t.Helper()
+	id := publishViaHTTP(t, n)
+	assertPresentInStream(t, id, topic, 5*time.Second)
+	return id
+}
+
 func assertAbsentFromStream(t testing.TB, id, topic string, timeout time.Duration) {
 	t.Helper()
 	if _, ok := recorderFor(topic).waitFor(id, timeout); ok {
