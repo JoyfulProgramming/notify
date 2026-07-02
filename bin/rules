@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
-# Manage Notify rules against the local rule-api (:8081).
+# Manage Notify rules against the rule-api (:8081).
 #
 # Usage:
-#   bin/rules create [-s APP] [-a ACCOUNT] [-t TITLE]
-#   bin/rules list
-#   bin/rules delete <ID>
+#   bin/rules [--env local|prod] create [-s APP] [-a ACCOUNT] [-t TITLE]
+#   bin/rules [--env local|prod] list
+#   bin/rules [--env local|prod] delete <ID>
 #
 # Unset fields fall back to values in notify-defaults.toml (project root).
 # At least one non-empty field is required by the API.
 set -euo pipefail
+
+# The Hetzner demo deployment (see conversation history / project memory for
+# provisioning details). Same static "local-key" API key as local dev — the
+# prod box runs the same notify-local binary with the same auth map.
+PROD_HOST="78.47.64.38"
 
 RULES_URL="${NOTIFY_RULES_URL:-http://localhost:8081}"
 API_KEY="${NOTIFY_API_KEY:-local-key}"
@@ -17,10 +22,12 @@ DEFAULTS_FILE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/notify-defaults.
 usage() {
   cat >&2 <<EOF
 usage:
-  bin/rules create [-s SOURCE_APP] [-a ACCOUNT] [-t TITLE]
-  bin/rules list
-  bin/rules delete <ID>
+  bin/rules [--env local|prod] create [-s SOURCE_APP] [-a ACCOUNT] [-t TITLE]
+  bin/rules [--env local|prod] list
+  bin/rules [--env local|prod] delete <ID>
 
+      --env          target environment: "local" (default, :8081) or "prod"
+                     (the Hetzner deployment). Overrides NOTIFY_RULES_URL.
   -s, --source-app   app identifier (e.g. com.google.gmail)
   -a, --account      account within the app
   -t, --title        notification title to match
@@ -29,6 +36,25 @@ Unset fields fall back to notify-defaults.toml in the project root.
 EOF
   exit 1
 }
+
+# Pull --env out of the argument list wherever it appears, so it works
+# before or after the subcommand and doesn't need handling in every
+# subcommand's own flag loop.
+env_name="local"
+args=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --env) env_name="${2:?--env requires a value}"; shift 2 ;;
+    *) args+=("$1"); shift ;;
+  esac
+done
+set -- "${args[@]}"
+
+case "$env_name" in
+  local) ;;
+  prod)  RULES_URL="http://$PROD_HOST:8081" ;;
+  *) echo "unknown --env: $env_name (expected local or prod)" >&2; exit 1 ;;
+esac
 
 require_jq() {
   if ! command -v jq >/dev/null 2>&1; then

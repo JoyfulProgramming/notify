@@ -1,0 +1,67 @@
+name: Deploy
+
+# Single job, no artifact hand-off between jobs: checkout, compile a static
+# linux/amd64 binary, and scp+restart it directly from the same runner. Go's
+# build cache (keyed by go.sum via actions/setup-go) makes the compile step
+# the cheap part; the bottleneck is network time getting the ~15MB binary to
+# the box, not CPU.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: true
+
+env:
+  PROD_HOST: 78.47.64.38
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Build
+        run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o notify-local ./cmd/notify-local
+
+      - name: Deploy
+        env:
+          SSH_KEY: ${{ secrets.PROD_DEPLOY_SSH_KEY }}
+        run: |
+          umask 077
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/deploy_key
+          ssh-keyscan -H "$PROD_HOST" > ~/.ssh/known_hosts 2>/dev/null
+
+          SSH="ssh -i ~/.ssh/deploy_key -o BatchMode=yes notify@$PROD_HOST"
+
+          # Upload under a temp name, then atomically replace the running
+          # binary — avoids serving a half-written file if the copy is
+          # interrupted, and only touches files the notify user already owns.
+          scp -i ~/.ssh/deploy_key notify-local "notify@$PROD_HOST:/opt/notify/notify-local.new"
+          $SSH '
+            set -e
+            chmod 755 /opt/notify/notify-local.new
+            mv /opt/notify/notify-local.new /opt/notify/notify-local
+            sudo -n systemctl restart notify-local
+          '
+
+      - name: Smoke test
+        run: |
+          for i in $(seq 1 10); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "http://$PROD_HOST:8082/?token=local-key" || true)
+            [ "$code" = "200" ] && exit 0
+            sleep 1
+          done
+          echo "deploy did not come back healthy" >&2
+          exit 1
