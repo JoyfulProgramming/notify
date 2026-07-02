@@ -63,11 +63,11 @@ func httpPost(t testing.TB, url, body string) *http.Response {
 
 // ---- ingestor (Capture BC) ----
 
-// notificationWire is the test-side mirror of the ingestor's inbound POST
-// body shape (see internal/ingestor/service.go's notificationWire) — tests
+// rawNotification is the test-side mirror of the ingestor's inbound POST
+// body shape (see internal/ingestor/service.go's rawNotification) — tests
 // only ever need a notification as JSON over HTTP, never as a constructed
 // contracts.Notification, so they speak this wire shape directly.
-type notificationWire struct {
+type rawNotification struct {
 	ID            string            `json:"id,omitempty"`
 	SourceApp     string            `json:"source_app"`
 	SourceAccount string            `json:"source_account"`
@@ -77,7 +77,7 @@ type notificationWire struct {
 }
 
 // publishViaHTTP posts a notification to the ingestor and returns its id.
-func publishViaHTTP(t testing.TB, n notificationWire) string {
+func publishViaHTTP(t testing.TB, n rawNotification) string {
 	t.Helper()
 	body, err := json.Marshal(n)
 	if err != nil {
@@ -101,13 +101,13 @@ func publishViaHTTP(t testing.TB, n notificationWire) string {
 }
 
 // publishNotification is the property-test alias for publishViaHTTP.
-func publishNotification(t testing.TB, n notificationWire) string {
+func publishNotification(t testing.TB, n rawNotification) string {
 	return publishViaHTTP(t, n)
 }
 
 // ---- rule-api (Matching BC) ----
 
-type ruleWire struct {
+type rawRule struct {
 	ID            string `json:"id,omitempty"`
 	SourceApp     string `json:"source_app"`
 	SourceAccount string `json:"source_account"`
@@ -120,12 +120,12 @@ type ruleWire struct {
 // all-fields-empty catch-all rule — see internal/rules/service.go), and
 // keeps fixture setup fast. The HTTP API surface itself is exercised
 // separately by createRuleViaHTTP/deleteRuleViaHTTP in contract_rules_test.go.
-func setUserRule(t testing.TB, r ruleWire) {
+func setUserRule(t testing.TB, r rawRule) {
 	t.Helper()
-	setUserRules(t, []ruleWire{r})
+	setUserRules(t, []rawRule{r})
 }
 
-func setUserRules(t testing.TB, rules []ruleWire) {
+func setUserRules(t testing.TB, rules []rawRule) {
 	t.Helper()
 	for _, w := range rules {
 		userID := "local"
@@ -158,9 +158,9 @@ func clearAllRules(t testing.TB) {
 	}
 }
 
-func createRuleViaHTTP(t testing.TB, r ruleWire) string {
+func createRuleViaHTTP(t testing.TB, r rawRule) string {
 	t.Helper()
-	body, err := json.Marshal(ruleWire{SourceApp: r.SourceApp, SourceAccount: r.SourceAccount, Title: r.Title})
+	body, err := json.Marshal(rawRule{SourceApp: r.SourceApp, SourceAccount: r.SourceAccount, Title: r.Title})
 	if err != nil {
 		t.Fatalf("marshal rule: %v", err)
 	}
@@ -169,7 +169,7 @@ func createRuleViaHTTP(t testing.TB, r ruleWire) string {
 	if resp.StatusCode != http.StatusCreated {
 		t.Fatalf("createRuleViaHTTP: expected 201, got %d", resp.StatusCode)
 	}
-	var out ruleWire
+	var out rawRule
 	if err := json.NewDecoder(resp.Body).Decode(&out); err != nil {
 		t.Fatalf("decoding create-rule response: %v", err)
 	}
@@ -185,14 +185,14 @@ func deleteRuleViaHTTP(t testing.TB, id string) {
 	}
 }
 
-func listRulesViaHTTP(t testing.TB) []ruleWire {
+func listRulesViaHTTP(t testing.TB) []rawRule {
 	t.Helper()
 	resp := authedRequest(t, http.MethodGet, sys.RulesURL+"/rules", nil)
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
 		t.Fatalf("listRulesViaHTTP: expected 200, got %d", resp.StatusCode)
 	}
-	var out []ruleWire
+	var out []rawRule
 	if err := json.NewDecoder(resp.Body).Decode(&out); err != nil {
 		t.Fatalf("decoding rules list: %v", err)
 	}
@@ -242,7 +242,7 @@ func assertPresentInStream(t testing.TB, id, topic string, timeout time.Duration
 }
 
 // assertRoutesTo publishes n and asserts it lands on topic, returning its id.
-func assertRoutesTo(t testing.TB, n notificationWire, topic string) string {
+func assertRoutesTo(t testing.TB, n rawNotification, topic string) string {
 	t.Helper()
 	id := publishViaHTTP(t, n)
 	assertPresentInStream(t, id, topic, 5*time.Second)
@@ -441,7 +441,7 @@ func fieldCovers(r, s string) bool {
 
 // ruleCovers reports whether rule r covers rule s: every notification matched
 // by s is also matched by r, field by field.
-func ruleCovers(r, s ruleWire) bool {
+func ruleCovers(r, s rawRule) bool {
 	return fieldCovers(r.SourceApp, s.SourceApp) &&
 		fieldCovers(r.SourceAccount, s.SourceAccount) &&
 		fieldCovers(r.Title, s.Title)
@@ -449,7 +449,7 @@ func ruleCovers(r, s ruleWire) bool {
 
 // rulesOverlap reports whether r and s are in a subset-or-superset
 // relationship — i.e. one covers the other.
-func rulesOverlap(r, s ruleWire) bool {
+func rulesOverlap(r, s rawRule) bool {
 	return ruleCovers(r, s) || ruleCovers(s, r)
 }
 

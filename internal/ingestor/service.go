@@ -15,13 +15,13 @@ import (
 	"notify/pkg/contracts"
 )
 
-// notificationWire is the inbound POST /notifications request shape. It
+// rawNotification is the inbound POST /notifications request shape. It
 // exists because the request legitimately omits fields the server fills in
 // (id, user_id, device_timestamp) — decoding straight into a
 // contracts.Notification would reject those as incomplete, since
 // contracts.NewNotification is the only way to obtain one and requires them
 // all up front. See internal/rules/service.go's ruleDTO for the same pattern.
-type notificationWire struct {
+type rawNotification struct {
 	ID              string            `json:"id"`
 	SourceApp       string            `json:"source_app"`
 	SourceAccount   string            `json:"source_account"`
@@ -61,7 +61,7 @@ func (s *Service) handlePost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var dto notificationWire
+	var dto rawNotification
 	if err := json.NewDecoder(r.Body).Decode(&dto); err != nil {
 		http.Error(w, "malformed body", http.StatusBadRequest)
 		return

@@ -65,9 +65,9 @@ func (e RuleChangedEvent) Kind() RuleChangedKind { return e.kind }
 func (e RuleChangedEvent) Rule() Rule            { return e.rule }
 func (e RuleChangedEvent) ChangedAt() time.Time  { return e.changedAt }
 
-// ruleWire mirrors a Rule's wire shape for embedding inside
+// rawRule mirrors a Rule's wire shape for embedding inside
 // RuleChangedEvent's JSON — Rule itself carries no JSON tags (see rule.go).
-type ruleWire struct {
+type rawRule struct {
 	ID            string `json:"id"`
 	UserID        string `json:"user_id"`
 	SourceApp     string `json:"source_app"`
@@ -75,18 +75,18 @@ type ruleWire struct {
 	Title         string `json:"title"`
 }
 
-type ruleChangedEventWire struct {
+type rawRuleChangedEvent struct {
 	EventID   string          `json:"event_id"`
 	Kind      RuleChangedKind `json:"kind"`
-	Rule      ruleWire        `json:"rule"`
+	Rule      rawRule        `json:"rule"`
 	ChangedAt time.Time       `json:"changed_at"`
 }
 
 func (e RuleChangedEvent) MarshalJSON() ([]byte, error) {
-	return json.Marshal(ruleChangedEventWire{
+	return json.Marshal(rawRuleChangedEvent{
 		EventID: e.eventID,
 		Kind:    e.kind,
-		Rule: ruleWire{
+		Rule: rawRule{
 			ID:            e.rule.ID(),
 			UserID:        e.rule.UserID(),
 			SourceApp:     e.rule.SourceApp(),
@@ -98,7 +98,7 @@ func (e RuleChangedEvent) MarshalJSON() ([]byte, error) {
 }
 
 func (e *RuleChangedEvent) UnmarshalJSON(data []byte) error {
-	var w ruleChangedEventWire
+	var w rawRuleChangedEvent
 	if err := json.Unmarshal(data, &w); err != nil {
 		return err
 	}

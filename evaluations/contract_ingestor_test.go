@@ -11,7 +11,7 @@ import (
 // TestContract_BasicIngestionPublishes maps to INV-1 (plan section 7,
 // "Basic ingestion publishes to notifications.captured").
 func TestContract_BasicIngestionPublishes(t *testing.T) {
-	id := publishViaHTTP(t, notificationWire{
+	id := publishViaHTTP(t, rawNotification{
 		SourceApp: "com.whatsapp",
 		Title:     "Alice: hey",
 		Body:      "Are you free?",
@@ -35,7 +35,7 @@ func TestContract_IngestorRejectsMalformed(t *testing.T) {
 // TestContract_IngestorAssignsReceivedAt maps to the schema contract.
 func TestContract_IngestorAssignsReceivedAt(t *testing.T) {
 	before := time.Now()
-	id := publishViaHTTP(t, notificationWire{SourceApp: "com.whatsapp", Title: "Test"})
+	id := publishViaHTTP(t, rawNotification{SourceApp: "com.whatsapp", Title: "Test"})
 	msg := waitForMessageOnTopic(t, bus.TopicNotificationsCaptured, id, 3*time.Second)
 	after := time.Now()
 
@@ -48,7 +48,7 @@ func TestContract_IngestorAssignsReceivedAt(t *testing.T) {
 // id that's POSTed twice must only appear once on notifications.captured.
 func TestContract_IngestorDeduplicatesByID(t *testing.T) {
 	id := newUUID(t)
-	n := notificationWire{ID: id, SourceApp: "com.whatsapp", Title: "First"}
+	n := rawNotification{ID: id, SourceApp: "com.whatsapp", Title: "First"}
 
 	got1 := publishViaHTTP(t, n)
 	got2 := publishViaHTTP(t, n)

@@ -119,7 +119,7 @@ func TestProperty_NoSubsetOrSupersetRulesAfterCreate(t *testing.T) {
 		newRule := generateArbitraryRule(rt)
 		newID := createRuleViaHTTP(t, newRule)
 
-		newWire := ruleWire{
+		newRuleWithID := rawRule{
 			ID:        newID,
 			SourceApp: newRule.SourceApp,
 			Title:     newRule.Title,
@@ -128,7 +128,7 @@ func TestProperty_NoSubsetOrSupersetRulesAfterCreate(t *testing.T) {
 			if r.ID == newID {
 				continue
 			}
-			if rulesOverlap(r, newWire) {
+			if rulesOverlap(r, newRuleWithID) {
 				rt.Fatalf(
 					"rule {SourceApp:%q Title:%q} overlaps with new rule {SourceApp:%q Title:%q} — INV-7 violated",
 					r.SourceApp, r.Title, newRule.SourceApp, newRule.Title,

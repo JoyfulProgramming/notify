@@ -127,12 +127,12 @@ func (n Notification) DeviceTimestamp() time.Time  { return n.deviceTimestamp }
 func (n Notification) ReceivedAt() time.Time       { return n.receivedAt }
 func (n Notification) Metadata() map[string]string { return n.metadata }
 
-// notificationWire mirrors the JSON wire shape (specs/notification.json
+// rawNotification mirrors the JSON wire shape (specs/notification.json
 // json_key names). MarshalJSON/UnmarshalJSON go through it so a
 // Notification still round-trips across the bus and SSE without exposing
 // its fields directly — decoding invalid/incomplete JSON fails outright
 // rather than producing a half-valid Notification.
-type notificationWire struct {
+type rawNotification struct {
 	ID              string            `json:"id"`
 	UserID          string            `json:"user_id"`
 	SourceApp       string            `json:"source_app"`
@@ -149,7 +149,7 @@ type notificationWire struct {
 }
 
 func (n Notification) MarshalJSON() ([]byte, error) {
-	return json.Marshal(notificationWire{
+	return json.Marshal(rawNotification{
 		ID:              n.id,
 		UserID:          n.userID,
 		SourceApp:       n.sourceApp,
@@ -167,7 +167,7 @@ func (n Notification) MarshalJSON() ([]byte, error) {
 }
 
 func (n *Notification) UnmarshalJSON(data []byte) error {
-	var w notificationWire
+	var w rawNotification
 	if err := json.Unmarshal(data, &w); err != nil {
 		return err
 	}
