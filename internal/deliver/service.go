@@ -1,13 +1,19 @@
 // Package deliver implements the Delivery bounded context's outward face
 // (plan section 10): one SSE subscription per connected client, filtered to
-// that client's user_id, deduplicated by notification id.
+// that client's user_id, deduplicated by notification id. The feed is
+// pushed to the browser as Datastar "patch elements" events — HTML
+// fragments merged straight into the page — rather than raw JSON, so the
+// client needs no hand-written EventSource/DOM code (see web/index.html).
 package deliver
 
 import (
 	"encoding/json"
 	"fmt"
+	"html"
 	"io/fs"
 	"net/http"
+
+	"github.com/starfederation/datastar-go/datastar"
 
 	"notify/internal/auth"
 	"notify/pkg/bus"
@@ -40,12 +46,6 @@ func (s *Service) handleEvents(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	flusher, ok := w.(http.Flusher)
-	if !ok {
-		http.Error(w, "streaming unsupported", http.StatusInternalServerError)
-		return
-	}
-
 	// Subscribe before signalling 200 OK — a client must never be able to
 	// observe a successful connection before its subscription exists, or a
 	// notification published right after connecting could be missed.
@@ -58,11 +58,8 @@ func (s *Service) handleEvents(w http.ResponseWriter, r *http.Request) {
 	})
 	defer sub.Close()
 
-	w.Header().Set("Content-Type", "text/event-stream")
-	w.Header().Set("Cache-Control", "no-cache")
-	w.Header().Set("Connection", "keep-alive")
-	w.WriteHeader(http.StatusOK)
-	flusher.Flush()
+	sse := datastar.NewSSE(w, r) // flushes headers and the 200 OK
+	sse.PatchSignals([]byte(`{"status":"connected"}`))
 
 	ctx := r.Context()
 	seen := make(map[string]bool) // INV-3: at most once per id, per session
@@ -85,8 +82,17 @@ func (s *Service) handleEvents(w http.ResponseWriter, r *http.Request) {
 		}
 		seen[n.ID()] = true
 
-		fmt.Fprintf(w, "data: %s\n\n", msg.Data)
-		flusher.Flush()
+		title := n.Title()
+		if title == "" {
+			title = "(no title)"
+		}
+		fragment := fmt.Sprintf(
+			`<li id="notification-%s"><div class="source">%s</div><div class="title">%s</div><div>%s</div></li>`,
+			html.EscapeString(n.ID()), html.EscapeString(n.SourceApp()), html.EscapeString(title), html.EscapeString(n.Body()),
+		)
+		if err := sse.PatchElements(fragment, datastar.WithSelectorID("feed"), datastar.WithModePrepend()); err != nil {
+			return
+		}
 		ack()
 	}
 }

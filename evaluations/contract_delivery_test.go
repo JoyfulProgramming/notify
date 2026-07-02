@@ -13,10 +13,10 @@ func TestContract_FilteredNotificationReachesSSEClient(t *testing.T) {
 	events := subscribeSSE(t)
 
 	id := publishViaHTTP(t, rawNotification{SourceApp: "com.whatsapp", Title: "Hello"})
-	event := waitForSSEEventWithID(t, events, id, 5*time.Second)
+	got := waitForSSEEventWithID(t, events, id, 5*time.Second)
 
-	if event.ID() != id {
-		t.Fatalf("expected id %s, got %s", id, event.ID())
+	if got != id {
+		t.Fatalf("expected id %s, got %s", id, got)
 	}
 }
 

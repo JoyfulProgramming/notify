@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <title>Notify — live feed</title>
+<script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.2/bundles/datastar.js"></script>
 <style>
   body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
   h1 { font-size: 1.2rem; }
@@ -13,37 +14,10 @@
   .title { font-weight: 600; }
 </style>
 </head>
-<body>
+<body data-signals-status="'connecting…'"
+      data-init="@get(`/events?token=${new URLSearchParams(location.search).get('token') || 'local-key'}`)">
 <h1>Notify</h1>
-<div id="status">connecting…</div>
+<div id="status" data-text="$status"></div>
 <ul id="feed"></ul>
-<script>
-  const params = new URLSearchParams(location.search);
-  const token = params.get("token") || "local-key";
-  const status = document.getElementById("status");
-  const feed = document.getElementById("feed");
-
-  const source = new EventSource(`/events?token=${encodeURIComponent(token)}`);
-
-  // Close explicitly on navigate/refresh/close rather than relying on the
-  // browser to notice the document is gone: SSE connections are long-lived,
-  // and a browser can be slow to reclaim one — refreshing a few times can
-  // otherwise pile up abandoned connections until the per-origin HTTP/1.1
-  // connection cap (6 in Chrome) is hit, which then blocks even the plain
-  // page load.
-  window.addEventListener("pagehide", () => source.close());
-
-  source.onopen = () => { status.textContent = "connected"; };
-  source.onerror = () => { status.textContent = "disconnected — retrying…"; };
-
-  source.onmessage = (event) => {
-    const n = JSON.parse(event.data);
-    const li = document.createElement("li");
-    li.innerHTML = `<div class="source">${n.source_app}</div>
-      <div class="title">${n.title || "(no title)"}</div>
-      <div>${n.body || ""}</div>`;
-    feed.prepend(li);
-  };
-</script>
 </body>
 </html>

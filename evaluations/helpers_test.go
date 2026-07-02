@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"path"
+	"regexp"
 	"strings"
 	"sync"
 	"testing"
@@ -330,7 +331,7 @@ func assertPresentInAtLeastOneStream(t testing.TB, id string, topics []string, t
 // ---- delivery-service (Delivery BC) SSE client ----
 
 type sseClient struct {
-	events chan contracts.Notification
+	events chan string // notification ids, extracted from patched <li id="notification-<id>"> fragments
 
 	resp      *http.Response
 	done      chan struct{}
@@ -371,7 +372,7 @@ func subscribeSSE(t testing.TB) *sseClient {
 	}
 
 	c := &sseClient{
-		events: make(chan contracts.Notification, 64),
+		events: make(chan string, 64),
 		resp:   resp,
 		done:   make(chan struct{}),
 	}
@@ -380,20 +381,29 @@ func subscribeSSE(t testing.TB) *sseClient {
 		defer close(c.events)
 		scanner := bufio.NewScanner(resp.Body)
 		scanner.Buffer(make([]byte, 0, 64*1024), 1024*1024)
+		// Datastar frames each SSE message as "event: <type>" followed by one
+		// or more "data: <dataline>" lines; a notification arrives as an
+		// "elements" dataline carrying the rendered <li id="notification-<id>">
+		// fragment (internal/deliver/service.go), so the id has to be pulled
+		// back out of the HTML rather than read directly off the wire.
+		var event string
 		for scanner.Scan() {
-			data, ok := strings.CutPrefix(scanner.Text(), "data: ")
-			if !ok {
-				continue
-			}
-			var n contracts.Notification
-			if err := json.Unmarshal([]byte(data), &n); err != nil {
-				continue
-			}
-			// Never block on a stalled/abandoned consumer — a stuck send
-			// here would prevent this goroutine from ever noticing Close().
-			select {
-			case c.events <- n:
-			default:
+			line := scanner.Text()
+			switch {
+			case strings.HasPrefix(line, "event: "):
+				event = strings.TrimPrefix(line, "event: ")
+			case event == "datastar-patch-elements" && strings.HasPrefix(line, "data: elements "):
+				fragment := strings.TrimPrefix(line, "data: elements ")
+				m := notificationIDPattern.FindStringSubmatch(fragment)
+				if m == nil {
+					continue
+				}
+				// Never block on a stalled/abandoned consumer — a stuck send
+				// here would prevent this goroutine from ever noticing Close().
+				select {
+				case c.events <- m[1]:
+				default:
+				}
 			}
 		}
 	}()
@@ -403,18 +413,22 @@ func subscribeSSE(t testing.TB) *sseClient {
 	return c
 }
 
-func waitForSSEEventWithID(t testing.TB, c *sseClient, id string, timeout time.Duration) contracts.Notification {
+// notificationIDPattern extracts the notification id back out of the
+// rendered <li id="notification-<id>"> fragment (internal/deliver/service.go).
+var notificationIDPattern = regexp.MustCompile(`id="notification-([^"]+)"`)
+
+func waitForSSEEventWithID(t testing.TB, c *sseClient, id string, timeout time.Duration) string {
 	t.Helper()
 	timer := time.NewTimer(timeout)
 	defer timer.Stop()
 	for {
 		select {
-		case n, ok := <-c.events:
+		case got, ok := <-c.events:
 			if !ok {
 				t.Fatalf("SSE stream closed before event %s arrived", id)
 			}
-			if n.ID() == id {
-				return n
+			if got == id {
+				return got
 			}
 		case <-timer.C:
 			t.Fatalf("SSE event %s not received within %v", id, timeout)
@@ -453,9 +467,9 @@ func rulesOverlap(r, s rawRule) bool {
 	return ruleCovers(r, s) || ruleCovers(s, r)
 }
 
-func collectSSEEventsWithID(t testing.TB, c *sseClient, id string, window time.Duration) []contracts.Notification {
+func collectSSEEventsWithID(t testing.TB, c *sseClient, id string, window time.Duration) []string {
 	t.Helper()
-	var got []contracts.Notification
+	var got []string
 	timer := time.NewTimer(window)
 	defer timer.Stop()
 	for {
@@ -464,7 +478,7 @@ func collectSSEEventsWithID(t testing.TB, c *sseClient, id string, window time.D
 			if !ok {
 				return got
 			}
-			if n.ID() == id {
+			if n == id {
 				got = append(got, n)
 			}
 		case <-timer.C:
