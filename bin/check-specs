@@ -3,6 +3,17 @@
 # corresponding update to specs/. Run as a Claude Code Stop hook so every
 # session is reminded to keep specs in sync with the contracts they describe.
 #
+# specs/*.json document a domain object's *field shape* (name, type,
+# required-ness) — not its Go constructor's calling convention. So a change
+# is only flagged if it touches a domain struct's field block: the first
+# "type X struct { ... }" declared in the file. Constructors, params structs
+# (e.g. RuleParams), getters, and wire (de)serialization helpers can change
+# freely without a spec update, since they don't alter the schema.
+#
+# Caveat: this can't see semantic drift that isn't a field change — e.g. a
+# constructor adding a new required-ness check on an existing field. Use
+# judgment for those; the automated check only rules out pure refactors.
+#
 # Covers both modified tracked files (git diff HEAD) and new untracked files
 # (git ls-files --others) so creating a new spec file is always detected.
 #
@@ -14,15 +25,98 @@ changed() {
     | grep "^$1/" || true
 }
 
-contracts_changed=$(changed pkg/contracts)
+all_contracts_changed=$(changed pkg/contracts)
 
-if [ -z "$contracts_changed" ]; then
+if [ -z "$all_contracts_changed" ]; then
   exit 0
 fi
 
 specs_changed=$(changed specs)
 
 if [ -n "$specs_changed" ]; then
+  exit 0
+fi
+
+untracked=$(git ls-files --others --exclude-standard 2>/dev/null)
+
+# struct_block <file-contents-on-stdin>: prints "start,end" line numbers of
+# the first "type X struct { ... }" block, or nothing if there is none.
+struct_block() {
+  awk '
+    /^type [A-Za-z0-9_]+ struct \{/ { start=NR }
+    start && /^\}/ { print start","NR; exit }
+  '
+}
+
+# touches_struct_fields FILE: true if FILE's diff overlaps its domain
+# struct's field block in either the old (HEAD) or new (working tree)
+# version. Non-.go files, new files, and deleted files are always "true"
+# (can't safely rule out a schema change).
+touches_struct_fields() {
+  file="$1"
+
+  case "$file" in
+    *.go) ;;
+    *) return 0 ;;
+  esac
+
+  if printf '%s\n' "$untracked" | grep -qx "$file"; then
+    return 0
+  fi
+  if ! git cat-file -e "HEAD:$file" 2>/dev/null; then
+    return 0
+  fi
+  if [ ! -f "$file" ]; then
+    return 0
+  fi
+
+  old_block=$(git show "HEAD:$file" | struct_block)
+  new_block=$(struct_block <"$file")
+  [ -z "$old_block" ] && [ -z "$new_block" ] && return 0
+
+  old_start=${old_block%%,*}
+  old_end=${old_block##*,}
+  new_start=${new_block%%,*}
+  new_end=${new_block##*,}
+
+  # Hunk header: "@@ -o_start[,o_count] +n_start[,n_count] @@...". Counts are
+  # omitted (implying 1) when a hunk is a single line — parse with bash
+  # regex rather than sed/awk field-splitting, which mishandles the
+  # resulting variable-width whitespace from empty optional groups.
+  hunk_re='^@@ -([0-9]+)(,([0-9]+))? \+([0-9]+)(,([0-9]+))? @@'
+  overlap=1
+  while IFS= read -r hunk; do
+    [[ "$hunk" =~ $hunk_re ]] || continue
+    o_start="${BASH_REMATCH[1]}"
+    o_count="${BASH_REMATCH[3]:-1}"
+    n_start="${BASH_REMATCH[4]}"
+    n_count="${BASH_REMATCH[6]:-1}"
+    if [ -n "$old_block" ] && [ "$o_count" -gt 0 ]; then
+      o_hunk_end=$((o_start + o_count - 1))
+      if [ "$o_start" -le "$old_end" ] && [ "$o_hunk_end" -ge "$old_start" ]; then
+        overlap=0
+      fi
+    fi
+    if [ -n "$new_block" ] && [ "$n_count" -gt 0 ]; then
+      n_hunk_end=$((n_start + n_count - 1))
+      if [ "$n_start" -le "$new_end" ] && [ "$n_hunk_end" -ge "$new_start" ]; then
+        overlap=0
+      fi
+    fi
+  done < <(git diff HEAD -U0 -- "$file" | grep -E '^@@')
+
+  return $overlap
+}
+
+contracts_changed=""
+for file in $all_contracts_changed; do
+  if touches_struct_fields "$file"; then
+    contracts_changed="$contracts_changed$file"$'\n'
+  fi
+done
+contracts_changed=$(printf '%s' "$contracts_changed" | sed '/^$/d')
+
+if [ -z "$contracts_changed" ]; then
   exit 0
 fi
 

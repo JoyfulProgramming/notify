@@ -52,7 +52,7 @@ func (s *Service) handle(msg bus.Message, ack bus.AckFunc, nack bus.NackFunc) {
 	// Decision #4: an infrastructure failure must never be mistaken for a
 	// rule decision. Nack so Pub/Sub (here: the in-memory bus) redelivers —
 	// never route to notifications.discarded on a store error.
-	rules, err := s.store.List(n.UserID)
+	rules, err := s.store.List(n.UserID())
 	if err != nil {
 		log.Printf("filter: rule store error, nacking for redelivery: %v", err)
 		nack()
@@ -73,7 +73,7 @@ func (s *Service) handle(msg bus.Message, ack bus.AckFunc, nack bus.NackFunc) {
 
 	if err := s.bus.Publish(topic, bus.Message{
 		Data:       data,
-		Attributes: map[string]string{"user_id": n.UserID},
+		Attributes: map[string]string{"user_id": n.UserID()},
 	}); err != nil {
 		log.Printf("filter: publish error, nacking: %v", err)
 		nack()

@@ -63,8 +63,21 @@ func httpPost(t testing.TB, url, body string) *http.Response {
 
 // ---- ingestor (Capture BC) ----
 
+// rawNotification is the test-side mirror of the ingestor's inbound POST
+// body shape (see internal/ingestor/service.go's rawNotification) — tests
+// only ever need a notification as JSON over HTTP, never as a constructed
+// contracts.Notification, so they speak this wire shape directly.
+type rawNotification struct {
+	ID            string            `json:"id,omitempty"`
+	SourceApp     string            `json:"source_app"`
+	SourceAccount string            `json:"source_account"`
+	Title         string            `json:"title"`
+	Body          string            `json:"body,omitempty"`
+	Metadata      map[string]string `json:"metadata,omitempty"`
+}
+
 // publishViaHTTP posts a notification to the ingestor and returns its id.
-func publishViaHTTP(t testing.TB, n contracts.Notification) string {
+func publishViaHTTP(t testing.TB, n rawNotification) string {
 	t.Helper()
 	body, err := json.Marshal(n)
 	if err != nil {
@@ -88,13 +101,13 @@ func publishViaHTTP(t testing.TB, n contracts.Notification) string {
 }
 
 // publishNotification is the property-test alias for publishViaHTTP.
-func publishNotification(t testing.TB, n contracts.Notification) string {
+func publishNotification(t testing.TB, n rawNotification) string {
 	return publishViaHTTP(t, n)
 }
 
 // ---- rule-api (Matching BC) ----
 
-type ruleWire struct {
+type rawRule struct {
 	ID            string `json:"id,omitempty"`
 	SourceApp     string `json:"source_app"`
 	SourceAccount string `json:"source_account"`
@@ -107,19 +120,24 @@ type ruleWire struct {
 // all-fields-empty catch-all rule — see internal/rules/service.go), and
 // keeps fixture setup fast. The HTTP API surface itself is exercised
 // separately by createRuleViaHTTP/deleteRuleViaHTTP in contract_rules_test.go.
-func setUserRule(t testing.TB, r contracts.Rule) {
+func setUserRule(t testing.TB, r rawRule) {
 	t.Helper()
-	setUserRules(t, []contracts.Rule{r})
+	setUserRules(t, []rawRule{r})
 }
 
-func setUserRules(t testing.TB, rules []contracts.Rule) {
+func setUserRules(t testing.TB, rules []rawRule) {
 	t.Helper()
-	for _, r := range rules {
-		if r.UserID == "" {
-			r.UserID = "local"
+	for _, w := range rules {
+		userID := "local"
+		id := w.ID
+		if id == "" {
+			id = newUUID(t)
 		}
-		if r.ID == "" {
-			r.ID = newUUID(t)
+		r, err := contracts.NewRule(contracts.RuleParams{
+			ID: id, UserID: userID, SourceApp: w.SourceApp, SourceAccount: w.SourceAccount, Title: w.Title,
+		})
+		if err != nil {
+			t.Fatalf("setUserRule: building rule: %v", err)
 		}
 		if err := sys.Store.Create(r); err != nil {
 			t.Fatalf("setUserRule: %v", err)
@@ -134,15 +152,15 @@ func clearAllRules(t testing.TB) {
 		t.Fatalf("clearAllRules: listing: %v", err)
 	}
 	for _, r := range existing {
-		if _, err := sys.Store.Delete("local", r.ID); err != nil {
-			t.Fatalf("clearAllRules: deleting %s: %v", r.ID, err)
+		if _, err := sys.Store.Delete("local", r.ID()); err != nil {
+			t.Fatalf("clearAllRules: deleting %s: %v", r.ID(), err)
 		}
 	}
 }
 
-func createRuleViaHTTP(t testing.TB, r contracts.Rule) string {
+func createRuleViaHTTP(t testing.TB, r rawRule) string {
 	t.Helper()
-	body, err := json.Marshal(ruleWire{SourceApp: r.SourceApp, SourceAccount: r.SourceAccount, Title: r.Title})
+	body, err := json.Marshal(rawRule{SourceApp: r.SourceApp, SourceAccount: r.SourceAccount, Title: r.Title})
 	if err != nil {
 		t.Fatalf("marshal rule: %v", err)
 	}
@@ -151,7 +169,7 @@ func createRuleViaHTTP(t testing.TB, r contracts.Rule) string {
 	if resp.StatusCode != http.StatusCreated {
 		t.Fatalf("createRuleViaHTTP: expected 201, got %d", resp.StatusCode)
 	}
-	var out ruleWire
+	var out rawRule
 	if err := json.NewDecoder(resp.Body).Decode(&out); err != nil {
 		t.Fatalf("decoding create-rule response: %v", err)
 	}
@@ -167,14 +185,14 @@ func deleteRuleViaHTTP(t testing.TB, id string) {
 	}
 }
 
-func listRulesViaHTTP(t testing.TB) []ruleWire {
+func listRulesViaHTTP(t testing.TB) []rawRule {
 	t.Helper()
 	resp := authedRequest(t, http.MethodGet, sys.RulesURL+"/rules", nil)
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
 		t.Fatalf("listRulesViaHTTP: expected 200, got %d", resp.StatusCode)
 	}
-	var out []ruleWire
+	var out []rawRule
 	if err := json.NewDecoder(resp.Body).Decode(&out); err != nil {
 		t.Fatalf("decoding rules list: %v", err)
 	}
@@ -221,6 +239,14 @@ func assertPresentInStream(t testing.TB, id, topic string, timeout time.Duration
 	if _, ok := recorderFor(topic).waitFor(id, timeout); !ok {
 		t.Fatalf("expected notification %s on %s within %v, not found", id, topic, timeout)
 	}
+}
+
+// assertRoutesTo publishes n and asserts it lands on topic, returning its id.
+func assertRoutesTo(t testing.TB, n rawNotification, topic string) string {
+	t.Helper()
+	id := publishViaHTTP(t, n)
+	assertPresentInStream(t, id, topic, 5*time.Second)
+	return id
 }
 
 func assertAbsentFromStream(t testing.TB, id, topic string, timeout time.Duration) {
@@ -387,7 +413,7 @@ func waitForSSEEventWithID(t testing.TB, c *sseClient, id string, timeout time.D
 			if !ok {
 				t.Fatalf("SSE stream closed before event %s arrived", id)
 			}
-			if n.ID == id {
+			if n.ID() == id {
 				return n
 			}
 		case <-timer.C:
@@ -415,7 +441,7 @@ func fieldCovers(r, s string) bool {
 
 // ruleCovers reports whether rule r covers rule s: every notification matched
 // by s is also matched by r, field by field.
-func ruleCovers(r, s ruleWire) bool {
+func ruleCovers(r, s rawRule) bool {
 	return fieldCovers(r.SourceApp, s.SourceApp) &&
 		fieldCovers(r.SourceAccount, s.SourceAccount) &&
 		fieldCovers(r.Title, s.Title)
@@ -423,7 +449,7 @@ func ruleCovers(r, s ruleWire) bool {
 
 // rulesOverlap reports whether r and s are in a subset-or-superset
 // relationship — i.e. one covers the other.
-func rulesOverlap(r, s ruleWire) bool {
+func rulesOverlap(r, s rawRule) bool {
 	return ruleCovers(r, s) || ruleCovers(s, r)
 }
 
@@ -438,7 +464,7 @@ func collectSSEEventsWithID(t testing.TB, c *sseClient, id string, window time.D
 			if !ok {
 				return got
 			}
-			if n.ID == id {
+			if n.ID() == id {
 				got = append(got, n)
 			}
 		case <-timer.C:

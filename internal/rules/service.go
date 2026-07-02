@@ -6,6 +6,8 @@ package rules
 
 import (
 	"encoding/json"
+	"errors"
+	"io"
 	"log"
 	"net/http"
 	"path"
@@ -48,7 +50,55 @@ type ruleDTO struct {
 }
 
 func toDTO(r contracts.Rule) ruleDTO {
-	return ruleDTO{ID: r.ID, SourceApp: r.SourceApp, SourceAccount: r.SourceAccount, Title: r.Title}
+	return ruleDTO{ID: r.ID(), SourceApp: r.SourceApp(), SourceAccount: r.SourceAccount(), Title: r.Title()}
+}
+
+// A rule with every field empty is indistinguishable from a missing request
+// over HTTP — decodeRuleDTO rejects it. Catch-all rules (deliberately all
+// fields empty) are still a valid domain concept; they're just not reachable
+// through this validated entry point in v1.
+var (
+	errMalformedBody      = errors.New("malformed body")
+	errRuleFieldsRequired = errors.New("at least one field is required")
+)
+
+func (d ruleDTO) empty() bool {
+	for _, field := range []string{d.SourceApp, d.SourceAccount, d.Title} {
+		if field != "" {
+			return false
+		}
+	}
+	return true
+}
+
+func decodeRuleDTO(body io.Reader) (ruleDTO, error) {
+	var dto ruleDTO
+	if err := json.NewDecoder(body).Decode(&dto); err != nil {
+		return ruleDTO{}, errMalformedBody
+	}
+	if dto.empty() {
+		return ruleDTO{}, errRuleFieldsRequired
+	}
+	return dto, nil
+}
+
+// replaceOverlapping deletes any stored rule that overlaps rule (INV-7),
+// publishing a RuleDeleted event for each one removed.
+func (s *Service) replaceOverlapping(userID string, rule contracts.Rule) error {
+	existing, err := s.store.List(userID)
+	if err != nil {
+		return err
+	}
+	for _, ex := range existing {
+		if !rulesOverlap(ex, rule) {
+			continue
+		}
+		if _, err := s.store.Delete(userID, ex.ID()); err != nil {
+			return err
+		}
+		s.publishChange(contracts.RuleDeleted, ex)
+	}
+	return nil
 }
 
 func (s *Service) handleCreate(w http.ResponseWriter, r *http.Request) {
@@ -58,17 +108,9 @@ func (s *Service) handleCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var dto ruleDTO
-	if err := json.NewDecoder(r.Body).Decode(&dto); err != nil {
-		http.Error(w, "malformed body", http.StatusBadRequest)
-		return
-	}
-	// A rule with every field empty is indistinguishable from a missing
-	// request over HTTP — reject it here. Catch-all rules (deliberately all
-	// fields empty) are still a valid domain concept; they're just not
-	// reachable through this validated entry point in v1.
-	if dto.SourceApp == "" && dto.SourceAccount == "" && dto.Title == "" {
-		http.Error(w, "at least one field is required", http.StatusBadRequest)
+	dto, err := decodeRuleDTO(r.Body)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
@@ -78,27 +120,17 @@ func (s *Service) handleCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rule := contracts.Rule{
-		ID:            id.String(),
-		UserID:        userID,
-		SourceApp:     dto.SourceApp,
-		SourceAccount: dto.SourceAccount,
-		Title:         dto.Title,
-	}
-
-	existing, err := s.store.List(userID)
+	rule, err := contracts.NewRule(contracts.RuleParams{
+		ID: id.String(), UserID: userID, SourceApp: dto.SourceApp, SourceAccount: dto.SourceAccount, Title: dto.Title,
+	})
 	if err != nil {
 		http.Error(w, "internal error", http.StatusInternalServerError)
 		return
 	}
-	for _, ex := range existing {
-		if rulesOverlap(ex, rule) {
-			if _, err := s.store.Delete(userID, ex.ID); err != nil {
-				http.Error(w, "internal error", http.StatusInternalServerError)
-				return
-			}
-			s.publishChange(contracts.RuleDeleted, ex)
-		}
+
+	if err := s.replaceOverlapping(userID, rule); err != nil {
+		http.Error(w, "internal error", http.StatusInternalServerError)
+		return
 	}
 
 	if err := s.store.Create(rule); err != nil {
@@ -153,7 +185,15 @@ func (s *Service) handleDelete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	s.publishChange(contracts.RuleDeleted, contracts.Rule{ID: id, UserID: userID})
+	// id is only reached here once store.Delete confirms a row with that id
+	// existed, i.e. it's a previously-assigned valid UUID — NewRule cannot
+	// fail on it.
+	tombstone, err := contracts.NewRule(contracts.RuleParams{ID: id, UserID: userID})
+	if err != nil {
+		log.Printf("rules: building delete tombstone: %v", err)
+	} else {
+		s.publishChange(contracts.RuleDeleted, tombstone)
+	}
 
 	w.WriteHeader(http.StatusNoContent)
 }
@@ -170,9 +210,9 @@ func fieldCovers(r, s string) bool {
 }
 
 func ruleCovers(r, s contracts.Rule) bool {
-	return fieldCovers(r.SourceApp, s.SourceApp) &&
-		fieldCovers(r.SourceAccount, s.SourceAccount) &&
-		fieldCovers(r.Title, s.Title)
+	return fieldCovers(r.SourceApp(), s.SourceApp()) &&
+		fieldCovers(r.SourceAccount(), s.SourceAccount()) &&
+		fieldCovers(r.Title(), s.Title())
 }
 
 func rulesOverlap(r, s contracts.Rule) bool {
@@ -185,19 +225,19 @@ func (s *Service) publishChange(kind contracts.RuleChangedKind, rule contracts.R
 		log.Printf("rules: failed to generate event id: %v", err)
 		return
 	}
-	data, err := json.Marshal(contracts.RuleChangedEvent{
-		EventID:   eventID.String(),
-		Kind:      kind,
-		Rule:      rule,
-		ChangedAt: time.Now().UTC(),
-	})
+	event, err := contracts.NewRuleChangedEvent(eventID.String(), kind, rule, time.Now().UTC())
+	if err != nil {
+		log.Printf("rules: building rule-changed event: %v", err)
+		return
+	}
+	data, err := json.Marshal(event)
 	if err != nil {
 		log.Printf("rules: failed to marshal rule-changed event: %v", err)
 		return
 	}
 	if err := s.bus.Publish(bus.TopicRulesChanged, bus.Message{
 		Data:       data,
-		Attributes: map[string]string{"user_id": rule.UserID},
+		Attributes: map[string]string{"user_id": rule.UserID()},
 	}); err != nil {
 		log.Printf("rules: failed to publish rule-changed event: %v", err)
 	}

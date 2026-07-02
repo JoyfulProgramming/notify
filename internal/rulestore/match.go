@@ -20,9 +20,9 @@ func matchField(pattern, value string) bool {
 
 // Matches reports whether a single rule matches a notification.
 func Matches(r contracts.Rule, n contracts.Notification) bool {
-	return matchField(r.SourceApp, n.SourceApp) &&
-		matchField(r.SourceAccount, n.SourceAccount) &&
-		matchField(r.Title, n.Title)
+	return matchField(r.SourceApp(), n.SourceApp()) &&
+		matchField(r.SourceAccount(), n.SourceAccount()) &&
+		matchField(r.Title(), n.Title())
 }
 
 // AnyRuleMatches implements INV-6: in v1 every rule means DELIVER, so matching
