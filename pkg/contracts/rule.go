@@ -33,26 +33,35 @@ type Rule struct {
 	title         string // see matching semantics below
 }
 
-// NewRule constructs a Rule, or rejects the data outright. id and userID are
-// required by specs/rule.json; id must additionally parse as a UUID.
-// sourceApp/sourceAccount/title are optional match patterns (see matching
+// RuleParams holds the fields needed to construct a Rule via NewRule.
+type RuleParams struct {
+	ID            string
+	UserID        string
+	SourceApp     string
+	SourceAccount string
+	Title         string
+}
+
+// NewRule constructs a Rule, or rejects the data outright. ID and UserID are
+// required by specs/rule.json; ID must additionally parse as a UUID.
+// SourceApp/SourceAccount/Title are optional match patterns (see matching
 // semantics below) and accept any string, including "".
-func NewRule(id, userID, sourceApp, sourceAccount, title string) (Rule, error) {
-	if id == "" {
+func NewRule(p RuleParams) (Rule, error) {
+	if p.ID == "" {
 		return Rule{}, errors.New("rule: id is required")
 	}
-	if _, err := uuid.Parse(id); err != nil {
+	if _, err := uuid.Parse(p.ID); err != nil {
 		return Rule{}, fmt.Errorf("rule: id must be a valid UUID: %w", err)
 	}
-	if userID == "" {
+	if p.UserID == "" {
 		return Rule{}, errors.New("rule: user_id is required")
 	}
 	return Rule{
-		id:            id,
-		userID:        userID,
-		sourceApp:     sourceApp,
-		sourceAccount: sourceAccount,
-		title:         title,
+		id:            p.ID,
+		userID:        p.UserID,
+		sourceApp:     p.SourceApp,
+		sourceAccount: p.SourceAccount,
+		title:         p.Title,
 	}, nil
 }
 

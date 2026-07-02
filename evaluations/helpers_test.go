@@ -133,7 +133,9 @@ func setUserRules(t testing.TB, rules []ruleWire) {
 		if id == "" {
 			id = newUUID(t)
 		}
-		r, err := contracts.NewRule(id, userID, w.SourceApp, w.SourceAccount, w.Title)
+		r, err := contracts.NewRule(contracts.RuleParams{
+			ID: id, UserID: userID, SourceApp: w.SourceApp, SourceAccount: w.SourceAccount, Title: w.Title,
+		})
 		if err != nil {
 			t.Fatalf("setUserRule: building rule: %v", err)
 		}

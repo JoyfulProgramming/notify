@@ -71,7 +71,9 @@ func (s *Store) List(userID string) ([]contracts.Rule, error) {
 		if err := rows.Scan(&id, &owner, &sourceApp, &sourceAccount, &title); err != nil {
 			return nil, err
 		}
-		r, err := contracts.NewRule(id, owner, sourceApp, sourceAccount, title)
+		r, err := contracts.NewRule(contracts.RuleParams{
+			ID: id, UserID: owner, SourceApp: sourceApp, SourceAccount: sourceAccount, Title: title,
+		})
 		if err != nil {
 			return nil, fmt.Errorf("rulestore: stored rule %s is invalid: %w", id, err)
 		}

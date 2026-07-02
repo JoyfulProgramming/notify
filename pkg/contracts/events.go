@@ -102,7 +102,9 @@ func (e *RuleChangedEvent) UnmarshalJSON(data []byte) error {
 	if err := json.Unmarshal(data, &w); err != nil {
 		return err
 	}
-	rule, err := NewRule(w.Rule.ID, w.Rule.UserID, w.Rule.SourceApp, w.Rule.SourceAccount, w.Rule.Title)
+	rule, err := NewRule(RuleParams{
+		ID: w.Rule.ID, UserID: w.Rule.UserID, SourceApp: w.Rule.SourceApp, SourceAccount: w.Rule.SourceAccount, Title: w.Rule.Title,
+	})
 	if err != nil {
 		return err
 	}
