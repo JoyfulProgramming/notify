@@ -25,6 +25,14 @@
 
   const source = new EventSource(`/events?token=${encodeURIComponent(token)}`);
 
+  // Close explicitly on navigate/refresh/close rather than relying on the
+  // browser to notice the document is gone: SSE connections are long-lived,
+  // and a browser can be slow to reclaim one — refreshing a few times can
+  // otherwise pile up abandoned connections until the per-origin HTTP/1.1
+  // connection cap (6 in Chrome) is hit, which then blocks even the plain
+  // page load.
+  window.addEventListener("pagehide", () => source.close());
+
   source.onopen = () => { status.textContent = "connected"; };
   source.onerror = () => { status.textContent = "disconnected — retrying…"; };
 
