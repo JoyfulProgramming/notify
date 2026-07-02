@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "gopls": {
+      "command": "/Users/johngallagher/go/bin/gopls",
+      "args": ["mcp"]
+    }
+  }
+}
