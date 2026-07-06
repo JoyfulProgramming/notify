@@ -171,21 +171,7 @@ func (n *Notification) UnmarshalJSON(data []byte) error {
 	if err := json.Unmarshal(data, &w); err != nil {
 		return err
 	}
-	parsed, err := NewNotification(NotificationParams{
-		ID:              w.ID,
-		UserID:          w.UserID,
-		SourceApp:       w.SourceApp,
-		SourceAccount:   w.SourceAccount,
-		SourceID:        w.SourceID,
-		SentBy:          w.SentBy,
-		SentIn:          w.SentIn,
-		Title:           w.Title,
-		Body:            w.Body,
-		DeviceID:        w.DeviceID,
-		DeviceTimestamp: w.DeviceTimestamp,
-		ReceivedAt:      w.ReceivedAt,
-		Metadata:        w.Metadata,
-	})
+	parsed, err := NewNotification(NotificationParams(w))
 	if err != nil {
 		return err
 	}

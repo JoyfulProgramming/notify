@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Runs go vet and checks gofmt formatting across the module.
+# Runs go vet, checks gofmt formatting, and runs staticcheck across the module.
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -17,5 +17,13 @@ if [ -n "$unformatted" ]; then
   echo "$unformatted" >&2
   exit 1
 fi
+
+if ! command -v staticcheck >/dev/null 2>&1; then
+  echo "error: staticcheck is required (go install honnef.co/go/tools/cmd/staticcheck@latest)" >&2
+  exit 1
+fi
+
+echo "staticcheck ./..."
+staticcheck ./...
 
 echo "OK"

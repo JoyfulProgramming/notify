@@ -95,8 +95,10 @@ git config core.hooksPath .githooks
 ### bin/lint
 
 ```sh
-bin/lint    # go vet + gofmt check
+bin/lint    # go vet + gofmt check + staticcheck
 ```
+
+Requires `staticcheck` (`go install honnef.co/go/tools/cmd/staticcheck@latest`).
 
 ### bin/check-specs
 

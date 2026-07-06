@@ -78,7 +78,7 @@ type rawRule struct {
 type rawRuleChangedEvent struct {
 	EventID   string          `json:"event_id"`
 	Kind      RuleChangedKind `json:"kind"`
-	Rule      rawRule        `json:"rule"`
+	Rule      rawRule         `json:"rule"`
 	ChangedAt time.Time       `json:"changed_at"`
 }
 

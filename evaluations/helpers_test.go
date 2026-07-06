@@ -257,12 +257,6 @@ func assertAbsentFromStream(t testing.TB, id, topic string, timeout time.Duratio
 	}
 }
 
-func waitForInStream(t testing.TB, id, topic string, timeout time.Duration) bool {
-	t.Helper()
-	_, ok := recorderFor(topic).waitFor(id, timeout)
-	return ok
-}
-
 func waitForMessageOnTopic(t testing.TB, topic, id string, timeout time.Duration) contracts.Notification {
 	t.Helper()
 	n, ok := recorderFor(topic).waitFor(id, timeout)
