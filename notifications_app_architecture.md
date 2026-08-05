@@ -46,12 +46,19 @@ These must hold across **any** implementation, in any language, across any regen
    When a client reconnects, it receives all unread notifications delivered
    since the last connection, plus new live notifications.
 
-8. Read status is per-location (e.g., web, Android app, desktop).
-   Marking a notification read on the web does not affect its read status
-   on other devices.
+8. Read status is per-location (e.g., web, Android app, desktop),
+   but read-status changes broadcast to all locations for that user.
+   When a notification is marked read on web, other locations are notified
+   via a pub/sub event and hide it immediately from their UI.
 
 9. Marking a notification as read is idempotent and irreversible.
    The operation sets a timestamp and is never undone.
+   Every successful MarkRead publishes a notification-read event.
+
+10. Read events are published to all locations.
+    When any location marks a notification read, a notification-read event
+    is published with user_id as a message attribute. All connected clients
+    for that user receive and act on the event.
 ```
 
 These are your durable evaluations in plain English. Every contract test and property test you write should map to one of these.
@@ -106,6 +113,24 @@ These are the boundaries that survive all code regenerations. They require the m
 - `delivered_at` is immutable and reflects when the notification first reached this user+location.
 - Duplicate Record calls (same user_id, location, notification_id) are idempotent — they do not create duplicate rows.
 - The `metadata` field stores raw `notification.v1` data as JSON for queryability and future evolution.
+
+### Notification Read Event Schema — `notification-read.v1` (NEW)
+
+```json
+{
+  "event_id":        "string — UUID v7, unique event identifier",
+  "user_id":         "string — the user who marked it read",
+  "notification_id": "string — UUID, which notification was marked read",
+  "location":        "string — which location initiated the read (browser-web, app-android, etc)",
+  "read_at":         "string — ISO 8601, when it was marked read"
+}
+```
+
+**Contract (in plain language):**
+- Emitted by notification-history when MarkRead is called.
+- Published to a `notifications.read` topic with `user_id` as a Pub/Sub message attribute.
+- Allows all other SSE connections for the same user to listen and immediately hide the notification from their UI.
+- Provides cross-device read status synchronization without requiring global (database-level) read status.
 
 ### Filter Rule Schema
 
@@ -456,7 +481,7 @@ Each passes the deletion test — it can be regenerated from its one-sentence sp
 | `filter-service` | Rule evaluation contract, `notification-filtered` schema | Evaluation algorithm changes; contract stays stable |
 | `rule-api` | Rule schema, `rule-changed` event shape | CRUD logic changes; schema stays stable |
 | `delivery-service` | `notification-filtered` schema, ack protocol, mark-read API | Delivery routing logic changes |
-| `notification-history` | `notification-delivery.v1` schema, read status semantics | Query/storage logic changes; schema stays stable |
+| `notification-history` | `notification-delivery.v1` schema, `notification-read.v1` events, read status semantics | Query/storage/event logic changes; schemas stay stable |
 | `dead-letter-monitor` | Dead-letter topic contract | Alert logic changes |
 
 ---

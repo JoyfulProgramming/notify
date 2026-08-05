@@ -2,11 +2,14 @@
 
 ## Requirement
 
-Notifications should persist beyond browser refresh/reconnection. Users should only see notifications disappear when they explicitly mark them as read. This requires:
+Notifications should persist beyond browser refresh/reconnection. Users should only see notifications disappear when they explicitly mark them as read. Additionally, when a notification is marked as read on one location (e.g., web browser), all other locations for that user should be notified immediately so they can hide the notification from their UI without requiring a refresh.
+
+This requires:
 - Persisting delivered notifications to a durable store
 - Loading historical (unread) notifications on client connect
 - Providing a "mark as read" operation
 - Ensuring read status persists across sessions
+- Publishing read-status-changed events so all locations can synchronize in real-time
 
 ---
 
@@ -203,12 +206,55 @@ CREATE TABLE delivery_locations (
 
 ---
 
+## New Events & Pub/Sub Topics
+
+### notification-read Event (NEW)
+
+**Topic:** `notifications.read`
+
+**Schema:**
+```json
+{
+  "event_id":        "UUID v7 — unique event identifier",
+  "user_id":         "string — the user who marked it read",
+  "notification_id": "UUID — which notification was marked read",
+  "location":        "string — which location initiated (browser-web, app-android, etc)",
+  "read_at":         "ISO 8601 — when it was marked read"
+}
+```
+
+**Pub/Sub Attributes:**
+```
+user_id = <user_id>  (for per-user subscription filtering)
+```
+
+**Publishing Contract:**
+- Emitted when `notification-history.MarkRead()` succeeds
+- Published once per unique (user_id, notification_id, location) pair
+- Idempotent: if MarkRead is called multiple times with same args, only one event is published
+
+**Subscription Model (in delivery-service):**
+```
+Topic: notifications.read
+Filter: attributes.user_id = "<user_id>"
+→ All connected SSE clients for that user receive the event
+→ Client's browser removes the notification from display immediately
+```
+
+**Why this works:**
+- No need for global read status in storage (stays per-location)
+- All locations get real-time notification of read status changes
+- Event-driven architecture is loosely coupled
+- Each location can still have independent read status if needed (e.g., user opens Android phone later and queries the history service)
+
+---
+
 ## New Components & Changes
 
-### New: `notification-history` service
+### Updated: `notification-history` service
 
 **One-sentence spec:**  
-Persists every notification delivered to a user + location, records read status, and provides queries for unread notifications by location.
+Persists every notification delivered to a user + location, records read status, publishes read-status-changed events, and provides queries for unread notifications by location.
 
 **Exports (package `internal/history`):**
 
@@ -220,7 +266,7 @@ type Service interface {
   Record(ctx context.Context, userID, location string, n *contracts.Notification) error
   
   // MarkRead sets read_at = now() for the given notification.
-  // Idempotent.
+  // Idempotent. Publishes a notification-read event on success.
   MarkRead(ctx context.Context, userID, location, notificationID string) error
   
   // Unread returns all unread notifications for user + location,
@@ -242,13 +288,14 @@ type DeliveredNotification struct {
 }
 ```
 
-### Modified: `delivery` service
+### Modified: `delivery-service`
 
 **Changes to `internal/deliver/service.go`:**
 
 1. Accept a `history.Service` in `New()`.
 2. After streaming each notification via SSE, call `history.Record()` to persist it.
 3. Add a new HTTP handler `POST /notifications/:id/read` that calls `history.MarkRead()`.
+4. Subscribe to `notifications.read` topic (NEW) and broadcast read events to all connected SSE clients for that user.
 
 **Code outline:**
 
