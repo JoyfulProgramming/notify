@@ -405,19 +405,62 @@ type RuleChangedEvent struct {
     ChangedAt time.Time       `json:"changed_at"`
 }</code></pre>
 
-    <h3>Pub/Sub topic names — the boundary</h3>
+    <h3>notification-delivery.v1 (Persistence)</h3>
+    <p>Persisted record of a notification delivered to a user + location. Stored in the notification-history service.</p>
+    <pre><code class="language-json">{
+  "user_id":           "string — owner of this notification",
+  "location":          "string — where delivered (browser-web, app-android, desktop-macos, etc)",
+  "notification_id":   "UUID — references notification.v1",
+  "delivered_at":      "ISO 8601 — when first delivered to this user+location",
+  "read_at":           "ISO 8601 or null — when marked as read, null if unread",
+  "source_app":        "string — copy of notification source_app for query performance",
+  "title":             "string — copy of notification title",
+  "body":              "string — copy of notification body",
+  "metadata":          "object — arbitrary JSON, for extensibility"
+}</code></pre>
+    <p><strong>Semantics:</strong></p>
+    <ul>
+      <li>Keyed by <code>(user_id, location, notification_id)</code> — unique delivery per location.</li>
+      <li><code>read_at</code> is immutable once set. Idempotent: setting twice is safe.</li>
+      <li>Each location tracks independent read status in storage.</li>
+      <li>When <code>read_at</code> is updated, <code>notification-read</code> event (see below) is published.</li>
+    </ul>
+
+    <h3>notification-read.v1 (Cross-Device Sync)</h3>
+    <p>Event published when a notification is marked as read. Allows all connected clients for that user to hide it immediately.</p>
+    <pre><code class="language-json">{
+  "event_id":        "UUID v7 — unique event identifier",
+  "user_id":         "string — the user who marked it read",
+  "notification_id": "UUID — which notification was marked read",
+  "location":        "string — which location initiated (browser-web, app-android, etc)",
+  "read_at":         "ISO 8601 — when it was marked read"
+}</code></pre>
+    <p><strong>Semantics:</strong></p>
+    <ul>
+      <li>Published to <code>notifications.read</code> topic with <code>user_id</code> as a Pub/Sub message attribute.</li>
+      <li>Idempotent: multiple MarkRead calls with same args publish exactly one event.</li>
+      <li>Enables Invariant 10: all connected clients for that user receive the event and immediately hide the notification.</li>
+    </ul>
+
+    <h3>Pub/Sub topics and events — the boundary</h3>
     <table class="scope-table">
-      <thead><tr><th>Topic</th><th>Marks</th><th>Published by</th></tr></thead>
+      <thead><tr><th>Topic</th><th>Message Type</th><th>Boundary</th><th>Published by</th></tr></thead>
       <tbody>
-        <tr><td><code>notifications.captured</code></td><td>Capture → Matching boundary</td><td>ingestor</td></tr>
-        <tr><td><code>notifications.matched</code></td><td>Matching → Delivery boundary</td><td>filter-service</td></tr>
-        <tr><td><code>notifications.discarded</code></td><td>Matching context — ruled out</td><td>filter-service</td></tr>
-        <tr><td><code>rules.changed</code></td><td>Matching context — RuleChangedEvent stream</td><td>rule-api</td></tr>
+        <tr><td><code>notifications.captured</code></td><td><code>notification.v1</code></td><td>Capture → Matching</td><td>ingestor</td></tr>
+        <tr><td><code>notifications.matched</code></td><td><code>notification.v1</code></td><td>Matching → Delivery</td><td>filter-service</td></tr>
+        <tr><td><code>notifications.discarded</code></td><td><code>notification.v1</code></td><td>Matching context</td><td>filter-service</td></tr>
+        <tr><td><code>rules.changed</code></td><td><code>RuleChangedEvent</code></td><td>Matching context</td><td>rule-api</td></tr>
+        <tr><td><code>notifications.read</code></td><td><code>notification-read.v1</code></td><td>Delivery context</td><td>notification-history</td></tr>
       </tbody>
     </table>
     <div class="spec-box">
-      <p>Only the filter-service may publish to <code>notifications.matched</code> or <code>notifications.discarded</code>.
-         Any service that publishes to or subscribes from these topics is implicitly depending on this contract.</p>
+      <p><strong>Publishing constraints:</strong></p>
+      <ul>
+        <li>Only <code>notification-ingestor</code> may publish to <code>notifications.captured</code>.</li>
+        <li>Only <code>filter-service</code> may publish to <code>notifications.matched</code> or <code>notifications.discarded</code>.</li>
+        <li>Only <code>rule-api</code> may publish to <code>rules.changed</code>.</li>
+        <li>Only <code>notification-history</code> may publish to <code>notifications.read</code>.</li>
+      </ul>
     </div>
   </section>
 
