@@ -39,7 +39,7 @@
     <li><button class="nav-link" data-target="filter"><span class="bc-dot bc-matching"></span>filter-service</button></li>
     <li><button class="nav-link" data-target="rules"><span class="bc-dot bc-matching"></span>rule-api</button></li>
     <li><button class="nav-link" data-target="delivery"><span class="bc-dot bc-delivery"></span>delivery-service</button></li>
-    <li><button class="nav-link" data-target="history"><span class="bc-dot bc-delivery"></span>notification-history</button></li>
+    <li><button class="nav-link" data-target="history"><span class="bc-dot bc-delivery"></span>notification-history &amp; read events</button></li>
     <li><button class="nav-link" data-target="system-properties"><span class="bc-dot bc-meta"></span>System-wide properties</button></li>
   </ul>
 
@@ -595,7 +595,14 @@ type RuleChangedEvent struct {
       <header>INV-9 — Marking as read is idempotent and irreversible</header>
       <p>Marking a notification as read is idempotent: calling the operation multiple times is safe and produces
          the same result as calling once. Once marked read, a notification cannot be unmarked. Read operations
-         set a timestamp and are never undone.</p>
+         set a timestamp and are never undone. Every successful MarkRead publishes a notification-read event.</p>
+    </div>
+    <div class="behavior-card">
+      <header>INV-10 — Read events broadcast to all locations</header>
+      <p>When any location marks a notification read, a notification-read event is published to the
+         <code>notifications.read</code> topic with <code>user_id</code> as a message attribute. All connected
+         clients for that user receive the event and immediately hide the notification from their UI, providing
+         real-time cross-device synchronization without requiring global database-level read status.</p>
     </div>
   </section>
 
@@ -1145,6 +1152,30 @@ func TestProperty_DeduplicationByID(t *testing.T) {
            per-location and global read_at. If storage grows beyond SQLite's practical limits (100GB+), implement
            archival or migrate to PostgreSQL.</p>
       </div>
+    </div>
+
+    <h3>Cross-device synchronization: notification-read event</h3>
+    <div class="spec-box">
+      <p>When notification-history marks a notification as read, it publishes a <code>notification-read</code> event
+         to the <code>notifications.read</code> Pub/Sub topic. All connected SSE clients for that user receive the
+         event and immediately hide the notification from their display.</p>
+    </div>
+    <pre><code class="language-json">{
+  "event_id":        "UUID v7 — unique event identifier",
+  "user_id":         "string — the user who marked it read",
+  "notification_id": "UUID — which notification was marked read",
+  "location":        "string — which location initiated (browser-web, app-android, etc)",
+  "read_at":         "ISO 8601 — when it was marked read"
+}</code></pre>
+    <p><strong>Pub/Sub attributes:</strong> <code>user_id</code> (used for per-user subscription filtering)</p>
+    <p><strong>Delivery model:</strong> Each SSE connection subscribes to <code>notifications.read</code> filtered by
+       its <code>user_id</code>. When a read event arrives, the client removes the notification from the DOM.</p>
+    <div class="callout">
+      <header>Why per-location storage + event-driven broadcast?</header>
+      <p>This design keeps the storage simple (per-location read status) while providing real-time cross-device UX.
+         If a user opens their Android phone hours later, they query the notification-history service and see the
+         read_at timestamp — the system is consistent. But for connected devices, the event provides immediate
+         feedback without them having to refresh.</p>
     </div>
   </section>
 
