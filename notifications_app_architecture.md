@@ -41,6 +41,17 @@ These must hold across **any** implementation, in any language, across any regen
 
 6. Deleting a rule never causes a notification that was already delivered
    to disappear from a client's history.
+
+7. A delivered notification persists across client disconnects.
+   When a client reconnects, it receives all unread notifications delivered
+   since the last connection, plus new live notifications.
+
+8. Read status is per-location (e.g., web, Android app, desktop).
+   Marking a notification read on the web does not affect its read status
+   on other devices.
+
+9. Marking a notification as read is idempotent and irreversible.
+   The operation sets a timestamp and is never undone.
 ```
 
 These are your durable evaluations in plain English. Every contract test and property test you write should map to one of these.
@@ -71,6 +82,30 @@ These are the boundaries that survive all code regenerations. They require the m
 - `device_timestamp` is what the device saw. `received_at` is when the system got it. Both are always present.
 - No service may fail if an unknown `metadata` key is present.
 - Adding new optional fields is a backwards-compatible change. Removing or renaming fields requires a new schema version (`notification.v2`).
+
+### Notification Delivery Status Schema — `notification-delivery.v1`
+
+```json
+{
+  "user_id":           "string — owner of this notification",
+  "location":          "string — where delivered (e.g., browser-web, app-android, desktop-macos)",
+  "notification_id":   "string — UUID, references notification.v1",
+  "delivered_at":      "string — ISO 8601, when first delivered to this user+location",
+  "read_at":           "string or null — ISO 8601 when marked as read, null if unread",
+  "source_app":        "string — copy of notification source_app for query performance",
+  "title":             "string — copy of notification title",
+  "body":              "string — copy of notification body",
+  "metadata":          "object — arbitrary JSON, for extensibility"
+}
+```
+
+**Contract (in plain language):**
+- Every notification that passes the filter service is recorded here, keyed by `(user_id, location, notification_id)`.
+- `read_at` is null until the user explicitly marks the notification as read. It is then set to the current timestamp.
+- Read status is independent per location. The same notification can be unread on web and read on Android.
+- `delivered_at` is immutable and reflects when the notification first reached this user+location.
+- Duplicate Record calls (same user_id, location, notification_id) are idempotent — they do not create duplicate rows.
+- The `metadata` field stores raw `notification.v1` data as JSON for queryability and future evolution.
 
 ### Filter Rule Schema
 
@@ -105,8 +140,8 @@ Every component must be expressible in a single sentence that a developer with n
 | `notification-ingestor` | Accepts raw notifications from Android/Web clients and publishes them to `notification-raw` Pub/Sub topic with a `received_at` timestamp, deduplicating by `notification_id`. |
 | `filter-service` | Subscribes to `notification-raw`, evaluates each notification against the owner's active rules in priority order, and publishes matching notifications to `notification-filtered`. |
 | `rule-api` | Provides CRUD operations for a user's filter rules and emits a `rule-changed` event to `rule-events` on every mutation. |
-| `delivery-service` | Subscribes to `notification-filtered`, delivers each notification to the user's connected clients via FCM/WebSocket/SSE, and records acknowledgement by `notification_id`. |
-| `notification-history` | Maintains an append-only read model of all notifications delivered to each user, queryable by time range and source app. |
+| `delivery-service` | Subscribes to `notification-filtered`, delivers each notification to the user's connected clients via FCM/WebSocket/SSE, persists the delivery to `notification-history`, and serves the mark-read API. |
+| `notification-history` | Persists all notifications delivered to each user by location, tracks read status by (user_id, location, notification_id), and provides queries for unread notifications. |
 | `dead-letter-monitor` | Consumes from the Pub/Sub dead-letter topic and emits alerts when undeliverable notifications accumulate beyond a threshold. |
 
 If you cannot explain what a component does in one sentence, either the spec is unclear or the component is doing too much.
@@ -142,6 +177,54 @@ func TestContract_OfflineQueueDrainsInOrder(t *testing.T) {
     assertDeliveredInOrder(t, ids, 15*time.Second)
     assertNoDuplicates(t, ids)
 }
+
+// A delivered notification is persisted and survives browser refresh.
+func TestContract_DeliveredNotificationPersists(t *testing.T) {
+    setUserRule(t, userID, Rule{SourceApp: "com.gmail", Action: DELIVER})
+    id := publishNotification(t, Notification{SourceApp: "com.gmail", Title: "New email"})
+    
+    // Notification appears on first connection
+    assertPresentInDeliveredStream(t, id, 5*time.Second)
+    
+    // Refresh the browser (disconnect and reconnect)
+    disconnect(t)
+    reconnect(t)
+    
+    // Unread notification still appears after reconnect
+    assertPresentInUnreadNotifications(t, id, 5*time.Second)
+}
+
+// A notification marked as read is absent from the unread list.
+func TestContract_MarkReadRemovesFromUnread(t *testing.T) {
+    setUserRule(t, userID, Rule{SourceApp: "com.gmail", Action: DELIVER})
+    id := publishNotification(t, Notification{SourceApp: "com.gmail", Title: "New email"})
+    
+    // Notification starts unread
+    assertPresentInUnreadNotifications(t, id, 5*time.Second)
+    
+    // Mark it as read
+    markNotificationRead(t, userID, id)
+    
+    // Now it's absent from unread list
+    assertAbsentFromUnreadNotifications(t, id, 5*time.Second)
+}
+
+// Read status is per-location—reading on web does not affect Android.
+func TestContract_ReadStatusPerLocation(t *testing.T) {
+    setUserRule(t, userID, Rule{SourceApp: "com.gmail", Action: DELIVER})
+    id := publishNotification(t, Notification{SourceApp: "com.gmail", Title: "New email"})
+    
+    // Deliver to both web and Android
+    deliverToLocation(t, id, "browser-web")
+    deliverToLocation(t, id, "app-android")
+    
+    // Mark as read on web only
+    markNotificationReadOnLocation(t, userID, id, "browser-web")
+    
+    // Web: not in unread. Android: still in unread.
+    assertAbsentFromUnreadNotifications(t, id, "browser-web")
+    assertPresentInUnreadNotifications(t, id, "app-android")
+}
 ```
 
 ### Property Tests (Behavioural, Generated Inputs)
@@ -173,6 +256,26 @@ func TestProperty_PriorityOrdering(t *testing.T) {
         assertPresentInFilteredStream(t, id, 5*time.Second)
     })
 }
+
+// Marking a notification read is idempotent.
+func TestProperty_MarkReadIdempotent(t *testing.T) {
+    rapid.Check(t, func(t *rapid.T) {
+        n := generateArbitraryNotification(t)
+        rule := generateMatchingDeliverRule(t, n)
+        setUserRule(t, userID, rule)
+        id := publishNotification(t, n)
+        
+        // Mark as read twice
+        markNotificationRead(t, userID, id)
+        markNotificationRead(t, userID, id)  // idempotent
+        
+        // Should have zero or one read records, never duplicates
+        readRecords := getReadRecords(t, userID, id)
+        if len(readRecords) > 1 {
+            t.Fatalf("idempotence violated: %d read records", len(readRecords))
+        }
+    })
+}
 ```
 
 ### Invariant Monitoring (Live, Continuous)
@@ -184,6 +287,9 @@ These run in production continuously, not just in CI:
 - **Filter rule hit rate** — track per-rule to detect stale rules that never match (compaction signal)
 - **Offline queue depth** — per device, alert if queue > 1000 items (possible connectivity failure)
 - **Duplicate delivery rate** — should be zero; any duplicate is a dedup invariant violation
+- **Unread notification count per user** — track for storage and performance planning
+- **Read status lag** — from mark-read request to absence from unread list, must be < 1s
+- **Persistence availability** — alert if notification history store has > 1 minute downtime
 
 ---
 
@@ -192,7 +298,9 @@ These run in production continuously, not just in CI:
 ```
 SLOW LAYER — Almost Never Changes
   Pub/Sub message schema (notification.v1)
+  Notification delivery status schema (notification-delivery.v1)
   Filter rule schema
+  Read status semantics (per-location, idempotent, irreversible)
   Offline sync protocol (UUID-based dedup)
   Audit log format
   notification_id generation algorithm (UUID v7)
@@ -200,12 +308,12 @@ SLOW LAYER — Almost Never Changes
 MID LAYER — Changes Monthly
   Filter Service: rule evaluation logic, priority resolution
   Rule API: CRUD operations, rule validation
-  Delivery Service: channel routing, acknowledgement tracking
-  Notification History: read model queries
+  Delivery Service: channel routing, acknowledgement tracking, persistence calls
+  Notification History Service: persistence, read status updates, unread queries
 
 FAST LAYER — Changes Weekly or Daily
   Android notification listener (adapts to Android API changes)
-  Web/Desktop UI: notification display, rule configuration screens
+  Web/Desktop UI: notification display, rule configuration, mark-read clicks  [UPDATED]
   Push delivery adapters: FCM, WebSocket, SSE implementations
   Notification enrichment: grouping, summarisation, metadata tagging
 ```
@@ -243,17 +351,28 @@ Android App
   Google Cloud Pub/Sub
   topic: notification-filtered
         │
-        ├──▶ delivery-service → WebSocket / SSE → Web / Desktop
-        ├──▶ delivery-service → FCM → Android
-        └──▶ notification-history (append-only read model)
+        ├──▶ notification-history (SQLite)
+        │   ├──▶ Record(notification, location) — persist
+        │   ├──▶ Unread(user_id, location) — query for web/app
+        │   └──▶ MarkRead(user_id, location, notification_id) — update
+        │
+        └──▶ delivery-service
+            ├──▶ Calls history.Record() after streaming
+            ├──▶ Sends unread notifications from history.Unread() on connect
+            ├──▶ Handles POST /notifications/:id/read via history.MarkRead()
+            └──▶ Streams to WebSocket / SSE → Web / Desktop
+            └──▶ Streams to FCM → Android
 ```
 
 **Why it works:**
 - The Filter Service is a pure function: `(notification, []Rule) → DELIVER | DISCARD`. It can be completely regenerated without touching Android or the web client — because the Pub/Sub schema is the conserved boundary.
 - The ingestor is separable from the filter. You can regenerate one without the other.
 - The delivery service is a thin adapter — it only knows about `notification-filtered` and delivery channels. New channels (e.g. Slack, email) are additions, not changes.
+- **The notification-history service is a pure persistence layer.** It only knows about the `notification-delivery.v1` schema. The storage backend (SQLite, Postgres, DynamoDB) can be swapped without changing the service spec. Read status semantics are immutable, so queries remain consistent.
 
 **Start here.** It is the smallest system that passes all the durable evaluations.
+
+**With persistence (current requirement):** Add the notification-history service between the filter service and the delivery service. The history service is the authoritative store of delivered notifications. The delivery service consults it on reconnect to rebuild the unread list.
 
 ---
 
@@ -336,8 +455,8 @@ Each passes the deletion test — it can be regenerated from its one-sentence sp
 | `notification-ingestor` | `notification.v1` Pub/Sub schema | Ingestor logic changes; schema stays stable |
 | `filter-service` | Rule evaluation contract, `notification-filtered` schema | Evaluation algorithm changes; contract stays stable |
 | `rule-api` | Rule schema, `rule-changed` event shape | CRUD logic changes; schema stays stable |
-| `delivery-service` | `notification-filtered` schema, ack protocol | Delivery routing logic changes |
-| `notification-history` | Audit log schema | Query model changes; log schema stays stable |
+| `delivery-service` | `notification-filtered` schema, ack protocol, mark-read API | Delivery routing logic changes |
+| `notification-history` | `notification-delivery.v1` schema, read status semantics | Query/storage logic changes; schema stays stable |
 | `dead-letter-monitor` | Dead-letter topic contract | Alert logic changes |
 
 ---
@@ -346,17 +465,23 @@ Each passes the deletion test — it can be regenerated from its one-sentence sp
 
 1. **Define and commit the Pub/Sub message schema.** This is the slow layer. It should be a Go struct in `pkg/contracts/notification.go` with a JSON schema alongside it. Do not write any services until this is done.
 
-2. **Write the durable evaluations.** Before any service code, write the contract tests and property tests above as Go test files that initially fail (they have nothing to test against yet). These become your acceptance criteria.
+2. **Define the notification delivery status schema** (`notification-delivery.v1`). This is also a slow layer — once stable, services depend on it. Define the read status semantics: per-location, idempotent, irreversible.
 
-3. **Build the Filter Service first.** It is a pure function — the easiest service to specify completely and the one everything else depends on for its output. Get it passing the contract tests.
+3. **Write the durable evaluations.** Before any service code, write the contract tests and property tests above as Go test files that initially fail (they have nothing to test against yet). These become your acceptance criteria. Include persistence and read status tests.
 
-4. **Build the ingestor.** Wire it to a local Pub/Sub emulator. Confirm the filter service receives notifications from it.
+4. **Build the Filter Service first.** It is a pure function — the easiest service to specify completely and the one everything else depends on for its output. Get it passing the contract tests.
 
-5. **Build the delivery service for one channel only** (WebSocket to a minimal web UI). Get end-to-end delivery working before adding FCM or SSE.
+5. **Build the ingestor.** Wire it to a local Pub/Sub emulator. Confirm the filter service receives notifications from it.
 
-6. **Add the Android listener last.** At this point the cloud pipeline is already tested. The Android code is a thin publisher — it only needs to produce valid `notification.v1` messages and implement the write-ahead log drain.
+6. **Build the notification-history service.** Implement SQLite persistence: Record (idempotent persist), Unread (query by location), MarkRead (set read_at). Write and pass the persistence contract tests.
 
-7. **Apply the n=1 test at week 4.** Could a new Go developer, given only the specs, invariants, and evaluations (not the code), regenerate the Filter Service? If not, improve the specs before writing more code.
+7. **Build the delivery service for one channel only** (WebSocket to a minimal web UI). Update it to: persist via notification-history after streaming, send unread notifications on connect, handle mark-read requests. Get end-to-end delivery and persistence working before adding FCM or SSE.
+
+8. **Update the web frontend** to fetch and display unread notifications on page load, and add click handlers for mark-read.
+
+9. **Add the Android listener last.** At this point the cloud pipeline is already tested. The Android code is a thin publisher — it only needs to produce valid `notification.v1` messages and implement the write-ahead log drain.
+
+10. **Apply the n=1 test at week 4.** Could a new Go developer, given only the specs, invariants, and evaluations (not the code), regenerate the Filter Service? If not, improve the specs before writing more code.
 
 ---
 
@@ -410,3 +535,170 @@ What would make this wrong:
   a different offline model is needed (e.g. local rule evaluation with FCM
   high-priority messages).
 ```
+
+### Notification Persistence & Read Status (NEW)
+
+```
+Why it exists:
+  Users expect notifications to survive browser refresh or app restart.
+  Without persistence, notifications vanish when a client disconnects.
+  Read status must persist so users know what they've already seen.
+
+Rejected alternatives:
+  In-memory only: loses data on disconnect, requires rebuilding from Pub/Sub
+  buffer (limited history, not user-facing).
+  Global read status: synchronising read status across all devices adds
+  complexity. Per-location is simpler and matches user expectations
+  (mark read on phone, ignore on desktop).
+  Forever retention: storage and query performance degrade. Cleanup after
+  N days (e.g., 30) is acceptable per Invariant 7.
+
+Active assumptions:
+  Users have at most ~10k unread notifications at a time.
+  Read status queries (unread list) are common; archive queries are rare.
+  SQLite is sufficient for a single-instance deployment.
+  If scaling to distributed deployments, a shared database (PostgreSQL) is needed.
+
+What would make this wrong:
+  If users need retroactive read status changes (undo), add an undo_read
+  timestamp alongside read_at.
+  If users need to sync read status across all devices, add a global
+  read_at column alongside the per-location one.
+  If storage grows beyond SQLite's practical limits (100GB+), migrate to
+  PostgreSQL or implement archival/tiering.
+```
+
+---
+
+## Read Status Design: Per-Location vs. Global
+
+The architecture uses **per-location read status** (Approach A). This section documents the decision and trade-offs.
+
+### Approach A: Per-Location Read Status (Selected)
+
+**Semantics:**
+- Each notification has independent read status for each location (browser-web, app-android, etc.).
+- Marking a notification read on web does not affect its unread status on Android.
+- Idempotent: marking the same notification read twice has no additional effect.
+- Irreversible: once marked read, a notification cannot be unmarked.
+
+**Schema:**
+```sql
+CREATE TABLE notifications_delivered (
+  user_id TEXT NOT NULL,
+  location TEXT NOT NULL,
+  notification_id TEXT NOT NULL,
+  delivered_at TEXT NOT NULL,
+  read_at TEXT,  -- NULL = unread, ISO 8601 timestamp = read at that time
+  source_app TEXT,
+  title TEXT,
+  body TEXT,
+  metadata TEXT,
+  
+  UNIQUE(user_id, location, notification_id),
+  INDEX(user_id, location, read_at, delivered_at)
+);
+```
+
+**Queries:**
+```sql
+-- Unread notifications for a user+location, newest first
+SELECT * FROM notifications_delivered
+WHERE user_id = ? AND location = ? AND read_at IS NULL
+ORDER BY delivered_at DESC;
+
+-- Mark as read
+UPDATE notifications_delivered
+SET read_at = NOW()
+WHERE user_id = ? AND location = ? AND notification_id = ?;
+```
+
+**Advantages:**
+- Simple schema (one table, clear semantics).
+- Matches user expectations: "I saw this on my phone, let me ignore it on my desktop."
+- Easy to test: each location is independent.
+- Easy to scale to new locations: add support for `location='watch-os'` or `location='desktop-win'` without schema changes.
+- Backend-agnostic: works with SQLite, PostgreSQL, DynamoDB, etc.
+
+**Disadvantages:**
+- Users might need to mark the same notification read on multiple devices (extra clicks).
+- Potential for notification fatigue if a user forgets to read on one device.
+
+### Approach B: Global Read Status (Alternative, Not Selected)
+
+**Semantics:**
+- Marking a notification read on any device marks it read everywhere.
+- One read_at timestamp per (user_id, notification_id) pair.
+- Requires tracking which locations have delivered the notification (separate table).
+
+**Schema:**
+```sql
+CREATE TABLE notifications (
+  user_id TEXT NOT NULL,
+  notification_id TEXT NOT NULL,
+  first_delivered_at TEXT NOT NULL,
+  read_at TEXT,  -- NULL = unread, ISO 8601 timestamp = read everywhere
+  source_app TEXT,
+  title TEXT,
+  body TEXT,
+  
+  UNIQUE(user_id, notification_id),
+  INDEX(user_id, read_at, first_delivered_at)
+);
+
+CREATE TABLE delivery_locations (
+  user_id TEXT NOT NULL,
+  notification_id TEXT NOT NULL,
+  location TEXT NOT NULL,
+  delivered_at TEXT NOT NULL,
+  
+  UNIQUE(user_id, notification_id, location),
+  FOREIGN KEY(user_id, notification_id) REFERENCES notifications(user_id, notification_id)
+);
+```
+
+**Advantages:**
+- Mark once, read everywhere: simpler user experience.
+- Fewer queries: one update touches all locations.
+- Less storage: one read_at per notification, not per location.
+
+**Disadvantages:**
+- More complex schema (two tables, foreign keys).
+- Does not match multi-device workflows: users expect independent read status per device.
+- Harder to extend: if you later want per-location read status, data migration is required.
+- Couples the notification-history service's logic more tightly.
+
+### Decision Rationale
+
+**Per-Location (Approach A) was selected because:**
+1. **Simpler schema** makes the notification-history service easier to specify, test, and regenerate.
+2. **Matches user mental models** for multi-device workflows (phone, desktop, watch may be used independently).
+3. **Forward-compatible** with future requirements (e.g., adding per-location notification preferences).
+4. **Deletion-safe**: the schema and service can be rewritten with confidence that semantics are stable.
+
+**If requirements change (e.g., users demand global read status):**
+- Add a new `read_at` column to the `notifications` table (no deletion of the per-location column).
+- Update the `MarkRead` logic to set both the per-location and global `read_at`.
+- Query logic can then check global `read_at` first (for older users/browsers), falling back to per-location.
+- This is a backward-compatible change that adds capability without breaking existing functionality.
+
+---
+
+## Implementation Phases
+
+### Phase 1: Core Persistence (Current)
+- [ ] Define `notification-delivery.v1` schema
+- [ ] Implement `notification-history` service with per-location read status
+- [ ] Update `delivery-service` to persist and serve mark-read
+- [ ] Update web frontend to fetch and display unread on load
+
+### Phase 2: Scaling (Future)
+- [ ] If unread counts grow large, add pagination to `Unread()` queries
+- [ ] If storage grows large, implement notification archival (older than 30 days)
+- [ ] If read latency becomes an issue, add read-status caching in the delivery service
+
+### Phase 3: Multi-Device Sync (Optional, If Requested)
+- [ ] Add global read status alongside per-location (dual-write strategy)
+- [ ] Provide user preference: "sync read status across devices" vs. "independent per device"
+- [ ] Migrate existing data when preference changes
+
