@@ -39,6 +39,7 @@
     <li><button class="nav-link" data-target="filter"><span class="bc-dot bc-matching"></span>filter-service</button></li>
     <li><button class="nav-link" data-target="rules"><span class="bc-dot bc-matching"></span>rule-api</button></li>
     <li><button class="nav-link" data-target="delivery"><span class="bc-dot bc-delivery"></span>delivery-service</button></li>
+    <li><button class="nav-link" data-target="history"><span class="bc-dot bc-delivery"></span>notification-history</button></li>
     <li><button class="nav-link" data-target="system-properties"><span class="bc-dot bc-meta"></span>System-wide properties</button></li>
   </ul>
 
@@ -342,7 +343,8 @@
     <h2>pkg/contracts</h2>
     <p>These structs are the slow layer. Changing them requires a new schema version.</p>
 
-    <h3>notification.v1</h3>
+    <h3>notification.v1 (Notification Message)</h3>
+    <p>Notification that flows through the Capture → Matching → Delivery pipeline.</p>
     <pre><code class="language-go">type Notification struct {
     ID              string            `json:"id"`               // UUID v7, dedup key
     UserID          string            `json:"user_id"`          // set by ingestor; trusted downstream
@@ -367,7 +369,8 @@
       <li>Adding optional fields is backward-compatible. Removing/renaming fields requires <code>notification.v2</code>.</li>
     </ul>
 
-    <h3>Rule schema</h3>
+    <h3>rule.v1 (Rule Schema)</h3>
+    <p>Filter rule that controls which notifications are delivered to a user.</p>
     <pre><code class="language-go">type Rule struct {
     ID            string // UUID, stable identifier
     UserID        string // owner; "local" for MVP
@@ -389,34 +392,91 @@
     <p>No <code>Priority</code> field ever exists. When multiple rules match, specificity is derived purely from
        the rule's shape — see <button class="inline-link" data-target="invariants">INV-6</button>.</p>
 
-    <h3>rule-changed event</h3>
-    <pre><code class="language-go">type RuleChangedKind string
-const (
-    RuleCreated RuleChangedKind = "CREATED"
-    RuleUpdated RuleChangedKind = "UPDATED"
-    RuleDeleted RuleChangedKind = "DELETED"
-)
-
-type RuleChangedEvent struct {
-    EventID   string          `json:"event_id"`
-    Kind      RuleChangedKind `json:"kind"`
-    Rule      Rule            `json:"rule"`
-    ChangedAt time.Time       `json:"changed_at"`
+    <h3>rule-changed.v1 (Rule Lifecycle)</h3>
+    <p>Event published when a rule is created, updated, or deleted. Allows filter-service to reload rules and re-evaluate buffered notifications.</p>
+    <pre><code class="language-json">{
+  "event_id":  "UUID v7 — unique event identifier",
+  "kind":      "CREATED | UPDATED | DELETED — what happened to the rule",
+  "rule": {
+    "id":              "UUID — stable rule identifier",
+    "user_id":         "string — owner; 'local' for MVP",
+    "source_app":      "string — package name to match, or '*' for any",
+    "source_account":  "string — account within app, or '' for any",
+    "title":           "string — substring match on title, or '' for any"
+  },
+  "changed_at": "ISO 8601 — when the change occurred"
 }</code></pre>
+    <p><strong>Semantics:</strong></p>
+    <ul>
+      <li><code>kind</code> enum: <code>CREATED</code> (rule added), <code>UPDATED</code> (rule modified), <code>DELETED</code> (rule removed).</li>
+      <li>Published immediately after rule mutation succeeds in the database.</li>
+      <li>Allows filter-service to reload rules without polling.</li>
+      <li>Invariant 5: changes take effect for future notifications only (not retroactive).</li>
+    </ul>
 
-    <h3>Pub/Sub topic names — the boundary</h3>
+    <h3>notification-delivery.v1 (Delivery Status & Persistence)</h3>
+    <p>Persisted record of a notification delivered to a user + location. Stored in the notification-history service.</p>
+    <pre><code class="language-json">{
+  "user_id":           "string — owner of this notification",
+  "location":          "string — where delivered (browser-web, app-android, desktop-macos, etc)",
+  "notification_id":   "UUID — references notification.v1",
+  "delivered_at":      "ISO 8601 — when first delivered to this user+location",
+  "read_at":           "ISO 8601 or null — when marked as read, null if unread",
+  "source_app":        "string — copy of notification source_app for query performance",
+  "title":             "string — copy of notification title",
+  "body":              "string — copy of notification body",
+  "metadata":          "object — arbitrary JSON, for extensibility"
+}</code></pre>
+    <p><strong>Semantics:</strong></p>
+    <ul>
+      <li>Keyed by <code>(user_id, location, notification_id)</code> — unique delivery per location.</li>
+      <li><code>read_at</code> is immutable once set. Idempotent: setting twice is safe.</li>
+      <li>Each location tracks independent read status in storage.</li>
+      <li>When <code>read_at</code> is updated, <code>notification-read</code> event (see below) is published.</li>
+    </ul>
+
+    <h3>notification-read.v1 (Cross-Device Sync)</h3>
+    <p>Event published when a notification is marked as read. Allows all connected clients for that user to hide it immediately.</p>
+    <pre><code class="language-json">{
+  "event_id":        "UUID v7 — unique event identifier",
+  "user_id":         "string — the user who marked it read",
+  "notification_id": "UUID — which notification was marked read",
+  "location":        "string — which location initiated (browser-web, app-android, etc)",
+  "read_at":         "ISO 8601 — when it was marked read"
+}</code></pre>
+    <p><strong>Semantics:</strong></p>
+    <ul>
+      <li>Published to <code>notifications.read</code> topic with <code>user_id</code> as a Pub/Sub message attribute.</li>
+      <li>Idempotent: multiple MarkRead calls with same args publish exactly one event.</li>
+      <li>Enables Invariant 10: all connected clients for that user receive the event and immediately hide the notification.</li>
+    </ul>
+
+    <h3>Pub/Sub topics and events — the boundary</h3>
     <table class="scope-table">
-      <thead><tr><th>Topic</th><th>Marks</th><th>Published by</th></tr></thead>
+      <thead><tr><th>Topic</th><th>Message Schema</th><th>Boundary</th><th>Published by</th></tr></thead>
       <tbody>
-        <tr><td><code>notifications.captured</code></td><td>Capture → Matching boundary</td><td>ingestor</td></tr>
-        <tr><td><code>notifications.matched</code></td><td>Matching → Delivery boundary</td><td>filter-service</td></tr>
-        <tr><td><code>notifications.discarded</code></td><td>Matching context — ruled out</td><td>filter-service</td></tr>
-        <tr><td><code>rules.changed</code></td><td>Matching context — RuleChangedEvent stream</td><td>rule-api</td></tr>
+        <tr><td><code>notifications.captured</code></td><td><code>notification.v1</code></td><td>Capture → Matching</td><td>ingestor</td></tr>
+        <tr><td><code>notifications.matched</code></td><td><code>notification.v1</code></td><td>Matching → Delivery</td><td>filter-service</td></tr>
+        <tr><td><code>notifications.discarded</code></td><td><code>notification.v1</code></td><td>Matching context</td><td>filter-service</td></tr>
+        <tr><td><code>rules.changed</code></td><td><code>rule-changed.v1</code></td><td>Matching context</td><td>rule-api</td></tr>
+        <tr><td><code>notifications.read</code></td><td><code>notification-read.v1</code></td><td>Delivery context</td><td>notification-history</td></tr>
       </tbody>
     </table>
     <div class="spec-box">
-      <p>Only the filter-service may publish to <code>notifications.matched</code> or <code>notifications.discarded</code>.
-         Any service that publishes to or subscribes from these topics is implicitly depending on this contract.</p>
+      <p><strong>Semantics:</strong></p>
+      <ul>
+        <li>All schemas are versioned for backward compatibility.</li>
+        <li>Adding optional fields is safe; removing or renaming fields requires a new schema version.</li>
+        <li>Each topic has exactly one designated publisher (see Publishing constraints below).</li>
+        <li>Services may subscribe to any topic; they depend on the message schema contract.</li>
+      </ul>
+      <p><strong>Publishing constraints:</strong></p>
+      <ul>
+        <li>Only <code>notification-ingestor</code> may publish to <code>notifications.captured</code>.</li>
+        <li>Only <code>filter-service</code> may publish to <code>notifications.matched</code> or <code>notifications.discarded</code>.</li>
+        <li>Only <code>rule-api</code> may publish to <code>rules.changed</code>.</li>
+        <li>Only <code>notification-history</code> may publish to <code>notifications.read</code>.</li>
+      </ul>
     </div>
   </section>
 
@@ -577,6 +637,32 @@ type RuleChangedEvent struct {
       </ol>
       <p>These two dimensions combine. No user-assigned priority number ever exists — specificity is always derived
          from the rule's shape alone.</p>
+    </div>
+    <div class="behavior-card">
+      <header>INV-7 — Delivered notifications persist across client disconnects</header>
+      <p>A notification delivered to a user+location persists in storage. When a client reconnects, it receives
+         all unread notifications delivered since the last connection, plus new live notifications. Notifications
+         do not disappear until explicitly marked as read.</p>
+    </div>
+    <div class="behavior-card">
+      <header>INV-8 — Read status is per-location in storage</header>
+      <p>Each notification has a read_at timestamp stored per-location (browser-web, app-android, etc). This allows
+         each device to independently query and display correct state. However, read events (INV-10) broadcast
+         changes in real-time, so marking a notification read on one device immediately hides it on all connected
+         devices without requiring a refresh or extra clicks.</p>
+    </div>
+    <div class="behavior-card">
+      <header>INV-9 — Marking as read is idempotent and irreversible</header>
+      <p>Marking a notification as read is idempotent: calling the operation multiple times is safe and produces
+         the same result as calling once. Once marked read, a notification cannot be unmarked. Read operations
+         set a timestamp and are never undone. Every successful MarkRead publishes a notification-read event.</p>
+    </div>
+    <div class="behavior-card">
+      <header>INV-10 — Read events broadcast to all locations</header>
+      <p>When any location marks a notification read, a notification-read event is published to the
+         <code>notifications.read</code> topic with <code>user_id</code> as a message attribute. All connected
+         clients for that user receive the event and immediately hide the notification from their UI, providing
+         real-time cross-device synchronization without requiring global database-level read status.</p>
     </div>
   </section>
 
@@ -1006,6 +1092,142 @@ func TestProperty_DeduplicationByID(t *testing.T) {
         <p>Guaranteed delivery across reconnects would need a durable per-client queue (Redis, or a Pub/Sub
            subscription per client).</p>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ NOTIFICATION-HISTORY ============ -->
+  <section class="pane" id="pane-history">
+    <p class="pane-kicker bc-delivery">Delivery bounded context</p>
+    <h2>notification-history</h2>
+    <div class="spec-box">
+      <p>Persists all notifications delivered to a user+location pair, tracks read status per location,
+         and provides queries for unread notifications. Implements idempotent Record and MarkRead operations.</p>
+    </div>
+    <div class="invariant-tags"><span class="tag">INV-7</span><span class="tag">INV-8</span><span class="tag">INV-9</span></div>
+
+    <h3>Behavioral examples</h3>
+    <div class="behavior-card">
+      <header>Delivered notification persists across browser refresh</header>
+      <ol>
+        <li>When a notification is delivered to a user+location (e.g., browser-web)</li>
+        <li>And the client disconnects and reconnects</li>
+        <li class="then">Then the notification appears in the unread list if not yet marked read</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Marking a notification as read removes it from unread</header>
+      <ol>
+        <li>Given a notification is in the unread list</li>
+        <li>When I POST to <code>/notifications/{id}/read</code></li>
+        <li class="then">Then the notification is absent from the unread list and read_at is set to current time</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Read status is per-location</header>
+      <ol>
+        <li>Given a notification is delivered to both web and Android</li>
+        <li>When I mark it read on web only</li>
+        <li class="then">Then it is absent from web unread, but still present in Android unread</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Mark-read is idempotent</header>
+      <ol>
+        <li>When I mark a notification read multiple times</li>
+        <li class="then">Then the result is the same as marking it once — no error, no duplicates</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Record is idempotent</header>
+      <ol>
+        <li>When the same notification is recorded twice for the same user+location</li>
+        <li class="then">Then only one row exists; the second call is ignored</li>
+      </ol>
+    </div>
+
+    <h3>Schema</h3>
+    <pre><code class="language-sql">CREATE TABLE notifications_delivered (
+  user_id TEXT NOT NULL,
+  location TEXT NOT NULL,                -- browser-web, app-android, desktop-macos, etc
+  notification_id TEXT NOT NULL,
+  delivered_at TEXT NOT NULL,            -- ISO 8601, when first delivered
+  read_at TEXT,                          -- ISO 8601 when marked read, NULL = unread
+  source_app TEXT,
+  title TEXT,
+  body TEXT,
+  metadata TEXT,                         -- arbitrary JSON
+
+  UNIQUE(user_id, location, notification_id),
+  INDEX(user_id, location, read_at, delivered_at)
+);</code></pre>
+
+    <h3>Contract test</h3>
+    <pre><code class="language-go">func TestContract_NotificationPersistsAcrossRefresh(t *testing.T) {
+    clearAllRules(t)
+    setUserRule(t, Rule{SourceApp: "com.gmail"})
+
+    // Deliver a notification
+    id := publishViaHTTP(t, Notification{SourceApp: "com.gmail", Title: "Email"})
+    client := subscribeSSE(t)
+    waitForSSEEventWithID(t, client.events, id, 5*time.Second)
+    client.Close()
+
+    // Simulate refresh: verify notification is still unread
+    unread := getUnreadNotifications(t)
+    if !contains(unread, id) {
+        t.Fatalf("notification %s did not persist after reconnect", id)
+    }
+
+    // Mark as read
+    markNotificationRead(t, id)
+    unread = getUnreadNotifications(t)
+    if contains(unread, id) {
+        t.Fatalf("notification %s still in unread after marking read", id)
+    }
+}</code></pre>
+
+    <h3>Provenance</h3>
+    <div class="provenance-grid">
+      <div class="prov-why">
+        <strong>Why it exists</strong>
+        <p>Users expect notifications to survive browser refresh or app restart. Read status must persist so the
+           user doesn't see the same notification twice. Per-location read status allows independent interaction
+           across multiple connected devices via Pub/Sub events. When one device marks a notification read,
+           all other connected clients immediately receive the event and hide it from their UI.</p>
+      </div>
+      <div class="prov-rejected">
+        <strong>Rejected alternatives</strong>
+        <p><em>In-memory only:</em> loses data on disconnect. <em>Global read status:</em> requires syncing across
+           all devices, more complexity without matching user expectations. <em>Forever retention:</em> grows
+           unbounded; clean up notifications after 30 days as a background task.</p>
+      </div>
+      <div class="prov-assumptions">
+        <strong>Active assumptions</strong>
+        <p>Users have at most ~10k unread notifications. SQLite is sufficient for a single-instance deployment.
+           If scaling to distributed deployments, migrate to PostgreSQL. Read queries are common; archive queries
+           are rare.</p>
+      </div>
+      <div class="prov-wrong">
+        <strong>What would make this wrong</strong>
+        <p>If users demand global read status (mark once, read everywhere), add a dual-write strategy with
+           per-location and global read_at. If storage grows beyond SQLite's practical limits (100GB+), implement
+           archival or migrate to PostgreSQL.</p>
+      </div>
+    </div>
+
+    <h3>Cross-device synchronization via notification-read events (Invariant 10)</h3>
+    <p>When a notification is marked as read, <code>notification-history</code> publishes a <code>notification-read.v1</code>
+       event to the <code>notifications.read</code> Pub/Sub topic (see <button class="inline-link" data-target="contracts">Contracts</button>
+       for full schema).</p>
+    <p>All SSE connections for that user subscribe to this topic filtered by <code>user_id</code>. When an event
+       arrives, the client receives it via SSE and immediately removes the notification from the DOM — providing
+       real-time cross-device synchronization without requiring refresh.</p>
+    <div class="callout">
+      <header>Per-location storage + event-driven broadcast</header>
+      <p>Storage layer tracks independent read_at per location (browser-web, app-android). But Invariant 10 events
+         synchronize UX immediately across all connected clients. If a device goes offline and reconnects later,
+         it queries the history service and sees the correct read_at timestamp — eventual consistency without
+         requiring global database-level read status.</p>
     </div>
   </section>
 
