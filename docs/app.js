@@ -1,7 +1,7 @@
 (function () {
   const ORDER = [
     "overview", "scope", "architecture", "repo", "contracts", "auth",
-    "invariants", "ingestor", "filter", "rules", "delivery",
+    "invariants", "ingestor", "filter", "rules", "delivery", "history",
     "system-properties", "implementation-order", "dev-env", "live-evals",
     "dod", "open-questions", "appendix",
   ];
@@ -18,6 +18,7 @@
     filter: "filter-service",
     rules: "rule-api",
     delivery: "delivery-service",
+    history: "notification-history & read events",
     "system-properties": "System-wide properties",
     "implementation-order": "Implementation order",
     "dev-env": "Dev environment",
