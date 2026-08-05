@@ -39,6 +39,7 @@
     <li><button class="nav-link" data-target="filter"><span class="bc-dot bc-matching"></span>filter-service</button></li>
     <li><button class="nav-link" data-target="rules"><span class="bc-dot bc-matching"></span>rule-api</button></li>
     <li><button class="nav-link" data-target="delivery"><span class="bc-dot bc-delivery"></span>delivery-service</button></li>
+    <li><button class="nav-link" data-target="history"><span class="bc-dot bc-delivery"></span>notification-history</button></li>
     <li><button class="nav-link" data-target="system-properties"><span class="bc-dot bc-meta"></span>System-wide properties</button></li>
   </ul>
 
@@ -578,6 +579,24 @@ type RuleChangedEvent struct {
       <p>These two dimensions combine. No user-assigned priority number ever exists — specificity is always derived
          from the rule's shape alone.</p>
     </div>
+    <div class="behavior-card">
+      <header>INV-7 — Delivered notifications persist across client disconnects</header>
+      <p>A notification delivered to a user+location persists in storage. When a client reconnects, it receives
+         all unread notifications delivered since the last connection, plus new live notifications. Notifications
+         do not disappear until explicitly marked as read.</p>
+    </div>
+    <div class="behavior-card">
+      <header>INV-8 — Read status is per-location</header>
+      <p>Each notification has independent read status for each location (browser-web, app-android, etc). Marking
+         a notification read on web does not affect its read status on Android. Users can read independently on
+         each device.</p>
+    </div>
+    <div class="behavior-card">
+      <header>INV-9 — Marking as read is idempotent and irreversible</header>
+      <p>Marking a notification as read is idempotent: calling the operation multiple times is safe and produces
+         the same result as calling once. Once marked read, a notification cannot be unmarked. Read operations
+         set a timestamp and are never undone.</p>
+    </div>
   </section>
 
   <!-- ============ INGESTOR ============ -->
@@ -1005,6 +1024,126 @@ func TestProperty_DeduplicationByID(t *testing.T) {
         <strong>What would make this wrong</strong>
         <p>Guaranteed delivery across reconnects would need a durable per-client queue (Redis, or a Pub/Sub
            subscription per client).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NOTIFICATION-HISTORY ============ -->
+  <section class="pane" id="pane-history">
+    <p class="pane-kicker bc-delivery">Delivery bounded context</p>
+    <h2>notification-history</h2>
+    <div class="spec-box">
+      <p>Persists all notifications delivered to a user+location pair, tracks read status per location,
+         and provides queries for unread notifications. Implements idempotent Record and MarkRead operations.</p>
+    </div>
+    <div class="invariant-tags"><span class="tag">INV-7</span><span class="tag">INV-8</span><span class="tag">INV-9</span></div>
+
+    <h3>Behavioral examples</h3>
+    <div class="behavior-card">
+      <header>Delivered notification persists across browser refresh</header>
+      <ol>
+        <li>When a notification is delivered to a user+location (e.g., browser-web)</li>
+        <li>And the client disconnects and reconnects</li>
+        <li class="then">Then the notification appears in the unread list if not yet marked read</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Marking a notification as read removes it from unread</header>
+      <ol>
+        <li>Given a notification is in the unread list</li>
+        <li>When I POST to <code>/notifications/{id}/read</code></li>
+        <li class="then">Then the notification is absent from the unread list and read_at is set to current time</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Read status is per-location</header>
+      <ol>
+        <li>Given a notification is delivered to both web and Android</li>
+        <li>When I mark it read on web only</li>
+        <li class="then">Then it is absent from web unread, but still present in Android unread</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Mark-read is idempotent</header>
+      <ol>
+        <li>When I mark a notification read multiple times</li>
+        <li class="then">Then the result is the same as marking it once — no error, no duplicates</li>
+      </ol>
+    </div>
+    <div class="behavior-card">
+      <header>Record is idempotent</header>
+      <ol>
+        <li>When the same notification is recorded twice for the same user+location</li>
+        <li class="then">Then only one row exists; the second call is ignored</li>
+      </ol>
+    </div>
+
+    <h3>Schema</h3>
+    <pre><code class="language-sql">CREATE TABLE notifications_delivered (
+  user_id TEXT NOT NULL,
+  location TEXT NOT NULL,                -- browser-web, app-android, desktop-macos, etc
+  notification_id TEXT NOT NULL,
+  delivered_at TEXT NOT NULL,            -- ISO 8601, when first delivered
+  read_at TEXT,                          -- ISO 8601 when marked read, NULL = unread
+  source_app TEXT,
+  title TEXT,
+  body TEXT,
+  metadata TEXT,                         -- arbitrary JSON
+
+  UNIQUE(user_id, location, notification_id),
+  INDEX(user_id, location, read_at, delivered_at)
+);</code></pre>
+
+    <h3>Contract test</h3>
+    <pre><code class="language-go">func TestContract_NotificationPersistsAcrossRefresh(t *testing.T) {
+    clearAllRules(t)
+    setUserRule(t, Rule{SourceApp: "com.gmail"})
+
+    // Deliver a notification
+    id := publishViaHTTP(t, Notification{SourceApp: "com.gmail", Title: "Email"})
+    client := subscribeSSE(t)
+    waitForSSEEventWithID(t, client.events, id, 5*time.Second)
+    client.Close()
+
+    // Simulate refresh: verify notification is still unread
+    unread := getUnreadNotifications(t)
+    if !contains(unread, id) {
+        t.Fatalf("notification %s did not persist after reconnect", id)
+    }
+
+    // Mark as read
+    markNotificationRead(t, id)
+    unread = getUnreadNotifications(t)
+    if contains(unread, id) {
+        t.Fatalf("notification %s still in unread after marking read", id)
+    }
+}</code></pre>
+
+    <h3>Provenance</h3>
+    <div class="provenance-grid">
+      <div class="prov-why">
+        <strong>Why it exists</strong>
+        <p>Users expect notifications to survive browser refresh or app restart. Read status must persist so the
+           user doesn't see the same notification twice. Per-location read status allows independent interaction
+           on multiple devices (mark read on phone, keep unread on desktop).</p>
+      </div>
+      <div class="prov-rejected">
+        <strong>Rejected alternatives</strong>
+        <p><em>In-memory only:</em> loses data on disconnect. <em>Global read status:</em> requires syncing across
+           all devices, more complexity without matching user expectations. <em>Forever retention:</em> grows
+           unbounded; clean up notifications after 30 days as a background task.</p>
+      </div>
+      <div class="prov-assumptions">
+        <strong>Active assumptions</strong>
+        <p>Users have at most ~10k unread notifications. SQLite is sufficient for a single-instance deployment.
+           If scaling to distributed deployments, migrate to PostgreSQL. Read queries are common; archive queries
+           are rare.</p>
+      </div>
+      <div class="prov-wrong">
+        <strong>What would make this wrong</strong>
+        <p>If users demand global read status (mark once, read everywhere), add a dual-write strategy with
+           per-location and global read_at. If storage grows beyond SQLite's practical limits (100GB+), implement
+           archival or migrate to PostgreSQL.</p>
       </div>
     </div>
   </section>
