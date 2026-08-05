@@ -390,22 +390,29 @@
     <p>No <code>Priority</code> field ever exists. When multiple rules match, specificity is derived purely from
        the rule's shape — see <button class="inline-link" data-target="invariants">INV-6</button>.</p>
 
-    <h3>rule-changed event</h3>
-    <pre><code class="language-go">type RuleChangedKind string
-const (
-    RuleCreated RuleChangedKind = "CREATED"
-    RuleUpdated RuleChangedKind = "UPDATED"
-    RuleDeleted RuleChangedKind = "DELETED"
-)
-
-type RuleChangedEvent struct {
-    EventID   string          `json:"event_id"`
-    Kind      RuleChangedKind `json:"kind"`
-    Rule      Rule            `json:"rule"`
-    ChangedAt time.Time       `json:"changed_at"`
+    <h3>rule-changed.v1 (Rule Lifecycle)</h3>
+    <p>Event published when a rule is created, updated, or deleted. Allows filter-service to reload rules and re-evaluate buffered notifications.</p>
+    <pre><code class="language-json">{
+  "event_id":  "UUID v7 — unique event identifier",
+  "kind":      "CREATED | UPDATED | DELETED — what happened to the rule",
+  "rule": {
+    "id":              "UUID — stable rule identifier",
+    "user_id":         "string — owner; 'local' for MVP",
+    "source_app":      "string — package name to match, or '*' for any",
+    "source_account":  "string — account within app, or '' for any",
+    "title":           "string — substring match on title, or '' for any"
+  },
+  "changed_at": "ISO 8601 — when the change occurred"
 }</code></pre>
+    <p><strong>Semantics:</strong></p>
+    <ul>
+      <li><code>kind</code> enum: <code>CREATED</code> (rule added), <code>UPDATED</code> (rule modified), <code>DELETED</code> (rule removed).</li>
+      <li>Published immediately after rule mutation succeeds in the database.</li>
+      <li>Allows filter-service to reload rules without polling.</li>
+      <li>Invariant 5: changes take effect for future notifications only (not retroactive).</li>
+    </ul>
 
-    <h3>notification-delivery.v1 (Persistence)</h3>
+    <h3>notification-delivery.v1 (Delivery Status & Persistence)</h3>
     <p>Persisted record of a notification delivered to a user + location. Stored in the notification-history service.</p>
     <pre><code class="language-json">{
   "user_id":           "string — owner of this notification",
@@ -444,16 +451,23 @@ type RuleChangedEvent struct {
 
     <h3>Pub/Sub topics and events — the boundary</h3>
     <table class="scope-table">
-      <thead><tr><th>Topic</th><th>Message Type</th><th>Boundary</th><th>Published by</th></tr></thead>
+      <thead><tr><th>Topic</th><th>Message Schema</th><th>Boundary</th><th>Published by</th></tr></thead>
       <tbody>
         <tr><td><code>notifications.captured</code></td><td><code>notification.v1</code></td><td>Capture → Matching</td><td>ingestor</td></tr>
         <tr><td><code>notifications.matched</code></td><td><code>notification.v1</code></td><td>Matching → Delivery</td><td>filter-service</td></tr>
         <tr><td><code>notifications.discarded</code></td><td><code>notification.v1</code></td><td>Matching context</td><td>filter-service</td></tr>
-        <tr><td><code>rules.changed</code></td><td><code>RuleChangedEvent</code></td><td>Matching context</td><td>rule-api</td></tr>
+        <tr><td><code>rules.changed</code></td><td><code>rule-changed.v1</code></td><td>Matching context</td><td>rule-api</td></tr>
         <tr><td><code>notifications.read</code></td><td><code>notification-read.v1</code></td><td>Delivery context</td><td>notification-history</td></tr>
       </tbody>
     </table>
     <div class="spec-box">
+      <p><strong>Semantics:</strong></p>
+      <ul>
+        <li>All schemas are versioned for backward compatibility.</li>
+        <li>Adding optional fields is safe; removing or renaming fields requires a new schema version.</li>
+        <li>Each topic has exactly one designated publisher (see Publishing constraints below).</li>
+        <li>Services may subscribe to any topic; they depend on the message schema contract.</li>
+      </ul>
       <p><strong>Publishing constraints:</strong></p>
       <ul>
         <li>Only <code>notification-ingestor</code> may publish to <code>notifications.captured</code>.</li>
