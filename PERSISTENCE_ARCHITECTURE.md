@@ -53,7 +53,7 @@ This requires:
 2. A notification is unread until the user explicitly marks it as read via the mark-read endpoint.
 3. Marking a notification as read is idempotent — marking it twice has the same effect as once.
 4. When a client reconnects, it receives all unread notifications, in delivered order (newest first or oldest first, configurable).
-5. A notification marked as read on one location (e.g. web) remains unread on other locations (e.g. Android app). Read status is per-location.
+5. Read status is per-location in storage (web and Android each have independent read_at timestamps). However, when a notification is marked read on one location, a read event broadcasts to all connected clients for that user, causing immediate hiding (Invariant 10). If a device is offline when marked read elsewhere, it will see the correct read_at when reconnected.
 6. Rule changes do not affect already-delivered notifications' read status or visibility.
 
 ### MID LAYER — Changes Monthly
@@ -80,9 +80,9 @@ This requires:
 
 ---
 
-### Approach A: Per-Location Read Status (Recommended)
+### Approach A: Per-Location Read Status + Event Broadcasting (Recommended)
 
-**Philosophy:** Read status is per-location. Marking a notification read on web doesn't affect its read status in the Android app.
+**Philosophy:** Read status is per-location in storage, but read events broadcast changes in real-time to all connected clients (Invariant 10). Storage stays simple while UX synchronizes immediately.
 
 ```
 Delivery Service (8082)
@@ -435,7 +435,7 @@ func TestContract_MarkedReadNotificationHidden(t *testing.T) {
   }
 }
 
-// Read status is per-location — reading on web doesn't affect Android.
+// Read status is per-location in storage, but events broadcast to connected clients.
 func TestContract_ReadStatusPerLocation(t *testing.T) {
   n := newTestNotification("com.google.gmail", "New message")
   n.SetID("test-123")

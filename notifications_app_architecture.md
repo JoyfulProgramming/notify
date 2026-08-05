@@ -234,7 +234,7 @@ func TestContract_MarkReadRemovesFromUnread(t *testing.T) {
     assertAbsentFromUnreadNotifications(t, id, 5*time.Second)
 }
 
-// Read status is per-location—reading on web does not affect Android.
+// Read status is per-location in storage, but events broadcast to connected clients.
 func TestContract_ReadStatusPerLocation(t *testing.T) {
     setUserRule(t, userID, Rule{SourceApp: "com.gmail", Action: DELIVER})
     id := publishNotification(t, Notification{SourceApp: "com.gmail", Title: "New email"})
