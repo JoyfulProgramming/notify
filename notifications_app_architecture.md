@@ -109,7 +109,7 @@ These are the boundaries that survive all code regenerations. They require the m
 **Contract (in plain language):**
 - Every notification that passes the filter service is recorded here, keyed by `(user_id, location, notification_id)`.
 - `read_at` is null until the user explicitly marks the notification as read. It is then set to the current timestamp.
-- Read status is independent per location. The same notification can be unread on web and read on Android.
+- Storage is per-location, but UX is synchronized via events. When one device marks read, all connected clients immediately hide it.
 - `delivered_at` is immutable and reflects when the notification first reached this user+location.
 - Duplicate Record calls (same user_id, location, notification_id) are idempotent — they do not create duplicate rows.
 - The `metadata` field stores raw `notification.v1` data as JSON for queryability and future evolution.
@@ -572,11 +572,11 @@ Why it exists:
 Rejected alternatives:
   In-memory only: loses data on disconnect, requires rebuilding from Pub/Sub
   buffer (limited history, not user-facing).
-  Global read status: synchronising read status across all devices adds
-  complexity. Per-location is simpler and matches user expectations
-  (mark read on phone, ignore on desktop).
+  Global read status in database: would require complex sync logic and cause
+  all devices to see read/unread in lockstep. Per-location storage + event
+  broadcasting (Invariant 10) achieves the same UX with simpler schema.
   Forever retention: storage and query performance degrade. Cleanup after
-  N days (e.g., 30) is acceptable per Invariant 7.
+  N days (e.g., 30) is acceptable.
 
 Active assumptions:
   Users have at most ~10k unread notifications at a time.
@@ -602,8 +602,9 @@ The architecture uses **per-location read status** (Approach A). This section do
 ### Approach A: Per-Location Read Status (Selected)
 
 **Semantics:**
-- Each notification has independent read status for each location (browser-web, app-android, etc.).
-- Marking a notification read on web does not affect its unread status on Android.
+- Storage: each notification has a read_at timestamp per-location (browser-web, app-android, etc.).
+- UX: when a notification is marked read on one location, a read event broadcasts to all other connected clients for that user, causing immediate hiding without refresh (Invariant 10).
+- If a device reconnects later (was offline), it queries the per-location read_at and sees the correct state.
 - Idempotent: marking the same notification read twice has no additional effect.
 - Irreversible: once marked read, a notification cannot be unmarked.
 
@@ -640,14 +641,15 @@ WHERE user_id = ? AND location = ? AND notification_id = ?;
 
 **Advantages:**
 - Simple schema (one table, clear semantics).
-- Matches user expectations: "I saw this on my phone, let me ignore it on my desktop."
-- Easy to test: each location is independent.
+- Real-time UX: read events broadcast to all connected devices, so marking read on phone hides it everywhere immediately (Invariant 10).
+- Eventual consistency: devices that reconnect later (were offline) query the per-location read_at and see correct state.
+- Easy to test: storage layer is per-location.
 - Easy to scale to new locations: add support for `location='watch-os'` or `location='desktop-win'` without schema changes.
 - Backend-agnostic: works with SQLite, PostgreSQL, DynamoDB, etc.
 
-**Disadvantages:**
-- Users might need to mark the same notification read on multiple devices (extra clicks).
-- Potential for notification fatigue if a user forgets to read on one device.
+**Trade-offs:**
+- Requires event-driven architecture (delivery-service must subscribe to notifications.read topic).
+- If Pub/Sub is down, read events don't broadcast, but storage remains consistent (eventual sync on reconnect).
 
 ### Approach B: Global Read Status (Alternative, Not Selected)
 
@@ -689,8 +691,8 @@ CREATE TABLE delivery_locations (
 
 **Disadvantages:**
 - More complex schema (two tables, foreign keys).
-- Does not match multi-device workflows: users expect independent read status per device.
-- Harder to extend: if you later want per-location read status, data migration is required.
+- Reduces flexibility: with Approach B + event broadcasting, all devices are forced to show/hide in sync, which doesn't allow offline-first scenarios where a device might want independent read state until it reconnects.
+- Harder to extend: if you later want per-location read status (e.g., for offline-first mobile apps), data migration is required.
 - Couples the notification-history service's logic more tightly.
 
 ### Decision Rationale
@@ -722,8 +724,10 @@ CREATE TABLE delivery_locations (
 - [ ] If storage grows large, implement notification archival (older than 30 days)
 - [ ] If read latency becomes an issue, add read-status caching in the delivery service
 
-### Phase 3: Multi-Device Sync (Optional, If Requested)
-- [ ] Add global read status alongside per-location (dual-write strategy)
-- [ ] Provide user preference: "sync read status across devices" vs. "independent per device"
-- [ ] Migrate existing data when preference changes
+### Phase 3: Enhanced Multi-Device Control (Optional, If Requested)
+
+Note: Real-time cross-device sync is already provided by Invariant 10 (read events). These are refinements:
+- [ ] Add per-device read preferences (e.g., "stay unread on this device even if read elsewhere")
+- [ ] Add global read status alongside per-location (dual-write strategy) if users demand true "all-or-nothing" read state
+- [ ] Implement read-status reconciliation for offline devices that accumulated local read state
 

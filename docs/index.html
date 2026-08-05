@@ -586,10 +586,11 @@ type RuleChangedEvent struct {
          do not disappear until explicitly marked as read.</p>
     </div>
     <div class="behavior-card">
-      <header>INV-8 — Read status is per-location</header>
-      <p>Each notification has independent read status for each location (browser-web, app-android, etc). Marking
-         a notification read on web does not affect its read status on Android. Users can read independently on
-         each device.</p>
+      <header>INV-8 — Read status is per-location in storage</header>
+      <p>Each notification has a read_at timestamp stored per-location (browser-web, app-android, etc). This allows
+         each device to independently query and display correct state. However, read events (INV-10) broadcast
+         changes in real-time, so marking a notification read on one device immediately hides it on all connected
+         devices without requiring a refresh or extra clicks.</p>
     </div>
     <div class="behavior-card">
       <header>INV-9 — Marking as read is idempotent and irreversible</header>
@@ -1132,7 +1133,8 @@ func TestProperty_DeduplicationByID(t *testing.T) {
         <strong>Why it exists</strong>
         <p>Users expect notifications to survive browser refresh or app restart. Read status must persist so the
            user doesn't see the same notification twice. Per-location read status allows independent interaction
-           on multiple devices (mark read on phone, keep unread on desktop).</p>
+           across multiple connected devices via Pub/Sub events. When one device marks a notification read,
+           all other connected clients immediately receive the event and hide it from their UI.</p>
       </div>
       <div class="prov-rejected">
         <strong>Rejected alternatives</strong>

@@ -129,12 +129,13 @@ CREATE TABLE notifications_delivered (
 ```
 
 **Why this approach:**
-- **Simple mental model:** a notification can be read on your phone but unread on your computer.
-- **Works with multiple clients:** web, Android, desktop can have independent read status.
-- **Minimal schema:** no need to track which devices exist or sync read status between them.
+- **Simple schema:** per-location read_at timestamp, no need to track devices or sync logic in storage.
+- **Works with multiple clients:** web, Android, desktop queries return correct state for each.
+- **Real-time UX via events:** read events broadcast immediately to all connected clients, so mark-read on phone hides it on all open browsers without extra clicks.
+- **Eventual consistency:** if a device reconnects later (offline), it queries the store and sees the read_at timestamp — correct state without double-reads.
 - **Deletable:** the notification-history service is a thin adapter — it's easy to rewrite the query logic or storage backend.
 
-**Trade-off:** Users might need to mark the same notification read on multiple devices. This is often intentional (e.g. "I saw this on my phone, but I'm ignoring it on my desktop").
+**Trade-off:** Storage layer is per-location, but events synchronize UX across locations. Requires event-driven architecture in delivery-service.
 
 ---
 
@@ -196,13 +197,14 @@ CREATE TABLE delivery_locations (
 
 ---
 
-## Recommended: Approach A (Per-Location)
+## Recommended: Approach A (Per-Location) + Event Broadcasting (Invariant 10)
 
 **Rationale:**
-1. Simpler schema — one table with clear semantics.
-2. Easier to test — each location's read status is independent.
-3. Matches user mental model — "I'll deal with this notification on my phone later, let me ignore it on web for now."
-4. Aligns with Phoenix Architecture — the service is small and the schema is stable; swapping implementations is easy.
+1. **Simpler schema** — one table with clear semantics. No need for complex sync logic in storage.
+2. **Real-time UX** — read events (notifications.read topic) broadcast immediately to all connected clients, so marking read on one device hides it on all open browsers without requiring refresh.
+3. **Eventual consistency** — if a device reconnects later (was offline), it queries the per-location read_at timestamp and sees the correct state, ensuring consistency even without event delivery.
+4. **True multi-device support** — storage is per-location (each device can have independent read_at), but UX is synchronized (events hide notifications immediately across devices).
+5. **Aligns with Phoenix Architecture** — the service is small and the schemas are stable; swapping storage backends or event implementations is easy.
 
 ---
 
