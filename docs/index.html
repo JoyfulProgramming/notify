@@ -39,7 +39,7 @@
     <li><button class="nav-link" data-target="filter"><span class="bc-dot bc-matching"></span>filter-service</button></li>
     <li><button class="nav-link" data-target="rules"><span class="bc-dot bc-matching"></span>rule-api</button></li>
     <li><button class="nav-link" data-target="delivery"><span class="bc-dot bc-delivery"></span>delivery-service</button></li>
-    <li><button class="nav-link" data-target="history"><span class="bc-dot bc-delivery"></span>notification-history &amp; read events</button></li>
+    <li><button class="nav-link" data-target="history"><span class="bc-dot bc-delivery"></span>notification-history</button></li>
     <li><button class="nav-link" data-target="system-properties"><span class="bc-dot bc-meta"></span>System-wide properties</button></li>
   </ul>
 
@@ -343,7 +343,8 @@
     <h2>pkg/contracts</h2>
     <p>These structs are the slow layer. Changing them requires a new schema version.</p>
 
-    <h3>notification.v1</h3>
+    <h3>notification.v1 (Notification Message)</h3>
+    <p>Notification that flows through the Capture → Matching → Delivery pipeline.</p>
     <pre><code class="language-go">type Notification struct {
     ID              string            `json:"id"`               // UUID v7, dedup key
     UserID          string            `json:"user_id"`          // set by ingestor; trusted downstream
@@ -368,7 +369,8 @@
       <li>Adding optional fields is backward-compatible. Removing/renaming fields requires <code>notification.v2</code>.</li>
     </ul>
 
-    <h3>Rule schema</h3>
+    <h3>rule.v1 (Rule Schema)</h3>
+    <p>Filter rule that controls which notifications are delivered to a user.</p>
     <pre><code class="language-go">type Rule struct {
     ID            string // UUID, stable identifier
     UserID        string // owner; "local" for MVP
@@ -1213,28 +1215,19 @@ func TestProperty_DeduplicationByID(t *testing.T) {
       </div>
     </div>
 
-    <h3>Cross-device synchronization: notification-read event</h3>
-    <div class="spec-box">
-      <p>When notification-history marks a notification as read, it publishes a <code>notification-read</code> event
-         to the <code>notifications.read</code> Pub/Sub topic. All connected SSE clients for that user receive the
-         event and immediately hide the notification from their display.</p>
-    </div>
-    <pre><code class="language-json">{
-  "event_id":        "UUID v7 — unique event identifier",
-  "user_id":         "string — the user who marked it read",
-  "notification_id": "UUID — which notification was marked read",
-  "location":        "string — which location initiated (browser-web, app-android, etc)",
-  "read_at":         "ISO 8601 — when it was marked read"
-}</code></pre>
-    <p><strong>Pub/Sub attributes:</strong> <code>user_id</code> (used for per-user subscription filtering)</p>
-    <p><strong>Delivery model:</strong> Each SSE connection subscribes to <code>notifications.read</code> filtered by
-       its <code>user_id</code>. When a read event arrives, the client removes the notification from the DOM.</p>
+    <h3>Cross-device synchronization via notification-read events (Invariant 10)</h3>
+    <p>When a notification is marked as read, <code>notification-history</code> publishes a <code>notification-read.v1</code>
+       event to the <code>notifications.read</code> Pub/Sub topic (see <button class="inline-link" data-target="contracts">Contracts</button>
+       for full schema).</p>
+    <p>All SSE connections for that user subscribe to this topic filtered by <code>user_id</code>. When an event
+       arrives, the client receives it via SSE and immediately removes the notification from the DOM — providing
+       real-time cross-device synchronization without requiring refresh.</p>
     <div class="callout">
-      <header>Why per-location storage + event-driven broadcast?</header>
-      <p>This design keeps the storage simple (per-location read status) while providing real-time cross-device UX.
-         If a user opens their Android phone hours later, they query the notification-history service and see the
-         read_at timestamp — the system is consistent. But for connected devices, the event provides immediate
-         feedback without them having to refresh.</p>
+      <header>Per-location storage + event-driven broadcast</header>
+      <p>Storage layer tracks independent read_at per location (browser-web, app-android). But Invariant 10 events
+         synchronize UX immediately across all connected clients. If a device goes offline and reconnects later,
+         it queries the history service and sees the correct read_at timestamp — eventual consistency without
+         requiring global database-level read status.</p>
     </div>
   </section>
 
