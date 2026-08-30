@@ -349,7 +349,28 @@
               "title": "ProjectRosterView",
               "fields": [
                 {
-                  "name": "Hey"
+                  "name": "projectId",
+                  "example": "8b1e7f2a-0000-4000-8000-000000000002"
+                },
+                {
+                  "name": "number",
+                  "example": "2"
+                },
+                {
+                  "name": "shorthand",
+                  "example": "2M"
+                },
+                {
+                  "name": "name",
+                  "example": "Mum"
+                },
+                {
+                  "name": "colour",
+                  "example": "#be185d"
+                },
+                {
+                  "name": "slotsRemaining",
+                  "example": "4"
                 }
               ]
             }
@@ -365,7 +386,7 @@
       ]
     }
   },
-  "hash": "g76ns9",
-  "timestamp": 1788099197871,
+  "hash": "81afh2",
+  "timestamp": 1788099230032,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
