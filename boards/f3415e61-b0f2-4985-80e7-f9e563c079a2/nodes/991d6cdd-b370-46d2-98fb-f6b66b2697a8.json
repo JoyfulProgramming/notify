@@ -37,24 +37,6 @@
         "generated": true,
         "subfields": [],
         "cardinality": "Single"
-      },
-      {
-        "name": "name",
-        "type": "String",
-        "example": "Mum",
-        "mapping": "CreateProject.name",
-        "generated": false,
-        "subfields": [],
-        "cardinality": "Single"
-      },
-      {
-        "name": "colour",
-        "type": "String",
-        "example": "#be185d",
-        "mapping": "derived:autoAssignColour()",
-        "generated": true,
-        "subfields": [],
-        "cardinality": "Single"
       }
     ],
     "compact": true,
@@ -63,7 +45,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "1emhkkq",
-  "timestamp": 1788099516817,
+  "hash": "1hidsjz",
+  "timestamp": 1788099520827,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
