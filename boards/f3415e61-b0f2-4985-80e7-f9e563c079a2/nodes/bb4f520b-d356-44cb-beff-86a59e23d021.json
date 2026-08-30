@@ -108,7 +108,7 @@
         {
           "id": "a57c1746-a84c-45dc-9a11-13fba82074d1",
           "width": 450,
-          "flowEnd": true
+          "flowEnd": false
         },
         {
           "id": "83c20443-3d8c-4d17-8809-2f288d819a2b",
@@ -118,6 +118,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1788099394144,
+  "timestamp": 1788099400415,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
