@@ -339,11 +339,33 @@
               "slots_remaining": "0"
             }
           ]
+        },
+        {
+          "id": "41c1946c-c2a3-452e-8cd0-2561157cceb4",
+          "then": [
+            {
+              "id": "3e5ffa8f-f657-4bc7-bda0-a02ce4c156c4",
+              "type": "READMODEL",
+              "title": "ProjectRosterView",
+              "fields": [
+                {
+                  "name": "Hey"
+                }
+              ]
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Scenario #4",
+          "context": [],
+          "examples": [],
+          "expectError": false,
+          "expectEmptyList": false
         }
       ]
     }
   },
-  "hash": "13j1c7k",
-  "timestamp": 1756531800000,
-  "userId": null
+  "hash": "g76ns9",
+  "timestamp": 1788099197871,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
