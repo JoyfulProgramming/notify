@@ -19,15 +19,6 @@
         "generated": true,
         "subfields": [],
         "cardinality": "Single"
-      },
-      {
-        "name": "number",
-        "type": "Number",
-        "example": "2",
-        "mapping": "derived:nextAvailableSlot()",
-        "generated": true,
-        "subfields": [],
-        "cardinality": "Single"
       }
     ],
     "compact": true,
@@ -36,7 +27,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "r5dwhn",
-  "timestamp": 1788099523233,
+  "hash": "1be519g",
+  "timestamp": 1788099525007,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
