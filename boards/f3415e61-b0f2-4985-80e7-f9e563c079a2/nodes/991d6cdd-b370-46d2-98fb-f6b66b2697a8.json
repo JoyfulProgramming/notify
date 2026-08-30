@@ -28,15 +28,6 @@
         "generated": true,
         "subfields": [],
         "cardinality": "Single"
-      },
-      {
-        "name": "shorthand",
-        "type": "String",
-        "example": "2M",
-        "mapping": "derived:number+name[0]",
-        "generated": true,
-        "subfields": [],
-        "cardinality": "Single"
       }
     ],
     "compact": true,
@@ -45,7 +36,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "1hidsjz",
-  "timestamp": 1788099520827,
+  "hash": "r5dwhn",
+  "timestamp": 1788099523233,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
