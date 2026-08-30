@@ -10,24 +10,14 @@
   "meta": {
     "type": "READMODEL",
     "title": "NewReadModel",
-    "fields": [
-      {
-        "name": "projectId",
-        "type": "UUID",
-        "example": "8b1e7f2a-0000-4000-8000-000000000002",
-        "mapping": "derived:uuid()",
-        "generated": true,
-        "subfields": [],
-        "cardinality": "Single"
-      }
-    ],
+    "fields": [],
     "compact": true,
     "context": "INTERNAL",
     "listElement": true,
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "1be519g",
-  "timestamp": 1788099525007,
+  "hash": "5s5bd1",
+  "timestamp": 1788099526966,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
