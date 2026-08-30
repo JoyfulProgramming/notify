@@ -2,13 +2,11 @@
   "id": "b5783c4e-103c-43f0-b823-8206ba704137",
   "type": "html_screen",
   "position": {
-    "x": 0,
-    "y": 0
+    "x": 105,
+    "y": 145
   },
   "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
-  "data": {
-    "backgroundColor": "#ffffff"
-  },
+  "data": {},
   "meta": {
     "type": "HTML_SCREEN",
     "pages": [
@@ -46,5 +44,7 @@
       }
     ]
   },
-  "hash": "tdfsu"
+  "hash": "tdfsu",
+  "timestamp": 1788098487824,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
