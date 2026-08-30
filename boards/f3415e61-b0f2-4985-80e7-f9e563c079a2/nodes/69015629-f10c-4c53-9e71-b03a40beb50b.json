@@ -1,0 +1,18 @@
+{
+  "id": "69015629-f10c-4c53-9e71-b03a40beb50b",
+  "type": "markdown",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "586e58f7-7e7a-4fbd-bef6-fe1b4771028a",
+  "data": {
+    "title": "OPEN QUESTION - what happens to sender/group rules pointing at a deleted project?"
+  },
+  "meta": {
+    "type": "MARKDOWN",
+    "title": "RESOLVED - rules cascade-delete, with a preview first",
+    "description": "## Resolved\n\nDeletion cascades: any Sender Rule pointing at the project is deleted along with it, and future signals that would have matched those rules become unassigned again.\n\nOn this chapter: ProjectDeletionImpactView (state-view, between ProjectDetailView and DeleteProject) previews the rules that will be deleted and illustrative examples of the notifications they've matched, before the user confirms.\n\nOn the 'Assign Signal to Project' timeline: ProjectDeleted is replayed there and, together with Sender Rule Created, feeds a new 'Rules Pending Deletion' read model. The 'Delete Rules For Deleted Project' automation reads it and issues DeleteSenderRule for each matching rule, producing Sender Rule Deleted. That event folds into Sender Rules View (removing the rule), so Auto-Assign Signal — which reads Sender Rules View — stops matching those senders/groups immediately. No further open question here."
+  },
+  "hash": "7kzy51"
+}

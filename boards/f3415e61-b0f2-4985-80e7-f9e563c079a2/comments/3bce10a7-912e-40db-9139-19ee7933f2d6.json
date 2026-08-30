@@ -1,0 +1,11 @@
+{
+  "id": "3bce10a7-912e-40db-9139-19ee7933f2d6",
+  "nodeId": "82584c29-da3b-4bd9-86bb-baf3f800d835",
+  "boardId": "f3415e61-b0f2-4985-80e7-f9e563c079a2",
+  "text": "TASK: Scenario \"Reassign a previously-assigned signal to a different project\" (id 5e1a1000-0000-4000-8000-000000000003) has a data flaw — its example only sets project_id (1W) with nothing distinguishing the prior assignment, so it reads as reassigning to the same project. It has been superseded by \"Reassign a previously-assigned signal to a different project (corrected)\" (id ...0006), which adds previous_project_id: 2M alongside project_id: 1W. Please delete this scenario manually in the UI — the API has no working delete/update for individual scenarios (node:changed/node:deleted on this SCENARIO node both return 500).",
+  "type": "TASK",
+  "timestamp": 1788066296022,
+  "resolved": false,
+  "agentRequest": false,
+  "author": "agent"
+}

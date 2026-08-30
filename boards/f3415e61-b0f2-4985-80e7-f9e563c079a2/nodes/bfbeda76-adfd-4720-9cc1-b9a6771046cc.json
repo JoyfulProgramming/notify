@@ -1,0 +1,15 @@
+{
+  "id": "bfbeda76-adfd-4720-9cc1-b9a6771046cc",
+  "type": "slice_border",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "9c176934-804e-4504-9c33-73c331b8f608",
+    "title": "Show Signals"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "title": "Show Signals"
+  },
+  "hash": "2n7km2"
+}

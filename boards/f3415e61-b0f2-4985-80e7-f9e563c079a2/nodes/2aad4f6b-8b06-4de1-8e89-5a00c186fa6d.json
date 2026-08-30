@@ -1,0 +1,76 @@
+{
+  "id": "2aad4f6b-8b06-4de1-8e89-5a00c186fa6d",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "ProjectCreated"
+  },
+  "meta": {
+    "type": "EVENT",
+    "title": "ProjectCreated",
+    "fields": [
+      {
+        "name": "projectId",
+        "type": "UUID",
+        "example": "8b1e7f2a-0000-4000-8000-000000000002",
+        "mapping": "derived:uuid()",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "number",
+        "type": "Number",
+        "example": "2",
+        "mapping": "derived:nextAvailableSlot()",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "shorthand",
+        "type": "String",
+        "example": "2M",
+        "mapping": "derived:number+name[0]",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Mum",
+        "mapping": "CreateProject.name",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "colour",
+        "type": "String",
+        "example": "#be185d",
+        "mapping": "derived:autoAssignColour()",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "scheduleId",
+        "type": "String",
+        "example": "lunch",
+        "mapping": "CreateProject.scheduleId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "createdAt",
+        "type": "DateTime",
+        "example": "2026-08-30T09:00:00Z",
+        "mapping": "derived:now()",
+        "generated": true,
+        "cardinality": "Single"
+      }
+    ],
+    "linkedTo": "0243fff4-723e-429a-a4c5-da84e988d637"
+  },
+  "hash": "70lw0"
+}

@@ -1,0 +1,70 @@
+{
+  "id": "ff1b5ec1-d36b-4f4e-b1ad-f0b9efdb5f2f",
+  "type": "spec_node",
+  "parentId": "586e58f7-7e7a-4fbd-bef6-fe1b4771028a",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "22222222-0001-4001-8001-000000000001",
+          "then": [
+            {
+              "id": "5585badb-6ab6-4e54-8f44-1310a0aca80e",
+              "type": "READMODEL",
+              "title": "ProjectRosterView"
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Roster is empty before any project is created",
+          "examples": [],
+          "expectEmptyList": true
+        },
+        {
+          "id": "22222222-0002-4002-8002-000000000002",
+          "then": [
+            {
+              "id": "5585badb-6ab6-4e54-8f44-1310a0aca80e",
+              "type": "READMODEL",
+              "title": "ProjectRosterView"
+            }
+          ],
+          "when": [],
+          "given": [
+            {
+              "id": "ae46ae59-a3f4-46d2-be62-65f92f14edc2",
+              "type": "EVENT",
+              "title": "ProjectCreated (Work)"
+            },
+            {
+              "id": "ae46ae59-a3f4-46d2-be62-65f92f14edc2",
+              "type": "EVENT",
+              "title": "ProjectCreated (Mum)"
+            }
+          ],
+          "title": "Roster shows created projects to choose from before deleting one",
+          "examples": [
+            {
+              "name": "Work",
+              "colour": "#4338ca",
+              "shorthand": "1W",
+              "project_id": "p1"
+            },
+            {
+              "name": "Mum",
+              "colour": "#be185d",
+              "shorthand": "2M",
+              "project_id": "p2"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hash": "g0e0h"
+}

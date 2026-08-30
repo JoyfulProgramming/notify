@@ -1,0 +1,42 @@
+{
+  "id": "678e9fcb-86e2-418e-864e-8c5f44dad78e",
+  "type": "sticky_note",
+  "position": {
+    "x": 3695,
+    "y": 507
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
+  "meta": {
+    "type": "COMMAND",
+    "title": "CreateSenderRule",
+    "fields": [
+      {
+        "name": "senderId",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "Signals Awaiting Rule Creation.senderId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "Signals Awaiting Rule Creation.assignMode",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectId",
+        "type": "String",
+        "example": "2M",
+        "mapping": "Signals Awaiting Rule Creation.projectId",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ],
+    "version": 0
+  },
+  "hash": "539uyp"
+}

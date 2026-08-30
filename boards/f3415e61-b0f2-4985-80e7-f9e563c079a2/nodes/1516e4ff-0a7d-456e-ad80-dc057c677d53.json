@@ -1,0 +1,19 @@
+{
+  "id": "1516e4ff-0a7d-456e-ad80-dc057c677d53",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "80510d03-cdc2-446a-9f6c-3548bb1940da",
+    "title": "ProjectListView"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "title": "ProjectListView"
+  },
+  "hash": "2wlar2"
+}

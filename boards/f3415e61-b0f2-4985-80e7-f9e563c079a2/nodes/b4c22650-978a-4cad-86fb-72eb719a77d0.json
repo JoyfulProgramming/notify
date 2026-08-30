@@ -1,0 +1,19 @@
+{
+  "id": "b4c22650-978a-4cad-86fb-72eb719a77d0",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "2705cdd1-bed1-418c-b955-8e51b2f52d9f",
+    "title": "Signals Awaiting Rule Creation"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "title": "Signals Awaiting Rule Creation"
+  },
+  "hash": "dvi2dw"
+}

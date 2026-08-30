@@ -1,0 +1,31 @@
+{
+  "id": "e26b6541-3e01-4a72-a471-88fe07db9b65",
+  "type": "sticky_note",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "Unmatched Signals"
+  },
+  "meta": {
+    "type": "READMODEL",
+    "title": "Unmatched Signals",
+    "fields": [
+      {
+        "name": "signalId",
+        "type": "UUID",
+        "example": "sig_18f2",
+        "mapping": "Signal Captured.signalId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "senderId",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "Signal Captured.sender",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ]
+  },
+  "hash": "41y8n7"
+}

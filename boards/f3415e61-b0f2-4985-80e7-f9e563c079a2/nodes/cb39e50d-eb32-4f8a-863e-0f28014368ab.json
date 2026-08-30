@@ -1,0 +1,73 @@
+{
+  "id": "cb39e50d-eb32-4f8a-863e-0f28014368ab",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "586e58f7-7e7a-4fbd-bef6-fe1b4771028a",
+  "data": {},
+  "meta": {
+    "type": "READMODEL",
+    "title": "ProjectDeletionImpactView",
+    "fields": [
+      {
+        "name": "ruleId",
+        "type": "UUID",
+        "example": "rule_9",
+        "mapping": "Sender Rule Created.ruleId",
+        "generated": false,
+        "cardinality": "List"
+      },
+      {
+        "name": "ruleSenderId",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "Sender Rule Created.senderId",
+        "generated": false,
+        "cardinality": "List"
+      },
+      {
+        "name": "ruleAssignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "Sender Rule Created.assignMode",
+        "generated": false,
+        "cardinality": "List"
+      },
+      {
+        "name": "exampleSender",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "derived:recentSignalsForProject(projectId)",
+        "generated": true,
+        "cardinality": "List"
+      },
+      {
+        "name": "exampleSourceApp",
+        "type": "String",
+        "example": "WhatsApp",
+        "mapping": "derived:recentSignalsForProject(projectId)",
+        "generated": true,
+        "cardinality": "List"
+      },
+      {
+        "name": "exampleBody",
+        "type": "String",
+        "example": "Can you call Mum later, she's not feeling great",
+        "mapping": "derived:recentSignalsForProject(projectId)",
+        "generated": true,
+        "cardinality": "List"
+      },
+      {
+        "name": "futureAssignment",
+        "type": "String",
+        "example": "Unassigned",
+        "mapping": "derived:'Unassigned' (matching rule will be deleted)",
+        "generated": true,
+        "cardinality": "List"
+      }
+    ]
+  },
+  "hash": "xwvs2a"
+}

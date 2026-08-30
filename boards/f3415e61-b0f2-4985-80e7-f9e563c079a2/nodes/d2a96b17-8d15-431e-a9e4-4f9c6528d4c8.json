@@ -1,0 +1,80 @@
+{
+  "id": "d2a96b17-8d15-431e-a9e4-4f9c6528d4c8",
+  "type": "html_screen",
+  "position": {
+    "x": 2805,
+    "y": 145
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "defaultPageIndex": 0
+  },
+  "meta": {
+    "type": "HTML_SCREEN",
+    "marks": [],
+    "pages": [
+      "<div style=\"min-height:100vh;background:#f4f5f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:32px;display:flex;align-items:flex-start;justify-content:center\">\n  <div style=\"max-width:480px;width:100%;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:28px;box-shadow:0 4px 16px rgba(0,0,0,0.06)\">\n\n    <div style=\"display:flex;align-items:center;gap:8px;margin-bottom:4px\">\n      <span style=\"font-size:12px;color:#9ca3af\">Signals</span>\n      <span style=\"font-size:12px;color:#d1d5db\">›</span>\n      <span style=\"font-size:12px;color:#111827;font-weight:600\">Assign to Project</span>\n    </div>\n    <div style=\"font-size:20px;font-weight:700;color:#111827;margin-bottom:20px\">Assign Signal to Project</div>\n\n    <div style=\"background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px;margin-bottom:24px\">\n      <div style=\"display:flex;align-items:center;gap:8px\">\n        <span style=\"width:22px;height:22px;border-radius:6px;background:#25d366;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700\">W</span>\n        <span style=\"font-size:13px;font-weight:700;color:#111827\">Mike</span>\n        <span style=\"font-size:11px;color:#9ca3af\">WhatsApp · 2 min ago</span>\n      </div>\n      <div style=\"font-size:14px;color:#374151;margin-top:6px\">\"Can you call Mum later, she's not feeling great\"</div>\n    </div>\n\n    <div style=\"margin-bottom:18px\">\n      <label style=\"display:block;font-size:11px;color:#6b7280;font-weight:700;letter-spacing:0.03em;margin-bottom:6px\">ASSIGN BY</label>\n      <div style=\"display:flex;flex-direction:column;gap:8px\">\n        <div style=\"display:flex;align-items:center;gap:10px;background:#f3f4f6;border:1.5px solid #111827;border-radius:8px;padding:10px 14px\">\n          <span style=\"width:16px;height:16px;border-radius:50%;border:5px solid #111827;background:#fff;display:inline-block;flex-shrink:0\"></span>\n          <span style=\"font-size:14px;font-weight:600;color:#111827\">Contact</span>\n        </div>\n        <div style=\"display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px\">\n          <span style=\"width:16px;height:16px;border-radius:50%;border:1.5px solid #9ca3af;background:#fff;display:inline-block;flex-shrink:0\"></span>\n          <span style=\"font-size:14px;font-weight:600;color:#111827\">Group</span>\n        </div>\n      </div>\n      <div style=\"font-size:11px;color:#9ca3af;margin-top:6px\">Contact: every future signal from Mike uses this rule. Group: every future signal from this WhatsApp group uses it, regardless of sender.</div>\n    </div>\n\n    <div style=\"margin-bottom:26px\">\n      <label style=\"display:block;font-size:11px;color:#6b7280;font-weight:700;letter-spacing:0.03em;margin-bottom:6px\">PROJECT</label>\n      <div style=\"display:flex;flex-direction:column;gap:6px\">\n        <div style=\"display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px\">\n          <span style=\"display:flex;align-items:center;gap:8px;font-size:14px;color:#374151\"><span style=\"width:10px;height:10px;border-radius:3px;background:#4338ca;display:inline-block\"></span>1W Work</span>\n        </div>\n        <div style=\"display:flex;align-items:center;justify-content:space-between;background:#fdf2f8;border:1.5px solid #be185d;border-radius:8px;padding:10px 14px\">\n          <span style=\"display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#be185d\"><span style=\"width:10px;height:10px;border-radius:3px;background:#be185d;display:inline-block\"></span>2M Mum</span>\n          <span style=\"color:#be185d;font-size:14px;font-weight:700\">✓</span>\n        </div>\n        <div style=\"display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px\">\n          <span style=\"display:flex;align-items:center;gap:8px;font-size:14px;color:#374151\"><span style=\"width:10px;height:10px;border-radius:3px;background:#047857;display:inline-block\"></span>3F Friends</span>\n        </div>\n      </div>\n    </div>\n\n    <div style=\"display:flex;gap:10px\">\n      <div style=\"flex:1;text-align:center;background:#111827;color:#fff;border-radius:8px;padding:11px 0;font-size:14px;font-weight:700\">Confirm Assignment</div>\n      <div style=\"flex:1;text-align:center;background:#fff;color:#374151;border:1px solid #e5e7eb;border-radius:8px;padding:11px 0;font-size:14px;font-weight:600\">Cancel</div>\n    </div>\n\n  </div>\n</div>\n"
+    ],
+    "title": "Assign Signal to Project",
+    "fields": [
+      {
+        "name": "signalId",
+        "type": "String",
+        "example": "sig_18f2",
+        "mapping": "session:selectedSignalId",
+        "cardinality": "Single"
+      },
+      {
+        "name": "sender",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "SignalsListView.sender",
+        "cardinality": "Single"
+      },
+      {
+        "name": "sourceApp",
+        "type": "String",
+        "example": "WhatsApp",
+        "mapping": "SignalsListView.sourceApp",
+        "cardinality": "Single"
+      },
+      {
+        "name": "body",
+        "type": "String",
+        "example": "Can you call Mum later, she is not feeling great",
+        "mapping": "SignalsListView.body",
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "AssignSignalToProject.assignMode",
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectChoice",
+        "type": "String",
+        "example": "2M",
+        "mapping": "AssignSignalToProject.projectId",
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectShorthand",
+        "type": "String",
+        "example": "2M",
+        "mapping": "ProjectListView.shorthand",
+        "cardinality": "List"
+      },
+      {
+        "name": "projectName",
+        "type": "String",
+        "example": "Mum",
+        "mapping": "ProjectListView.name",
+        "cardinality": "List"
+      }
+    ],
+    "version": 1
+  },
+  "hash": "mnla74"
+}

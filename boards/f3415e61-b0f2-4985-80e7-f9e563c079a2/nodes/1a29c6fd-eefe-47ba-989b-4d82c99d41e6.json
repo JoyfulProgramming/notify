@@ -1,0 +1,87 @@
+{
+  "id": "1a29c6fd-eefe-47ba-989b-4d82c99d41e6",
+  "type": "spec_node",
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "11111111-0001-4001-8001-000000000001",
+          "then": [
+            {
+              "id": "0243fff4-723e-429a-a4c5-da84e988d637",
+              "type": "EVENT",
+              "title": "ProjectCreated"
+            }
+          ],
+          "when": [
+            {
+              "id": "52230b43-77eb-426f-b0b0-a45976d9478d",
+              "type": "COMMAND",
+              "title": "CreateProject"
+            }
+          ],
+          "given": [],
+          "title": "Create project with name and schedule succeeds"
+        },
+        {
+          "id": "11111111-0002-4002-8002-000000000002",
+          "then": [],
+          "when": [
+            {
+              "id": "52230b43-77eb-426f-b0b0-a45976d9478d",
+              "type": "COMMAND",
+              "title": "CreateProject"
+            }
+          ],
+          "given": [],
+          "title": "Reject project creation with missing name",
+          "expectError": true,
+          "errorDescription": "project name is required"
+        },
+        {
+          "id": "11111111-0003-4003-8003-000000000003",
+          "then": [],
+          "when": [
+            {
+              "id": "52230b43-77eb-426f-b0b0-a45976d9478d",
+              "type": "COMMAND",
+              "title": "CreateProject"
+            }
+          ],
+          "given": [],
+          "title": "Reject project creation with no schedule selected",
+          "expectError": true,
+          "errorDescription": "a schedule is required to create a project"
+        },
+        {
+          "id": "11111111-0004-4004-8004-000000000004",
+          "then": [],
+          "when": [
+            {
+              "id": "52230b43-77eb-426f-b0b0-a45976d9478d",
+              "type": "COMMAND",
+              "title": "CreateProject"
+            }
+          ],
+          "given": [
+            {
+              "id": "0243fff4-723e-429a-a4c5-da84e988d637",
+              "type": "EVENT",
+              "title": "6 ProjectCreated events already exist (all slots used)"
+            }
+          ],
+          "title": "Reject project creation when all 6 project slots are used",
+          "expectError": true,
+          "errorDescription": "maximum of 6 projects reached"
+        }
+      ]
+    }
+  },
+  "hash": "1v13trj"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "d36a80a2-6399-4827-a007-d519b420f5c5",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "586e58f7-7e7a-4fbd-bef6-fe1b4771028a",
+  "data": {},
+  "meta": {
+    "type": "COMMAND",
+    "title": "DeleteProject",
+    "fields": [
+      {
+        "name": "projectId",
+        "type": "UUID",
+        "example": "8b1e7f2a-0000-4000-8000-000000000002",
+        "mapping": "ProjectDetailView.projectId",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ]
+  },
+  "hash": "1sldiuu"
+}

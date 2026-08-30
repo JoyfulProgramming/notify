@@ -1,0 +1,20 @@
+{
+  "id": "57114e5f-fb3f-4398-b5e1-906817e9ee90",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "586e58f7-7e7a-4fbd-bef6-fe1b4771028a",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "33a64754-9cfe-489d-b8d5-61d4a99101d5",
+    "title": "ProjectDetailView"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "33a64754-9cfe-489d-b8d5-61d4a99101d5",
+    "title": "ProjectDetailView"
+  },
+  "hash": "jv8qpz"
+}

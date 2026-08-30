@@ -1,0 +1,52 @@
+{
+  "id": "e1cf1a29-a225-4978-b3bd-95834e9f21d5",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "ProjectDeleted"
+  },
+  "meta": {
+    "type": "EVENT",
+    "title": "ProjectDeleted",
+    "fields": [
+      {
+        "name": "projectId",
+        "type": "UUID",
+        "example": "8b1e7f2a-0000-4000-8000-000000000002",
+        "mapping": "DeleteProject.projectId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "shorthand",
+        "type": "String",
+        "example": "2M",
+        "mapping": "ProjectDetailView.shorthand",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Mum",
+        "mapping": "ProjectDetailView.name",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "deletedAt",
+        "type": "DateTime",
+        "example": "2026-08-30T09:00:00Z",
+        "mapping": "derived:now()",
+        "generated": true,
+        "cardinality": "Single"
+      }
+    ],
+    "linkedTo": "fafc2953-273b-41d1-9117-eec6b3a441d8"
+  },
+  "hash": "1k73qgg"
+}

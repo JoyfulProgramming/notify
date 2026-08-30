@@ -1,0 +1,74 @@
+{
+  "id": "bf5264eb-2759-47c0-9d15-b5d0901b3cba",
+  "type": "spec_node",
+  "parentId": "586e58f7-7e7a-4fbd-bef6-fe1b4771028a",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "22222222-0004-4004-8004-000000000004",
+          "then": [
+            {
+              "id": "cb39e50d-eb32-4f8a-863e-0f28014368ab",
+              "type": "READMODEL",
+              "title": "ProjectDeletionImpactView"
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Impact preview is empty when the project has no rules assigned yet",
+          "examples": [],
+          "expectEmptyList": true
+        },
+        {
+          "id": "22222222-0005-4005-8005-000000000005",
+          "then": [
+            {
+              "id": "cb39e50d-eb32-4f8a-863e-0f28014368ab",
+              "type": "READMODEL",
+              "title": "ProjectDeletionImpactView"
+            }
+          ],
+          "when": [],
+          "given": [
+            {
+              "id": "b8d242d7-f516-472a-a168-49a409b8a0d2",
+              "type": "EVENT",
+              "title": "Sender Rule Created (Mike, Contact)"
+            },
+            {
+              "id": "b8d242d7-f516-472a-a168-49a409b8a0d2",
+              "type": "EVENT",
+              "title": "Sender Rule Created (Mum's Chat, Group)"
+            }
+          ],
+          "title": "Impact preview lists sender and group rules that will be deleted",
+          "examples": [
+            {
+              "example_body": "Can you call Mum later, she's not feeling great",
+              "example_sender": "Mike",
+              "rule_sender_id": "Mike",
+              "rule_assign_mode": "Contact",
+              "future_assignment": "Unassigned",
+              "example_source_app": "WhatsApp"
+            },
+            {
+              "example_body": "Pete: I'll pop round Thursday to help with the shopping",
+              "example_sender": "Mum's Chat",
+              "rule_sender_id": "Mum's Chat",
+              "rule_assign_mode": "Group",
+              "future_assignment": "Unassigned",
+              "example_source_app": "WhatsApp"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hash": "14rm6iu"
+}

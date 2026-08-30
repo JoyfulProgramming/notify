@@ -1,0 +1,11 @@
+{
+  "id": "a7de09cc-0ed7-4248-8a00-8aff9fccd97b",
+  "nodeId": "225b290f-dcd1-4306-9c18-a1f5c4abf1d7",
+  "boardId": "f3415e61-b0f2-4985-80e7-f9e563c079a2",
+  "text": "QUESTION: Same gap as 'Sender Rule Created' - no producing COMMAND or AUTOMATION on the board. Should likely be an AUTOMATION reacting to 'Sender Rule Created' (e.g. 'Reassign Existing Signals'), with a todo-list read model of signals matching the new rule's sender. Also has 0 fields defined (needs at least: ruleId, reassignedSignalIds[], projectId, reassignedAt). Flagging from the completeness check.",
+  "type": "COMMENT",
+  "timestamp": 1787965933330,
+  "resolved": false,
+  "agentRequest": false,
+  "author": "completeness-check"
+}

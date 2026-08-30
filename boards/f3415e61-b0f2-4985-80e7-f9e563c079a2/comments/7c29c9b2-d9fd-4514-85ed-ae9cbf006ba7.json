@@ -1,0 +1,11 @@
+{
+  "id": "7c29c9b2-d9fd-4514-85ed-ae9cbf006ba7",
+  "nodeId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "boardId": "f3415e61-b0f2-4985-80e7-f9e563c079a2",
+  "text": "Notify is a working implementation exploring the \"Phoenix Architecture\" (code is disposable cache; contracts + evaluations are the durable layer). It is a notification-routing system: signals arrive over HTTP, get matched against user-defined rules, and matches are streamed live to a browser via SSE. Everything runs in a single Go process with an in-memory bus — no Docker, no cloud.\n\nThree services, wired in-process via pkg/bus:\n1. Ingestor (:8080) — accepts incoming notifications over HTTP\n2. Rule API (:8081) — CRUD for delivery rules (source_app / source_account / title, each supporting exact match, glob, or wildcard), backed by SQLite\n3. Deliver + Web (:8082) — matches notifications against rules and streams matches to the browser via SSE\n\npkg/contracts holds the durable notification.v1 and Rule structs (the conserved layer). evaluations/ holds the contract + property tests that define correct behaviour — the implementation in internal/ is the disposable part. CLI helpers: bin/notify (send test notifications), bin/rules (manage rules), bin/serve (run everything and open the web UI).",
+  "type": "COMMENT",
+  "timestamp": 1787962458789,
+  "resolved": false,
+  "agentRequest": false,
+  "author": "agent"
+}

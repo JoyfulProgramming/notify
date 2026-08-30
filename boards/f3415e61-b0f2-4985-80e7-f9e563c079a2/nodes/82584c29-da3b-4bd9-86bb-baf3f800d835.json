@@ -1,0 +1,322 @@
+{
+  "id": "82584c29-da3b-4bd9-86bb-baf3f800d835",
+  "type": "spec_node",
+  "position": {
+    "x": 2746.5,
+    "y": 1101.8
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "version": 5,
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "type": "EVENT",
+              "title": "Signal Assigned To Project"
+            }
+          ],
+          "when": [
+            {
+              "id": "432b78d0-0038-4acb-8edf-c819b4798de7",
+              "type": "COMMAND",
+              "title": "AssignSignalToProject"
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured"
+            }
+          ],
+          "title": "Manually assign a signal to a project by Contact",
+          "examples": [
+            {
+              "signal_id": "sig-mike-1",
+              "project_id": "2M",
+              "assign_mode": "Contact",
+              "assigned_by": "user"
+            }
+          ]
+        },
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000002",
+          "then": [
+            {
+              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "type": "EVENT",
+              "title": "Signal Assigned To Project"
+            }
+          ],
+          "when": [
+            {
+              "id": "432b78d0-0038-4acb-8edf-c819b4798de7",
+              "type": "COMMAND",
+              "title": "AssignSignalToProject"
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured"
+            }
+          ],
+          "title": "Manually assign a signal to a project by Group",
+          "examples": [
+            {
+              "signal_id": "sig-humanists-1",
+              "project_id": "3F",
+              "assign_mode": "Group",
+              "assigned_by": "user"
+            }
+          ]
+        },
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000003",
+          "then": [
+            {
+              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "type": "EVENT",
+              "title": "Signal Assigned To Project",
+              "fields": [
+                {
+                  "name": "signalId",
+                  "example": "sig_18f2"
+                },
+                {
+                  "name": "assignMode",
+                  "example": "Contact"
+                },
+                {
+                  "name": "projectId",
+                  "example": "1W"
+                },
+                {
+                  "name": "assignedAt",
+                  "example": "2026-08-29T00:05:00Z"
+                },
+                {
+                  "name": "assignedBy",
+                  "example": "user"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "432b78d0-0038-4acb-8edf-c819b4798de7",
+              "type": "COMMAND",
+              "title": "AssignSignalToProject",
+              "fields": [
+                {
+                  "name": "signalId",
+                  "example": "sig_18f2"
+                },
+                {
+                  "name": "assignMode",
+                  "example": "Contact"
+                },
+                {
+                  "name": "projectId",
+                  "example": "1W"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured",
+              "fields": [
+                {
+                  "name": "signalId",
+                  "example": "sig_18f2"
+                },
+                {
+                  "name": "sender",
+                  "example": "Mike"
+                },
+                {
+                  "name": "sourceApp",
+                  "example": "WhatsApp"
+                },
+                {
+                  "name": "body",
+                  "example": "Can you call Mum later, she is not feeling great"
+                },
+                {
+                  "name": "receivedAt",
+                  "example": "2026-08-29T00:02:00Z"
+                }
+              ]
+            },
+            {
+              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "type": "EVENT",
+              "title": "Signal Assigned To Project",
+              "fields": [
+                {
+                  "name": "signalId",
+                  "example": "sig_18f2"
+                },
+                {
+                  "name": "assignMode",
+                  "example": "Contact"
+                },
+                {
+                  "name": "projectId",
+                  "example": "2M"
+                },
+                {
+                  "name": "assignedAt",
+                  "example": "2026-08-29T00:05:00Z"
+                },
+                {
+                  "name": "assignedBy",
+                  "example": "user"
+                }
+              ]
+            }
+          ],
+          "title": "Reassign a previously-assigned signal to a different project",
+          "context": [],
+          "examples": [
+            {
+              "signal_id": "sig-mike-1",
+              "project_id": "1W",
+              "assign_mode": "Contact",
+              "assigned_by": "user"
+            }
+          ],
+          "expectError": false,
+          "expectEmptyList": false
+        },
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000004",
+          "then": [],
+          "when": [
+            {
+              "id": "432b78d0-0038-4acb-8edf-c819b4798de7",
+              "type": "COMMAND",
+              "title": "AssignSignalToProject",
+              "fields": [
+                {
+                  "name": "signalId",
+                  "example": "sig_18f2"
+                },
+                {
+                  "name": "assignMode",
+                  "example": "Contact"
+                },
+                {
+                  "name": "projectId"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured",
+              "fields": [
+                {
+                  "name": "signalId",
+                  "example": "sig_18f2"
+                },
+                {
+                  "name": "sender",
+                  "example": "Mike"
+                },
+                {
+                  "name": "sourceApp",
+                  "example": "WhatsApp"
+                },
+                {
+                  "name": "body",
+                  "example": "Can you call Mum later, she is not feeling great"
+                },
+                {
+                  "name": "receivedAt",
+                  "example": "2026-08-29T00:02:00Z"
+                }
+              ]
+            }
+          ],
+          "title": "Reject assignment with no project selected",
+          "context": [],
+          "examples": [],
+          "expectError": true,
+          "expectEmptyList": false,
+          "errorDescription": "projectId is required"
+        },
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000005",
+          "then": [],
+          "when": [
+            {
+              "id": "432b78d0-0038-4acb-8edf-c819b4798de7",
+              "type": "COMMAND",
+              "title": "AssignSignalToProject"
+            }
+          ],
+          "given": [],
+          "title": "Reject assignment for a signal that was never captured",
+          "examples": [],
+          "expectError": true,
+          "expectEmptyList": false,
+          "errorDescription": "signal not found"
+        },
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000006",
+          "then": [
+            {
+              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "type": "EVENT",
+              "title": "Signal Assigned To Project"
+            }
+          ],
+          "when": [
+            {
+              "id": "432b78d0-0038-4acb-8edf-c819b4798de7",
+              "type": "COMMAND",
+              "title": "AssignSignalToProject"
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured"
+            },
+            {
+              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "type": "EVENT",
+              "title": "Signal Assigned To Project"
+            }
+          ],
+          "title": "Reassign a previously-assigned signal to a different project (corrected)",
+          "examples": [
+            {
+              "signal_id": "sig-mike-1",
+              "project_id": "1W",
+              "assign_mode": "Contact",
+              "assigned_by": "user",
+              "previous_project_id": "2M"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hash": "1vy63ng"
+}

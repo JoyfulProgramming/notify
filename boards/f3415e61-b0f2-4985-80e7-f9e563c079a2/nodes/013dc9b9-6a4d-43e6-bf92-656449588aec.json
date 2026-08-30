@@ -1,0 +1,20 @@
+{
+  "id": "013dc9b9-6a4d-43e6-bf92-656449588aec",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "586e58f7-7e7a-4fbd-bef6-fe1b4771028a",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "1cd5ba72-27a8-4446-8351-41fced3269c7",
+    "title": "ProjectRosterView"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "1cd5ba72-27a8-4446-8351-41fced3269c7",
+    "title": "ProjectRosterView"
+  },
+  "hash": "qyuhlh"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "b7fbfa95-15b9-4c93-8975-145caf1dbaa5",
+  "type": "image",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "url": "https://cdn.pixabay.com/photo/2016/01/03/11/24/gear-1119298_1280.png"
+  },
+  "meta": {
+    "type": "AUTOMATION",
+    "title": "Delete Rules For Deleted Project"
+  },
+  "hash": "1brqo0v"
+}

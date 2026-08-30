@@ -1,0 +1,56 @@
+{
+  "id": "b84adfc1-6f1c-4c92-bb07-57bda1d9af27",
+  "type": "html_screen",
+  "position": {
+    "x": 1455,
+    "y": 145
+  },
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {},
+  "meta": {
+    "type": "HTML_SCREEN",
+    "pages": [
+      "<div style=\"min-height:100vh;background:#f4f5f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:32px;display:flex;align-items:flex-start;justify-content:center\">\n  <div style=\"max-width:480px;width:100%;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:28px;box-shadow:0 4px 16px rgba(0,0,0,0.06)\">\n\n    <div style=\"display:flex;align-items:center;gap:8px;margin-bottom:4px\">\n      <span style=\"font-size:12px;color:#9ca3af\">Projects</span>\n      <span style=\"font-size:12px;color:#d1d5db\">›</span>\n      <span style=\"font-size:12px;color:#111827;font-weight:600\">Create Project</span>\n    </div>\n    <div style=\"display:flex;align-items:center;justify-content:space-between;margin-bottom:20px\">\n      <div style=\"font-size:20px;font-weight:700;color:#111827\">Create Project</div>\n      <div style=\"font-size:11px;color:#9ca3af;background:#f9fafb;border:1px solid #e5e7eb;border-radius:20px;padding:4px 10px\">2 of 6 projects used</div>\n    </div>\n\n    <div style=\"background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px;margin-bottom:24px;display:flex;align-items:center;gap:12px\">\n      <span style=\"width:36px;height:36px;border-radius:9px;background:#be185d;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;flex-shrink:0\">3F</span>\n      <div>\n        <div style=\"font-size:11px;color:#9ca3af;font-weight:600;letter-spacing:0.03em\">AUTO-ASSIGNED</div>\n        <div style=\"font-size:13px;color:#374151;margin-top:2px\">Number, colour &amp; shorthand are generated automatically — edit colour later from the project list.</div>\n      </div>\n    </div>\n\n    <div style=\"margin-bottom:20px\">\n      <label style=\"display:block;font-size:11px;color:#6b7280;font-weight:700;letter-spacing:0.03em;margin-bottom:6px\">PROJECT NAME</label>\n      <div style=\"background:#fff;border:1.5px solid #111827;border-radius:8px;padding:11px 14px;font-size:14px;color:#111827\">Friends</div>\n    </div>\n\n    <div style=\"margin-bottom:26px\">\n      <label style=\"display:block;font-size:11px;color:#6b7280;font-weight:700;letter-spacing:0.03em;margin-bottom:6px\">SCHEDULE</label>\n      <div style=\"display:flex;flex-direction:column;gap:8px\">\n        <div style=\"display:flex;align-items:center;gap:10px;background:#f3f4f6;border:1.5px solid #111827;border-radius:8px;padding:10px 14px\">\n          <span style=\"width:16px;height:16px;border-radius:50%;border:5px solid #111827;background:#fff;display:inline-block;flex-shrink:0\"></span>\n          <span style=\"font-size:14px;font-weight:600;color:#111827\">Evenings</span>\n          <span style=\"font-size:12px;color:#9ca3af;margin-left:auto\">6pm – 9pm</span>\n        </div>\n        <div style=\"display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px\">\n          <span style=\"width:16px;height:16px;border-radius:50%;border:1.5px solid #9ca3af;background:#fff;display:inline-block;flex-shrink:0\"></span>\n          <span style=\"font-size:14px;font-weight:600;color:#374151\">Weekends</span>\n          <span style=\"font-size:12px;color:#9ca3af;margin-left:auto\">Sat – Sun</span>\n        </div>\n        <div style=\"display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px\">\n          <span style=\"width:16px;height:16px;border-radius:50%;border:1.5px solid #9ca3af;background:#fff;display:inline-block;flex-shrink:0\"></span>\n          <span style=\"font-size:14px;font-weight:600;color:#374151\">Business Hours</span>\n          <span style=\"font-size:12px;color:#9ca3af;margin-left:auto\">Mon–Fri 9–6</span>\n        </div>\n        <div style=\"display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px\">\n          <span style=\"width:16px;height:16px;border-radius:50%;border:1.5px solid #9ca3af;background:#fff;display:inline-block;flex-shrink:0\"></span>\n          <span style=\"font-size:14px;font-weight:600;color:#374151\">Lunch</span>\n          <span style=\"font-size:12px;color:#9ca3af;margin-left:auto\">12:30 – 1:20</span>\n        </div>\n        <div style=\"display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px\">\n          <span style=\"width:16px;height:16px;border-radius:50%;border:1.5px solid #9ca3af;background:#fff;display:inline-block;flex-shrink:0\"></span>\n          <span style=\"font-size:14px;font-weight:600;color:#374151\">Waking Hours</span>\n        </div>\n        <div style=\"display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px\">\n          <span style=\"width:16px;height:16px;border-radius:50%;border:1.5px solid #9ca3af;background:#fff;display:inline-block;flex-shrink:0\"></span>\n          <span style=\"font-size:14px;font-weight:600;color:#374151\">Any Time</span>\n        </div>\n      </div>\n      <div style=\"font-size:11px;color:#9ca3af;margin-top:8px\">Every project needs a schedule — notifications for this project only surface while it's active.</div>\n    </div>\n\n    <div style=\"display:flex;gap:10px\">\n      <div style=\"flex:1;text-align:center;background:#111827;color:#fff;border-radius:8px;padding:11px 0;font-size:14px;font-weight:700\">Create Project</div>\n      <div style=\"flex:1;text-align:center;background:#fff;color:#374151;border:1px solid #e5e7eb;border-radius:8px;padding:11px 0;font-size:14px;font-weight:600\">Cancel</div>\n    </div>\n\n  </div>\n</div>\n"
+    ],
+    "title": "Create Project",
+    "fields": [
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Friends",
+        "mapping": "CreateProject.name",
+        "cardinality": "Single"
+      },
+      {
+        "name": "scheduleId",
+        "type": "String",
+        "example": "evenings",
+        "mapping": "CreateProject.scheduleId",
+        "cardinality": "Single"
+      },
+      {
+        "name": "slotsRemaining",
+        "type": "Number",
+        "example": "4",
+        "mapping": "ProjectRosterView.slotsRemaining",
+        "cardinality": "Single"
+      },
+      {
+        "name": "previewShorthand",
+        "type": "String",
+        "example": "3F",
+        "mapping": "derived:previewShorthand(name)",
+        "cardinality": "Single"
+      },
+      {
+        "name": "previewColour",
+        "type": "String",
+        "example": "#be185d",
+        "mapping": "derived:previewColour()",
+        "cardinality": "Single"
+      }
+    ],
+    "version": 2
+  },
+  "hash": "1n7pj93"
+}

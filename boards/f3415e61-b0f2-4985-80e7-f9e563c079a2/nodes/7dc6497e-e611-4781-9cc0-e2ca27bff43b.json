@@ -1,0 +1,57 @@
+{
+  "id": "7dc6497e-e611-4781-9cc0-e2ca27bff43b",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
+  "meta": {
+    "type": "EVENT",
+    "title": "Sender Rule Deleted",
+    "fields": [
+      {
+        "name": "ruleId",
+        "type": "UUID",
+        "example": "rule_9",
+        "mapping": "DeleteSenderRule.ruleId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "senderId",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "DeleteSenderRule.senderId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectId",
+        "type": "String",
+        "example": "2M",
+        "mapping": "DeleteSenderRule.projectId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "reason",
+        "type": "String",
+        "example": "project_deleted",
+        "mapping": "derived:'project_deleted'",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "deletedAt",
+        "type": "DateTime",
+        "example": "2026-08-30T09:10:00Z",
+        "mapping": "derived:now()",
+        "generated": true,
+        "cardinality": "Single"
+      }
+    ]
+  },
+  "hash": "1n95qyv"
+}

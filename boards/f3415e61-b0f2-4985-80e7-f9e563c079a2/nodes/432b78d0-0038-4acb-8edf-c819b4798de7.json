@@ -1,0 +1,39 @@
+{
+  "id": "432b78d0-0038-4acb-8edf-c819b4798de7",
+  "type": "sticky_note",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "AssignSignalToProject"
+  },
+  "meta": {
+    "type": "COMMAND",
+    "title": "AssignSignalToProject",
+    "fields": [
+      {
+        "name": "signalId",
+        "type": "UUID",
+        "example": "sig_18f2",
+        "mapping": "session:selectedSignalId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "user-input",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectId",
+        "type": "String",
+        "example": "2M",
+        "mapping": "user-input",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ]
+  },
+  "hash": "10wcr7d"
+}

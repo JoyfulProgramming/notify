@@ -1,0 +1,41 @@
+{
+  "id": "ae9bfd67-5bea-439f-ac9c-aea579d78fea",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
+  "meta": {
+    "type": "COMMAND",
+    "title": "DeleteSenderRule",
+    "fields": [
+      {
+        "name": "ruleId",
+        "type": "UUID",
+        "example": "rule_9",
+        "mapping": "Rules Pending Deletion.ruleId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "senderId",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "Rules Pending Deletion.senderId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectId",
+        "type": "String",
+        "example": "2M",
+        "mapping": "Rules Pending Deletion.projectId",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ]
+  },
+  "hash": "8tjd52"
+}

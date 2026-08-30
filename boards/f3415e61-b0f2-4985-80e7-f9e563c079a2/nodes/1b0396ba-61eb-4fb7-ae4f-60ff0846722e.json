@@ -1,0 +1,71 @@
+{
+  "id": "1b0396ba-61eb-4fb7-ae4f-60ff0846722e",
+  "type": "spec_node",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "storylines": [
+      {
+        "id": "5e1a2000-0000-4000-8000-000000000003",
+        "beats": [
+          {
+            "type": "READMODEL",
+            "refId": "a299a501-e660-49c4-9a8d-062c7ba91ae9",
+            "title": "Signals Awaiting Rule Creation",
+            "examples": [],
+            "instanceId": "5e1a2000-0000-4000-8000-000000000031",
+            "exampleMode": "list",
+            "expectEmptyList": true
+          },
+          {
+            "type": "EVENT",
+            "refId": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+            "title": "Signal Assigned To Project",
+            "instanceId": "5e1a2000-0000-4000-8000-000000000032"
+          },
+          {
+            "type": "READMODEL",
+            "refId": "a299a501-e660-49c4-9a8d-062c7ba91ae9",
+            "title": "Signals Awaiting Rule Creation",
+            "examples": [
+              {
+                "sender_id": "Mike",
+                "signal_id": "sig-mike-1",
+                "project_id": "2M",
+                "assign_mode": "Contact"
+              }
+            ],
+            "instanceId": "5e1a2000-0000-4000-8000-000000000033",
+            "exampleMode": "list"
+          },
+          {
+            "type": "EVENT",
+            "refId": "49affe6d-66d2-4b4e-b95d-30bae3ebcd20",
+            "title": "Sender Rule Created",
+            "instanceId": "5e1a2000-0000-4000-8000-000000000034"
+          },
+          {
+            "type": "READMODEL",
+            "refId": "a299a501-e660-49c4-9a8d-062c7ba91ae9",
+            "title": "Signals Awaiting Rule Creation",
+            "examples": [],
+            "instanceId": "5e1a2000-0000-4000-8000-000000000035",
+            "exampleMode": "list",
+            "expectEmptyList": true
+          }
+        ],
+        "title": "Signals Awaiting Rule Creation: opened by manual assignment, closed by the new rule",
+        "layout": "horizontal",
+        "description": "Only a manual assignment opens this todo item - an auto-assigned signal already matched an existing rule, so no new rule is needed."
+      }
+    ],
+    "givenWhenThenScenario": {
+      "scenarios": []
+    }
+  },
+  "hash": "1dwcds0"
+}

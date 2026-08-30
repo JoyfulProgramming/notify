@@ -1,0 +1,51 @@
+{
+  "id": "e243e369-0a82-4b45-b626-4db10d3a4f9f",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "Rules Pending Deletion"
+  },
+  "meta": {
+    "type": "READMODEL",
+    "title": "Rules Pending Deletion",
+    "fields": [
+      {
+        "name": "ruleId",
+        "type": "UUID",
+        "example": "rule_9",
+        "mapping": "Sender Rule Created.ruleId",
+        "generated": false,
+        "cardinality": "List"
+      },
+      {
+        "name": "senderId",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "Sender Rule Created.senderId",
+        "generated": false,
+        "cardinality": "List"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "Sender Rule Created.assignMode",
+        "generated": false,
+        "cardinality": "List"
+      },
+      {
+        "name": "projectId",
+        "type": "String",
+        "example": "2M",
+        "mapping": "ProjectDeleted.projectId",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ]
+  },
+  "hash": "1krx4zl"
+}

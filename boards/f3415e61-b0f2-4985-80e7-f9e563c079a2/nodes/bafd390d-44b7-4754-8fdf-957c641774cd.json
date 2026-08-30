@@ -1,0 +1,63 @@
+{
+  "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+  "type": "sticky_note",
+  "position": {
+    "x": 95,
+    "y": 827
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
+  "meta": {
+    "type": "EVENT",
+    "title": "Signal Captured",
+    "fields": [
+      {
+        "name": "signalId",
+        "type": "UUID",
+        "example": "sig_18f2",
+        "mapping": "derived:uuid4()",
+        "generated": true,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "sender",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "webhook:sender_name",
+        "generated": false,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "sourceApp",
+        "type": "String",
+        "example": "WhatsApp",
+        "mapping": "webhook:source_app",
+        "generated": false,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "body",
+        "type": "String",
+        "example": "Can you call Mum later, she is not feeling great",
+        "mapping": "webhook:message_body",
+        "generated": false,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "receivedAt",
+        "type": "DateTime",
+        "example": "2026-08-29T00:02:00Z",
+        "mapping": "derived:now()",
+        "generated": true,
+        "subfields": [],
+        "cardinality": "Single"
+      }
+    ],
+    "version": 6
+  },
+  "hash": "p1b0l9"
+}

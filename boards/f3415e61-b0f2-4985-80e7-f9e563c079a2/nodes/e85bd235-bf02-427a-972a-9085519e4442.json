@@ -1,0 +1,69 @@
+{
+  "id": "e85bd235-bf02-427a-972a-9085519e4442",
+  "type": "spec_node",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "storylines": [
+      {
+        "id": "5e1a2000-0000-4000-8000-000000000001",
+        "beats": [
+          {
+            "type": "READMODEL",
+            "refId": "e26b6541-3e01-4a72-a471-88fe07db9b65",
+            "title": "Unmatched Signals",
+            "examples": [],
+            "instanceId": "5e1a2000-0000-4000-8000-000000000011",
+            "exampleMode": "list",
+            "expectEmptyList": true
+          },
+          {
+            "type": "EVENT",
+            "refId": "bafd390d-44b7-4754-8fdf-957c641774cd",
+            "title": "Signal Captured",
+            "instanceId": "5e1a2000-0000-4000-8000-000000000012"
+          },
+          {
+            "type": "READMODEL",
+            "refId": "e26b6541-3e01-4a72-a471-88fe07db9b65",
+            "title": "Unmatched Signals",
+            "examples": [
+              {
+                "sender_id": "Mike",
+                "signal_id": "sig-mike-4"
+              }
+            ],
+            "instanceId": "5e1a2000-0000-4000-8000-000000000013",
+            "exampleMode": "list"
+          },
+          {
+            "type": "EVENT",
+            "refId": "29fcbf5a-2f3c-492e-abe6-2417445bb1e3",
+            "title": "Signal Assigned To Project",
+            "instanceId": "5e1a2000-0000-4000-8000-000000000014"
+          },
+          {
+            "type": "READMODEL",
+            "refId": "e26b6541-3e01-4a72-a471-88fe07db9b65",
+            "title": "Unmatched Signals",
+            "examples": [],
+            "instanceId": "5e1a2000-0000-4000-8000-000000000015",
+            "exampleMode": "list",
+            "expectEmptyList": true
+          }
+        ],
+        "title": "Unmatched Signals: opened by capture, closed by assignment",
+        "layout": "horizontal",
+        "description": "A signal opens a pending item as soon as it's captured, and the item disappears once it's assigned - by auto-assign if a rule already matches, or manually otherwise."
+      }
+    ],
+    "givenWhenThenScenario": {
+      "scenarios": []
+    }
+  },
+  "hash": "sp3s93"
+}

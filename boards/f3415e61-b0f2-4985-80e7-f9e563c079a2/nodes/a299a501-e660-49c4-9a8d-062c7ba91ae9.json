@@ -1,0 +1,50 @@
+{
+  "id": "a299a501-e660-49c4-9a8d-062c7ba91ae9",
+  "type": "sticky_note",
+  "position": {
+    "x": 3245,
+    "y": 507
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
+  "meta": {
+    "type": "READMODEL",
+    "title": "Signals Awaiting Rule Creation",
+    "fields": [
+      {
+        "name": "signalId",
+        "type": "UUID",
+        "example": "sig_18f2",
+        "mapping": "Signal Assigned To Project.signalId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "senderId",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "Signal Captured.sender",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "Signal Assigned To Project.assignMode",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectId",
+        "type": "String",
+        "example": "2M",
+        "mapping": "Signal Assigned To Project.projectId",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ],
+    "version": 0
+  },
+  "hash": "wowecq"
+}

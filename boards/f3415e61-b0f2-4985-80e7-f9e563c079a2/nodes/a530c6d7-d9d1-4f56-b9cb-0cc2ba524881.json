@@ -1,0 +1,47 @@
+{
+  "id": "a530c6d7-d9d1-4f56-b9cb-0cc2ba524881",
+  "type": "sticky_note",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "Signals Pending Reassignment"
+  },
+  "meta": {
+    "type": "READMODEL",
+    "title": "Signals Pending Reassignment",
+    "fields": [
+      {
+        "name": "ruleId",
+        "type": "UUID",
+        "example": "rule_9",
+        "mapping": "Sender Rule Created.ruleId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "senderId",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "Sender Rule Created.senderId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "Sender Rule Created.assignMode",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectId",
+        "type": "String",
+        "example": "2M",
+        "mapping": "Sender Rule Created.projectId",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ]
+  },
+  "hash": "qnucms"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "580772ec-5a00-4e92-865c-97c2f50a493b",
+  "type": "markdown",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "GAP - ProjectListView has no source event on this timeline"
+  },
+  "meta": {
+    "type": "MARKDOWN",
+    "title": "RESOLVED - ProjectListView now sourced from Create Project chapter",
+    "description": "## Resolved\n\nThe 'Create Project' chapter (timeline bb4f520b-d356-44cb-beff-86a59e23d021) now models project creation: a CreateProject command produces a ProjectCreated event. That event has been replayed onto this timeline as node 2aad4f6b-8b06-4de1-8e89-5a00c186fa6d (linked copy) and wired to ProjectListView, so ProjectListView.projectId/shorthand/name now trace to a real source event."
+  },
+  "hash": "r1dlu9"
+}

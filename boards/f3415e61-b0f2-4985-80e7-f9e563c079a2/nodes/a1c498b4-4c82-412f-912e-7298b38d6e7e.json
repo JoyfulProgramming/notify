@@ -1,0 +1,97 @@
+{
+  "id": "a1c498b4-4c82-412f-912e-7298b38d6e7e",
+  "type": "spec_node",
+  "parentId": "586e58f7-7e7a-4fbd-bef6-fe1b4771028a",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "22222222-0006-4006-8006-000000000006",
+          "then": [
+            {
+              "id": "fafc2953-273b-41d1-9117-eec6b3a441d8",
+              "type": "EVENT",
+              "title": "ProjectDeleted"
+            }
+          ],
+          "when": [
+            {
+              "id": "d36a80a2-6399-4827-a007-d519b420f5c5",
+              "type": "COMMAND",
+              "title": "DeleteProject"
+            }
+          ],
+          "given": [],
+          "title": "Delete a project with no rules assigned"
+        },
+        {
+          "id": "22222222-0007-4007-8007-000000000007",
+          "then": [
+            {
+              "id": "fafc2953-273b-41d1-9117-eec6b3a441d8",
+              "type": "EVENT",
+              "title": "ProjectDeleted"
+            }
+          ],
+          "when": [
+            {
+              "id": "d36a80a2-6399-4827-a007-d519b420f5c5",
+              "type": "COMMAND",
+              "title": "DeleteProject"
+            }
+          ],
+          "given": [
+            {
+              "id": "b8d242d7-f516-472a-a168-49a409b8a0d2",
+              "type": "EVENT",
+              "title": "Sender Rule Created (Mike, Contact)"
+            }
+          ],
+          "title": "Delete a project that has sender/group rules assigned (cascade handled by Assign Signal to Project timeline)"
+        },
+        {
+          "id": "22222222-0008-4008-8008-000000000008",
+          "then": [],
+          "when": [
+            {
+              "id": "d36a80a2-6399-4827-a007-d519b420f5c5",
+              "type": "COMMAND",
+              "title": "DeleteProject"
+            }
+          ],
+          "given": [],
+          "title": "Reject deletion with a missing project id",
+          "expectError": true,
+          "errorDescription": "projectId is required"
+        },
+        {
+          "id": "22222222-0009-4009-8009-000000000009",
+          "then": [],
+          "when": [
+            {
+              "id": "d36a80a2-6399-4827-a007-d519b420f5c5",
+              "type": "COMMAND",
+              "title": "DeleteProject"
+            }
+          ],
+          "given": [
+            {
+              "id": "fafc2953-273b-41d1-9117-eec6b3a441d8",
+              "type": "EVENT",
+              "title": "ProjectDeleted"
+            }
+          ],
+          "title": "Reject deleting a project that was already deleted",
+          "expectError": true,
+          "errorDescription": "project not found or already deleted"
+        }
+      ]
+    }
+  },
+  "hash": "p1zayi"
+}

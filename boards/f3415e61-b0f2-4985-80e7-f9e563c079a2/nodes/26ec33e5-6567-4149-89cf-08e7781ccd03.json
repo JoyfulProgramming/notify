@@ -1,0 +1,20 @@
+{
+  "id": "26ec33e5-6567-4149-89cf-08e7781ccd03",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "586e58f7-7e7a-4fbd-bef6-fe1b4771028a",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "b436c84e-ec26-4bd4-80c7-999cdbc2d070",
+    "title": "ProjectDeletionImpactView"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "b436c84e-ec26-4bd4-80c7-999cdbc2d070",
+    "title": "ProjectDeletionImpactView"
+  },
+  "hash": "zl1yse"
+}

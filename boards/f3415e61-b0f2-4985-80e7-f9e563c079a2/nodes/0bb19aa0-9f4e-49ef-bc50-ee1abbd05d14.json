@@ -1,0 +1,19 @@
+{
+  "id": "0bb19aa0-9f4e-49ef-bc50-ee1abbd05d14",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "84c23e71-df40-4d2a-bae5-f273f4793d33",
+    "title": "AssignSignalToProject"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "title": "AssignSignalToProject"
+  },
+  "hash": "l6llj9"
+}

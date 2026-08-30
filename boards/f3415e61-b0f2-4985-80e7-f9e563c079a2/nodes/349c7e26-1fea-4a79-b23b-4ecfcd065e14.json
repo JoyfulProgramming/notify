@@ -1,0 +1,68 @@
+{
+  "id": "349c7e26-1fea-4a79-b23b-4ecfcd065e14",
+  "type": "spec_node",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "storylines": [
+      {
+        "id": "5e1a2000-0000-4000-8000-000000000002",
+        "beats": [
+          {
+            "type": "EVENT",
+            "refId": "bafd390d-44b7-4754-8fdf-957c641774cd",
+            "title": "Signal Captured",
+            "instanceId": "5e1a2000-0000-4000-8000-000000000021"
+          },
+          {
+            "type": "READMODEL",
+            "refId": "80ea221d-95fc-432d-b04c-e32a7bd6c37c",
+            "title": "SignalsListView",
+            "examples": [
+              {
+                "sender": "Dave",
+                "signal_id": "sig-dave-1",
+                "source_app": "WhatsApp",
+                "assigned_project": ""
+              }
+            ],
+            "instanceId": "5e1a2000-0000-4000-8000-000000000022",
+            "exampleMode": "list"
+          },
+          {
+            "type": "EVENT",
+            "refId": "29fcbf5a-2f3c-492e-abe6-2417445bb1e3",
+            "title": "Signal Assigned To Project",
+            "instanceId": "5e1a2000-0000-4000-8000-000000000023"
+          },
+          {
+            "type": "READMODEL",
+            "refId": "80ea221d-95fc-432d-b04c-e32a7bd6c37c",
+            "title": "SignalsListView",
+            "examples": [
+              {
+                "sender": "Dave",
+                "signal_id": "sig-dave-1",
+                "source_app": "WhatsApp",
+                "assigned_project": "3F"
+              }
+            ],
+            "instanceId": "5e1a2000-0000-4000-8000-000000000024",
+            "exampleMode": "list"
+          }
+        ],
+        "title": "SignalsListView: a signal starts unassigned, then gets its project",
+        "layout": "horizontal",
+        "description": "The screen row for a signal has no assignedProject until the automation finds a matching rule."
+      }
+    ],
+    "givenWhenThenScenario": {
+      "scenarios": []
+    }
+  },
+  "hash": "1hnx7hm"
+}

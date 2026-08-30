@@ -1,0 +1,48 @@
+{
+  "id": "0d397ca4-2c7e-4cef-8d27-8de66f0b0b08",
+  "type": "sticky_note",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "Sender Rules View"
+  },
+  "meta": {
+    "type": "READMODEL",
+    "title": "Sender Rules View",
+    "fields": [
+      {
+        "name": "ruleId",
+        "type": "UUID",
+        "example": "rule_9",
+        "mapping": "Sender Rule Created.ruleId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "senderId",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "Sender Rule Created.senderId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "Sender Rule Created.assignMode",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectId",
+        "type": "String",
+        "example": "2M",
+        "mapping": "Sender Rule Created.projectId",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ],
+    "description": "Folds Sender Rule Created (add) and Sender Rule Deleted (remove by ruleId, e.g. when the owning project is deleted). Auto-Assign Signal reads this view, so a removed rule stops matching future signals immediately."
+  },
+  "hash": "rj6uuj"
+}

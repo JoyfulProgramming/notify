@@ -1,0 +1,40 @@
+{
+  "id": "53707957-7c10-4306-9955-f4d3a4416193",
+  "type": "sticky_note",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "ProjectListView",
+    "hasComments": true
+  },
+  "meta": {
+    "type": "READMODEL",
+    "title": "ProjectListView",
+    "fields": [
+      {
+        "name": "projectId",
+        "type": "String",
+        "example": "2M",
+        "mapping": "ProjectCreated.projectId",
+        "generated": false,
+        "cardinality": "List"
+      },
+      {
+        "name": "shorthand",
+        "type": "String",
+        "example": "2M",
+        "mapping": "ProjectCreated.shorthand",
+        "generated": false,
+        "cardinality": "List"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Mum",
+        "mapping": "ProjectCreated.name",
+        "generated": false,
+        "cardinality": "List"
+      }
+    ]
+  },
+  "hash": "hc5229"
+}

@@ -1,0 +1,124 @@
+{
+  "id": "9b437eb0-cdaf-4168-a556-17c1d87e0e9b",
+  "type": "spec_node",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000010",
+          "then": [
+            {
+              "id": "49affe6d-66d2-4b4e-b95d-30bae3ebcd20",
+              "type": "EVENT",
+              "title": "Sender Rule Created"
+            }
+          ],
+          "when": [
+            {
+              "id": "678e9fcb-86e2-418e-864e-8c5f44dad78e",
+              "type": "COMMAND",
+              "title": "CreateSenderRule"
+            }
+          ],
+          "given": [
+            {
+              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "type": "EVENT",
+              "title": "Signal Assigned To Project"
+            }
+          ],
+          "title": "Create a sender rule after a manual assignment by Contact",
+          "examples": [
+            {
+              "sender_id": "Mike",
+              "project_id": "2M",
+              "assign_mode": "Contact"
+            }
+          ]
+        },
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000011",
+          "then": [
+            {
+              "id": "49affe6d-66d2-4b4e-b95d-30bae3ebcd20",
+              "type": "EVENT",
+              "title": "Sender Rule Created"
+            }
+          ],
+          "when": [
+            {
+              "id": "678e9fcb-86e2-418e-864e-8c5f44dad78e",
+              "type": "COMMAND",
+              "title": "CreateSenderRule"
+            }
+          ],
+          "given": [
+            {
+              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "type": "EVENT",
+              "title": "Signal Assigned To Project"
+            }
+          ],
+          "title": "Create a sender rule after a manual assignment by Group",
+          "examples": [
+            {
+              "sender_id": "Humanists Group",
+              "project_id": "3F",
+              "assign_mode": "Group"
+            }
+          ]
+        },
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000012",
+          "then": [],
+          "when": [
+            {
+              "id": "678e9fcb-86e2-418e-864e-8c5f44dad78e",
+              "type": "COMMAND",
+              "title": "CreateSenderRule"
+            }
+          ],
+          "given": [
+            {
+              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "type": "EVENT",
+              "title": "Signal Assigned To Project"
+            },
+            {
+              "id": "49affe6d-66d2-4b4e-b95d-30bae3ebcd20",
+              "type": "EVENT",
+              "title": "Sender Rule Created"
+            }
+          ],
+          "title": "Reject creating a duplicate rule for a sender that already has one",
+          "examples": [],
+          "expectError": true,
+          "expectEmptyList": false,
+          "errorDescription": "a rule already exists for this sender"
+        },
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000013",
+          "then": [],
+          "when": [],
+          "given": [
+            {
+              "id": "29fcbf5a-2f3c-492e-abe6-2417445bb1e3",
+              "type": "EVENT",
+              "title": "Signal Assigned To Project"
+            }
+          ],
+          "title": "Not triggered when the assignment came from the auto-assign automation",
+          "examples": [],
+          "expectEmptyList": false
+        }
+      ]
+    }
+  },
+  "hash": "16uhj2l"
+}

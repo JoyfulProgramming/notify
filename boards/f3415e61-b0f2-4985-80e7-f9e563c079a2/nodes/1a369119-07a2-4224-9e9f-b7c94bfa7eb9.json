@@ -1,0 +1,68 @@
+{
+  "id": "1a369119-07a2-4224-9e9f-b7c94bfa7eb9",
+  "type": "html_screen",
+  "position": {
+    "x": 1905,
+    "y": 145
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
+  "meta": {
+    "type": "HTML_SCREEN",
+    "pages": [
+      "<div style=\"min-height:100vh;background:#f4f5f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:32px\">\n  <div style=\"max-width:680px;margin:0 auto\">\n    <div style=\"display:flex;align-items:center;justify-content:space-between;margin-bottom:20px\">\n      <div style=\"display:flex;align-items:center;gap:10px\">\n        <div style=\"width:36px;height:36px;border-radius:10px;background:#111827;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px\">N</div>\n        <div>\n          <div style=\"font-size:20px;font-weight:700;color:#111827\">Signals</div>\n          <div style=\"font-size:12px;color:#6b7280\">Unassigned and recently triaged</div>\n        </div>\n      </div>\n    </div>\n\n    <div style=\"background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#92400e\">\n      Assigning a signal to a project creates a rule for that sender — every other signal from them will update instantly.\n    </div>\n\n    <div style=\"display:flex;flex-direction:column;gap:10px\">\n\n      <div style=\"background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px\">\n        <div style=\"display:flex;justify-content:space-between;align-items:flex-start;gap:12px\">\n          <div style=\"flex:1\">\n            <div style=\"display:flex;align-items:center;gap:8px\">\n              <span style=\"width:20px;height:20px;border-radius:6px;background:#25d366;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700\">W</span>\n              <span style=\"font-size:13px;font-weight:700;color:#111827\">Mike</span>\n              <span style=\"font-size:11px;color:#9ca3af\">WhatsApp · 2 min ago</span>\n            </div>\n            <div style=\"font-size:14px;color:#374151;margin-top:6px\">\"Can you call Mum later, she's not feeling great\"</div>\n          </div>\n          <div style=\"background:#111827;color:#fff;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;white-space:nowrap\">Assign</div>\n        </div>\n      </div>\n\n      <div style=\"background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px\">\n        <div style=\"display:flex;justify-content:space-between;align-items:flex-start;gap:12px\">\n          <div style=\"flex:1\">\n            <div style=\"display:flex;align-items:center;gap:8px\">\n              <span style=\"width:20px;height:20px;border-radius:6px;background:#25d366;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700\">W</span>\n              <span style=\"font-size:13px;font-weight:700;color:#111827\">Mike</span>\n              <span style=\"font-size:11px;color:#9ca3af\">WhatsApp · 1 hr ago</span>\n            </div>\n            <div style=\"font-size:14px;color:#374151;margin-top:6px\">\"Might pop round to see her tomorrow too\"</div>\n          </div>\n          <div style=\"background:#111827;color:#fff;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;white-space:nowrap\">Assign</div>\n        </div>\n      </div>\n\n      <div style=\"background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px\">\n        <div style=\"display:flex;justify-content:space-between;align-items:flex-start;gap:12px\">\n          <div style=\"flex:1\">\n            <div style=\"display:flex;align-items:center;gap:8px\">\n              <span style=\"width:20px;height:20px;border-radius:6px;background:#25d366;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700\">W</span>\n              <span style=\"font-size:13px;font-weight:700;color:#111827\">Mike</span>\n              <span style=\"font-size:11px;color:#9ca3af\">WhatsApp · yesterday</span>\n            </div>\n            <div style=\"font-size:14px;color:#374151;margin-top:6px\">\"Prescription's sorted, picking it up Thursday\"</div>\n          </div>\n          <div style=\"background:#111827;color:#fff;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;white-space:nowrap\">Assign</div>\n        </div>\n      </div>\n\n      <div style=\"background:#fff;border:1px solid #e5e7eb;border-left:4px solid #047857;border-radius:10px;padding:14px 16px\">\n        <div style=\"display:flex;justify-content:space-between;align-items:flex-start;gap:12px\">\n          <div style=\"flex:1\">\n            <div style=\"display:flex;align-items:center;gap:8px\">\n              <span style=\"width:20px;height:20px;border-radius:6px;background:#25d366;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700\">W</span>\n              <span style=\"font-size:13px;font-weight:700;color:#111827\">Dave</span>\n              <span style=\"font-size:11px;color:#9ca3af\">WhatsApp · 3 hrs ago</span>\n              <span style=\"background:#ecfdf5;color:#047857;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px\">3F Friends</span>\n            </div>\n            <div style=\"font-size:14px;color:#374151;margin-top:6px\">\"See you at the club Thursday?\"</div>\n            <div style=\"font-size:11px;color:#9ca3af;margin-top:6px\">auto-assigned — matched an existing rule</div>\n          </div>\n          <div style=\"background:#111827;color:#fff;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;white-space:nowrap\">Assign</div>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>\n"
+    ],
+    "title": "Signals List",
+    "fields": [
+      {
+        "name": "sender",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "SignalsListView.sender",
+        "cardinality": "List"
+      },
+      {
+        "name": "sourceApp",
+        "type": "String",
+        "example": "WhatsApp",
+        "mapping": "SignalsListView.sourceApp",
+        "cardinality": "List"
+      },
+      {
+        "name": "body",
+        "type": "String",
+        "example": "Can you call Mum later, she is not feeling great",
+        "mapping": "SignalsListView.body",
+        "cardinality": "List"
+      },
+      {
+        "name": "receivedAt",
+        "type": "DateTime",
+        "example": "2026-08-29T00:02:00Z",
+        "mapping": "SignalsListView.receivedAt",
+        "cardinality": "List"
+      },
+      {
+        "name": "assignedProject",
+        "type": "String",
+        "example": "3F",
+        "mapping": "SignalsListView.assignedProject",
+        "cardinality": "List"
+      },
+      {
+        "name": "signalId",
+        "type": "String",
+        "example": "sig_18f2",
+        "mapping": "session:selectedSignalId",
+        "cardinality": "Single"
+      }
+    ],
+    "compact": true,
+    "context": "INTERNAL",
+    "version": 25,
+    "listElement": false,
+    "todoListElement": false,
+    "createsAggregate": false
+  },
+  "hash": "pjx4q4"
+}

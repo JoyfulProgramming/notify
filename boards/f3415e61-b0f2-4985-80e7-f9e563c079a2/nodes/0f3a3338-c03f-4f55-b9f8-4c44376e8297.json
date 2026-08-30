@@ -1,0 +1,47 @@
+{
+  "id": "0f3a3338-c03f-4f55-b9f8-4c44376e8297",
+  "type": "spec_node",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000050",
+          "then": [
+            {
+              "id": "53707957-7c10-4306-9955-f4d3a4416193",
+              "type": "READMODEL",
+              "title": "ProjectListView"
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "GAP: ProjectListView expected rows (no ProjectCreated event modeled on this timeline yet)",
+          "examples": [
+            {
+              "name": "Work",
+              "shorthand": "1W",
+              "project_id": "1W"
+            },
+            {
+              "name": "Mum",
+              "shorthand": "2M",
+              "project_id": "2M"
+            },
+            {
+              "name": "Friends",
+              "shorthand": "3F",
+              "project_id": "3F"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hash": "cqi2on"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "141bc9a5-81a6-4e9d-b92e-ec31026c78b8",
+  "nodeId": "53707957-7c10-4306-9955-f4d3a4416193",
+  "boardId": "f3415e61-b0f2-4985-80e7-f9e563c079a2",
+  "text": "Missing slice coverage: this column (colId 80510d03-cdc2-446a-9f6c-3548bb1940da) has a READMODEL but no SLICE_BORDER - every COMMAND/READMODEL column needs a slice to be buildable. Also still has the known gap noted in this column's feedback-lane MARKDOWN note: its fields map to a 'ProjectCreated' event that doesn't exist on this timeline yet.",
+  "type": "TASK",
+  "timestamp": 1787965933747,
+  "resolved": false,
+  "agentRequest": false,
+  "author": "completeness-check"
+}

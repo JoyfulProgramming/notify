@@ -1,0 +1,53 @@
+{
+  "id": "9ff7523c-1273-40ba-93f7-c9c49bf537d4",
+  "type": "spec_node",
+  "position": {
+    "x": 496.5,
+    "y": 1101.8
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "version": 1,
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000040",
+          "then": [
+            {
+              "id": "0d397ca4-2c7e-4cef-8d27-8de66f0b0b08",
+              "type": "READMODEL",
+              "title": "Sender Rules View"
+            }
+          ],
+          "when": [],
+          "given": [
+            {
+              "id": "49affe6d-66d2-4b4e-b95d-30bae3ebcd20",
+              "type": "EVENT",
+              "title": "Sender Rule Created"
+            }
+          ],
+          "title": "Sender Rules View accumulates one row per rule created",
+          "examples": [
+            {
+              "rule_id": "rule-mike-1",
+              "sender_id": "Mike",
+              "project_id": "2M",
+              "assign_mode": "Contact"
+            },
+            {
+              "rule_id": "rule-dave-1",
+              "sender_id": "Dave",
+              "project_id": "3F",
+              "assign_mode": "Group"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hash": "1ryz1cl"
+}

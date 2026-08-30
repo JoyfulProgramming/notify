@@ -1,0 +1,19 @@
+{
+  "id": "84ad61b8-fef0-472d-837a-6c124bbd063a",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "eee7d4e9-5521-4c5f-9c91-49d814c6d70b",
+    "title": "Unmatched Signals"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "title": "Unmatched Signals"
+  },
+  "hash": "1ke7p4g"
+}

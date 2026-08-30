@@ -1,0 +1,33 @@
+{
+  "id": "52230b43-77eb-426f-b0b0-a45976d9478d",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {},
+  "meta": {
+    "type": "COMMAND",
+    "title": "CreateProject",
+    "fields": [
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Mum",
+        "mapping": "user-input",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "scheduleId",
+        "type": "String",
+        "example": "lunch",
+        "mapping": "user-input",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ]
+  },
+  "hash": "1pgkp1m"
+}

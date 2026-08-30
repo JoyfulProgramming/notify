@@ -1,0 +1,18 @@
+{
+  "id": "22ef30f3-a1ce-426d-b985-2669b39588de",
+  "type": "image",
+  "position": {
+    "x": 3705,
+    "y": 145
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "url": "https://cdn.pixabay.com/photo/2016/01/03/11/24/gear-1119298_1280.png"
+  },
+  "meta": {
+    "type": "AUTOMATION",
+    "title": "Create Sender Rule",
+    "version": 0
+  },
+  "hash": "14f733p"
+}

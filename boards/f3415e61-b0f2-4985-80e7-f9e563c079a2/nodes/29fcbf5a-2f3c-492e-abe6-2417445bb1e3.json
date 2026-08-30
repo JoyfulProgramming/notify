@@ -1,0 +1,55 @@
+{
+  "id": "29fcbf5a-2f3c-492e-abe6-2417445bb1e3",
+  "type": "sticky_note",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "Signal Assigned To Project"
+  },
+  "meta": {
+    "type": "EVENT",
+    "title": "Signal Assigned To Project",
+    "fields": [
+      {
+        "name": "signalId",
+        "type": "UUID",
+        "example": "sig_18f2",
+        "mapping": "AssignSignalToProject.signalId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "AssignSignalToProject.assignMode",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectId",
+        "type": "String",
+        "example": "2M",
+        "mapping": "AssignSignalToProject.projectId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignedAt",
+        "type": "DateTime",
+        "example": "2026-08-29T00:05:00Z",
+        "mapping": "derived:now()",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignedBy",
+        "type": "String",
+        "example": "rule",
+        "mapping": "derived:'rule'",
+        "generated": true,
+        "cardinality": "Single"
+      }
+    ]
+  },
+  "hash": "1diztfc"
+}

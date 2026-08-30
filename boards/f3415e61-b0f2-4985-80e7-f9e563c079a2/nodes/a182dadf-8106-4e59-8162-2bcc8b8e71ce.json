@@ -1,0 +1,70 @@
+{
+  "id": "a182dadf-8106-4e59-8162-2bcc8b8e71ce",
+  "type": "spec_node",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000030",
+          "then": [
+            {
+              "id": "29fcbf5a-2f3c-492e-abe6-2417445bb1e3",
+              "type": "EVENT",
+              "title": "Signal Assigned To Project"
+            }
+          ],
+          "when": [
+            {
+              "id": "7ffebbad-718e-4d1b-b474-ae63ae2ea1f1",
+              "type": "COMMAND",
+              "title": "AssignSignalToProject"
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured"
+            },
+            {
+              "id": "49affe6d-66d2-4b4e-b95d-30bae3ebcd20",
+              "type": "EVENT",
+              "title": "Sender Rule Created"
+            }
+          ],
+          "title": "Auto-assign fires when the sender already matches an existing rule",
+          "examples": [
+            {
+              "signal_id": "sig-mike-4",
+              "project_id": "2M",
+              "assign_mode": "Contact",
+              "assigned_by": "rule"
+            }
+          ]
+        },
+        {
+          "id": "5e1a1000-0000-4000-8000-000000000031",
+          "then": [],
+          "when": [],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured"
+            }
+          ],
+          "title": "Auto-assign does not fire when no rule matches the sender yet",
+          "examples": [],
+          "expectEmptyList": false
+        }
+      ]
+    }
+  },
+  "hash": "1xfpyd"
+}

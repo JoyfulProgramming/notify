@@ -1,0 +1,14 @@
+{
+  "id": "c1ff7fd6-6642-4ed4-9899-b5367a3bb28c",
+  "type": "markdown",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "Event -> field reasoning - SignalListView"
+  },
+  "meta": {
+    "type": "MARKDOWN",
+    "title": "Event -> field reasoning - SignalsListView",
+    "description": "## Event -> field reasoning - SignalsListView\n\nThis read model (and its Signals List screen) intentionally sits AFTER the Auto-Assign Signal automation column, not next to Signal Captured. Signal Captured itself stays in an earlier column because it has to - it is what opens the Unmatched Signals todo list that triggers Auto-Assign Signal. But the screen a person actually looks at reflects state accumulated by the time they open it, i.e. after the automation has already had a chance to run.\n\n- **Signal Captured** -> sets signalId, sender, sourceApp, body, receivedAt. Stand-in for the already-implemented MVP Capture pipeline (see notify_mvp_plan.md), not modeled on this board.\n- **Signal Assigned To Project (auto instance, Auto-Assign Signal's column)** -> sets assignedProject (latest value). This is what makes Dave's already-assigned row legitimate: it is fed forward from the automation, not backward-linked.\n- The manual Signal Assigned To Project (later column, the Assign Signal to Project slice) is NOT connected here - it is later than this read model's column, so it cannot feed it without violating forward-only ordering. A signal a person manually assigns updates via the next time this screen is queried in a later occurrence, not retroactively on this instance.\n\nConsumed by both Signals List (this column, list cardinality) and Assign Signal to Project (single-item context display, one column further right)."
+  },
+  "hash": "11vj3dg"
+}

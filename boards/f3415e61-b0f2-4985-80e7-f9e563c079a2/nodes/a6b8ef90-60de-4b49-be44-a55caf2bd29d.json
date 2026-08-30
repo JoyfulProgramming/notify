@@ -1,0 +1,36 @@
+{
+  "id": "a6b8ef90-60de-4b49-be44-a55caf2bd29d",
+  "type": "spec_node",
+  "parentId": "586e58f7-7e7a-4fbd-bef6-fe1b4771028a",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "22222222-0003-4003-8003-000000000003",
+          "then": [
+            {
+              "id": "3e13475f-b75b-43d7-9617-effbf697db9a",
+              "type": "READMODEL",
+              "title": "ProjectDetailView"
+            }
+          ],
+          "when": [],
+          "given": [
+            {
+              "id": "522ae700-ca95-4552-b837-f7d337050aae",
+              "type": "EVENT",
+              "title": "ProjectCreated (Mum)"
+            }
+          ],
+          "title": "Project details display after the project is created"
+        }
+      ]
+    }
+  },
+  "hash": "7z6xwl"
+}

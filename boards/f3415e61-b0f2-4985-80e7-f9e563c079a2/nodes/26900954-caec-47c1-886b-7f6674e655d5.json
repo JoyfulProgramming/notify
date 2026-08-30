@@ -1,0 +1,20 @@
+{
+  "id": "26900954-caec-47c1-886b-7f6674e655d5",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "586e58f7-7e7a-4fbd-bef6-fe1b4771028a",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "c810880c-770f-477d-aebd-cd8fe52e43a9",
+    "title": "DeleteProject"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "c810880c-770f-477d-aebd-cd8fe52e43a9",
+    "title": "DeleteProject"
+  },
+  "hash": "d775in"
+}

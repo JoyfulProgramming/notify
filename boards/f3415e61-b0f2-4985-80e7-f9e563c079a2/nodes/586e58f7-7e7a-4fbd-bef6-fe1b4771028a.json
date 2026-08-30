@@ -1,0 +1,187 @@
+{
+  "id": "586e58f7-7e7a-4fbd-bef6-fe1b4771028a",
+  "type": "timeline",
+  "position": {
+    "x": 729.8453674217676,
+    "y": 5260.041630418264
+  },
+  "data": {},
+  "meta": {
+    "type": "CHAPTER",
+    "title": "Delete Project",
+    "timelineData": {
+      "rows": [
+        {
+          "id": "56c6751d-d6b3-4cbb-ab33-2e2ba2e175e5",
+          "type": "actor",
+          "label": "Actor",
+          "height": 320
+        },
+        {
+          "id": "5ccb7d5d-4f9f-4ddb-8837-4458d63c7204",
+          "type": "interaction",
+          "label": "Interaction",
+          "height": 320
+        },
+        {
+          "id": "cb91467a-24c2-4717-b102-4e9271bb5f00",
+          "type": "swimlane",
+          "label": "Swimlane",
+          "height": 320
+        },
+        {
+          "id": "606c7a3e-5d4c-42a9-8e34-bb09d30097f1",
+          "type": "spec",
+          "label": "Spec Lane",
+          "height": 320
+        },
+        {
+          "id": "219b04be-d834-4294-ad31-bd60d4830524",
+          "type": "feedback",
+          "label": "Notes",
+          "height": 320
+        }
+      ],
+      "cells": [
+        {
+          "id": "56c6751d-d6b3-4cbb-ab33-2e2ba2e175e5-33a64754-9cfe-489d-b8d5-61d4a99101d5",
+          "colId": "33a64754-9cfe-489d-b8d5-61d4a99101d5",
+          "rowId": "56c6751d-d6b3-4cbb-ab33-2e2ba2e175e5",
+          "nodeId": "54a827b0-cde8-47f4-963a-f16a0492f4cf",
+          "nodeType": "HTML_SCREEN"
+        },
+        {
+          "id": "5ccb7d5d-4f9f-4ddb-8837-4458d63c7204-33a64754-9cfe-489d-b8d5-61d4a99101d5",
+          "colId": "33a64754-9cfe-489d-b8d5-61d4a99101d5",
+          "rowId": "5ccb7d5d-4f9f-4ddb-8837-4458d63c7204",
+          "nodeId": "3e13475f-b75b-43d7-9617-effbf697db9a",
+          "nodeType": "READMODEL"
+        },
+        {
+          "id": "cb91467a-24c2-4717-b102-4e9271bb5f00-33a64754-9cfe-489d-b8d5-61d4a99101d5",
+          "colId": "33a64754-9cfe-489d-b8d5-61d4a99101d5",
+          "rowId": "cb91467a-24c2-4717-b102-4e9271bb5f00",
+          "nodeId": "522ae700-ca95-4552-b837-f7d337050aae",
+          "nodeType": "EVENT"
+        },
+        {
+          "id": "56c6751d-d6b3-4cbb-ab33-2e2ba2e175e5-c810880c-770f-477d-aebd-cd8fe52e43a9",
+          "colId": "c810880c-770f-477d-aebd-cd8fe52e43a9",
+          "rowId": "56c6751d-d6b3-4cbb-ab33-2e2ba2e175e5",
+          "nodeId": "cbddaa9e-4929-4b67-8f72-703a96ed4c3a",
+          "nodeType": "HTML_SCREEN"
+        },
+        {
+          "id": "5ccb7d5d-4f9f-4ddb-8837-4458d63c7204-c810880c-770f-477d-aebd-cd8fe52e43a9",
+          "colId": "c810880c-770f-477d-aebd-cd8fe52e43a9",
+          "rowId": "5ccb7d5d-4f9f-4ddb-8837-4458d63c7204",
+          "nodeId": "d36a80a2-6399-4827-a007-d519b420f5c5",
+          "nodeType": "COMMAND"
+        },
+        {
+          "id": "cb91467a-24c2-4717-b102-4e9271bb5f00-c810880c-770f-477d-aebd-cd8fe52e43a9",
+          "colId": "c810880c-770f-477d-aebd-cd8fe52e43a9",
+          "rowId": "cb91467a-24c2-4717-b102-4e9271bb5f00",
+          "nodeId": "fafc2953-273b-41d1-9117-eec6b3a441d8",
+          "nodeType": "EVENT"
+        },
+        {
+          "id": "219b04be-d834-4294-ad31-bd60d4830524-c810880c-770f-477d-aebd-cd8fe52e43a9",
+          "colId": "c810880c-770f-477d-aebd-cd8fe52e43a9",
+          "rowId": "219b04be-d834-4294-ad31-bd60d4830524",
+          "nodeId": "69015629-f10c-4c53-9e71-b03a40beb50b",
+          "nodeType": "MARKDOWN"
+        },
+        {
+          "id": "56c6751d-d6b3-4cbb-ab33-2e2ba2e175e5-1cd5ba72-27a8-4446-8351-41fced3269c7",
+          "colId": "1cd5ba72-27a8-4446-8351-41fced3269c7",
+          "rowId": "56c6751d-d6b3-4cbb-ab33-2e2ba2e175e5",
+          "nodeId": "36d4cb34-6bd1-4338-8699-64f53f660694",
+          "nodeType": "HTML_SCREEN"
+        },
+        {
+          "id": "5ccb7d5d-4f9f-4ddb-8837-4458d63c7204-1cd5ba72-27a8-4446-8351-41fced3269c7",
+          "colId": "1cd5ba72-27a8-4446-8351-41fced3269c7",
+          "rowId": "5ccb7d5d-4f9f-4ddb-8837-4458d63c7204",
+          "nodeId": "5585badb-6ab6-4e54-8f44-1310a0aca80e",
+          "nodeType": "READMODEL"
+        },
+        {
+          "id": "cb91467a-24c2-4717-b102-4e9271bb5f00-1cd5ba72-27a8-4446-8351-41fced3269c7",
+          "colId": "1cd5ba72-27a8-4446-8351-41fced3269c7",
+          "rowId": "cb91467a-24c2-4717-b102-4e9271bb5f00",
+          "nodeId": "ae46ae59-a3f4-46d2-be62-65f92f14edc2",
+          "nodeType": "EVENT"
+        },
+        {
+          "id": "56c6751d-d6b3-4cbb-ab33-2e2ba2e175e5-b436c84e-ec26-4bd4-80c7-999cdbc2d070",
+          "colId": "b436c84e-ec26-4bd4-80c7-999cdbc2d070",
+          "rowId": "56c6751d-d6b3-4cbb-ab33-2e2ba2e175e5",
+          "nodeId": "44f0ac63-8fbe-4933-a0ee-a525df778900",
+          "nodeType": "HTML_SCREEN"
+        },
+        {
+          "id": "5ccb7d5d-4f9f-4ddb-8837-4458d63c7204-b436c84e-ec26-4bd4-80c7-999cdbc2d070",
+          "colId": "b436c84e-ec26-4bd4-80c7-999cdbc2d070",
+          "rowId": "5ccb7d5d-4f9f-4ddb-8837-4458d63c7204",
+          "nodeId": "cb39e50d-eb32-4f8a-863e-0f28014368ab",
+          "nodeType": "READMODEL"
+        },
+        {
+          "id": "cb91467a-24c2-4717-b102-4e9271bb5f00-b436c84e-ec26-4bd4-80c7-999cdbc2d070",
+          "colId": "b436c84e-ec26-4bd4-80c7-999cdbc2d070",
+          "rowId": "cb91467a-24c2-4717-b102-4e9271bb5f00",
+          "nodeId": "b8d242d7-f516-472a-a168-49a409b8a0d2",
+          "nodeType": "EVENT"
+        },
+        {
+          "id": "606c7a3e-5d4c-42a9-8e34-bb09d30097f1-1cd5ba72-27a8-4446-8351-41fced3269c7",
+          "colId": "1cd5ba72-27a8-4446-8351-41fced3269c7",
+          "rowId": "606c7a3e-5d4c-42a9-8e34-bb09d30097f1",
+          "nodeId": "ff1b5ec1-d36b-4f4e-b1ad-f0b9efdb5f2f",
+          "nodeType": "SCENARIO"
+        },
+        {
+          "id": "606c7a3e-5d4c-42a9-8e34-bb09d30097f1-33a64754-9cfe-489d-b8d5-61d4a99101d5",
+          "colId": "33a64754-9cfe-489d-b8d5-61d4a99101d5",
+          "rowId": "606c7a3e-5d4c-42a9-8e34-bb09d30097f1",
+          "nodeId": "a6b8ef90-60de-4b49-be44-a55caf2bd29d",
+          "nodeType": "SCENARIO"
+        },
+        {
+          "id": "606c7a3e-5d4c-42a9-8e34-bb09d30097f1-b436c84e-ec26-4bd4-80c7-999cdbc2d070",
+          "colId": "b436c84e-ec26-4bd4-80c7-999cdbc2d070",
+          "rowId": "606c7a3e-5d4c-42a9-8e34-bb09d30097f1",
+          "nodeId": "bf5264eb-2759-47c0-9d15-b5d0901b3cba",
+          "nodeType": "SCENARIO"
+        },
+        {
+          "id": "606c7a3e-5d4c-42a9-8e34-bb09d30097f1-c810880c-770f-477d-aebd-cd8fe52e43a9",
+          "colId": "c810880c-770f-477d-aebd-cd8fe52e43a9",
+          "rowId": "606c7a3e-5d4c-42a9-8e34-bb09d30097f1",
+          "nodeId": "a1c498b4-4c82-412f-912e-7298b38d6e7e",
+          "nodeType": "SCENARIO"
+        }
+      ],
+      "columns": [
+        {
+          "id": "1cd5ba72-27a8-4446-8351-41fced3269c7",
+          "width": 450
+        },
+        {
+          "id": "33a64754-9cfe-489d-b8d5-61d4a99101d5",
+          "width": 450
+        },
+        {
+          "id": "b436c84e-ec26-4bd4-80c7-999cdbc2d070",
+          "width": 450
+        },
+        {
+          "id": "c810880c-770f-477d-aebd-cd8fe52e43a9",
+          "width": 450
+        }
+      ]
+    }
+  },
+  "hash": "4ho01g"
+}

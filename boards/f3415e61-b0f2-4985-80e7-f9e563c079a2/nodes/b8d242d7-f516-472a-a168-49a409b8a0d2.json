@@ -1,0 +1,64 @@
+{
+  "id": "b8d242d7-f516-472a-a168-49a409b8a0d2",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "586e58f7-7e7a-4fbd-bef6-fe1b4771028a",
+  "data": {},
+  "meta": {
+    "type": "EVENT",
+    "title": "Sender Rule Created",
+    "fields": [
+      {
+        "name": "ruleId",
+        "type": "UUID",
+        "example": "rule_9",
+        "mapping": "derived:uuid4()",
+        "generated": true,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "senderId",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "CreateSenderRule.senderId",
+        "generated": false,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "CreateSenderRule.assignMode",
+        "generated": false,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectId",
+        "type": "String",
+        "example": "2M",
+        "mapping": "CreateSenderRule.projectId",
+        "generated": false,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "createdAt",
+        "type": "DateTime",
+        "example": "2026-08-29T00:06:00Z",
+        "mapping": "derived:now()",
+        "generated": true,
+        "subfields": [],
+        "cardinality": "Single"
+      }
+    ],
+    "version": 2,
+    "linkedTo": "49affe6d-66d2-4b4e-b95d-30bae3ebcd20"
+  },
+  "hash": "1cfdh0g"
+}

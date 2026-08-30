@@ -1,0 +1,103 @@
+{
+  "id": "f742b272-0d94-426a-9992-d95c57b2f842",
+  "type": "spec_node",
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "11111111-0005-4005-8005-000000000005",
+          "then": [
+            {
+              "id": "3e5ffa8f-f657-4bc7-bda0-a02ce4c156c4",
+              "type": "READMODEL",
+              "title": "ProjectRosterView"
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Roster is empty before any project is created",
+          "examples": [],
+          "expectEmptyList": true
+        },
+        {
+          "id": "11111111-0006-4006-8006-000000000006",
+          "then": [
+            {
+              "id": "3e5ffa8f-f657-4bc7-bda0-a02ce4c156c4",
+              "type": "READMODEL",
+              "title": "ProjectRosterView"
+            }
+          ],
+          "when": [],
+          "given": [
+            {
+              "id": "8203df40-523c-42c7-96a0-43eb66f9838a",
+              "type": "EVENT",
+              "title": "ProjectCreated (Work)"
+            },
+            {
+              "id": "8203df40-523c-42c7-96a0-43eb66f9838a",
+              "type": "EVENT",
+              "title": "ProjectCreated (Mum)"
+            }
+          ],
+          "title": "Roster shows created projects with remaining slots",
+          "examples": [
+            {
+              "name": "Work",
+              "colour": "#4338ca",
+              "number": "1",
+              "shorthand": "1W",
+              "project_id": "p1",
+              "slots_remaining": "4"
+            },
+            {
+              "name": "Mum",
+              "colour": "#be185d",
+              "number": "2",
+              "shorthand": "2M",
+              "project_id": "p2",
+              "slots_remaining": "4"
+            }
+          ]
+        },
+        {
+          "id": "11111111-0007-4007-8007-000000000007",
+          "then": [
+            {
+              "id": "3e5ffa8f-f657-4bc7-bda0-a02ce4c156c4",
+              "type": "READMODEL",
+              "title": "ProjectRosterView"
+            }
+          ],
+          "when": [],
+          "given": [
+            {
+              "id": "8203df40-523c-42c7-96a0-43eb66f9838a",
+              "type": "EVENT",
+              "title": "ProjectCreated (6th project)"
+            }
+          ],
+          "title": "Roster shows zero slots remaining once the 6th project is created",
+          "examples": [
+            {
+              "name": "Hobbies",
+              "colour": "#0891b2",
+              "number": "6",
+              "shorthand": "6H",
+              "project_id": "p6",
+              "slots_remaining": "0"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hash": "1je9ima"
+}
