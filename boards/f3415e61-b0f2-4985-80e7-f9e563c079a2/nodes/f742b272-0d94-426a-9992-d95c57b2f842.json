@@ -42,12 +42,56 @@
             {
               "id": "8203df40-523c-42c7-96a0-43eb66f9838a",
               "type": "EVENT",
-              "title": "ProjectCreated (Work, 1st project)"
+              "title": "ProjectCreated",
+              "fields": [
+                {
+                  "name": "projectId",
+                  "example": "11111111-aaaa-4000-8000-000000000001"
+                },
+                {
+                  "name": "number",
+                  "example": "1"
+                },
+                {
+                  "name": "shorthand",
+                  "example": "1W"
+                },
+                {
+                  "name": "name",
+                  "example": "Work"
+                },
+                {
+                  "name": "colour",
+                  "example": "#4338ca"
+                }
+              ]
             },
             {
               "id": "8203df40-523c-42c7-96a0-43eb66f9838a",
               "type": "EVENT",
-              "title": "ProjectCreated (Mum, 2nd project)"
+              "title": "ProjectCreated",
+              "fields": [
+                {
+                  "name": "projectId",
+                  "example": "8b1e7f2a-0000-4000-8000-000000000002"
+                },
+                {
+                  "name": "number",
+                  "example": "2"
+                },
+                {
+                  "name": "shorthand",
+                  "example": "2M"
+                },
+                {
+                  "name": "name",
+                  "example": "Mum"
+                },
+                {
+                  "name": "colour",
+                  "example": "#be185d"
+                }
+              ]
             }
           ],
           "title": "Roster shows created projects with remaining slots",
@@ -57,7 +101,7 @@
               "colour": "#4338ca",
               "number": "1",
               "shorthand": "1W",
-              "project_id": "p1",
+              "project_id": "11111111-aaaa-4000-8000-000000000001",
               "slots_remaining": "5"
             },
             {
@@ -65,7 +109,7 @@
               "colour": "#be185d",
               "number": "2",
               "shorthand": "2M",
-              "project_id": "p2",
+              "project_id": "8b1e7f2a-0000-4000-8000-000000000002",
               "slots_remaining": "4"
             }
           ]
@@ -84,32 +128,164 @@
             {
               "id": "8203df40-523c-42c7-96a0-43eb66f9838a",
               "type": "EVENT",
-              "title": "ProjectCreated (Work, 1st project)"
+              "title": "ProjectCreated",
+              "fields": [
+                {
+                  "name": "projectId",
+                  "example": "11111111-aaaa-4000-8000-000000000001"
+                },
+                {
+                  "name": "number",
+                  "example": "1"
+                },
+                {
+                  "name": "shorthand",
+                  "example": "1W"
+                },
+                {
+                  "name": "name",
+                  "example": "Work"
+                },
+                {
+                  "name": "colour",
+                  "example": "#4338ca"
+                }
+              ]
             },
             {
               "id": "8203df40-523c-42c7-96a0-43eb66f9838a",
               "type": "EVENT",
-              "title": "ProjectCreated (Mum, 2nd project)"
+              "title": "ProjectCreated",
+              "fields": [
+                {
+                  "name": "projectId",
+                  "example": "8b1e7f2a-0000-4000-8000-000000000002"
+                },
+                {
+                  "name": "number",
+                  "example": "2"
+                },
+                {
+                  "name": "shorthand",
+                  "example": "2M"
+                },
+                {
+                  "name": "name",
+                  "example": "Mum"
+                },
+                {
+                  "name": "colour",
+                  "example": "#be185d"
+                }
+              ]
             },
             {
               "id": "8203df40-523c-42c7-96a0-43eb66f9838a",
               "type": "EVENT",
-              "title": "ProjectCreated (Friends, 3rd project)"
+              "title": "ProjectCreated",
+              "fields": [
+                {
+                  "name": "projectId",
+                  "example": "33333333-cccc-4000-8000-000000000003"
+                },
+                {
+                  "name": "number",
+                  "example": "3"
+                },
+                {
+                  "name": "shorthand",
+                  "example": "3F"
+                },
+                {
+                  "name": "name",
+                  "example": "Friends"
+                },
+                {
+                  "name": "colour",
+                  "example": "#047857"
+                }
+              ]
             },
             {
               "id": "8203df40-523c-42c7-96a0-43eb66f9838a",
               "type": "EVENT",
-              "title": "ProjectCreated (Health, 4th project)"
+              "title": "ProjectCreated",
+              "fields": [
+                {
+                  "name": "projectId",
+                  "example": "44444444-dddd-4000-8000-000000000004"
+                },
+                {
+                  "name": "number",
+                  "example": "4"
+                },
+                {
+                  "name": "shorthand",
+                  "example": "4H"
+                },
+                {
+                  "name": "name",
+                  "example": "Health"
+                },
+                {
+                  "name": "colour",
+                  "example": "#b45309"
+                }
+              ]
             },
             {
               "id": "8203df40-523c-42c7-96a0-43eb66f9838a",
               "type": "EVENT",
-              "title": "ProjectCreated (Travel, 5th project)"
+              "title": "ProjectCreated",
+              "fields": [
+                {
+                  "name": "projectId",
+                  "example": "55555555-eeee-4000-8000-000000000005"
+                },
+                {
+                  "name": "number",
+                  "example": "5"
+                },
+                {
+                  "name": "shorthand",
+                  "example": "5T"
+                },
+                {
+                  "name": "name",
+                  "example": "Travel"
+                },
+                {
+                  "name": "colour",
+                  "example": "#7c3aed"
+                }
+              ]
             },
             {
               "id": "8203df40-523c-42c7-96a0-43eb66f9838a",
               "type": "EVENT",
-              "title": "ProjectCreated (Hobbies, 6th project)"
+              "title": "ProjectCreated",
+              "fields": [
+                {
+                  "name": "projectId",
+                  "example": "66666666-ffff-4000-8000-000000000006"
+                },
+                {
+                  "name": "number",
+                  "example": "6"
+                },
+                {
+                  "name": "shorthand",
+                  "example": "6H"
+                },
+                {
+                  "name": "name",
+                  "example": "Hobbies"
+                },
+                {
+                  "name": "colour",
+                  "example": "#0891b2"
+                }
+              ]
             }
           ],
           "title": "Roster shows zero slots remaining once the 6th project is created",
@@ -119,7 +295,7 @@
               "colour": "#4338ca",
               "number": "1",
               "shorthand": "1W",
-              "project_id": "p1",
+              "project_id": "11111111-aaaa-4000-8000-000000000001",
               "slots_remaining": "0"
             },
             {
@@ -127,7 +303,7 @@
               "colour": "#be185d",
               "number": "2",
               "shorthand": "2M",
-              "project_id": "p2",
+              "project_id": "8b1e7f2a-0000-4000-8000-000000000002",
               "slots_remaining": "0"
             },
             {
@@ -135,7 +311,7 @@
               "colour": "#047857",
               "number": "3",
               "shorthand": "3F",
-              "project_id": "p3",
+              "project_id": "33333333-cccc-4000-8000-000000000003",
               "slots_remaining": "0"
             },
             {
@@ -143,7 +319,7 @@
               "colour": "#b45309",
               "number": "4",
               "shorthand": "4H",
-              "project_id": "p4",
+              "project_id": "44444444-dddd-4000-8000-000000000004",
               "slots_remaining": "0"
             },
             {
@@ -151,7 +327,7 @@
               "colour": "#7c3aed",
               "number": "5",
               "shorthand": "5T",
-              "project_id": "p5",
+              "project_id": "55555555-eeee-4000-8000-000000000005",
               "slots_remaining": "0"
             },
             {
@@ -159,7 +335,7 @@
               "colour": "#0891b2",
               "number": "6",
               "shorthand": "6H",
-              "project_id": "p6",
+              "project_id": "66666666-ffff-4000-8000-000000000006",
               "slots_remaining": "0"
             }
           ]
@@ -167,7 +343,7 @@
       ]
     }
   },
-  "hash": "1e22a7",
-  "timestamp": 1756531700000,
+  "hash": "13j1c7k",
+  "timestamp": 1756531800000,
   "userId": null
 }
