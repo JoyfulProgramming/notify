@@ -339,54 +339,11 @@
               "slots_remaining": "0"
             }
           ]
-        },
-        {
-          "id": "41c1946c-c2a3-452e-8cd0-2561157cceb4",
-          "then": [
-            {
-              "id": "3e5ffa8f-f657-4bc7-bda0-a02ce4c156c4",
-              "type": "READMODEL",
-              "title": "ProjectRosterView",
-              "fields": [
-                {
-                  "name": "projectId",
-                  "example": "8b1e7f2a-0000-4000-8000-000000000002"
-                },
-                {
-                  "name": "number",
-                  "example": "2"
-                },
-                {
-                  "name": "shorthand",
-                  "example": "2M"
-                },
-                {
-                  "name": "name",
-                  "example": "Mum"
-                },
-                {
-                  "name": "colour",
-                  "example": "#be185d"
-                },
-                {
-                  "name": "slotsRemaining",
-                  "example": "4"
-                }
-              ]
-            }
-          ],
-          "when": [],
-          "given": [],
-          "title": "Scenario #4",
-          "context": [],
-          "examples": [],
-          "expectError": false,
-          "expectEmptyList": false
         }
       ]
     }
   },
-  "hash": "81afh2",
-  "timestamp": 1788099230032,
+  "hash": "y0i96u",
+  "timestamp": 1788099249225,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
