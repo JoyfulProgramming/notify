@@ -71,7 +71,7 @@
     "compact": true,
     "context": "INTERNAL",
     "version": 9,
-    "description": "Rows are hidden once receivedAt <= the latest SignalsArchived.archivedUpTo — pressing 'Done' sweeps everything currently visible out of the list without deleting the underlying signal history.",
+    "description": "A row is hidden once its signalId appears in any SignalsArchived.signalIds — i.e. only the signals the user explicitly selected and archived disappear, not everything up to a point in time. The underlying signal history is never deleted.",
     "listElement": false,
     "todoListElement": false,
     "createsAggregate": false,
@@ -79,7 +79,7 @@
       "meta.description"
     ]
   },
-  "hash": "1ihq4fb",
-  "timestamp": 1756536810000,
+  "hash": "1cfw01r",
+  "timestamp": 1756795400000,
   "userId": null
 }

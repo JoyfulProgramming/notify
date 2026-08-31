@@ -62,13 +62,13 @@
         "cardinality": "Single"
       }
     ],
-    "description": "Rows are hidden once receivedAt <= the latest SignalsArchived.archivedUpTo, same visibility rule as SignalsListView — pressing 'Done' on this grouped-by-contact screen fires the same ArchiveSignals command. A row's badge shows a grey '?' instead of a project number/colour when that contact's signals span more than one assigned project.",
+    "description": "A signal is hidden once its signalId appears in any SignalsArchived.signalIds, same rule as SignalsListView — a contact row's count/preview reflect only its still-unarchived signals; the row itself disappears once all its signals are archived. A row's badge shows a grey '?' instead of a project number/colour when that contact's remaining signals span more than one assigned project.",
     "listElement": true,
     "changedAttributes": [
       "meta.description"
     ]
   },
-  "hash": "1m7mqiz",
-  "timestamp": 1756795201000,
+  "hash": "123yoci",
+  "timestamp": 1756795401000,
   "userId": null
 }
