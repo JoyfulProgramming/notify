@@ -1,0 +1,87 @@
+{
+  "id": "189dbab4-84ad-4e34-b324-b6b7defd5288",
+  "type": "sticky_note",
+  "position": {
+    "x": 995,
+    "y": 507
+  },
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {},
+  "meta": {
+    "type": "READMODEL",
+    "title": "ProjectCreated",
+    "fields": [
+      {
+        "name": "projectId",
+        "type": "UUID",
+        "example": "8b1e7f2a-0000-4000-8000-000000000002",
+        "mapping": "derived:uuid()",
+        "generated": true,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "number",
+        "type": "Number",
+        "example": "2",
+        "mapping": "derived:nextAvailableSlot()",
+        "generated": true,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "shorthand",
+        "type": "String",
+        "example": "2M",
+        "mapping": "derived:number+name[0]",
+        "generated": true,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Mum",
+        "mapping": "CreateProject.name",
+        "generated": false,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "colour",
+        "type": "String",
+        "example": "#be185d",
+        "mapping": "derived:autoAssignColour()",
+        "generated": true,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "scheduleId",
+        "type": "String",
+        "example": "lunch",
+        "mapping": "CreateProject.scheduleId",
+        "generated": false,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "createdAt",
+        "type": "DateTime",
+        "example": "2026-08-30T09:00:00Z",
+        "mapping": "derived:now()",
+        "generated": true,
+        "subfields": [],
+        "cardinality": "Single"
+      }
+    ],
+    "compact": true,
+    "context": "INTERNAL",
+    "listElement": false,
+    "todoListElement": false,
+    "createsAggregate": false
+  },
+  "hash": "15crknq",
+  "timestamp": 1788136571544,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+}
