@@ -1,0 +1,19 @@
+{
+  "id": "ab525b2e-a8c0-4d64-93d3-50b0682b0061",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {
+    "title": "ProjectColourPaletteView"
+  },
+  "meta": {
+    "type": "READMODEL",
+    "title": "ProjectColourPaletteView"
+  },
+  "hash": "h9c2jr",
+  "timestamp": 1788141778369,
+  "userId": null
+}
