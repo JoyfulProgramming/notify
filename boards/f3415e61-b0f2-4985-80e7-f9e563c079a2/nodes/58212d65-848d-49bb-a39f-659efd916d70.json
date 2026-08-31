@@ -76,18 +76,18 @@
         "cardinality": "List"
       },
       {
-        "name": "doneButton",
+        "name": "archiveButton",
         "type": "String",
-        "example": "Done",
-        "mapping": "ArchiveSignals.archivedUpTo (triggers the command; no direct input, top-right button)",
+        "example": "Archive",
+        "mapping": "ArchiveSignals.signalIds (triggers the command with session:selectedSignalIds; disabled/inactive whenever the selection is empty)",
         "cardinality": "Single"
       }
     ],
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "1gnv4f1",
-  "timestamp": 1788218132662,
+  "hash": "rn3rha",
+  "timestamp": 1756795501000,
   "userId": null
 }

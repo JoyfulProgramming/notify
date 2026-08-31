@@ -85,10 +85,10 @@
         "cardinality": "Single"
       },
       {
-        "name": "doneButton",
+        "name": "archiveButton",
         "type": "String",
-        "example": "Done",
-        "mapping": "ArchiveSignals.archivedUpTo (triggers the command; no direct input, top-right button)",
+        "example": "Archive",
+        "mapping": "ArchiveSignals.signalIds (triggers the command with session:selectedSignalIds; disabled/inactive whenever the selection is empty)",
         "cardinality": "Single"
       }
     ],
@@ -99,10 +99,10 @@
     "todoListElement": false,
     "createsAggregate": false,
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "ldrcde",
-  "timestamp": 1788218055006,
+  "hash": "1uggg81",
+  "timestamp": 1756795500000,
   "userId": null
 }
