@@ -1,0 +1,19 @@
+{
+  "id": "c8aca613-70c8-408a-949c-d34a0b9f508c",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "SignalsArchived"
+  },
+  "meta": {
+    "type": "EVENT",
+    "title": "SignalsArchived"
+  },
+  "hash": "1ctrfv4",
+  "timestamp": 1788216866350,
+  "userId": null
+}
