@@ -2,13 +2,11 @@
   "id": "eb711e6d-7850-4b53-89b7-a43ca8fcc2e9",
   "type": "sticky_note",
   "position": {
-    "x": 0,
-    "y": 0
+    "x": 95,
+    "y": 827
   },
   "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
-  "data": {
-    "title": "ProjectSlotsView"
-  },
+  "data": {},
   "meta": {
     "type": "READMODEL",
     "title": "ProjectSlotsView",
@@ -19,6 +17,7 @@
         "example": "4",
         "mapping": "derived:6-count(ProjectCreated)",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -27,11 +26,13 @@
         "example": "2",
         "mapping": "derived:count(ProjectCreated)",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       }
-    ]
+    ],
+    "version": 1
   },
-  "hash": "tg5jpq",
-  "timestamp": 1756532200000,
-  "userId": null
+  "hash": "au1g8j",
+  "timestamp": 1788140326467,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
