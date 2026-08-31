@@ -11,9 +11,76 @@
   },
   "meta": {
     "type": "EVENT",
-    "title": "ProjectCreated"
+    "title": "ProjectCreated",
+    "fields": [
+      {
+        "name": "projectId",
+        "type": "UUID",
+        "example": "8b1e7f2a-0000-4000-8000-000000000002",
+        "mapping": "derived:uuid()",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "number",
+        "type": "Number",
+        "example": "2",
+        "mapping": "derived:nextAvailableSlot()",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "shorthand",
+        "type": "String",
+        "example": "2M",
+        "mapping": "derived:number+name[0]",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Mum",
+        "mapping": "CreateProject.name",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "colour",
+        "type": "String",
+        "example": "#ef4444",
+        "mapping": "derived:CreateProject.colourChoice ?? nextContrastingColour(usedProjectColours) — palette (fixed 6, in default pick order): Blue #3b82f6, Green #10b981, Red #ef4444, Purple #8b5cf6, Orange #f97316, Teal #06b6d4. Since at most 6 projects can ever exist, every project gets a distinct palette colour — no repeats are possible.",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "scheduleId",
+        "type": "String",
+        "example": "lunch",
+        "mapping": "CreateProject.scheduleId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "createdAt",
+        "type": "DateTime",
+        "example": "2026-08-30T09:00:00Z",
+        "mapping": "derived:now()",
+        "generated": true,
+        "cardinality": "Single"
+      }
+    ],
+    "compact": true,
+    "context": "INTERNAL",
+    "linkedTo": "0243fff4-723e-429a-a4c5-da84e988d637",
+    "listElement": false,
+    "todoListElement": false,
+    "createsAggregate": false,
+    "changedAttributes": [
+      "meta.linkedTo"
+    ]
   },
-  "hash": "1w0y77y",
-  "timestamp": 1788140315403,
+  "hash": "8vj32e",
+  "timestamp": 1788140324425,
   "userId": null
 }
