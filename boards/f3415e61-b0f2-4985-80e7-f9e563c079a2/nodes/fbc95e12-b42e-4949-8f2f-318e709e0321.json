@@ -1,0 +1,21 @@
+{
+  "id": "fbc95e12-b42e-4949-8f2f-318e709e0321",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "23f4c4bc-301e-4955-92b1-018e75182410",
+    "title": "Signals Pending Reassignment"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "title": "Signals Pending Reassignment"
+  },
+  "hash": "fy47gi",
+  "timestamp": 1788189993919,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+}
