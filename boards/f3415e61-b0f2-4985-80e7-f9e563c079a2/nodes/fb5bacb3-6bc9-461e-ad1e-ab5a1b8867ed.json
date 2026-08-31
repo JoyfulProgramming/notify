@@ -3,12 +3,15 @@
   "type": "image",
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "title": "Auto-Assign Signal",
-    "url": "https://cdn.pixabay.com/photo/2016/01/03/11/24/gear-1119298_1280.png"
+    "url": "https://cdn.pixabay.com/photo/2016/01/03/11/24/gear-1119298_1280.png",
+    "title": "Auto-Assign Signal"
   },
   "meta": {
     "type": "AUTOMATION",
-    "title": "Auto-Assign Signal"
+    "title": "Auto-Assign Signal",
+    "description": "Fires for EVERY captured signal, with no exceptions — a signal is never left unassigned. Evaluates Sender Rules View using the contact+group > contact > group specificity order; if a rule matches, assigns to that rule's project (which may itself be the 'unassigned' pseudo-project, e.g. an explicit exception rule). If no rule matches at all, defaults to 'unassigned'. Either way, exactly one AssignSignalToProject command always fires."
   },
-  "hash": "1130c7p"
+  "hash": "gwlwoy",
+  "timestamp": 1756535200000,
+  "userId": null
 }

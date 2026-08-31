@@ -13,7 +13,7 @@
         "name": "signalId",
         "type": "UUID",
         "example": "sig_18f2",
-        "mapping": "Unmatched Signals.signalId",
+        "mapping": "Signal Captured.signalId",
         "generated": false,
         "cardinality": "Single"
       },
@@ -21,7 +21,7 @@
         "name": "assignMode",
         "type": "String",
         "example": "Contact",
-        "mapping": "Sender Rules View.assignMode",
+        "mapping": "Sender Rules View.assignMode, or 'Default' when no rule matched",
         "generated": false,
         "cardinality": "Single"
       },
@@ -29,11 +29,13 @@
         "name": "projectId",
         "type": "String",
         "example": "2M",
-        "mapping": "Sender Rules View.projectId",
+        "mapping": "Sender Rules View.projectId, or the permanent 'unassigned' pseudo-project when no rule matched — never null, every signal always gets a real projectId",
         "generated": false,
         "cardinality": "Single"
       }
     ]
   },
-  "hash": "99l8mc"
+  "hash": "xy0hjk",
+  "timestamp": 1756535201000,
+  "userId": null
 }

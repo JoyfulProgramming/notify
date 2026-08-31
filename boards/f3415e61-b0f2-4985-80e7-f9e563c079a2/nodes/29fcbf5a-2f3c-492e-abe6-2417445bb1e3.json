@@ -29,7 +29,7 @@
         "name": "projectId",
         "type": "String",
         "example": "2M",
-        "mapping": "AssignSignalToProject.projectId",
+        "mapping": "AssignSignalToProject.projectId — always a real project id, including the permanent 'unassigned' pseudo-project as a valid value; never null",
         "generated": false,
         "cardinality": "Single"
       },
@@ -45,11 +45,13 @@
         "name": "assignedBy",
         "type": "String",
         "example": "rule",
-        "mapping": "derived:'rule'",
+        "mapping": "derived:'rule' when a Sender Rule matched, 'default' when it fell through to 'unassigned'",
         "generated": true,
         "cardinality": "Single"
       }
     ]
   },
-  "hash": "1diztfc"
+  "hash": "14kf98j",
+  "timestamp": 1756535202000,
+  "userId": null
 }

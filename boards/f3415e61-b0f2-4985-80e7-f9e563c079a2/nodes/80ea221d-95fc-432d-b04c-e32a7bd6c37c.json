@@ -17,7 +17,6 @@
         "example": "sig_18f2",
         "mapping": "Signal Captured.signalId",
         "generated": false,
-        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -26,7 +25,6 @@
         "example": "Mike",
         "mapping": "Signal Captured.sender",
         "generated": false,
-        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -35,7 +33,6 @@
         "example": "WhatsApp",
         "mapping": "Signal Captured.sourceApp",
         "generated": false,
-        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -44,7 +41,6 @@
         "example": "Can you call Mum later, she is not feeling great",
         "mapping": "Signal Captured.body",
         "generated": false,
-        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -53,17 +49,14 @@
         "example": "2026-08-29T00:02:00Z",
         "mapping": "Signal Captured.receivedAt",
         "generated": false,
-        "subfields": [],
         "cardinality": "Single"
       },
       {
         "name": "assignedProject",
         "type": "String",
-        "example": "3F",
-        "mapping": "latest:Signal Assigned To Project.projectId",
-        "optional": true,
+        "example": "unassigned",
+        "mapping": "latest:Signal Assigned To Project.projectId — always present now, every signal is assigned the moment it's captured (to a real project or the permanent 'unassigned' pseudo-project)",
         "generated": false,
-        "subfields": [],
         "cardinality": "Single"
       }
     ],
@@ -74,5 +67,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "ifggip"
+  "hash": "1cps4bh",
+  "timestamp": 1756535203000,
+  "userId": null
 }
