@@ -26,7 +26,21 @@
             {
               "id": "52230b43-77eb-426f-b0b0-a45976d9478d",
               "type": "COMMAND",
-              "title": "CreateProject"
+              "title": "CreateProject",
+              "fields": [
+                {
+                  "name": "name",
+                  "example": "Friends"
+                },
+                {
+                  "name": "scheduleId",
+                  "example": "lunch"
+                },
+                {
+                  "name": "colourChoice",
+                  "example": "#ef4444"
+                }
+              ]
             }
           ],
           "given": [],
@@ -39,7 +53,17 @@
             {
               "id": "52230b43-77eb-426f-b0b0-a45976d9478d",
               "type": "COMMAND",
-              "title": "CreateProject"
+              "title": "CreateProject",
+              "fields": [
+                {
+                  "name": "name",
+                  "example": ""
+                },
+                {
+                  "name": "scheduleId",
+                  "example": "lunch"
+                }
+              ]
             }
           ],
           "given": [],
@@ -54,7 +78,17 @@
             {
               "id": "52230b43-77eb-426f-b0b0-a45976d9478d",
               "type": "COMMAND",
-              "title": "CreateProject"
+              "title": "CreateProject",
+              "fields": [
+                {
+                  "name": "name",
+                  "example": "Friends"
+                },
+                {
+                  "name": "scheduleId",
+                  "example": ""
+                }
+              ]
             }
           ],
           "given": [],
@@ -69,7 +103,17 @@
             {
               "id": "52230b43-77eb-426f-b0b0-a45976d9478d",
               "type": "COMMAND",
-              "title": "CreateProject"
+              "title": "CreateProject",
+              "fields": [
+                {
+                  "name": "name",
+                  "example": "Hobbies"
+                },
+                {
+                  "name": "scheduleId",
+                  "example": "any-time"
+                }
+              ]
             }
           ],
           "given": [
@@ -86,7 +130,7 @@
       ]
     }
   },
-  "hash": "otsre9",
-  "timestamp": 1788141071786,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "s72wdp",
+  "timestamp": 1756532500000,
+  "userId": null
 }
