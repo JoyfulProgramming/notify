@@ -40,14 +40,14 @@
         "type": "String",
         "example": "#3b82f6",
         "mapping": "ProjectColourPaletteView.colour",
-        "cardinality": "List"
+        "cardinality": "Single"
       },
       {
         "name": "paletteName",
         "type": "String",
         "example": "Blue",
         "mapping": "ProjectColourPaletteView.name",
-        "cardinality": "List"
+        "cardinality": "Single"
       },
       {
         "name": "usedColours",
@@ -76,7 +76,7 @@
       "meta.fields"
     ]
   },
-  "hash": "x50yf3",
-  "timestamp": 1756532703000,
+  "hash": "kd8udb",
+  "timestamp": 1756532801000,
   "userId": null
 }
