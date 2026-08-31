@@ -12,7 +12,7 @@
     "title": "RemainingProjectSlots",
     "fields": [
       {
-        "name": "remainingSlots",
+        "name": "slotsRemaining",
         "type": "String",
         "example": "2M",
         "mapping": "derived:number+name[0]",
@@ -27,7 +27,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "16x3ub7",
-  "timestamp": 1788137449705,
+  "hash": "s0dqvn",
+  "timestamp": 1788137503993,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
