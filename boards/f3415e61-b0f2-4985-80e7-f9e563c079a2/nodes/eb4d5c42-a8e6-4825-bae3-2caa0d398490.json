@@ -62,13 +62,13 @@
         "cardinality": "Single"
       }
     ],
-    "description": "Rows are hidden once receivedAt <= the latest SignalsArchived.archivedUpTo, same visibility rule as SignalsListView — pressing 'Done' on this grouped-by-group screen fires the same ArchiveSignals command.",
+    "description": "Rows are hidden once receivedAt <= the latest SignalsArchived.archivedUpTo, same visibility rule as SignalsListView — pressing 'Done' on this grouped-by-group screen fires the same ArchiveSignals command. The 'None' row (signals with no WhatsApp group, i.e. direct messages) is always sorted first regardless of recency; remaining rows sort by latestReceivedAt descending. A row's badge shows a grey '?' instead of a project number/colour when its signals span more than one assigned project.",
     "listElement": true,
     "changedAttributes": [
       "meta.description"
     ]
   },
-  "hash": "btm0ar",
-  "timestamp": 1756536812000,
+  "hash": "2c5miv",
+  "timestamp": 1756795200000,
   "userId": null
 }
