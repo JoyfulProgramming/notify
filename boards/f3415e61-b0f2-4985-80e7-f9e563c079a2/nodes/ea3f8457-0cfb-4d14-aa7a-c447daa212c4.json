@@ -1,0 +1,19 @@
+{
+  "id": "ea3f8457-0cfb-4d14-aa7a-c447daa212c4",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {
+    "title": "SelectNextProjectColour"
+  },
+  "meta": {
+    "type": "COMMAND",
+    "title": "SelectNextProjectColour"
+  },
+  "hash": "1hquz8i",
+  "timestamp": 1788142256402,
+  "userId": null
+}
