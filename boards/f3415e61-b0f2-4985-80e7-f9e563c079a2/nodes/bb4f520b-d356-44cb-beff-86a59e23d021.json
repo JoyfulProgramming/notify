@@ -30,6 +30,12 @@
           "height": 320
         },
         {
+          "id": "d14aec91-b052-4e61-992b-b8b5c25d67b8",
+          "type": "interaction",
+          "label": "Interaction",
+          "height": 320
+        },
+        {
           "id": "2bd1dfc5-8223-459c-9516-db989924d21a",
           "type": "swimlane",
           "label": "Swimlane",
@@ -127,6 +133,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1788140315403,
+  "timestamp": 1788141762141,
   "userId": null
 }
