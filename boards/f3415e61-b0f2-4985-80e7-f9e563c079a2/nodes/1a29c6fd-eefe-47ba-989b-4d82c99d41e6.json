@@ -38,7 +38,7 @@
                 },
                 {
                   "name": "colourChoice",
-                  "example": "#ef4444"
+                  "example": "Red"
                 }
               ]
             }
@@ -140,7 +140,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#3b82f6"
+                  "example": "Blue"
                 }
               ]
             },
@@ -167,7 +167,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#10b981"
+                  "example": "Green"
                 }
               ]
             },
@@ -194,7 +194,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#ef4444"
+                  "example": "Red"
                 }
               ]
             },
@@ -221,7 +221,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#8b5cf6"
+                  "example": "Purple"
                 }
               ]
             },
@@ -248,7 +248,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#f97316"
+                  "example": "Orange"
                 }
               ]
             },
@@ -275,7 +275,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#06b6d4"
+                  "example": "Teal"
                 }
               ]
             }
@@ -287,7 +287,7 @@
       ]
     }
   },
-  "hash": "192mmi9",
-  "timestamp": 1756533000000,
+  "hash": "1u608dr",
+  "timestamp": 1756533208000,
   "userId": null
 }

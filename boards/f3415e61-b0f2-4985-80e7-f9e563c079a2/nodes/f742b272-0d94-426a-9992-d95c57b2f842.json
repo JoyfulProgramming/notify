@@ -62,7 +62,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#3b82f6"
+                  "example": "Blue"
                 }
               ]
             },
@@ -89,7 +89,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#10b981"
+                  "example": "Green"
                 }
               ]
             }
@@ -98,14 +98,14 @@
           "examples": [
             {
               "name": "Work",
-              "colour": "#3b82f6",
+              "colour": "Blue",
               "number": "1",
               "shorthand": "1W",
               "project_id": "11111111-aaaa-4000-8000-000000000001"
             },
             {
               "name": "Mum",
-              "colour": "#10b981",
+              "colour": "Green",
               "number": "2",
               "shorthand": "2M",
               "project_id": "8b1e7f2a-0000-4000-8000-000000000002"
@@ -146,7 +146,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#3b82f6"
+                  "example": "Blue"
                 }
               ]
             },
@@ -173,7 +173,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#10b981"
+                  "example": "Green"
                 }
               ]
             },
@@ -200,7 +200,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#ef4444"
+                  "example": "Red"
                 }
               ]
             },
@@ -227,7 +227,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#8b5cf6"
+                  "example": "Purple"
                 }
               ]
             },
@@ -254,7 +254,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#f97316"
+                  "example": "Orange"
                 }
               ]
             },
@@ -281,7 +281,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#06b6d4"
+                  "example": "Teal"
                 }
               ]
             }
@@ -290,42 +290,42 @@
           "examples": [
             {
               "name": "Work",
-              "colour": "#3b82f6",
+              "colour": "Blue",
               "number": "1",
               "shorthand": "1W",
               "project_id": "11111111-aaaa-4000-8000-000000000001"
             },
             {
               "name": "Mum",
-              "colour": "#10b981",
+              "colour": "Green",
               "number": "2",
               "shorthand": "2M",
               "project_id": "8b1e7f2a-0000-4000-8000-000000000002"
             },
             {
               "name": "Friends",
-              "colour": "#ef4444",
+              "colour": "Red",
               "number": "3",
               "shorthand": "3F",
               "project_id": "33333333-cccc-4000-8000-000000000003"
             },
             {
               "name": "Health",
-              "colour": "#8b5cf6",
+              "colour": "Purple",
               "number": "4",
               "shorthand": "4H",
               "project_id": "44444444-dddd-4000-8000-000000000004"
             },
             {
               "name": "Travel",
-              "colour": "#f97316",
+              "colour": "Orange",
               "number": "5",
               "shorthand": "5T",
               "project_id": "55555555-eeee-4000-8000-000000000005"
             },
             {
               "name": "Hobbies",
-              "colour": "#06b6d4",
+              "colour": "Teal",
               "number": "6",
               "shorthand": "6H",
               "project_id": "66666666-ffff-4000-8000-000000000006"
@@ -368,24 +368,12 @@
               "title": "ProjectCreated",
               "fields": [
                 {
-                  "name": "projectId",
-                  "example": "11111111-aaaa-4000-8000-000000000001"
-                },
-                {
-                  "name": "number",
-                  "example": "1"
-                },
-                {
-                  "name": "shorthand",
-                  "example": "1W"
-                },
-                {
                   "name": "name",
                   "example": "Work"
                 },
                 {
                   "name": "colour",
-                  "example": "#3b82f6"
+                  "example": "Blue"
                 }
               ]
             },
@@ -395,24 +383,12 @@
               "title": "ProjectCreated",
               "fields": [
                 {
-                  "name": "projectId",
-                  "example": "8b1e7f2a-0000-4000-8000-000000000002"
-                },
-                {
-                  "name": "number",
-                  "example": "2"
-                },
-                {
-                  "name": "shorthand",
-                  "example": "2M"
-                },
-                {
                   "name": "name",
                   "example": "Mum"
                 },
                 {
                   "name": "colour",
-                  "example": "#10b981"
+                  "example": "Green"
                 }
               ]
             }
@@ -442,24 +418,12 @@
               "title": "ProjectCreated",
               "fields": [
                 {
-                  "name": "projectId",
-                  "example": "11111111-aaaa-4000-8000-000000000001"
-                },
-                {
-                  "name": "number",
-                  "example": "1"
-                },
-                {
-                  "name": "shorthand",
-                  "example": "1W"
-                },
-                {
                   "name": "name",
                   "example": "Work"
                 },
                 {
                   "name": "colour",
-                  "example": "#3b82f6"
+                  "example": "Blue"
                 }
               ]
             },
@@ -468,25 +432,13 @@
               "type": "EVENT",
               "title": "ProjectCreated",
               "fields": [
-                {
-                  "name": "projectId",
-                  "example": "8b1e7f2a-0000-4000-8000-000000000002"
-                },
-                {
-                  "name": "number",
-                  "example": "2"
-                },
-                {
-                  "name": "shorthand",
-                  "example": "2M"
-                },
                 {
                   "name": "name",
                   "example": "Mum"
                 },
                 {
                   "name": "colour",
-                  "example": "#10b981"
+                  "example": "Green"
                 }
               ]
             },
@@ -495,25 +447,13 @@
               "type": "EVENT",
               "title": "ProjectCreated",
               "fields": [
-                {
-                  "name": "projectId",
-                  "example": "33333333-cccc-4000-8000-000000000003"
-                },
-                {
-                  "name": "number",
-                  "example": "3"
-                },
-                {
-                  "name": "shorthand",
-                  "example": "3F"
-                },
                 {
                   "name": "name",
                   "example": "Friends"
                 },
                 {
                   "name": "colour",
-                  "example": "#ef4444"
+                  "example": "Red"
                 }
               ]
             },
@@ -522,25 +462,13 @@
               "type": "EVENT",
               "title": "ProjectCreated",
               "fields": [
-                {
-                  "name": "projectId",
-                  "example": "44444444-dddd-4000-8000-000000000004"
-                },
-                {
-                  "name": "number",
-                  "example": "4"
-                },
-                {
-                  "name": "shorthand",
-                  "example": "4H"
-                },
                 {
                   "name": "name",
                   "example": "Health"
                 },
                 {
                   "name": "colour",
-                  "example": "#8b5cf6"
+                  "example": "Purple"
                 }
               ]
             },
@@ -549,25 +477,13 @@
               "type": "EVENT",
               "title": "ProjectCreated",
               "fields": [
-                {
-                  "name": "projectId",
-                  "example": "55555555-eeee-4000-8000-000000000005"
-                },
-                {
-                  "name": "number",
-                  "example": "5"
-                },
-                {
-                  "name": "shorthand",
-                  "example": "5T"
-                },
                 {
                   "name": "name",
                   "example": "Travel"
                 },
                 {
                   "name": "colour",
-                  "example": "#f97316"
+                  "example": "Orange"
                 }
               ]
             },
@@ -577,24 +493,12 @@
               "title": "ProjectCreated",
               "fields": [
                 {
-                  "name": "projectId",
-                  "example": "66666666-ffff-4000-8000-000000000006"
-                },
-                {
-                  "name": "number",
-                  "example": "6"
-                },
-                {
-                  "name": "shorthand",
-                  "example": "6H"
-                },
-                {
                   "name": "name",
                   "example": "Hobbies"
                 },
                 {
                   "name": "colour",
-                  "example": "#06b6d4"
+                  "example": "Teal"
                 }
               ]
             }
@@ -610,7 +514,7 @@
       ]
     }
   },
-  "hash": "wnwupz",
-  "timestamp": 1788141040826,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "1qta469",
+  "timestamp": 1756533207000,
+  "userId": null
 }
