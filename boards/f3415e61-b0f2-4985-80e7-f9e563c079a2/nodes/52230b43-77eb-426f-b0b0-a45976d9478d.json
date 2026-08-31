@@ -31,13 +31,13 @@
         "name": "colourChoice",
         "type": "String",
         "example": "#ef4444",
-        "mapping": "user-input, prepopulated from ProjectColourPaletteView's next unused colour and editable via the 'Next colour' toggle — always present by submit time, never absent",
+        "mapping": "ProjectColourSelectionView.colour",
         "generated": false,
         "cardinality": "Single"
       }
     ]
   },
-  "hash": "1o833sy",
-  "timestamp": 1756532701000,
+  "hash": "1cnhki9",
+  "timestamp": 1756532903000,
   "userId": null
 }

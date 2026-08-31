@@ -32,7 +32,7 @@
         "name": "colourChoice",
         "type": "String",
         "example": "#ef4444",
-        "mapping": "CreateProject.colourChoice",
+        "mapping": "ProjectColourSelectionView.colour",
         "cardinality": "Single"
       },
       {
@@ -76,7 +76,7 @@
       "meta.fields"
     ]
   },
-  "hash": "kd8udb",
-  "timestamp": 1756532801000,
+  "hash": "xlvh91",
+  "timestamp": 1756532904000,
   "userId": null
 }
