@@ -24,14 +24,14 @@
       {
         "name": "assignedProjectNumber",
         "type": "String",
-        "example": "3",
-        "mapping": "ProjectRosterView.number (looked up by assignedProject), blank/dash for Unassigned",
+        "example": "1W",
+        "mapping": "ProjectRosterView.number+shorthand (looked up by assignedProject), blank/dash for Unassigned",
         "cardinality": "List"
       },
       {
         "name": "assignedProjectColour",
         "type": "String",
-        "example": "Red",
+        "example": "Blue",
         "mapping": "ProjectRosterView.colour (looked up by assignedProject)",
         "cardinality": "List"
       },
@@ -39,7 +39,7 @@
         "name": "importance",
         "type": "Boolean",
         "example": "true",
-        "mapping": "SignalsListView.importance",
+        "mapping": "SignalsListView.importance — gates whether this signal can ever become a notification at all (importance AND in-schedule required)",
         "cardinality": "List"
       },
       {
@@ -64,13 +64,6 @@
         "cardinality": "List"
       },
       {
-        "name": "messageTypeIcon",
-        "type": "String",
-        "example": "message",
-        "mapping": "SignalsListView.type (message/review)",
-        "cardinality": "List"
-      },
-      {
         "name": "receivedAt",
         "type": "DateTime",
         "example": "2026-08-29T00:02:00Z",
@@ -87,7 +80,7 @@
       {
         "name": "groupingMode",
         "type": "String",
-        "example": "Contact",
+        "example": "None",
         "mapping": "session:signalGroupingType — one of None / Contact / Group",
         "cardinality": "Single"
       }
@@ -99,10 +92,10 @@
     "todoListElement": false,
     "createsAggregate": false,
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "ymy0ln",
-  "timestamp": 1788213865678,
+  "hash": "a8j51r",
+  "timestamp": 1756535700000,
   "userId": null
 }
