@@ -11,9 +11,37 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "ScheduleOptionsView"
+    "title": "ScheduleOptionsView",
+    "fields": [
+      {
+        "name": "scheduleId",
+        "type": "String",
+        "example": "evenings",
+        "mapping": "static-config — the stable key used throughout the rest of the model",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Evenings",
+        "mapping": "static-config",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "timeRange",
+        "type": "String",
+        "example": "6pm – 9pm",
+        "mapping": "static-config — empty for presets with no fixed hours (Any Time, Waking Hours)",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ],
+    "description": "The lookup table for schedule presets — currently static reference data (not built from any event), same pattern as ProjectColourPaletteView. 'scheduleId' is the stable key stored on CreateProject/ProjectCreated; 'name' and 'timeRange' are display-only, resolved here. FUTURE: once custom schedules are supported, this stops being static config and becomes a real event-sourced read model (folding e.g. ScheduleCreated/ScheduleUpdated), and 'scheduleId' starts referencing user-created schedules instead of only these 6 fixed presets — CreateProject.scheduleId and ProjectCreated.scheduleId will not need to change shape when that happens, only this lookup's source.",
+    "listElement": true
   },
-  "hash": "1wuxipe",
-  "timestamp": 1788183794774,
+  "hash": "1mxs3am",
+  "timestamp": 1756534100000,
   "userId": null
 }
