@@ -47,8 +47,8 @@
         "name": "colour",
         "type": "String",
         "example": "#ef4444",
-        "mapping": "derived:CreateProject.colourChoice ?? nextContrastingColour(usedProjectColours) — palette (fixed 6, in default pick order): Blue #3b82f6, Green #10b981, Red #ef4444, Purple #8b5cf6, Orange #f97316, Teal #06b6d4. Since at most 6 projects can ever exist, every project gets a distinct palette colour — no repeats are possible.",
-        "generated": true,
+        "mapping": "CreateProject.colourChoice",
+        "generated": false,
         "cardinality": "Single"
       },
       {
@@ -74,7 +74,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "9txn74",
-  "timestamp": 1756532001000,
+  "hash": "6ykgft",
+  "timestamp": 1756532702000,
   "userId": null
 }

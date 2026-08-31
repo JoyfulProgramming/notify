@@ -31,14 +31,13 @@
         "name": "colourChoice",
         "type": "String",
         "example": "#ef4444",
-        "mapping": "user-input (Next colour toggle, cycles the 6-colour palette; optional — defaults to the auto-suggested colour if the user never taps it)",
-        "optional": true,
+        "mapping": "user-input, prepopulated from ProjectColourPaletteView's next unused colour and editable via the 'Next colour' toggle — always present by submit time, never absent",
         "generated": false,
         "cardinality": "Single"
       }
     ]
   },
-  "hash": "10u1qb9",
-  "timestamp": 1756532000000,
+  "hash": "1o833sy",
+  "timestamp": 1756532701000,
   "userId": null
 }
