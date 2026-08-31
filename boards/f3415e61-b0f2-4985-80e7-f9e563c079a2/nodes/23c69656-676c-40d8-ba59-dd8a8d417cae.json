@@ -2,12 +2,12 @@
   "id": "23c69656-676c-40d8-ba59-dd8a8d417cae",
   "type": "sticky_note",
   "position": {
-    "x": 0,
-    "y": 0
+    "x": 95,
+    "y": 827
   },
   "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
   "data": {
-    "title": "ProjectCreated"
+    "linkedTo": "0243fff4-723e-429a-a4c5-da84e988d637"
   },
   "meta": {
     "type": "EVENT",
@@ -83,12 +83,9 @@
     "linkedTo": "0243fff4-723e-429a-a4c5-da84e988d637",
     "listElement": false,
     "todoListElement": false,
-    "createsAggregate": false,
-    "changedAttributes": [
-      "meta.linkedTo"
-    ]
+    "createsAggregate": false
   },
-  "hash": "1nzzs7f",
-  "timestamp": 1788138147920,
-  "userId": null
+  "hash": "1xuunez",
+  "timestamp": 1788139427517,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
