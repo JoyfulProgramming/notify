@@ -30,14 +30,14 @@
       {
         "name": "colourChoice",
         "type": "String",
-        "example": "#ef4444",
-        "mapping": "ProjectColourSelectionView.colour",
+        "example": "Red",
+        "mapping": "ProjectColourSelectionView.colour — a ProjectColourPaletteView.colour name, not a hex value",
         "generated": false,
         "cardinality": "Single"
       }
     ]
   },
-  "hash": "1cnhki9",
-  "timestamp": 1756532903000,
+  "hash": "sznxjx",
+  "timestamp": 1756533204000,
   "userId": null
 }

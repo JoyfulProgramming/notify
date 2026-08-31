@@ -16,8 +16,8 @@
       {
         "name": "colour",
         "type": "String",
-        "example": "#10b981",
-        "mapping": "derived:nextPaletteColourAfter(currentSelection, excludingUsedProjectColours)",
+        "example": "Green",
+        "mapping": "derived:nextPaletteColourAfter(currentSelection, excludingUsedProjectColours) — a ProjectColourPaletteView.colour name, e.g. 'Blue'/'Green'/'Red'; look up ProjectColourPaletteView for its hex and cycle order",
         "generated": true,
         "cardinality": "Single"
       },
@@ -31,7 +31,7 @@
       }
     ]
   },
-  "hash": "gbzcl2",
-  "timestamp": 1756532901000,
+  "hash": "1vvre8t",
+  "timestamp": 1756533202000,
   "userId": null
 }

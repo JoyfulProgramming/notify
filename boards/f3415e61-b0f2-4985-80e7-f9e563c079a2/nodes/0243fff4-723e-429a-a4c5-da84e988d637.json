@@ -46,8 +46,8 @@
       {
         "name": "colour",
         "type": "String",
-        "example": "#ef4444",
-        "mapping": "CreateProject.colourChoice",
+        "example": "Red",
+        "mapping": "CreateProject.colourChoice — a ProjectColourPaletteView.colour name (e.g. 'Blue'), not a hex value; look up ProjectColourPaletteView for the hex to render",
         "generated": false,
         "cardinality": "Single"
       },
@@ -74,7 +74,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "6ykgft",
-  "timestamp": 1756532702000,
+  "hash": "xd2fga",
+  "timestamp": 1756533205000,
   "userId": null
 }

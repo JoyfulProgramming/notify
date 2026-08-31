@@ -16,15 +16,15 @@
       {
         "name": "colour",
         "type": "String",
-        "example": "#10b981",
-        "mapping": "latest:ProjectColourSelected.colour",
+        "example": "Purple",
+        "mapping": "latest:ProjectColourSelected.colour — a ProjectColourPaletteView.colour name",
         "generated": false,
         "cardinality": "Single"
       }
     ],
-    "description": "Tracks which palette colour is currently selected in the in-progress Create Project dialog for this session. Before any ProjectColourSelected event, defaults to the first ProjectColourPaletteView entry not already present in ProjectRosterView.colour — same default the initial screen render uses."
+    "description": "Tracks which palette colour NAME is currently selected in the in-progress Create Project dialog for this session. Before any ProjectColourSelected event, defaults to the first ProjectColourPaletteView entry not already present in ProjectRosterView.colour. To render, look up this name in ProjectColourPaletteView for its hex value."
   },
-  "hash": "o0tv38",
-  "timestamp": 1756532902000,
+  "hash": "1qt34rl",
+  "timestamp": 1756533203000,
   "userId": null
 }
