@@ -1,0 +1,19 @@
+{
+  "id": "c28d92ab-c4fb-4883-bc3a-1181002e3491",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "ArchiveSignals"
+  },
+  "meta": {
+    "type": "COMMAND",
+    "title": "ArchiveSignals"
+  },
+  "hash": "j21qov",
+  "timestamp": 1788216851881,
+  "userId": null
+}
