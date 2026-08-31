@@ -3,7 +3,7 @@
   "type": "spec_node",
   "position": {
     "x": 46.5,
-    "y": 1101.8
+    "y": 1421.8
   },
   "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
   "data": {},
@@ -118,9 +118,19 @@
           "id": "11111111-0007-4007-8007-000000000007",
           "then": [
             {
-              "id": "3e5ffa8f-f657-4bc7-bda0-a02ce4c156c4",
+              "id": "eb711e6d-7850-4b53-89b7-a43ca8fcc2e9",
               "type": "READMODEL",
-              "title": "ProjectRosterView"
+              "title": "ProjectSlotsView",
+              "fields": [
+                {
+                  "name": "slotsRemaining",
+                  "example": "0"
+                },
+                {
+                  "name": "slotsUsed",
+                  "example": "6"
+                }
+              ]
             }
           ],
           "when": [],
@@ -149,6 +159,14 @@
                 {
                   "name": "colour",
                   "example": "#3b82f6"
+                },
+                {
+                  "name": "scheduleId",
+                  "example": "lunch"
+                },
+                {
+                  "name": "createdAt",
+                  "example": "2026-08-30T09:00:00Z"
                 }
               ]
             },
@@ -176,6 +194,14 @@
                 {
                   "name": "colour",
                   "example": "#10b981"
+                },
+                {
+                  "name": "scheduleId",
+                  "example": "lunch"
+                },
+                {
+                  "name": "createdAt",
+                  "example": "2026-08-30T09:00:00Z"
                 }
               ]
             },
@@ -203,6 +229,14 @@
                 {
                   "name": "colour",
                   "example": "#ef4444"
+                },
+                {
+                  "name": "scheduleId",
+                  "example": "lunch"
+                },
+                {
+                  "name": "createdAt",
+                  "example": "2026-08-30T09:00:00Z"
                 }
               ]
             },
@@ -230,6 +264,14 @@
                 {
                   "name": "colour",
                   "example": "#8b5cf6"
+                },
+                {
+                  "name": "scheduleId",
+                  "example": "lunch"
+                },
+                {
+                  "name": "createdAt",
+                  "example": "2026-08-30T09:00:00Z"
                 }
               ]
             },
@@ -257,6 +299,14 @@
                 {
                   "name": "colour",
                   "example": "#f97316"
+                },
+                {
+                  "name": "scheduleId",
+                  "example": "lunch"
+                },
+                {
+                  "name": "createdAt",
+                  "example": "2026-08-30T09:00:00Z"
                 }
               ]
             },
@@ -284,11 +334,20 @@
                 {
                   "name": "colour",
                   "example": "#06b6d4"
+                },
+                {
+                  "name": "scheduleId",
+                  "example": "lunch"
+                },
+                {
+                  "name": "createdAt",
+                  "example": "2026-08-30T09:00:00Z"
                 }
               ]
             }
           ],
           "title": "Roster shows zero slots remaining once the 6th project is created",
+          "context": [],
           "examples": [
             {
               "name": "Work",
@@ -338,12 +397,14 @@
               "project_id": "66666666-ffff-4000-8000-000000000006",
               "slots_remaining": "0"
             }
-          ]
+          ],
+          "expectError": false,
+          "expectEmptyList": false
         }
       ]
     }
   },
-  "hash": "93dvax",
-  "timestamp": 1756532300000,
-  "userId": null
+  "hash": "6k1zuc",
+  "timestamp": 1788140805226,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
