@@ -50,12 +50,9 @@
         "cardinality": "Single"
       }
     ],
-    "version": 7,
-    "changedAttributes": [
-      "meta.fields"
-    ]
+    "version": 7
   },
   "hash": "14sx3z1",
-  "timestamp": 1756533402000,
-  "userId": null
+  "timestamp": 1788183206145,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
