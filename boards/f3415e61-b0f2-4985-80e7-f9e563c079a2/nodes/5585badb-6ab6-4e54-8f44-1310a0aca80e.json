@@ -38,12 +38,14 @@
       {
         "name": "colour",
         "type": "String",
-        "example": "#be185d",
-        "mapping": "ProjectCreated.colour",
+        "example": "Green",
+        "mapping": "ProjectCreated.colour — a ProjectColourPaletteView.colour name; look it up there for the hex to render",
         "generated": false,
         "cardinality": "List"
       }
     ]
   },
-  "hash": "1jzwkhq"
+  "hash": "10alyss",
+  "timestamp": 1756533300000,
+  "userId": null
 }
