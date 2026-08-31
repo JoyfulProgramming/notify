@@ -55,7 +55,7 @@
         "name": "scheduleId",
         "type": "String",
         "example": "evenings",
-        "mapping": "CreateProject.scheduleId — a ScheduleOptionsView.scheduleId key; look up ScheduleOptionsView for its name/timeRange to render",
+        "mapping": "CreateProject.scheduleId — a ScheduleOptionsView.scheduleId key; look up ScheduleOptionsView for its name/alwaysActive and ScheduleTimeSlotsView for its exact windows to render",
         "generated": false,
         "cardinality": "Single"
       },
@@ -74,7 +74,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "13iy1m3",
-  "timestamp": 1756534201000,
+  "hash": "j4s2vw",
+  "timestamp": 1756535000000,
   "userId": null
 }
