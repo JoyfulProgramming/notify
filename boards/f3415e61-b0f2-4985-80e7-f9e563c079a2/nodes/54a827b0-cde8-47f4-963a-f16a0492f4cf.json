@@ -40,7 +40,7 @@
       {
         "name": "colour",
         "type": "String",
-        "example": "#be185d",
+        "example": "#10b981",
         "mapping": "ProjectDetailView.colour",
         "cardinality": "Single"
       },
@@ -53,10 +53,10 @@
       }
     ],
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "1o50vcy",
-  "timestamp": 1788140153387,
+  "hash": "18rjlbi",
+  "timestamp": 1756532102000,
   "userId": null
 }
