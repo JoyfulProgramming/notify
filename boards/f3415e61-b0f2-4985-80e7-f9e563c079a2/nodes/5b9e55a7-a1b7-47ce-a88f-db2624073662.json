@@ -2,12 +2,12 @@
   "id": "5b9e55a7-a1b7-47ce-a88f-db2624073662",
   "type": "sticky_note",
   "position": {
-    "x": 0,
-    "y": 0
+    "x": 95,
+    "y": 1147
   },
   "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
   "data": {
-    "title": "ProjectCreated"
+    "linkedTo": "0243fff4-723e-429a-a4c5-da84e988d637"
   },
   "meta": {
     "type": "EVENT",
@@ -19,6 +19,7 @@
         "example": "8b1e7f2a-0000-4000-8000-000000000002",
         "mapping": "derived:uuid()",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -27,6 +28,7 @@
         "example": "2",
         "mapping": "derived:nextAvailableSlot()",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -35,6 +37,7 @@
         "example": "2M",
         "mapping": "derived:number+name[0]",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -43,6 +46,7 @@
         "example": "Mum",
         "mapping": "CreateProject.name",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -51,6 +55,7 @@
         "example": "#ef4444",
         "mapping": "derived:CreateProject.colourChoice ?? nextContrastingColour(usedProjectColours) — palette (fixed 6, in default pick order): Blue #3b82f6, Green #10b981, Red #ef4444, Purple #8b5cf6, Orange #f97316, Teal #06b6d4. Since at most 6 projects can ever exist, every project gets a distinct palette colour — no repeats are possible.",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -59,6 +64,7 @@
         "example": "lunch",
         "mapping": "CreateProject.scheduleId",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -67,20 +73,19 @@
         "example": "2026-08-30T09:00:00Z",
         "mapping": "derived:now()",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       }
     ],
     "compact": true,
     "context": "INTERNAL",
+    "version": 1,
     "linkedTo": "0243fff4-723e-429a-a4c5-da84e988d637",
     "listElement": false,
     "todoListElement": false,
-    "createsAggregate": false,
-    "changedAttributes": [
-      "meta.linkedTo"
-    ]
+    "createsAggregate": false
   },
-  "hash": "8vj32e",
-  "timestamp": 1788140324425,
-  "userId": null
+  "hash": "18yf1vi",
+  "timestamp": 1788140338616,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
