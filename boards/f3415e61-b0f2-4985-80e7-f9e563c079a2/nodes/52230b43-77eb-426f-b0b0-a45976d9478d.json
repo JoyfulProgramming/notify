@@ -14,7 +14,7 @@
       {
         "name": "name",
         "type": "String",
-        "example": "Mum",
+        "example": "Friends",
         "mapping": "user-input",
         "generated": false,
         "cardinality": "Single"
@@ -26,8 +26,19 @@
         "mapping": "user-input",
         "generated": false,
         "cardinality": "Single"
+      },
+      {
+        "name": "colourChoice",
+        "type": "String",
+        "example": "#ef4444",
+        "mapping": "user-input (Next colour toggle, cycles the 6-colour palette; optional — defaults to the auto-suggested colour if the user never taps it)",
+        "optional": true,
+        "generated": false,
+        "cardinality": "Single"
       }
     ]
   },
-  "hash": "1pgkp1m"
+  "hash": "10u1qb9",
+  "timestamp": 1756532000000,
+  "userId": null
 }
