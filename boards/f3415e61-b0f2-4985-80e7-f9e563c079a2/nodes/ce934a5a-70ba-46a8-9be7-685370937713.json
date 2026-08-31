@@ -11,9 +11,27 @@
   },
   "meta": {
     "type": "EVENT",
-    "title": "ProjectColourSelected"
+    "title": "ProjectColourSelected",
+    "fields": [
+      {
+        "name": "colour",
+        "type": "String",
+        "example": "#10b981",
+        "mapping": "derived:nextPaletteColourAfter(currentSelection, excludingUsedProjectColours)",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "selectedAt",
+        "type": "DateTime",
+        "example": "2026-08-31T09:00:00Z",
+        "mapping": "derived:now()",
+        "generated": true,
+        "cardinality": "Single"
+      }
+    ]
   },
-  "hash": "1vn3ryn",
-  "timestamp": 1788142273236,
+  "hash": "gbzcl2",
+  "timestamp": 1756532901000,
   "userId": null
 }

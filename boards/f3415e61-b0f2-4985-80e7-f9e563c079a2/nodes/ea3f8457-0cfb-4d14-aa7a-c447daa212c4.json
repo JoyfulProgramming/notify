@@ -11,9 +11,11 @@
   },
   "meta": {
     "type": "COMMAND",
-    "title": "SelectNextProjectColour"
+    "title": "SelectNextProjectColour",
+    "fields": [],
+    "description": "Fired when the user presses 'Next colour' on the Create Project screen. Takes no input — the handler reads the current selection (ProjectColourSelectionView, or the auto-suggested default if none yet), ProjectColourPaletteView, and ProjectRosterView.colour (already-used colours) to compute the next value."
   },
-  "hash": "1hquz8i",
-  "timestamp": 1788142256402,
+  "hash": "6ysqc3",
+  "timestamp": 1756532900000,
   "userId": null
 }

@@ -11,9 +11,20 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "ProjectColourSelectionView"
+    "title": "ProjectColourSelectionView",
+    "fields": [
+      {
+        "name": "colour",
+        "type": "String",
+        "example": "#10b981",
+        "mapping": "latest:ProjectColourSelected.colour",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ],
+    "description": "Tracks which palette colour is currently selected in the in-progress Create Project dialog for this session. Before any ProjectColourSelected event, defaults to the first ProjectColourPaletteView entry not already present in ProjectRosterView.colour — same default the initial screen render uses."
   },
-  "hash": "3s1y8q",
-  "timestamp": 1788142294855,
+  "hash": "o0tv38",
+  "timestamp": 1756532902000,
   "userId": null
 }
