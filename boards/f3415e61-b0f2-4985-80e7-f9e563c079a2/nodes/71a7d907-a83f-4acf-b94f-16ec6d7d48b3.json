@@ -46,15 +46,6 @@
         "generated": false,
         "subfields": [],
         "cardinality": "Single"
-      },
-      {
-        "name": "createdAt",
-        "type": "DateTime",
-        "example": "2026-08-30T09:00:00Z",
-        "mapping": "derived:now()",
-        "generated": true,
-        "subfields": [],
-        "cardinality": "Single"
       }
     ],
     "compact": true,
@@ -63,7 +54,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "y2hw7j",
-  "timestamp": 1788137425745,
+  "hash": "hftl4g",
+  "timestamp": 1788137428128,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
