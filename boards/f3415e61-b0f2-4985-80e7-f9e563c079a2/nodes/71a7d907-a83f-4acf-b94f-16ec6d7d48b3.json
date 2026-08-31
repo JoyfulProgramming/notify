@@ -37,15 +37,6 @@
         "generated": true,
         "subfields": [],
         "cardinality": "Single"
-      },
-      {
-        "name": "scheduleId",
-        "type": "String",
-        "example": "lunch",
-        "mapping": "CreateProject.scheduleId",
-        "generated": false,
-        "subfields": [],
-        "cardinality": "Single"
       }
     ],
     "compact": true,
@@ -54,7 +45,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "hftl4g",
-  "timestamp": 1788137428128,
+  "hash": "zwbs18",
+  "timestamp": 1788137430192,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
