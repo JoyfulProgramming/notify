@@ -11,9 +11,61 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "UniqueGroupsView"
+    "title": "UniqueGroupsView",
+    "fields": [
+      {
+        "name": "groupId",
+        "type": "String",
+        "example": "grp_8821",
+        "mapping": "Signal Captured.groupId — empty/absent represents the permanent 'None' row",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "groupName",
+        "type": "String",
+        "example": "Mum's Chat",
+        "mapping": "GroupsView.name (looked up by groupId), or literally 'None' when groupId is empty",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "signalCount",
+        "type": "Number",
+        "example": "2",
+        "mapping": "derived:count(Signal Captured where groupId matches)",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "latestPreview",
+        "type": "String",
+        "example": "Might pop round to see...",
+        "mapping": "latest:Signal Captured.body for this groupId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "latestReceivedAt",
+        "type": "DateTime",
+        "example": "2026-08-29T00:02:00Z",
+        "mapping": "latest:Signal Captured.receivedAt for this groupId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignedProject",
+        "type": "String",
+        "example": "unassigned",
+        "mapping": "latest:Signal Assigned To Project.projectId for this groupId's most recent signal",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ],
+    "description": "One row per distinct groupId, PLUS a permanent 'None' row aggregating every signal with no group (a direct message). Folds Signal Captured (to aggregate and resolve the display name) and Signal Assigned To Project (for the current project badge). Powers the Signals screen's 'Group' grouping mode. Never keys or dedupes on groupName — only groupId, since two distinct groups can share a display name (the 'None' row is the one exception, since it has no real groupId at all).",
+    "listElement": true
   },
-  "hash": "1bdhhmg",
-  "timestamp": 1788215953860,
+  "hash": "1j1tvtv",
+  "timestamp": 1756536501000,
   "userId": null
 }

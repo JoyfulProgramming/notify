@@ -11,9 +11,61 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "UniqueContactsView"
+    "title": "UniqueContactsView",
+    "fields": [
+      {
+        "name": "sender",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "Signal Captured.sender",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "sourceApp",
+        "type": "String",
+        "example": "WhatsApp",
+        "mapping": "latest:Signal Captured.sourceApp for this sender",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "signalCount",
+        "type": "Number",
+        "example": "3",
+        "mapping": "derived:count(Signal Captured where sender matches)",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "latestPreview",
+        "type": "String",
+        "example": "Prescription's sorted...",
+        "mapping": "latest:Signal Captured.body for this sender",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "latestReceivedAt",
+        "type": "DateTime",
+        "example": "2026-08-29T00:02:00Z",
+        "mapping": "latest:Signal Captured.receivedAt for this sender",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignedProject",
+        "type": "String",
+        "example": "unassigned",
+        "mapping": "latest:Signal Assigned To Project.projectId for this sender's most recent signal",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ],
+    "description": "One row per distinct sender — folds Signal Captured (to aggregate) and Signal Assigned To Project (for the current project badge). Powers the Signals screen's 'Contact' grouping mode.",
+    "listElement": true
   },
-  "hash": "1keh7l3",
-  "timestamp": 1788215950314,
+  "hash": "1l2nver",
+  "timestamp": 1756536500000,
   "userId": null
 }
