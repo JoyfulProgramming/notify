@@ -11,9 +11,36 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "ProjectColourPaletteView"
+    "title": "ProjectColourPaletteView",
+    "fields": [
+      {
+        "name": "order",
+        "type": "Number",
+        "example": "1",
+        "mapping": "static-config",
+        "generated": false,
+        "cardinality": "List"
+      },
+      {
+        "name": "colour",
+        "type": "String",
+        "example": "#3b82f6",
+        "mapping": "static-config",
+        "generated": false,
+        "cardinality": "List"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Blue",
+        "mapping": "static-config",
+        "generated": false,
+        "cardinality": "List"
+      }
+    ],
+    "description": "Static reference data — not built from any event. The fixed, ordered 6-colour palette every project is drawn from. Source of truth for: (1) the swatch order shown on the Create Project screen, (2) what 'Next colour' cycles through, and (3) the default auto-suggestion, which is the first palette entry not already present in ProjectRosterView.colour."
   },
-  "hash": "h9c2jr",
-  "timestamp": 1788141778369,
+  "hash": "1fzp7sg",
+  "timestamp": 1756532700000,
   "userId": null
 }
