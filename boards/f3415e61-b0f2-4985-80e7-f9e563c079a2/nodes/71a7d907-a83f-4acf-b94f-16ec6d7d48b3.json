@@ -9,17 +9,8 @@
   "data": {},
   "meta": {
     "type": "READMODEL",
-    "title": "ProjectCreated",
+    "title": "RemainingProjectSlots",
     "fields": [
-      {
-        "name": "projectId",
-        "type": "UUID",
-        "example": "8b1e7f2a-0000-4000-8000-000000000002",
-        "mapping": "derived:uuid()",
-        "generated": true,
-        "subfields": [],
-        "cardinality": "Single"
-      },
       {
         "name": "number",
         "type": "Number",
@@ -81,7 +72,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "15crknq",
-  "timestamp": 1788137402179,
+  "hash": "1tot4nk",
+  "timestamp": 1788137423411,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
