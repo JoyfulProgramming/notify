@@ -17,8 +17,7 @@
         "example": "1",
         "mapping": "static-config",
         "generated": false,
-        "subfields": [],
-        "cardinality": "List"
+        "cardinality": "Single"
       },
       {
         "name": "colour",
@@ -26,8 +25,7 @@
         "example": "#3b82f6",
         "mapping": "static-config",
         "generated": false,
-        "subfields": [],
-        "cardinality": "List"
+        "cardinality": "Single"
       },
       {
         "name": "name",
@@ -35,14 +33,14 @@
         "example": "Blue",
         "mapping": "static-config",
         "generated": false,
-        "subfields": [],
-        "cardinality": "List"
+        "cardinality": "Single"
       }
     ],
     "version": 1,
-    "description": "Static reference data — not built from any event. The fixed, ordered 6-colour palette every project is drawn from. Source of truth for: (1) the swatch order shown on the Create Project screen, (2) what 'Next colour' cycles through, and (3) the default auto-suggestion, which is the first palette entry not already present in ProjectRosterView.colour."
+    "description": "Static reference data — not built from any event. The fixed, ordered 6-colour palette every project is drawn from. Source of truth for: (1) the swatch order shown on the Create Project screen, (2) what 'Next colour' cycles through, and (3) the default auto-suggestion, which is the first palette entry not already present in ProjectRosterView.colour.",
+    "listElement": true
   },
-  "hash": "2lnd3c",
-  "timestamp": 1788141904503,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "1v70zah",
+  "timestamp": 1756532800000,
+  "userId": null
 }
