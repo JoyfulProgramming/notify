@@ -14,24 +14,23 @@
     "title": "SignalsArchived",
     "fields": [
       {
-        "name": "archivedUpTo",
-        "type": "DateTime",
-        "example": "2026-08-31T10:00:00Z",
-        "mapping": "ArchiveSignals.archivedUpTo",
-        "generated": false,
-        "cardinality": "Single"
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_18f2\",\"sig_9a41\"]",
+        "mapping": "ArchiveSignals.signalIds",
+        "cardinality": "List"
       },
       {
         "name": "archivedAt",
         "type": "DateTime",
-        "example": "2026-08-31T10:00:00Z",
+        "example": "2026-09-01T10:00:00Z",
         "mapping": "derived:now()",
         "generated": true,
         "cardinality": "Single"
       }
     ]
   },
-  "hash": "8h7ezo",
-  "timestamp": 1756536801000,
+  "hash": "7ha1lz",
+  "timestamp": 1756795301000,
   "userId": null
 }

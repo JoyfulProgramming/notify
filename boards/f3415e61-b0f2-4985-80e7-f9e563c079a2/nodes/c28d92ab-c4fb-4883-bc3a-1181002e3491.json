@@ -14,17 +14,16 @@
     "title": "ArchiveSignals",
     "fields": [
       {
-        "name": "archivedUpTo",
-        "type": "DateTime",
-        "example": "2026-08-31T10:00:00Z",
-        "mapping": "derived:now()",
-        "generated": true,
-        "cardinality": "Single"
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_18f2\",\"sig_9a41\"]",
+        "mapping": "session:selectedSignalIds",
+        "cardinality": "List"
       }
     ],
-    "description": "Fired by the 'Done' button on any Signals List screen (None/Contact/Group). Bulk-clears the current view rather than requiring per-signal action — the user assigns/reviews what they care about, then presses Done once to sweep everything else out of sight. No signalIds needed: it just stamps 'archived up to now'."
+    "description": "Fired by the 'Archive' button on any Signals List screen (None/Contact/Group). Operates only on the currently selected signals (session:selectedSignalIds via the row checkboxes / Select All/None/Invert) — the button is inactive/disabled whenever the selection is empty. A common flow is Select All then Archive, sweeping every currently-visible signal off the screen in one go."
   },
-  "hash": "14fxl0q",
-  "timestamp": 1756536800000,
+  "hash": "1oamr0c",
+  "timestamp": 1756795300000,
   "userId": null
 }
