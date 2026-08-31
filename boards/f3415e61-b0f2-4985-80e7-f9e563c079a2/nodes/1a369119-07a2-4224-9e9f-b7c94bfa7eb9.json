@@ -50,17 +50,17 @@
         "cardinality": "List"
       },
       {
+        "name": "groupDisplayName",
+        "type": "String",
+        "example": "Mum's Chat",
+        "mapping": "derived:truncate(GroupsView.name, 10 chars) (looked up by SignalsListView.groupId); blank when groupId is empty",
+        "cardinality": "List"
+      },
+      {
         "name": "signalCount",
         "type": "Number",
         "example": "3",
         "mapping": "derived:count(signals in this grouped row), only shown when grouped by Contact or Group",
-        "cardinality": "List"
-      },
-      {
-        "name": "groupChipAbbreviation",
-        "type": "String",
-        "example": "MC",
-        "mapping": "derived:initials(SignalsListView.groupName) — e.g. 'Mum's Chat' to 'MC', 'Wed/Sat Play' to 'WSP', a single-word group to just its first letter; hidden when no group",
         "cardinality": "List"
       },
       {
@@ -92,10 +92,10 @@
     "todoListElement": false,
     "createsAggregate": false,
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "1gwcnim",
-  "timestamp": 1788214889415,
+  "hash": "18odhlr",
+  "timestamp": 1756536300000,
   "userId": null
 }
