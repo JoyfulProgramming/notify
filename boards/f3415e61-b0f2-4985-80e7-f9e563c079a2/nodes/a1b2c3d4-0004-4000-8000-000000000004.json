@@ -25,14 +25,14 @@
         "name": "assignMode",
         "type": "String",
         "example": "Contact",
-        "mapping": "AssignSignalToProject.assignMode — defaults to Contact for a None-grouping multi-select",
+        "mapping": "AssignSignalToProject.assignMode — defaults to Contact for a None-grouping multi-select; only Contact/Group offered",
         "cardinality": "Single"
       },
       {
         "name": "affectedContacts",
         "type": "String",
         "example": "[\"Mike\",\"Kathleen\"]",
-        "mapping": "derived:distinct(sender) across session:selectedSignalIds — drives the 'will create sender rules for' list",
+        "mapping": "derived:distinct(sender) across session:selectedSignalIds — rendered as icon chips at the top of the screen",
         "cardinality": "List"
       },
       {
@@ -44,12 +44,13 @@
       }
     ],
     "version": 3,
-    "description": "What the Assign screen looks like after pressing Assign from the None-grouping multi-select (3 individual signals: Mike x2, Kathleen). Defaults to 'By Contact' since the selection spans multiple contacts; a pink callout lists exactly which contacts (Mike, Kathleen) will get a standing sender rule for this project. 'By Group' and 'These signals only' remain selectable alternatives.",
+    "description": "What the Assign screen looks like after pressing Assign from the None-grouping multi-select (3 individual signals: Mike x2, Kathleen). Simplified/shortened per feedback: no heading, no per-signal message list, no redundant 'will create sender rules for' callout — just the distinct contacts as WhatsApp-icon chips, an Assign-By choice (Contact/Group only, 'These signals only' removed), and the project picker. Defaults to 'By Contact' since the selection spans multiple contacts.",
     "changedAttributes": [
-      "meta.pages"
+      "meta.description",
+      "meta.fields"
     ]
   },
-  "hash": "1yia9di",
-  "timestamp": 1788219546990,
+  "hash": "126lc09",
+  "timestamp": 1756795800000,
   "userId": null
 }
