@@ -9,9 +9,79 @@
   "data": {},
   "meta": {
     "type": "SCENARIO",
-    "title": "Specifications"
+    "title": "Specifications",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "ea29ac64-c718-4d3f-b35e-25b5813b46e4",
+          "then": [
+            {
+              "id": "189dbab4-84ad-4e34-b324-b6b7defd5288",
+              "type": "READMODEL",
+              "title": "ProjectsCreated",
+              "fields": [
+                {
+                  "name": "projectId",
+                  "example": "8b1e7f2a-0000-4000-8000-000000000002"
+                },
+                {
+                  "name": "number",
+                  "example": "2"
+                },
+                {
+                  "name": "shorthand",
+                  "example": "2M"
+                },
+                {
+                  "name": "name",
+                  "example": "Mum"
+                },
+                {
+                  "name": "colour",
+                  "example": "#be185d"
+                },
+                {
+                  "name": "scheduleId",
+                  "example": "lunch"
+                },
+                {
+                  "name": "createdAt",
+                  "example": "2026-08-30T09:00:00Z"
+                }
+              ]
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Scenario #1",
+          "context": [],
+          "examples": [
+            {
+              "name": "Mum",
+              "colour": "#be185d",
+              "number": "1",
+              "createdAt": "2026-08-30T09:00:00Z",
+              "projectId": "8b1e7f2a-0000-4000-8000-000000000002",
+              "shorthand": "1W",
+              "scheduleId": "lunch"
+            },
+            {
+              "name": "Mum",
+              "colour": "#be185d",
+              "number": "2",
+              "createdAt": "2026-08-30T09:00:00Z",
+              "projectId": "8b1e7f2a-0000-4000-8000-000000000002",
+              "shorthand": "2M",
+              "scheduleId": "lunch"
+            }
+          ],
+          "expectError": false,
+          "expectEmptyList": false
+        }
+      ]
+    }
   },
-  "hash": "ycol87",
-  "timestamp": 1788136636781,
+  "hash": "1ja1ypt",
+  "timestamp": 1788136690883,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
