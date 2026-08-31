@@ -1,10 +1,12 @@
 {
   "id": "a1b2c3d4-0004-4000-8000-000000000004",
   "type": "html_screen",
-  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {
-    "backgroundColor": "#ffffff"
+  "position": {
+    "x": 8205,
+    "y": 145
   },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
   "meta": {
     "type": "HTML_SCREEN",
     "pages": [
@@ -41,9 +43,10 @@
         "cardinality": "Single"
       }
     ],
+    "version": 3,
     "description": "What the Assign screen looks like after pressing Assign from the None-grouping multi-select (3 individual signals: Mike x2, Kathleen). Defaults to 'By Contact' since the selection spans multiple contacts; a pink callout lists exactly which contacts (Mike, Kathleen) will get a standing sender rule for this project. 'By Group' and 'These signals only' remain selectable alternatives."
   },
-  "hash": "ve0rsa",
-  "timestamp": 1756795700000,
-  "userId": null
+  "hash": "kt2pkl",
+  "timestamp": 1788219330902,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
