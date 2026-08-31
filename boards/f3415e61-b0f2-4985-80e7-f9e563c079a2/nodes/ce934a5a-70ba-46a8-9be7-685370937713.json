@@ -2,13 +2,11 @@
   "id": "ce934a5a-70ba-46a8-9be7-685370937713",
   "type": "sticky_note",
   "position": {
-    "x": 0,
-    "y": 0
+    "x": 995,
+    "y": 1467
   },
   "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
-  "data": {
-    "title": "ProjectColourSelected"
-  },
+  "data": {},
   "meta": {
     "type": "EVENT",
     "title": "ProjectColourSelected",
@@ -19,6 +17,7 @@
         "example": "Green",
         "mapping": "derived:nextPaletteColourAfter(currentSelection) — the next ProjectColourPaletteView row (by order, wrapping after Teal back to Blue) whose used is false",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -27,11 +26,13 @@
         "example": "2026-08-31T09:00:00Z",
         "mapping": "derived:now()",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       }
-    ]
+    ],
+    "version": 3
   },
-  "hash": "lrg5fe",
-  "timestamp": 1756533800000,
-  "userId": null
+  "hash": "8bll2d",
+  "timestamp": 1788183401263,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
