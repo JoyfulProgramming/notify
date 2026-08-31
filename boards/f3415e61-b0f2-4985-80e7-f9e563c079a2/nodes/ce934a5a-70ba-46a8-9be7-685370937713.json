@@ -1,0 +1,19 @@
+{
+  "id": "ce934a5a-70ba-46a8-9be7-685370937713",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {
+    "title": "ProjectColourSelected"
+  },
+  "meta": {
+    "type": "EVENT",
+    "title": "ProjectColourSelected"
+  },
+  "hash": "1vn3ryn",
+  "timestamp": 1788142273236,
+  "userId": null
+}
