@@ -2,7 +2,7 @@
   "id": "b84adfc1-6f1c-4c92-bb07-57bda1d9af27",
   "type": "html_screen",
   "position": {
-    "x": 1455,
+    "x": 555,
     "y": 145
   },
   "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
@@ -57,12 +57,9 @@
         "cardinality": "Single"
       }
     ],
-    "version": 2,
-    "changedAttributes": [
-      "meta.fields"
-    ]
+    "version": 6
   },
-  "hash": "3ww84w",
-  "timestamp": 1756532002000,
-  "userId": null
+  "hash": "3ww81g",
+  "timestamp": 1788139771806,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
