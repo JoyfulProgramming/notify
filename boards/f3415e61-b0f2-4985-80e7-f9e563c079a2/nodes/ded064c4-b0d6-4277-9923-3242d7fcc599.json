@@ -1,0 +1,22 @@
+{
+  "id": "ded064c4-b0d6-4277-9923-3242d7fcc599",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "4d8ca75c-1425-450f-988c-91a103aa4719",
+    "title": "SelectNextProjectColour"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "4d8ca75c-1425-450f-988c-91a103aa4719",
+    "title": "SelectNextProjectColour"
+  },
+  "hash": "ph8js9",
+  "timestamp": 1788176858811,
+  "userId": null
+}
