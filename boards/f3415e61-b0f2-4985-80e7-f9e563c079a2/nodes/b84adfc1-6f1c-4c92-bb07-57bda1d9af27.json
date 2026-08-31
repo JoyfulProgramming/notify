@@ -50,10 +50,17 @@
         "cardinality": "Single"
       },
       {
-        "name": "scheduleTimeRange",
+        "name": "scheduleAlwaysActive",
+        "type": "Boolean",
+        "example": "false",
+        "mapping": "ScheduleOptionsView.alwaysActive",
+        "cardinality": "Single"
+      },
+      {
+        "name": "scheduleSummary",
         "type": "String",
-        "example": "6pm – 9pm",
-        "mapping": "ScheduleOptionsView.timeRange",
+        "example": "6pm - 9pm",
+        "mapping": "derived:summarize(ScheduleTimeSlotsView rows where scheduleId matches) - display-only text built from the exact rows, not stored anywhere",
         "cardinality": "Single"
       },
       {
@@ -69,7 +76,7 @@
       "meta.fields"
     ]
   },
-  "hash": "16rh84g",
-  "timestamp": 1756534300000,
+  "hash": "155it5e",
+  "timestamp": 1756534700000,
   "userId": null
 }
