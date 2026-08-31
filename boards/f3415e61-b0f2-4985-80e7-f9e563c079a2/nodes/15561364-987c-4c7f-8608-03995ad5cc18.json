@@ -235,11 +235,93 @@
             }
           ],
           "title": "Selection view reflects the most recently selected colour"
+        },
+        {
+          "id": "04040404-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "ab525b2e-a8c0-4d64-93d3-50b0682b0061",
+              "type": "READMODEL",
+              "title": "ProjectColourPaletteView"
+            }
+          ],
+          "when": [],
+          "given": [
+            {
+              "id": "e616d323-a2ef-4f31-99ce-f52711c9ec86",
+              "type": "EVENT",
+              "title": "ProjectCreated",
+              "fields": [
+                {
+                  "name": "name",
+                  "example": "Work"
+                },
+                {
+                  "name": "colour",
+                  "example": "Blue"
+                }
+              ]
+            },
+            {
+              "id": "e616d323-a2ef-4f31-99ce-f52711c9ec86",
+              "type": "EVENT",
+              "title": "ProjectCreated",
+              "fields": [
+                {
+                  "name": "name",
+                  "example": "Mum"
+                },
+                {
+                  "name": "colour",
+                  "example": "Green"
+                }
+              ]
+            }
+          ],
+          "title": "Palette marks colours already used by existing projects",
+          "examples": [
+            {
+              "hex": "#3b82f6",
+              "used": "true",
+              "order": "1",
+              "colour": "Blue"
+            },
+            {
+              "hex": "#10b981",
+              "used": "true",
+              "order": "2",
+              "colour": "Green"
+            },
+            {
+              "hex": "#ef4444",
+              "used": "false",
+              "order": "3",
+              "colour": "Red"
+            },
+            {
+              "hex": "#8b5cf6",
+              "used": "false",
+              "order": "4",
+              "colour": "Purple"
+            },
+            {
+              "hex": "#f97316",
+              "used": "false",
+              "order": "5",
+              "colour": "Orange"
+            },
+            {
+              "hex": "#06b6d4",
+              "used": "false",
+              "order": "6",
+              "colour": "Teal"
+            }
+          ]
         }
       ]
     }
   },
-  "hash": "fqcoz0",
-  "timestamp": 1756533201000,
+  "hash": "27kpxf",
+  "timestamp": 1788183368865,
   "userId": null
 }
