@@ -535,11 +535,182 @@
           "title": "Any Time has no time slot rows at all - always_active on ScheduleOptionsView governs it instead",
           "examples": [],
           "expectEmptyList": true
+        },
+        {
+          "id": "12121212-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "69be30e2-a110-40da-8715-4bc0fe8dd505",
+              "type": "READMODEL",
+              "title": "ScheduleTimeSlotsView"
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Lunch repeats the same daily window across all seven days",
+          "examples": [
+            {
+              "end_time": "13:20",
+              "start_time": "12:30",
+              "day_of_week": "Monday",
+              "schedule_id": "lunch"
+            },
+            {
+              "end_time": "13:20",
+              "start_time": "12:30",
+              "day_of_week": "Tuesday",
+              "schedule_id": "lunch"
+            },
+            {
+              "end_time": "13:20",
+              "start_time": "12:30",
+              "day_of_week": "Wednesday",
+              "schedule_id": "lunch"
+            },
+            {
+              "end_time": "13:20",
+              "start_time": "12:30",
+              "day_of_week": "Thursday",
+              "schedule_id": "lunch"
+            },
+            {
+              "end_time": "13:20",
+              "start_time": "12:30",
+              "day_of_week": "Friday",
+              "schedule_id": "lunch"
+            },
+            {
+              "end_time": "13:20",
+              "start_time": "12:30",
+              "day_of_week": "Saturday",
+              "schedule_id": "lunch"
+            },
+            {
+              "end_time": "13:20",
+              "start_time": "12:30",
+              "day_of_week": "Sunday",
+              "schedule_id": "lunch"
+            }
+          ]
+        },
+        {
+          "id": "12121212-0000-4000-8000-000000000002",
+          "then": [
+            {
+              "id": "69be30e2-a110-40da-8715-4bc0fe8dd505",
+              "type": "READMODEL",
+              "title": "ScheduleTimeSlotsView"
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Evenings repeats the same daily window across all seven days",
+          "examples": [
+            {
+              "end_time": "21:00",
+              "start_time": "18:00",
+              "day_of_week": "Monday",
+              "schedule_id": "evenings"
+            },
+            {
+              "end_time": "21:00",
+              "start_time": "18:00",
+              "day_of_week": "Tuesday",
+              "schedule_id": "evenings"
+            },
+            {
+              "end_time": "21:00",
+              "start_time": "18:00",
+              "day_of_week": "Wednesday",
+              "schedule_id": "evenings"
+            },
+            {
+              "end_time": "21:00",
+              "start_time": "18:00",
+              "day_of_week": "Thursday",
+              "schedule_id": "evenings"
+            },
+            {
+              "end_time": "21:00",
+              "start_time": "18:00",
+              "day_of_week": "Friday",
+              "schedule_id": "evenings"
+            },
+            {
+              "end_time": "21:00",
+              "start_time": "18:00",
+              "day_of_week": "Saturday",
+              "schedule_id": "evenings"
+            },
+            {
+              "end_time": "21:00",
+              "start_time": "18:00",
+              "day_of_week": "Sunday",
+              "schedule_id": "evenings"
+            }
+          ]
+        },
+        {
+          "id": "12121212-0000-4000-8000-000000000003",
+          "then": [
+            {
+              "id": "69be30e2-a110-40da-8715-4bc0fe8dd505",
+              "type": "READMODEL",
+              "title": "ScheduleTimeSlotsView"
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Waking Hours repeats the same daily window across all seven days",
+          "examples": [
+            {
+              "end_time": "23:00",
+              "start_time": "07:00",
+              "day_of_week": "Monday",
+              "schedule_id": "waking-hours"
+            },
+            {
+              "end_time": "23:00",
+              "start_time": "07:00",
+              "day_of_week": "Tuesday",
+              "schedule_id": "waking-hours"
+            },
+            {
+              "end_time": "23:00",
+              "start_time": "07:00",
+              "day_of_week": "Wednesday",
+              "schedule_id": "waking-hours"
+            },
+            {
+              "end_time": "23:00",
+              "start_time": "07:00",
+              "day_of_week": "Thursday",
+              "schedule_id": "waking-hours"
+            },
+            {
+              "end_time": "23:00",
+              "start_time": "07:00",
+              "day_of_week": "Friday",
+              "schedule_id": "waking-hours"
+            },
+            {
+              "end_time": "23:00",
+              "start_time": "07:00",
+              "day_of_week": "Saturday",
+              "schedule_id": "waking-hours"
+            },
+            {
+              "end_time": "23:00",
+              "start_time": "07:00",
+              "day_of_week": "Sunday",
+              "schedule_id": "waking-hours"
+            }
+          ]
         }
       ]
     }
   },
-  "hash": "1x5jh9j",
-  "timestamp": 1756534600000,
+  "hash": "1xarypn",
+  "timestamp": 1788185825571,
   "userId": null
 }
