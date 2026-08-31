@@ -29,11 +29,11 @@
         "cardinality": "Single"
       },
       {
-        "name": "usedColours",
-        "type": "String",
-        "example": "Blue, Green",
-        "mapping": "ProjectRosterView.colour",
-        "cardinality": "List"
+        "name": "paletteUsed",
+        "type": "Boolean",
+        "example": "true",
+        "mapping": "ProjectColourPaletteView.used",
+        "cardinality": "Single"
       },
       {
         "name": "slotsRemaining",
@@ -43,9 +43,12 @@
         "cardinality": "Single"
       }
     ],
-    "version": 6
+    "version": 6,
+    "changedAttributes": [
+      "meta.fields"
+    ]
   },
-  "hash": "1r5cx5f",
-  "timestamp": 1788182864629,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "16x5ic4",
+  "timestamp": 1756533700000,
+  "userId": null
 }
