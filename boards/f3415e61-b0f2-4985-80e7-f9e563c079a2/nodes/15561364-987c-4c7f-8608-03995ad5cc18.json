@@ -403,11 +403,56 @@
               "colour": "Teal"
             }
           ]
+        },
+        {
+          "id": "0b0b0b0b-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "0b933c18-d13f-4fe5-b115-726870095ff4",
+              "type": "READMODEL",
+              "title": "ScheduleOptionsView"
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Schedule options always show the fixed 6 presets",
+          "examples": [
+            {
+              "name": "Any Time",
+              "time_range": "",
+              "schedule_id": "any-time"
+            },
+            {
+              "name": "Waking Hours",
+              "time_range": "",
+              "schedule_id": "waking-hours"
+            },
+            {
+              "name": "Lunch",
+              "time_range": "12:30 – 1:20",
+              "schedule_id": "lunch"
+            },
+            {
+              "name": "Business Hours",
+              "time_range": "Mon–Fri 9–6",
+              "schedule_id": "business-hours"
+            },
+            {
+              "name": "Evenings",
+              "time_range": "6pm – 9pm",
+              "schedule_id": "evenings"
+            },
+            {
+              "name": "Weekends",
+              "time_range": "Sat – Sun",
+              "schedule_id": "weekends"
+            }
+          ]
         }
       ]
     }
   },
-  "hash": "yloycp",
-  "timestamp": 1788183536222,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "zkv5am",
+  "timestamp": 1788183845407,
+  "userId": null
 }
