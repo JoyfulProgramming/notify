@@ -11,9 +11,10 @@
   },
   "meta": {
     "type": "MARKDOWN",
-    "description": "The \"Unassigned\" pseudo-project"
+    "title": "The \"Unassigned\" pseudo-project (null object pattern)",
+    "description": "## Design decision\n\n'Unassigned' is a real, permanent project row — not a null/optional projectId anywhere in the model. Every signal gets a projectId the moment Auto-Assign Signal processes it, whether or not a Sender Rule matched.\n\nProperties:\n- Always exists; not created via CreateProject, not counted in ProjectSlotsView's 6-slot cap, cannot be deleted or recoloured.\n- A completely ordinary value for projectId everywhere — AssignSignalToProject.projectId, Signal Assigned To Project.projectId, SignalsListView.assignedProject, and a Sender Rule's own target project can all legitimately be 'unassigned'.\n- No separate 'ignore' concept: to suppress a sender/group, create a normal Sender Rule whose target project is 'unassigned' — the existing contact+group > contact > group specificity resolution handles exceptions for free (e.g. 'everyone in this group goes to Family, except this one person → Unassigned').\n- The Signals screen shows every signal, always, filterable by project — 'Unassigned' is just one more filter value, not a separate inbox/backlog state.\n\nStill open: exactly how/when the 'unassigned' project row itself comes into existence (it isn't a business event — more like seed/bootstrap data, similar to how ProjectColourPaletteView and ScheduleOptionsView are static config rather than event-sourced). Treat it the same way: a permanent static row, not something CreateProject ever produces."
   },
-  "hash": "1m8850",
-  "timestamp": 1788212243852,
+  "hash": "5o8wf8",
+  "timestamp": 1756535300000,
   "userId": null
 }
