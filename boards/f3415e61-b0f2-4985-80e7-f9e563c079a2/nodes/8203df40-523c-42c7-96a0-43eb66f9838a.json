@@ -2,11 +2,13 @@
   "id": "8203df40-523c-42c7-96a0-43eb66f9838a",
   "type": "sticky_note",
   "position": {
-    "x": 0,
-    "y": 0
+    "x": 95,
+    "y": 827
   },
   "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
-  "data": {},
+  "data": {
+    "linkedTo": "0243fff4-723e-429a-a4c5-da84e988d637"
+  },
   "meta": {
     "type": "EVENT",
     "title": "ProjectCreated",
@@ -70,5 +72,7 @@
     ],
     "linkedTo": "0243fff4-723e-429a-a4c5-da84e988d637"
   },
-  "hash": "70lw0"
+  "hash": "70lw0",
+  "timestamp": 1788136793646,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
