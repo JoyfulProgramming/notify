@@ -23,14 +23,14 @@
         "name": "assignMode",
         "type": "String",
         "example": "Group",
-        "mapping": "AssignSignalToProject.assignMode — defaults to Group for a Group-grouping multi-select",
+        "mapping": "AssignSignalToProject.assignMode — defaults to Group for a Group-grouping multi-select; only Contact/Group offered",
         "cardinality": "Single"
       },
       {
         "name": "affectedGroups",
         "type": "String",
         "example": "[\"Mum's Chat\",\"Wed/Sat Play\"]",
-        "mapping": "derived:selected group rows (by groupId) — drives the 'will create group rules for' list",
+        "mapping": "derived:selected group rows (by groupId) — rendered as icon chips at the top of the screen",
         "cardinality": "List"
       },
       {
@@ -41,12 +41,13 @@
         "cardinality": "Single"
       }
     ],
-    "description": "What the Assign screen looks like after pressing Assign from the Group-grouping multi-select (2 group rows: Mum's Chat, Wed/Sat Play — 7 signals). Defaults to 'By Group', with a blue callout listing both WhatsApp groups that will get a standing group rule for this project.",
+    "description": "What the Assign screen looks like after pressing Assign from the Group-grouping multi-select (2 group rows: Mum's Chat, Wed/Sat Play — 7 signals). Simplified to match the None-selection variant: no heading, no per-signal message list, no redundant 'will create group rules for' callout — just the two groups as WhatsApp-icon chips, an Assign-By choice (Contact/Group only), and the project picker. Defaults to 'By Group'.",
     "changedAttributes": [
-      "meta.pages"
+      "meta.description",
+      "meta.fields"
     ]
   },
-  "hash": "31s4vs",
-  "timestamp": 1788219663114,
+  "hash": "10pe4ec",
+  "timestamp": 1756795901000,
   "userId": null
 }

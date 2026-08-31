@@ -23,14 +23,14 @@
         "name": "assignMode",
         "type": "String",
         "example": "Contact",
-        "mapping": "AssignSignalToProject.assignMode — defaults to Contact for a Contact-grouping multi-select",
+        "mapping": "AssignSignalToProject.assignMode — defaults to Contact for a Contact-grouping multi-select; only Contact/Group offered",
         "cardinality": "Single"
       },
       {
         "name": "affectedContacts",
         "type": "String",
         "example": "[\"Mike\",\"Kathleen\",\"Bobby Willis\"]",
-        "mapping": "derived:selected contact rows — drives the 'will create sender rules for' list",
+        "mapping": "derived:selected contact rows — rendered as icon chips at the top of the screen",
         "cardinality": "List"
       },
       {
@@ -41,12 +41,13 @@
         "cardinality": "Single"
       }
     ],
-    "description": "What the Assign screen looks like after pressing Assign from the Contact-grouping multi-select (3 contact rows: Mike, Kathleen, Bobby Willis — 5 signals). Defaults to 'By Contact', with a green callout listing all three contacts that will get a standing sender rule for this project.",
+    "description": "What the Assign screen looks like after pressing Assign from the Contact-grouping multi-select (3 contact rows: Mike, Kathleen, Bobby Willis — 5 signals). Simplified to match the None-selection variant: no heading, no per-signal message list, no redundant 'will create sender rules for' callout — just the three contacts as WhatsApp-icon chips, an Assign-By choice (Contact/Group only), and the project picker. Defaults to 'By Contact'.",
     "changedAttributes": [
-      "meta.pages"
+      "meta.description",
+      "meta.fields"
     ]
   },
-  "hash": "1pkcu3d",
-  "timestamp": 1788219651001,
+  "hash": "1oaf9f4",
+  "timestamp": 1756795900000,
   "userId": null
 }
