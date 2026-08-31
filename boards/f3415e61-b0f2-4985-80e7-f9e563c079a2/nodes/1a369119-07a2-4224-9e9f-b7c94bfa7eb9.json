@@ -36,13 +36,6 @@
         "cardinality": "List"
       },
       {
-        "name": "importance",
-        "type": "Boolean",
-        "example": "true",
-        "mapping": "SignalsListView.importance — gates whether this signal can ever become a notification at all (importance AND in-schedule required)",
-        "cardinality": "List"
-      },
-      {
         "name": "sender",
         "type": "String",
         "example": "Mike",
@@ -92,10 +85,10 @@
     "todoListElement": false,
     "createsAggregate": false,
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "1td8uh5",
-  "timestamp": 1788214383157,
+  "hash": "rymt2",
+  "timestamp": 1756535800000,
   "userId": null
 }
