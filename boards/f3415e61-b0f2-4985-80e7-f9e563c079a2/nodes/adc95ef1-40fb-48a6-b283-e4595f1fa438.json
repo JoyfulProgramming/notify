@@ -11,9 +11,29 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "GroupsView"
+    "title": "GroupsView",
+    "fields": [
+      {
+        "name": "groupId",
+        "type": "String",
+        "example": "grp_8821",
+        "mapping": "Signal Captured.groupId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Mum's Chat",
+        "mapping": "latest:Signal Captured.groupName where groupId matches",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ],
+    "description": "The id-to-name lookup for groups — folds Signal Captured, one row per distinct groupId (never per name). groupName is not unique: two different WhatsApp groups can share a display name, so nothing anywhere should key or dedupe on it. 'name' always reflects the most recently seen groupName for that groupId, since a group's display name can drift over time.",
+    "listElement": true
   },
-  "hash": "whrip7",
-  "timestamp": 1788214971012,
+  "hash": "1cfbf6x",
+  "timestamp": 1756536200000,
   "userId": null
 }
