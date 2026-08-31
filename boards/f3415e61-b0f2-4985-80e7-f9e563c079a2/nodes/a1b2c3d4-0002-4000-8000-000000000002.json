@@ -1,0 +1,17 @@
+{
+  "id": "a1b2c3d4-0002-4000-8000-000000000002",
+  "type": "html_screen",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "backgroundColor": "#ffffff"
+  },
+  "meta": {
+    "type": "HTML_SCREEN",
+    "pages": [
+      "<div>placeholder</div>"
+    ]
+  },
+  "hash": "1fgqfqr",
+  "timestamp": 1788218763033,
+  "userId": null
+}
