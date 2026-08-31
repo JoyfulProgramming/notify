@@ -36,10 +36,18 @@
         "cardinality": "Single"
       },
       {
+        "name": "groupId",
+        "type": "String",
+        "example": "grp_8821",
+        "mapping": "webhook:group_id — the stable, unique identifier for this group; empty/absent for a direct message with no group. Two distinct groups can share the same display name, so this id — never the name — is what everything else keys on",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
         "name": "groupName",
         "type": "String",
         "example": "Mum's Chat",
-        "mapping": "webhook:group_name — empty/absent for a direct message with no group",
+        "mapping": "webhook:group_name — the display name for groupId at the time of capture; not unique, and may drift over time. GroupsView tracks the latest name per groupId",
         "generated": false,
         "cardinality": "Single"
       },
@@ -62,7 +70,7 @@
     ],
     "version": 6
   },
-  "hash": "1pfune",
-  "timestamp": 1756536000000,
+  "hash": "bipcdy",
+  "timestamp": 1756536100000,
   "userId": null
 }
