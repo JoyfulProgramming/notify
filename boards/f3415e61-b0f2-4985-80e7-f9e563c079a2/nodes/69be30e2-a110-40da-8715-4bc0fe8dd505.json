@@ -11,9 +11,45 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "ScheduleTimeSlotsView"
+    "title": "ScheduleTimeSlotsView",
+    "fields": [
+      {
+        "name": "scheduleId",
+        "type": "String",
+        "example": "business-hours",
+        "mapping": "static-config - foreign key to ScheduleOptionsView.scheduleId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "dayOfWeek",
+        "type": "String",
+        "example": "Monday",
+        "mapping": "static-config - one of Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "startTime",
+        "type": "String",
+        "example": "09:00",
+        "mapping": "static-config - 24h HH:mm, local to the user's timezone",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "endTime",
+        "type": "String",
+        "example": "17:00",
+        "mapping": "static-config - 24h HH:mm, local to the user's timezone; always after startTime, schedules never span midnight in v1",
+        "generated": false,
+        "cardinality": "Single"
+      }
+    ],
+    "description": "Static reference data (like ScheduleOptionsView) describing exactly when each schedule is active - one row per (scheduleId, dayOfWeek), so a schedule spanning several days has one row per day rather than a compressed range. This is deliberately explicit and machine-comparable (24h HH:mm, a fixed dayOfWeek enum) so a later automation can evaluate 'is now inside this project's schedule' to decide whether to trigger a notification immediately or hold it. A schedule with alwaysActive=true on ScheduleOptionsView (Any Time) has no rows here at all - absence of rows is not 'never active', check alwaysActive first. FUTURE: becomes event-sourced once custom schedules exist (see ScheduleOptionsView).",
+    "listElement": true
   },
-  "hash": "1eeee74",
-  "timestamp": 1788185271372,
+  "hash": "3afmil",
+  "timestamp": 1756534500000,
   "userId": null
 }
