@@ -283,56 +283,11 @@
           "title": "Reject project creation when all 6 project slots are used",
           "expectError": true,
           "errorDescription": "maximum of 6 projects reached"
-        },
-        {
-          "id": "ffffffff-0001-4001-8001-000000000001",
-          "then": [
-            {
-              "id": "ab525b2e-a8c0-4d64-93d3-50b0682b0061",
-              "type": "READMODEL",
-              "title": "ProjectColourPaletteView"
-            }
-          ],
-          "when": [],
-          "given": [],
-          "title": "Colour palette always shows the fixed 6 options in cycle order",
-          "examples": [
-            {
-              "name": "Blue",
-              "order": "1",
-              "colour": "#3b82f6"
-            },
-            {
-              "name": "Green",
-              "order": "2",
-              "colour": "#10b981"
-            },
-            {
-              "name": "Red",
-              "order": "3",
-              "colour": "#ef4444"
-            },
-            {
-              "name": "Purple",
-              "order": "4",
-              "colour": "#8b5cf6"
-            },
-            {
-              "name": "Orange",
-              "order": "5",
-              "colour": "#f97316"
-            },
-            {
-              "name": "Teal",
-              "order": "6",
-              "colour": "#06b6d4"
-            }
-          ]
         }
       ]
     }
   },
-  "hash": "rmmm15",
-  "timestamp": 1788142061215,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "192mmi9",
+  "timestamp": 1756533000000,
+  "userId": null
 }
