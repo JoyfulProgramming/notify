@@ -1,0 +1,71 @@
+{
+  "id": "f00f9a8f-6af5-41bb-a7e0-d12b91c01e87",
+  "type": "sticky_note",
+  "position": {
+    "x": 1788.3852661315766,
+    "y": 3693.3643231227006
+  },
+  "data": {
+    "linkedTo": "/app/board/f3415e61-b0f2-4985-80e7-f9e563c079a2/?moveToWidget=3e5ffa8f-f657-4bc7-bda0-a02ce4c156c4"
+  },
+  "meta": {
+    "type": "READMODEL",
+    "title": "ProjectRosterView",
+    "fields": [
+      {
+        "name": "projectId",
+        "type": "UUID",
+        "example": "8b1e7f2a-0000-4000-8000-000000000002",
+        "mapping": "ProjectCreated.projectId",
+        "generated": false,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "number",
+        "type": "Number",
+        "example": "2",
+        "mapping": "ProjectCreated.number",
+        "generated": false,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "shorthand",
+        "type": "String",
+        "example": "2M",
+        "mapping": "ProjectCreated.shorthand",
+        "generated": false,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Mum",
+        "mapping": "ProjectCreated.name",
+        "generated": false,
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "colour",
+        "type": "String",
+        "example": "#be185d",
+        "mapping": "ProjectCreated.colour",
+        "generated": false,
+        "subfields": [],
+        "cardinality": "Single"
+      }
+    ],
+    "compact": true,
+    "context": "INTERNAL",
+    "linkedTo": "/app/board/f3415e61-b0f2-4985-80e7-f9e563c079a2/?moveToWidget=3e5ffa8f-f657-4bc7-bda0-a02ce4c156c4",
+    "listElement": true,
+    "todoListElement": false,
+    "createsAggregate": false
+  },
+  "hash": "zhsvld",
+  "timestamp": 1788137365315,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+}
