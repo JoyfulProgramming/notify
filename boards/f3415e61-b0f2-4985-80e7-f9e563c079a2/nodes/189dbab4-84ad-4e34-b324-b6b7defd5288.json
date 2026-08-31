@@ -9,7 +9,7 @@
   "data": {},
   "meta": {
     "type": "READMODEL",
-    "title": "ProjectCreated",
+    "title": "ProjectsCreated",
     "fields": [
       {
         "name": "projectId",
@@ -77,11 +77,11 @@
     ],
     "compact": true,
     "context": "INTERNAL",
-    "listElement": false,
+    "listElement": true,
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "15crknq",
-  "timestamp": 1788136571544,
+  "hash": "1kan966",
+  "timestamp": 1788136618757,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
