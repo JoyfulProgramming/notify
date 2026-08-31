@@ -1,0 +1,19 @@
+{
+  "id": "23c69656-676c-40d8-ba59-dd8a8d417cae",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {
+    "title": "ProjectCreated"
+  },
+  "meta": {
+    "type": "EVENT",
+    "title": "ProjectCreated"
+  },
+  "hash": "1w0y77y",
+  "timestamp": 1788138139705,
+  "userId": null
+}
