@@ -29,14 +29,21 @@
       {
         "name": "colourChoice",
         "type": "String",
-        "example": "#8b5cf6",
+        "example": "Purple",
         "mapping": "ProjectColourSelectionView.colour",
+        "cardinality": "Single"
+      },
+      {
+        "name": "colourHex",
+        "type": "String",
+        "example": "#8b5cf6",
+        "mapping": "ProjectColourPaletteView.hex (looked up by colourChoice)",
         "cardinality": "Single"
       },
       {
         "name": "usedColours",
         "type": "String",
-        "example": "#3b82f6, #10b981",
+        "example": "Blue, Green",
         "mapping": "ProjectRosterView.colour",
         "cardinality": "List"
       },
@@ -52,7 +59,7 @@
       "meta.fields"
     ]
   },
-  "hash": "d1jzno",
-  "timestamp": 1756533100000,
+  "hash": "odtla0",
+  "timestamp": 1756533401000,
   "userId": null
 }

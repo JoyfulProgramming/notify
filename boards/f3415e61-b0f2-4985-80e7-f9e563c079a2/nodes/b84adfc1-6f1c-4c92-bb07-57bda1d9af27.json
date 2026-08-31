@@ -15,44 +15,23 @@
     "title": "Create Project",
     "fields": [
       {
-        "name": "name",
-        "type": "String",
-        "example": "Friends",
-        "mapping": "CreateProject.name",
-        "cardinality": "Single"
-      },
-      {
-        "name": "scheduleId",
-        "type": "String",
-        "example": "evenings",
-        "mapping": "CreateProject.scheduleId",
-        "cardinality": "Single"
-      },
-      {
-        "name": "colourChoice",
-        "type": "String",
-        "example": "#ef4444",
-        "mapping": "ProjectColourSelectionView.colour",
-        "cardinality": "Single"
-      },
-      {
         "name": "paletteColour",
         "type": "String",
-        "example": "#3b82f6",
+        "example": "Blue",
         "mapping": "ProjectColourPaletteView.colour",
         "cardinality": "Single"
       },
       {
-        "name": "paletteName",
+        "name": "paletteHex",
         "type": "String",
-        "example": "Blue",
-        "mapping": "ProjectColourPaletteView.name",
+        "example": "#3b82f6",
+        "mapping": "ProjectColourPaletteView.hex",
         "cardinality": "Single"
       },
       {
         "name": "usedColours",
         "type": "String",
-        "example": "#3b82f6, #10b981",
+        "example": "Blue, Green",
         "mapping": "ProjectRosterView.colour",
         "cardinality": "List"
       },
@@ -62,18 +41,14 @@
         "example": "4",
         "mapping": "ProjectSlotsView.slotsRemaining",
         "cardinality": "Single"
-      },
-      {
-        "name": "previewShorthand",
-        "type": "String",
-        "example": "3F",
-        "mapping": "derived:previewShorthand(name)",
-        "cardinality": "Single"
       }
     ],
-    "version": 6
+    "version": 6,
+    "changedAttributes": [
+      "meta.fields"
+    ]
   },
-  "hash": "xlvh91",
-  "timestamp": 1788176518407,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "1r5cx5f",
+  "timestamp": 1756533400000,
+  "userId": null
 }

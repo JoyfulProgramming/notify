@@ -40,8 +40,15 @@
       {
         "name": "colour",
         "type": "String",
-        "example": "#10b981",
+        "example": "Green",
         "mapping": "ProjectDetailView.colour",
+        "cardinality": "Single"
+      },
+      {
+        "name": "colourHex",
+        "type": "String",
+        "example": "#10b981",
+        "mapping": "ProjectColourPaletteView.hex (looked up by colour)",
         "cardinality": "Single"
       },
       {
@@ -56,7 +63,7 @@
       "meta.fields"
     ]
   },
-  "hash": "18rjlbi",
-  "timestamp": 1756532102000,
+  "hash": "1temt5d",
+  "timestamp": 1756533404000,
   "userId": null
 }

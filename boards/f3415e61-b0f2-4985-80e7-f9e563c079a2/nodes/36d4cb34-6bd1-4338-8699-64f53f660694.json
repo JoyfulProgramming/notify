@@ -33,8 +33,15 @@
       {
         "name": "colour",
         "type": "String",
-        "example": "#10b981",
+        "example": "Green",
         "mapping": "ProjectRosterView.colour",
+        "cardinality": "List"
+      },
+      {
+        "name": "colourHex",
+        "type": "String",
+        "example": "#10b981",
+        "mapping": "ProjectColourPaletteView.hex (looked up by colour)",
         "cardinality": "List"
       },
       {
@@ -49,7 +56,7 @@
       "meta.fields"
     ]
   },
-  "hash": "9yp7qm",
-  "timestamp": 1756532101000,
+  "hash": "1hmep55",
+  "timestamp": 1756533403000,
   "userId": null
 }

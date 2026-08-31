@@ -31,8 +31,15 @@
       {
         "name": "colour",
         "type": "String",
-        "example": "#10b981",
+        "example": "Green",
         "mapping": "ProjectRosterView.colour",
+        "cardinality": "List"
+      },
+      {
+        "name": "colourHex",
+        "type": "String",
+        "example": "#10b981",
+        "mapping": "ProjectColourPaletteView.hex (looked up by colour)",
         "cardinality": "List"
       },
       {
@@ -41,13 +48,6 @@
         "example": "4",
         "mapping": "ProjectSlotsView.slotsRemaining",
         "cardinality": "Single"
-      },
-      {
-        "name": "slotsUsed",
-        "type": "Number",
-        "example": "2",
-        "mapping": "ProjectSlotsView.slotsUsed",
-        "cardinality": "Single"
       }
     ],
     "version": 7,
@@ -55,7 +55,7 @@
       "meta.fields"
     ]
   },
-  "hash": "176e1dt",
-  "timestamp": 1756532301000,
+  "hash": "14sx3z1",
+  "timestamp": 1756533402000,
   "userId": null
 }
