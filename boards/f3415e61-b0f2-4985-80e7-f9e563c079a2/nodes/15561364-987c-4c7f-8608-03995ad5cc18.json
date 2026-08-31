@@ -9,10 +9,235 @@
     "type": "SCENARIO",
     "title": "",
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "cc010000-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "ab525b2e-a8c0-4d64-93d3-50b0682b0061",
+              "type": "READMODEL",
+              "title": "ProjectColourPaletteView"
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Colour palette always shows the fixed 6 options in cycle order",
+          "examples": [
+            {
+              "name": "Blue",
+              "order": "1",
+              "colour": "#3b82f6"
+            },
+            {
+              "name": "Green",
+              "order": "2",
+              "colour": "#10b981"
+            },
+            {
+              "name": "Red",
+              "order": "3",
+              "colour": "#ef4444"
+            },
+            {
+              "name": "Purple",
+              "order": "4",
+              "colour": "#8b5cf6"
+            },
+            {
+              "name": "Orange",
+              "order": "5",
+              "colour": "#f97316"
+            },
+            {
+              "name": "Teal",
+              "order": "6",
+              "colour": "#06b6d4"
+            }
+          ]
+        },
+        {
+          "id": "cc020000-0000-4000-8000-000000000002",
+          "then": [
+            {
+              "id": "f28f2ddf-d396-496b-aaec-769deee81431",
+              "type": "READMODEL",
+              "title": "ProjectColourSelectionView"
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Selection defaults to the first unused palette colour before any Next colour press"
+        },
+        {
+          "id": "cc030000-0000-4000-8000-000000000003",
+          "then": [
+            {
+              "id": "ce934a5a-70ba-46a8-9be7-685370937713",
+              "type": "EVENT",
+              "title": "ProjectColourSelected",
+              "fields": [
+                {
+                  "name": "colour",
+                  "example": "#10b981"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "ea3f8457-0cfb-4d14-aa7a-c447daa212c4",
+              "type": "COMMAND",
+              "title": "SelectNextProjectColour"
+            }
+          ],
+          "given": [
+            {
+              "id": "ce934a5a-70ba-46a8-9be7-685370937713",
+              "type": "EVENT",
+              "title": "ProjectColourSelected",
+              "fields": [
+                {
+                  "name": "colour",
+                  "example": "#3b82f6"
+                }
+              ]
+            }
+          ],
+          "title": "Pressing Next colour advances to the next unused palette colour"
+        },
+        {
+          "id": "cc040000-0000-4000-8000-000000000004",
+          "then": [
+            {
+              "id": "ce934a5a-70ba-46a8-9be7-685370937713",
+              "type": "EVENT",
+              "title": "ProjectColourSelected",
+              "fields": [
+                {
+                  "name": "colour",
+                  "example": "#8b5cf6"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "ea3f8457-0cfb-4d14-aa7a-c447daa212c4",
+              "type": "COMMAND",
+              "title": "SelectNextProjectColour"
+            }
+          ],
+          "given": [
+            {
+              "id": "5b9e55a7-a1b7-47ce-a88f-db2624073662",
+              "type": "EVENT",
+              "title": "ProjectCreated",
+              "fields": [
+                {
+                  "name": "name",
+                  "example": "Work"
+                },
+                {
+                  "name": "colour",
+                  "example": "#3b82f6"
+                }
+              ]
+            },
+            {
+              "id": "5b9e55a7-a1b7-47ce-a88f-db2624073662",
+              "type": "EVENT",
+              "title": "ProjectCreated",
+              "fields": [
+                {
+                  "name": "name",
+                  "example": "Mum"
+                },
+                {
+                  "name": "colour",
+                  "example": "#10b981"
+                }
+              ]
+            },
+            {
+              "id": "ce934a5a-70ba-46a8-9be7-685370937713",
+              "type": "EVENT",
+              "title": "ProjectColourSelected",
+              "fields": [
+                {
+                  "name": "colour",
+                  "example": "#ef4444"
+                }
+              ]
+            }
+          ],
+          "title": "Next colour skips palette entries already used by existing projects"
+        },
+        {
+          "id": "cc050000-0000-4000-8000-000000000005",
+          "then": [
+            {
+              "id": "ce934a5a-70ba-46a8-9be7-685370937713",
+              "type": "EVENT",
+              "title": "ProjectColourSelected",
+              "fields": [
+                {
+                  "name": "colour",
+                  "example": "#3b82f6"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "ea3f8457-0cfb-4d14-aa7a-c447daa212c4",
+              "type": "COMMAND",
+              "title": "SelectNextProjectColour"
+            }
+          ],
+          "given": [
+            {
+              "id": "ce934a5a-70ba-46a8-9be7-685370937713",
+              "type": "EVENT",
+              "title": "ProjectColourSelected",
+              "fields": [
+                {
+                  "name": "colour",
+                  "example": "#06b6d4"
+                }
+              ]
+            }
+          ],
+          "title": "Next colour wraps back to Blue after cycling past Teal"
+        },
+        {
+          "id": "cc060000-0000-4000-8000-000000000006",
+          "then": [
+            {
+              "id": "f28f2ddf-d396-496b-aaec-769deee81431",
+              "type": "READMODEL",
+              "title": "ProjectColourSelectionView"
+            }
+          ],
+          "when": [],
+          "given": [
+            {
+              "id": "ce934a5a-70ba-46a8-9be7-685370937713",
+              "type": "EVENT",
+              "title": "ProjectColourSelected",
+              "fields": [
+                {
+                  "name": "colour",
+                  "example": "#ef4444"
+                }
+              ]
+            }
+          ],
+          "title": "Selection view reflects the most recently selected colour"
+        }
+      ]
     }
   },
-  "hash": "2f00c6",
-  "timestamp": 1788176363294,
+  "hash": "pce7fa",
+  "timestamp": 1788176363577,
   "userId": null
 }
