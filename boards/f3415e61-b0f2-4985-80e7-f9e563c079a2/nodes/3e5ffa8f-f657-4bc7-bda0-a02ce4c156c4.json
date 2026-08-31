@@ -18,7 +18,7 @@
         "mapping": "ProjectCreated.projectId",
         "generated": false,
         "subfields": [],
-        "cardinality": "List"
+        "cardinality": "Single"
       },
       {
         "name": "number",
@@ -63,7 +63,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "yzpc89",
-  "timestamp": 1788136742820,
+  "hash": "139sr75",
+  "timestamp": 1788136754446,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
