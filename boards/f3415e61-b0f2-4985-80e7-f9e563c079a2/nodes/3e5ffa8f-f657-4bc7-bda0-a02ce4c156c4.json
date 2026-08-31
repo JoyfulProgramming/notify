@@ -17,8 +17,7 @@
         "example": "8b1e7f2a-0000-4000-8000-000000000002",
         "mapping": "ProjectCreated.projectId",
         "generated": false,
-        "subfields": [],
-        "cardinality": "Single"
+        "cardinality": "List"
       },
       {
         "name": "number",
@@ -26,8 +25,7 @@
         "example": "2",
         "mapping": "ProjectCreated.number",
         "generated": false,
-        "subfields": [],
-        "cardinality": "Single"
+        "cardinality": "List"
       },
       {
         "name": "shorthand",
@@ -35,8 +33,7 @@
         "example": "2M",
         "mapping": "ProjectCreated.shorthand",
         "generated": false,
-        "subfields": [],
-        "cardinality": "Single"
+        "cardinality": "List"
       },
       {
         "name": "name",
@@ -44,17 +41,15 @@
         "example": "Mum",
         "mapping": "ProjectCreated.name",
         "generated": false,
-        "subfields": [],
-        "cardinality": "Single"
+        "cardinality": "List"
       },
       {
         "name": "colour",
         "type": "String",
-        "example": "#be185d",
+        "example": "#10b981",
         "mapping": "ProjectCreated.colour",
         "generated": false,
-        "subfields": [],
-        "cardinality": "Single"
+        "cardinality": "List"
       }
     ],
     "compact": true,
@@ -64,7 +59,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "68a22s",
-  "timestamp": 1788138245200,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "4b2wwl",
+  "timestamp": 1756532302000,
+  "userId": null
 }
