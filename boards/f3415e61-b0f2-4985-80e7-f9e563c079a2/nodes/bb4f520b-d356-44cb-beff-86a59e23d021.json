@@ -46,12 +46,6 @@
           "type": "spec",
           "label": "Spec Lane",
           "height": 320
-        },
-        {
-          "id": "7932695d-00b9-431a-9c17-1711bd55ca53",
-          "type": "feedback",
-          "label": "Notes",
-          "height": 320
         }
       ],
       "cells": [
@@ -172,6 +166,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1788176429473,
+  "timestamp": 1788176431879,
   "userId": null
 }
