@@ -19,15 +19,6 @@
         "generated": true,
         "subfields": [],
         "cardinality": "Single"
-      },
-      {
-        "name": "name",
-        "type": "String",
-        "example": "Mum",
-        "mapping": "CreateProject.name",
-        "generated": false,
-        "subfields": [],
-        "cardinality": "Single"
       }
     ],
     "compact": true,
@@ -36,7 +27,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "ze0wws",
-  "timestamp": 1788137432426,
+  "hash": "1bjmhvt",
+  "timestamp": 1788137438577,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
