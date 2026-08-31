@@ -53,7 +53,7 @@
         "name": "groupDisplayName",
         "type": "String",
         "example": "Mum's Chat",
-        "mapping": "derived:truncate(GroupsView.name, 10 chars) (looked up by SignalsListView.groupId); blank when groupId is empty",
+        "mapping": "derived:truncate(GroupsView.name, 16 chars) (looked up by SignalsListView.groupId); right-aligned; blank when groupId is empty",
         "cardinality": "List"
       },
       {
@@ -92,10 +92,10 @@
     "todoListElement": false,
     "createsAggregate": false,
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "1lrk28",
-  "timestamp": 1788215126173,
+  "hash": "zh55f0",
+  "timestamp": 1756536400000,
   "userId": null
 }
