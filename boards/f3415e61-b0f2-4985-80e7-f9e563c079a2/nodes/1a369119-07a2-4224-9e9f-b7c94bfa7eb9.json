@@ -83,6 +83,13 @@
         "example": "None",
         "mapping": "session:signalGroupingType — one of None / Contact / Group",
         "cardinality": "Single"
+      },
+      {
+        "name": "doneButton",
+        "type": "String",
+        "example": "Done",
+        "mapping": "ArchiveSignals.archivedUpTo (triggers the command; no direct input, top-right button)",
+        "cardinality": "Single"
       }
     ],
     "compact": true,
@@ -92,10 +99,10 @@
     "todoListElement": false,
     "createsAggregate": false,
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "loh3ue",
-  "timestamp": 1788217183762,
+  "hash": "vqfzv2",
+  "timestamp": 1756708800000,
   "userId": null
 }

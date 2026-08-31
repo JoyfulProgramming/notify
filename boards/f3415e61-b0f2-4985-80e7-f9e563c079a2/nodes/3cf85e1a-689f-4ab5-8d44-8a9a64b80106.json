@@ -16,14 +16,14 @@
         "name": "assignedProjectNumber",
         "type": "String",
         "example": "3F",
-        "mapping": "ProjectRosterView.number+shorthand (looked up by assignedProject), blank/dash for Unassigned",
+        "mapping": "ProjectRosterView.number+shorthand (looked up by assignedProject), blank/dash for Unassigned, or a 'Mixed' badge when the group's signals span more than one project",
         "cardinality": "List"
       },
       {
         "name": "assignedProjectColour",
         "type": "String",
         "example": "Red",
-        "mapping": "ProjectRosterView.colour (looked up by assignedProject)",
+        "mapping": "ProjectRosterView.colour (looked up by assignedProject), or a neutral grey 'Mixed' badge colour when spanning more than one project",
         "cardinality": "List"
       },
       {
@@ -60,13 +60,27 @@
         "example": "Group",
         "mapping": "session:signalGroupingType — one of None / Contact / Group",
         "cardinality": "Single"
+      },
+      {
+        "name": "isMixedProjects",
+        "type": "Boolean",
+        "example": "true",
+        "mapping": "derived:count(distinct assignedProject across this group's signals) > 1 — drives the '?' mixed-project badge",
+        "cardinality": "List"
+      },
+      {
+        "name": "doneButton",
+        "type": "String",
+        "example": "Done",
+        "mapping": "ArchiveSignals.archivedUpTo (triggers the command; no direct input, top-right button)",
+        "cardinality": "Single"
       }
     ],
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "1dtujq9",
-  "timestamp": 1788217297154,
+  "hash": "100e8fv",
+  "timestamp": 1756708802000,
   "userId": null
 }
