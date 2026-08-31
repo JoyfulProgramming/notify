@@ -1,0 +1,19 @@
+{
+  "id": "69be30e2-a110-40da-8715-4bc0fe8dd505",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {
+    "title": "ScheduleTimeSlotsView"
+  },
+  "meta": {
+    "type": "READMODEL",
+    "title": "ScheduleTimeSlotsView"
+  },
+  "hash": "1eeee74",
+  "timestamp": 1788185271372,
+  "userId": null
+}
