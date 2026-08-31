@@ -39,16 +39,16 @@
         "name": "used",
         "type": "Boolean",
         "example": "true",
-        "mapping": "derived:exists(ProjectCreated where ProjectCreated.colour == this.colour)",
+        "mapping": "derived:exists(ProjectCreated p where p.colour == this.colour AND not exists(ProjectDeleted d where d.projectId == p.projectId))",
         "generated": true,
         "cardinality": "Single"
       }
     ],
     "version": 3,
-    "description": "The lookup table for project colours. 'order', 'colour', and 'hex' are static reference data (not built from any event) — 'colour' is the stable name used everywhere else in the model, 'hex' is only ever resolved here, and 'order' is the fixed cycle position (1–6) that 'Next colour' advances through and wraps at. 'used' is the one derived field: folds ProjectCreated, true when some existing project already has this colour.",
+    "description": "The lookup table for project colours. 'order', 'colour', and 'hex' are static reference data (not built from any event) — 'colour' is the stable name used everywhere else in the model, 'hex' is only ever resolved here, and 'order' is the fixed cycle position (1–6) that 'Next colour' advances through and wraps at. 'used' is the one derived field: folds ProjectCreated (colour becomes used) and ProjectDeleted (colour becomes free again once its owning project is deleted).",
     "listElement": true
   },
-  "hash": "294muo",
-  "timestamp": 1756533600000,
+  "hash": "1i63r30",
+  "timestamp": 1756533900000,
   "userId": null
 }
