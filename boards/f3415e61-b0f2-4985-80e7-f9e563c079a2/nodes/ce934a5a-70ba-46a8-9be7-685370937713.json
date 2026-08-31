@@ -14,10 +14,9 @@
       {
         "name": "colour",
         "type": "String",
-        "example": "Green",
+        "example": "Purple",
         "mapping": "derived:nextPaletteColourAfter(currentSelection) — the next ProjectColourPaletteView row (by order, wrapping after Teal back to Blue) whose used is false",
         "generated": true,
-        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -26,13 +25,12 @@
         "example": "2026-08-31T09:00:00Z",
         "mapping": "derived:now()",
         "generated": true,
-        "subfields": [],
         "cardinality": "Single"
       }
     ],
     "version": 3
   },
-  "hash": "8bll2d",
-  "timestamp": 1788183401263,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "1s36l4g",
+  "timestamp": 1756534000000,
+  "userId": null
 }
