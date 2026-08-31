@@ -36,6 +36,14 @@
         "cardinality": "Single"
       },
       {
+        "name": "groupName",
+        "type": "String",
+        "example": "Mum's Chat",
+        "mapping": "Signal Captured.groupName",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
         "name": "body",
         "type": "String",
         "example": "Can you call Mum later, she is not feeling great",
@@ -67,7 +75,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "1cps4bh",
-  "timestamp": 1756535203000,
+  "hash": "1fnqm14",
+  "timestamp": 1756536001000,
   "userId": null
 }
