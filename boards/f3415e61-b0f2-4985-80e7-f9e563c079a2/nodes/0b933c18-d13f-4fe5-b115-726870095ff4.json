@@ -17,7 +17,7 @@
         "name": "scheduleId",
         "type": "String",
         "example": "evenings",
-        "mapping": "static-config — the stable key used throughout the rest of the model",
+        "mapping": "static-config - the stable key used throughout the rest of the model",
         "generated": false,
         "cardinality": "Single"
       },
@@ -30,18 +30,18 @@
         "cardinality": "Single"
       },
       {
-        "name": "timeRange",
-        "type": "String",
-        "example": "6pm – 9pm",
-        "mapping": "static-config — empty for presets with no fixed hours (Any Time, Waking Hours)",
+        "name": "alwaysActive",
+        "type": "Boolean",
+        "example": "false",
+        "mapping": "static-config - true only for 'Any Time', meaning it always matches regardless of ScheduleTimeSlotsView",
         "generated": false,
         "cardinality": "Single"
       }
     ],
-    "description": "The lookup table for schedule presets — currently static reference data (not built from any event), same pattern as ProjectColourPaletteView. 'scheduleId' is the stable key stored on CreateProject/ProjectCreated; 'name' and 'timeRange' are display-only, resolved here. FUTURE: once custom schedules are supported, this stops being static config and becomes a real event-sourced read model (folding e.g. ScheduleCreated/ScheduleUpdated), and 'scheduleId' starts referencing user-created schedules instead of only these 6 fixed presets — CreateProject.scheduleId and ProjectCreated.scheduleId will not need to change shape when that happens, only this lookup's source.",
+    "description": "The lookup table for schedule presets - currently static reference data (not built from any event), same pattern as ProjectColourPaletteView. 'scheduleId' is the stable key stored on CreateProject/ProjectCreated. Exact recurring time windows live in ScheduleTimeSlotsView (one row per weekday the schedule is active), keyed by this same scheduleId - alwaysActive is the only exception, for the 'Any Time' preset which has no windows at all. FUTURE: once custom schedules are supported, both this view and ScheduleTimeSlotsView stop being static config and become event-sourced (folding e.g. ScheduleCreated/ScheduleTimeSlotAdded) instead - CreateProject.scheduleId and ProjectCreated.scheduleId will not need to change shape when that happens, only these two lookups' source.",
     "listElement": true
   },
-  "hash": "1mxs3am",
-  "timestamp": 1756534100000,
+  "hash": "ym7xz1",
+  "timestamp": 1756534400000,
   "userId": null
 }
