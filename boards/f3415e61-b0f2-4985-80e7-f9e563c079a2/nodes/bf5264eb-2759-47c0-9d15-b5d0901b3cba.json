@@ -47,28 +47,24 @@
               "title": "Sender Rule Created (Mum's Chat, Group)"
             }
           ],
-          "title": "Impact preview lists sender and group rules that will be deleted",
+          "title": "Impact preview lists sender and group rules that will be deleted, framed as future impact only",
           "examples": [
             {
-              "example_body": "Can you call Mum later, she's not feeling great",
-              "example_sender": "Mike",
               "rule_sender_id": "Mike",
               "rule_assign_mode": "Contact",
-              "future_assignment": "Unassigned",
-              "example_source_app": "WhatsApp"
+              "future_impact_statement": "Future messages from Mike will not be assigned to this project"
             },
             {
-              "example_body": "Pete: I'll pop round Thursday to help with the shopping",
-              "example_sender": "Mum's Chat",
               "rule_sender_id": "Mum's Chat",
               "rule_assign_mode": "Group",
-              "future_assignment": "Unassigned",
-              "example_source_app": "WhatsApp"
+              "future_impact_statement": "Future messages from Mum's Chat in this group will not be assigned to this project"
             }
           ]
         }
       ]
     }
   },
-  "hash": "14rm6iu"
+  "hash": "up9tka",
+  "timestamp": 1756535102000,
+  "userId": null
 }
