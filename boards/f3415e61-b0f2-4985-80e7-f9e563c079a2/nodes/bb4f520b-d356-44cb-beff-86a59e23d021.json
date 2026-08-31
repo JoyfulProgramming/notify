@@ -105,13 +105,6 @@
           "rowId": "57e29517-4890-4015-b4f5-0d540cf3151b",
           "nodeId": "189dbab4-84ad-4e34-b324-b6b7defd5288",
           "nodeType": "READMODEL"
-        },
-        {
-          "id": "5c047db8-c6e1-4a77-b9c2-1bdb5f9fde67-83c20443-3d8c-4d17-8809-2f288d819a2b",
-          "colId": "83c20443-3d8c-4d17-8809-2f288d819a2b",
-          "rowId": "5c047db8-c6e1-4a77-b9c2-1bdb5f9fde67",
-          "nodeId": "c6e68925-587f-4d21-8df4-165fb7a8764c",
-          "nodeType": "SCENARIO"
         }
       ],
       "columns": [
@@ -132,6 +125,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1788136637187,
+  "timestamp": 1788136725225,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
