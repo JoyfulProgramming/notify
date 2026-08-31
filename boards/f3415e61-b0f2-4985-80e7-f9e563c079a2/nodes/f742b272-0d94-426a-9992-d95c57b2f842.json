@@ -10,7 +10,7 @@
   "meta": {
     "type": "SCENARIO",
     "title": "",
-    "version": 1,
+    "version": 8,
     "givenWhenThenScenario": {
       "scenarios": [
         {
@@ -343,7 +343,7 @@
       ]
     }
   },
-  "hash": "o78ifk",
-  "timestamp": 1756531900000,
-  "userId": null
+  "hash": "1h0qcgp",
+  "timestamp": 1788138267281,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
