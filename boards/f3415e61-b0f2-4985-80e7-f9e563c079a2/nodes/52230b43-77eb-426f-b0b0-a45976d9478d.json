@@ -22,8 +22,8 @@
       {
         "name": "scheduleId",
         "type": "String",
-        "example": "lunch",
-        "mapping": "user-input",
+        "example": "evenings",
+        "mapping": "user-input, selected from ScheduleOptionsView",
         "generated": false,
         "cardinality": "Single"
       },
@@ -37,7 +37,7 @@
       }
     ]
   },
-  "hash": "1s9c2qo",
-  "timestamp": 1756534001000,
+  "hash": "xaem2k",
+  "timestamp": 1756534200000,
   "userId": null
 }

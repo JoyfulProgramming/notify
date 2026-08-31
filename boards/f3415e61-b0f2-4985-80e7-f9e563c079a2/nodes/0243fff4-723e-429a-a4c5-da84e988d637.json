@@ -46,7 +46,7 @@
       {
         "name": "colour",
         "type": "String",
-        "example": "Red",
+        "example": "Purple",
         "mapping": "CreateProject.colourChoice — a ProjectColourPaletteView.colour name (e.g. 'Blue'), not a hex value; look up ProjectColourPaletteView for the hex to render",
         "generated": false,
         "cardinality": "Single"
@@ -54,8 +54,8 @@
       {
         "name": "scheduleId",
         "type": "String",
-        "example": "lunch",
-        "mapping": "CreateProject.scheduleId",
+        "example": "evenings",
+        "mapping": "CreateProject.scheduleId — a ScheduleOptionsView.scheduleId key; look up ScheduleOptionsView for its name/timeRange to render",
         "generated": false,
         "cardinality": "Single"
       },
@@ -74,7 +74,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "xd2fga",
-  "timestamp": 1756533205000,
+  "hash": "13iy1m3",
+  "timestamp": 1756534201000,
   "userId": null
 }
