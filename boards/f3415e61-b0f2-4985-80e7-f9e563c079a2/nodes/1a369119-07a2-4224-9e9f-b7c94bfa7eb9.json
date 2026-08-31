@@ -45,7 +45,7 @@
       {
         "name": "assignedProject",
         "type": "String",
-        "example": "3F",
+        "example": "Unassigned",
         "mapping": "SignalsListView.assignedProject",
         "cardinality": "List"
       },
@@ -54,6 +54,20 @@
         "type": "String",
         "example": "sig_18f2",
         "mapping": "session:selectedSignalId",
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectFilterOptions",
+        "type": "String",
+        "example": "Unassigned, 1W Work, 2M Mum, 3F Friends",
+        "mapping": "ProjectRosterView.shorthand + the permanent Unassigned pseudo-project, always listed first",
+        "cardinality": "List"
+      },
+      {
+        "name": "activeProjectFilter",
+        "type": "String",
+        "example": "All",
+        "mapping": "session:activeProjectFilter",
         "cardinality": "Single"
       }
     ],
@@ -64,10 +78,10 @@
     "todoListElement": false,
     "createsAggregate": false,
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "zh3jnc",
-  "timestamp": 1788212285159,
+  "hash": "1a8gckd",
+  "timestamp": 1756535400000,
   "userId": null
 }
