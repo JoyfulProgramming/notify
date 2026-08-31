@@ -23,7 +23,7 @@
         "name": "scheduleId",
         "type": "String",
         "example": "evenings",
-        "mapping": "session:scheduleId",
+        "mapping": "session:scheduleId, selected from ScheduleOptionsView",
         "cardinality": "Single"
       },
       {
@@ -59,7 +59,7 @@
       "meta.fields"
     ]
   },
-  "hash": "odtla0",
-  "timestamp": 1756533401000,
+  "hash": "wgnidv",
+  "timestamp": 1756534301000,
   "userId": null
 }

@@ -36,6 +36,27 @@
         "cardinality": "Single"
       },
       {
+        "name": "scheduleId",
+        "type": "String",
+        "example": "evenings",
+        "mapping": "ScheduleOptionsView.scheduleId",
+        "cardinality": "Single"
+      },
+      {
+        "name": "scheduleName",
+        "type": "String",
+        "example": "Evenings",
+        "mapping": "ScheduleOptionsView.name",
+        "cardinality": "Single"
+      },
+      {
+        "name": "scheduleTimeRange",
+        "type": "String",
+        "example": "6pm – 9pm",
+        "mapping": "ScheduleOptionsView.timeRange",
+        "cardinality": "Single"
+      },
+      {
         "name": "slotsRemaining",
         "type": "Number",
         "example": "4",
@@ -48,7 +69,7 @@
       "meta.fields"
     ]
   },
-  "hash": "16x5ic4",
-  "timestamp": 1756533700000,
+  "hash": "16rh84g",
+  "timestamp": 1756534300000,
   "userId": null
 }
