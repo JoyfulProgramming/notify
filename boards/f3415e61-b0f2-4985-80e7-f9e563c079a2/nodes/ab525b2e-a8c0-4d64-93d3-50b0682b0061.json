@@ -34,13 +34,21 @@
         "mapping": "static-config — resolved from 'colour' only when rendering",
         "generated": false,
         "cardinality": "Single"
+      },
+      {
+        "name": "used",
+        "type": "Boolean",
+        "example": "true",
+        "mapping": "derived:exists(ProjectCreated where ProjectCreated.colour == this.colour)",
+        "generated": true,
+        "cardinality": "Single"
       }
     ],
     "version": 3,
-    "description": "The lookup table for project colours — static reference data, not built from any event. 'colour' is the stable name used everywhere else in the model (commands, events, other read models); 'hex' is only ever resolved here, at the point something actually needs to paint pixels. 'order' is the fixed cycle position (1–6) that 'Next colour' advances through and wraps at.",
+    "description": "The lookup table for project colours. 'order', 'colour', and 'hex' are static reference data (not built from any event) — 'colour' is the stable name used everywhere else in the model, 'hex' is only ever resolved here, and 'order' is the fixed cycle position (1–6) that 'Next colour' advances through and wraps at. 'used' is the one derived field: folds ProjectCreated, true when some existing project already has this colour.",
     "listElement": true
   },
-  "hash": "r3oik7",
-  "timestamp": 1756533200000,
+  "hash": "294muo",
+  "timestamp": 1756533600000,
   "userId": null
 }
