@@ -19,7 +19,7 @@
         "generated": true,
         "subfields": [],
         "cardinality": "Single",
-        "idAttribute": true
+        "idAttribute": false
       },
       {
         "name": "number",
@@ -82,7 +82,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "398qfq",
-  "timestamp": 1788137639134,
+  "hash": "13vdbp9",
+  "timestamp": 1788137966695,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
