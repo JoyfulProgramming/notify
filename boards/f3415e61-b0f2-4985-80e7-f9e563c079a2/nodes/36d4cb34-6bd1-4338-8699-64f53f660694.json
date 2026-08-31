@@ -33,7 +33,7 @@
       {
         "name": "colour",
         "type": "String",
-        "example": "#be185d",
+        "example": "#10b981",
         "mapping": "ProjectRosterView.colour",
         "cardinality": "List"
       },
@@ -46,10 +46,10 @@
       }
     ],
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "1mamlc2",
-  "timestamp": 1788140111765,
+  "hash": "9yp7qm",
+  "timestamp": 1756532101000,
   "userId": null
 }
