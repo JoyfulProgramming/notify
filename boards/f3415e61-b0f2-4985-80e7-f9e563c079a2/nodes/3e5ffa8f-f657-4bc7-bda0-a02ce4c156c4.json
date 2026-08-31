@@ -59,11 +59,11 @@
     ],
     "compact": true,
     "context": "INTERNAL",
-    "listElement": false,
+    "listElement": true,
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "1hm442q",
-  "timestamp": 1788136737221,
+  "hash": "yzpc89",
+  "timestamp": 1788136742820,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
