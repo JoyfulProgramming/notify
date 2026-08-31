@@ -26,34 +26,34 @@
           "title": "Colour palette always shows the fixed 6 options in cycle order",
           "examples": [
             {
-              "name": "Blue",
+              "hex": "#3b82f6",
               "order": "1",
-              "colour": "#3b82f6"
+              "colour": "Blue"
             },
             {
-              "name": "Green",
+              "hex": "#10b981",
               "order": "2",
-              "colour": "#10b981"
+              "colour": "Green"
             },
             {
-              "name": "Red",
+              "hex": "#ef4444",
               "order": "3",
-              "colour": "#ef4444"
+              "colour": "Red"
             },
             {
-              "name": "Purple",
+              "hex": "#8b5cf6",
               "order": "4",
-              "colour": "#8b5cf6"
+              "colour": "Purple"
             },
             {
-              "name": "Orange",
+              "hex": "#f97316",
               "order": "5",
-              "colour": "#f97316"
+              "colour": "Orange"
             },
             {
-              "name": "Teal",
+              "hex": "#06b6d4",
               "order": "6",
-              "colour": "#06b6d4"
+              "colour": "Teal"
             }
           ]
         },
@@ -80,7 +80,7 @@
               "fields": [
                 {
                   "name": "colour",
-                  "example": "#10b981"
+                  "example": "Green"
                 }
               ]
             }
@@ -100,7 +100,7 @@
               "fields": [
                 {
                   "name": "colour",
-                  "example": "#3b82f6"
+                  "example": "Blue"
                 }
               ]
             }
@@ -117,7 +117,7 @@
               "fields": [
                 {
                   "name": "colour",
-                  "example": "#8b5cf6"
+                  "example": "Purple"
                 }
               ]
             }
@@ -141,7 +141,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#3b82f6"
+                  "example": "Blue"
                 }
               ]
             },
@@ -156,7 +156,7 @@
                 },
                 {
                   "name": "colour",
-                  "example": "#10b981"
+                  "example": "Green"
                 }
               ]
             },
@@ -167,7 +167,7 @@
               "fields": [
                 {
                   "name": "colour",
-                  "example": "#ef4444"
+                  "example": "Red"
                 }
               ]
             }
@@ -184,7 +184,7 @@
               "fields": [
                 {
                   "name": "colour",
-                  "example": "#3b82f6"
+                  "example": "Blue"
                 }
               ]
             }
@@ -204,7 +204,7 @@
               "fields": [
                 {
                   "name": "colour",
-                  "example": "#06b6d4"
+                  "example": "Teal"
                 }
               ]
             }
@@ -229,7 +229,7 @@
               "fields": [
                 {
                   "name": "colour",
-                  "example": "#ef4444"
+                  "example": "Red"
                 }
               ]
             }
@@ -239,7 +239,7 @@
       ]
     }
   },
-  "hash": "15zmg1i",
-  "timestamp": 1788179860508,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "fqcoz0",
+  "timestamp": 1756533201000,
+  "userId": null
 }
