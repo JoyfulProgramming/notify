@@ -130,13 +130,6 @@
           "nodeType": "EVENT"
         },
         {
-          "id": "fbbe1763-78df-49ab-9efc-4bebc02c92ff-a57c1746-a84c-45dc-9a11-13fba82074d1",
-          "colId": "a57c1746-a84c-45dc-9a11-13fba82074d1",
-          "rowId": "fbbe1763-78df-49ab-9efc-4bebc02c92ff",
-          "nodeId": "ea3f8457-0cfb-4d14-aa7a-c447daa212c4",
-          "nodeType": "COMMAND"
-        },
-        {
           "id": "47399890-2704-4356-8fd3-8dfd37e07e14-a57c1746-a84c-45dc-9a11-13fba82074d1",
           "colId": "a57c1746-a84c-45dc-9a11-13fba82074d1",
           "rowId": "47399890-2704-4356-8fd3-8dfd37e07e14",
@@ -163,6 +156,13 @@
           "rowId": "d14aec91-b052-4e61-992b-b8b5c25d67b8",
           "nodeId": "ab525b2e-a8c0-4d64-93d3-50b0682b0061",
           "nodeType": "READMODEL"
+        },
+        {
+          "id": "fbbe1763-78df-49ab-9efc-4bebc02c92ff-bb62dcf7-7370-4fcf-9ac1-8e4a4634b55d",
+          "colId": "bb62dcf7-7370-4fcf-9ac1-8e4a4634b55d",
+          "rowId": "fbbe1763-78df-49ab-9efc-4bebc02c92ff",
+          "nodeId": "ea3f8457-0cfb-4d14-aa7a-c447daa212c4",
+          "nodeType": "COMMAND"
         }
       ],
       "columns": [
@@ -183,6 +183,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1788142599781,
+  "timestamp": 1788142601811,
   "userId": null
 }
