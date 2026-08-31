@@ -1,0 +1,22 @@
+{
+  "id": "1c950ba2-8d04-447d-aaac-ce7753f48aad",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "bb62dcf7-7370-4fcf-9ac1-8e4a4634b55d",
+    "title": "ProjectColourPaletteView"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "bb62dcf7-7370-4fcf-9ac1-8e4a4634b55d",
+    "title": "ProjectColourPaletteView"
+  },
+  "hash": "4kwu85",
+  "timestamp": 1788176855669,
+  "userId": null
+}
