@@ -11,9 +11,76 @@
   },
   "meta": {
     "type": "EVENT",
-    "title": "ProjectCreated"
+    "title": "ProjectCreated",
+    "fields": [
+      {
+        "name": "projectId",
+        "type": "UUID",
+        "example": "8b1e7f2a-0000-4000-8000-000000000002",
+        "mapping": "derived:uuid()",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "number",
+        "type": "Number",
+        "example": "2",
+        "mapping": "derived:nextAvailableSlot()",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "shorthand",
+        "type": "String",
+        "example": "2M",
+        "mapping": "derived:number+name[0]",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Mum",
+        "mapping": "CreateProject.name",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "colour",
+        "type": "String",
+        "example": "Red",
+        "mapping": "CreateProject.colourChoice — a ProjectColourPaletteView.colour name (e.g. 'Blue'), not a hex value; look up ProjectColourPaletteView for the hex to render",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "scheduleId",
+        "type": "String",
+        "example": "lunch",
+        "mapping": "CreateProject.scheduleId",
+        "generated": false,
+        "cardinality": "Single"
+      },
+      {
+        "name": "createdAt",
+        "type": "DateTime",
+        "example": "2026-08-30T09:00:00Z",
+        "mapping": "derived:now()",
+        "generated": true,
+        "cardinality": "Single"
+      }
+    ],
+    "compact": true,
+    "context": "INTERNAL",
+    "linkedTo": "0243fff4-723e-429a-a4c5-da84e988d637",
+    "listElement": false,
+    "todoListElement": false,
+    "createsAggregate": false,
+    "changedAttributes": [
+      "meta.linkedTo"
+    ]
   },
-  "hash": "1w0y77y",
-  "timestamp": 1788183330507,
+  "hash": "xk8ymk",
+  "timestamp": 1788183336475,
   "userId": null
 }
