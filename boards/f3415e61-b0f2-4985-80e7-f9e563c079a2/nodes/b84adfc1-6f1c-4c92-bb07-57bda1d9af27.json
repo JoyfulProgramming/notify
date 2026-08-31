@@ -29,6 +29,20 @@
         "cardinality": "Single"
       },
       {
+        "name": "colourChoice",
+        "type": "String",
+        "example": "#ef4444",
+        "mapping": "CreateProject.colourChoice",
+        "cardinality": "Single"
+      },
+      {
+        "name": "usedColours",
+        "type": "String",
+        "example": "#3b82f6, #10b981",
+        "mapping": "ProjectRosterView.colour",
+        "cardinality": "List"
+      },
+      {
         "name": "slotsRemaining",
         "type": "Number",
         "example": "4",
@@ -41,21 +55,14 @@
         "example": "3F",
         "mapping": "derived:previewShorthand(name)",
         "cardinality": "Single"
-      },
-      {
-        "name": "previewColour",
-        "type": "String",
-        "example": "#be185d",
-        "mapping": "derived:previewColour()",
-        "cardinality": "Single"
       }
     ],
     "version": 2,
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "hole60",
-  "timestamp": 1788139732308,
+  "hash": "3ww84w",
+  "timestamp": 1756532002000,
   "userId": null
 }
