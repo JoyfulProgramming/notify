@@ -36,6 +36,20 @@
         "cardinality": "Single"
       },
       {
+        "name": "paletteColour",
+        "type": "String",
+        "example": "#3b82f6",
+        "mapping": "ProjectColourPaletteView.colour",
+        "cardinality": "List"
+      },
+      {
+        "name": "paletteName",
+        "type": "String",
+        "example": "Blue",
+        "mapping": "ProjectColourPaletteView.name",
+        "cardinality": "List"
+      },
+      {
         "name": "usedColours",
         "type": "String",
         "example": "#3b82f6, #10b981",
@@ -46,7 +60,7 @@
         "name": "slotsRemaining",
         "type": "Number",
         "example": "4",
-        "mapping": "ProjectRosterView.slotsRemaining",
+        "mapping": "ProjectSlotsView.slotsRemaining",
         "cardinality": "Single"
       },
       {
@@ -59,10 +73,10 @@
     ],
     "version": 6,
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "1y99smr",
-  "timestamp": 1788139982113,
+  "hash": "x50yf3",
+  "timestamp": 1756532703000,
   "userId": null
 }
