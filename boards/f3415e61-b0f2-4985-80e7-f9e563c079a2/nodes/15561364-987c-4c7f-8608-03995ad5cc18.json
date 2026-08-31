@@ -419,40 +419,127 @@
           "examples": [
             {
               "name": "Any Time",
-              "time_range": "",
-              "schedule_id": "any-time"
+              "schedule_id": "any-time",
+              "always_active": "true"
             },
             {
               "name": "Waking Hours",
-              "time_range": "",
-              "schedule_id": "waking-hours"
+              "schedule_id": "waking-hours",
+              "always_active": "false"
             },
             {
               "name": "Lunch",
-              "time_range": "12:30 – 1:20",
-              "schedule_id": "lunch"
+              "schedule_id": "lunch",
+              "always_active": "false"
             },
             {
               "name": "Business Hours",
-              "time_range": "Mon–Fri 9–6",
-              "schedule_id": "business-hours"
+              "schedule_id": "business-hours",
+              "always_active": "false"
             },
             {
               "name": "Evenings",
-              "time_range": "6pm – 9pm",
-              "schedule_id": "evenings"
+              "schedule_id": "evenings",
+              "always_active": "false"
             },
             {
               "name": "Weekends",
-              "time_range": "Sat – Sun",
+              "schedule_id": "weekends",
+              "always_active": "false"
+            }
+          ]
+        },
+        {
+          "id": "10101010-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "69be30e2-a110-40da-8715-4bc0fe8dd505",
+              "type": "READMODEL",
+              "title": "ScheduleTimeSlotsView"
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Business Hours repeats the same Monday-Friday window across all five weekdays",
+          "examples": [
+            {
+              "end_time": "17:00",
+              "start_time": "09:00",
+              "day_of_week": "Monday",
+              "schedule_id": "business-hours"
+            },
+            {
+              "end_time": "17:00",
+              "start_time": "09:00",
+              "day_of_week": "Tuesday",
+              "schedule_id": "business-hours"
+            },
+            {
+              "end_time": "17:00",
+              "start_time": "09:00",
+              "day_of_week": "Wednesday",
+              "schedule_id": "business-hours"
+            },
+            {
+              "end_time": "17:00",
+              "start_time": "09:00",
+              "day_of_week": "Thursday",
+              "schedule_id": "business-hours"
+            },
+            {
+              "end_time": "17:00",
+              "start_time": "09:00",
+              "day_of_week": "Friday",
+              "schedule_id": "business-hours"
+            }
+          ]
+        },
+        {
+          "id": "10101010-0000-4000-8000-000000000002",
+          "then": [
+            {
+              "id": "69be30e2-a110-40da-8715-4bc0fe8dd505",
+              "type": "READMODEL",
+              "title": "ScheduleTimeSlotsView"
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Weekends covers Saturday and Sunday as full-day windows",
+          "examples": [
+            {
+              "end_time": "23:59",
+              "start_time": "00:00",
+              "day_of_week": "Saturday",
+              "schedule_id": "weekends"
+            },
+            {
+              "end_time": "23:59",
+              "start_time": "00:00",
+              "day_of_week": "Sunday",
               "schedule_id": "weekends"
             }
           ]
+        },
+        {
+          "id": "10101010-0000-4000-8000-000000000003",
+          "then": [
+            {
+              "id": "69be30e2-a110-40da-8715-4bc0fe8dd505",
+              "type": "READMODEL",
+              "title": "ScheduleTimeSlotsView"
+            }
+          ],
+          "when": [],
+          "given": [],
+          "title": "Any Time has no time slot rows at all - always_active on ScheduleOptionsView governs it instead",
+          "examples": [],
+          "expectEmptyList": true
         }
       ]
     }
   },
-  "hash": "1hqkbta",
-  "timestamp": 1788185110466,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "1x5jh9j",
+  "timestamp": 1756534600000,
+  "userId": null
 }
