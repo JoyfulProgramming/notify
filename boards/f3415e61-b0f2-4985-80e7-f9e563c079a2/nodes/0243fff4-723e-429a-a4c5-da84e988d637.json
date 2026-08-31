@@ -2,8 +2,8 @@
   "id": "0243fff4-723e-429a-a4c5-da84e988d637",
   "type": "sticky_note",
   "position": {
-    "x": 0,
-    "y": 0
+    "x": 545,
+    "y": 1147
   },
   "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
   "data": {},
@@ -17,7 +17,9 @@
         "example": "8b1e7f2a-0000-4000-8000-000000000002",
         "mapping": "derived:uuid()",
         "generated": true,
-        "cardinality": "Single"
+        "subfields": [],
+        "cardinality": "Single",
+        "idAttribute": true
       },
       {
         "name": "number",
@@ -25,6 +27,7 @@
         "example": "2",
         "mapping": "derived:nextAvailableSlot()",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -33,6 +36,7 @@
         "example": "2M",
         "mapping": "derived:number+name[0]",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -41,6 +45,7 @@
         "example": "Mum",
         "mapping": "CreateProject.name",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -49,6 +54,7 @@
         "example": "#be185d",
         "mapping": "derived:autoAssignColour()",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -57,6 +63,7 @@
         "example": "lunch",
         "mapping": "CreateProject.scheduleId",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -65,9 +72,17 @@
         "example": "2026-08-30T09:00:00Z",
         "mapping": "derived:now()",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       }
-    ]
+    ],
+    "compact": true,
+    "context": "INTERNAL",
+    "listElement": false,
+    "todoListElement": false,
+    "createsAggregate": false
   },
-  "hash": "1y3vxnq"
+  "hash": "398qfq",
+  "timestamp": 1788137613491,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
