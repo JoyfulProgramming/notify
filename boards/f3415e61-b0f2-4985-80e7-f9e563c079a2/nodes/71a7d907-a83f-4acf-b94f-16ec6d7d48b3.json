@@ -12,15 +12,6 @@
     "title": "RemainingProjectSlots",
     "fields": [
       {
-        "name": "number",
-        "type": "Number",
-        "example": "2",
-        "mapping": "derived:nextAvailableSlot()",
-        "generated": true,
-        "subfields": [],
-        "cardinality": "Single"
-      },
-      {
         "name": "shorthand",
         "type": "String",
         "example": "2M",
@@ -72,7 +63,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "1tot4nk",
-  "timestamp": 1788137423411,
+  "hash": "y2hw7j",
+  "timestamp": 1788137425745,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
