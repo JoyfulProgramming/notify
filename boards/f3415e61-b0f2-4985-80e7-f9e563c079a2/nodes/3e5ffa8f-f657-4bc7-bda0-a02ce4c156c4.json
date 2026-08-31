@@ -17,7 +17,6 @@
         "example": "8b1e7f2a-0000-4000-8000-000000000002",
         "mapping": "ProjectCreated.projectId",
         "generated": false,
-        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -26,8 +25,7 @@
         "example": "2",
         "mapping": "ProjectCreated.number",
         "generated": false,
-        "subfields": [],
-        "cardinality": "List"
+        "cardinality": "Single"
       },
       {
         "name": "shorthand",
@@ -35,8 +33,7 @@
         "example": "2M",
         "mapping": "ProjectCreated.shorthand",
         "generated": false,
-        "subfields": [],
-        "cardinality": "List"
+        "cardinality": "Single"
       },
       {
         "name": "name",
@@ -44,8 +41,7 @@
         "example": "Mum",
         "mapping": "ProjectCreated.name",
         "generated": false,
-        "subfields": [],
-        "cardinality": "List"
+        "cardinality": "Single"
       },
       {
         "name": "colour",
@@ -53,8 +49,7 @@
         "example": "Green",
         "mapping": "ProjectCreated.colour — a ProjectColourPaletteView.colour name; look it up there for the hex to render",
         "generated": false,
-        "subfields": [],
-        "cardinality": "List"
+        "cardinality": "Single"
       }
     ],
     "compact": true,
@@ -64,7 +59,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "1jkxtna",
-  "timestamp": 1788183004282,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "15r3n0z",
+  "timestamp": 1756533500000,
+  "userId": null
 }
