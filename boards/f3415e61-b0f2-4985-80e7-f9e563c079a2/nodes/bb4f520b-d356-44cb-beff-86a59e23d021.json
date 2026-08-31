@@ -48,6 +48,12 @@
           "height": 320
         },
         {
+          "id": "47399890-2704-4356-8fd3-8dfd37e07e14",
+          "type": "swimlane",
+          "label": "Swimlane",
+          "height": 320
+        },
+        {
           "id": "5c047db8-c6e1-4a77-b9c2-1bdb5f9fde67",
           "type": "spec",
           "label": "Spec Lane",
@@ -146,6 +152,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1788142243203,
+  "timestamp": 1788142245251,
   "userId": null
 }
