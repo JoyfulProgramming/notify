@@ -15,13 +15,6 @@
     "title": "Signals List",
     "fields": [
       {
-        "name": "sender",
-        "type": "String",
-        "example": "Mike",
-        "mapping": "SignalsListView.sender",
-        "cardinality": "List"
-      },
-      {
         "name": "sourceApp",
         "type": "String",
         "example": "WhatsApp",
@@ -29,10 +22,52 @@
         "cardinality": "List"
       },
       {
-        "name": "body",
+        "name": "assignedProjectNumber",
         "type": "String",
-        "example": "Can you call Mum later, she is not feeling great",
-        "mapping": "SignalsListView.body",
+        "example": "3",
+        "mapping": "ProjectRosterView.number (looked up by assignedProject), blank/dash for Unassigned",
+        "cardinality": "List"
+      },
+      {
+        "name": "assignedProjectColour",
+        "type": "String",
+        "example": "Red",
+        "mapping": "ProjectRosterView.colour (looked up by assignedProject)",
+        "cardinality": "List"
+      },
+      {
+        "name": "importance",
+        "type": "Boolean",
+        "example": "true",
+        "mapping": "SignalsListView.importance",
+        "cardinality": "List"
+      },
+      {
+        "name": "sender",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "SignalsListView.sender",
+        "cardinality": "List"
+      },
+      {
+        "name": "signalCount",
+        "type": "Number",
+        "example": "3",
+        "mapping": "derived:count(signals in this grouped row), only shown when grouped by sender or sender+group",
+        "cardinality": "List"
+      },
+      {
+        "name": "groupChips",
+        "type": "String",
+        "example": "Friends",
+        "mapping": "SignalsListView.groupName, hidden when no group",
+        "cardinality": "List"
+      },
+      {
+        "name": "messageTypeIcon",
+        "type": "String",
+        "example": "message",
+        "mapping": "SignalsListView.type (message/review)",
         "cardinality": "List"
       },
       {
@@ -43,31 +78,17 @@
         "cardinality": "List"
       },
       {
-        "name": "assignedProject",
-        "type": "String",
-        "example": "Unassigned",
-        "mapping": "SignalsListView.assignedProject",
-        "cardinality": "List"
-      },
-      {
         "name": "signalId",
         "type": "String",
         "example": "sig_18f2",
-        "mapping": "session:selectedSignalId",
-        "cardinality": "Single"
-      },
-      {
-        "name": "projectFilterOptions",
-        "type": "String",
-        "example": "Unassigned, 1W Work, 2M Mum, 3F Friends",
-        "mapping": "ProjectRosterView.shorthand + the permanent Unassigned pseudo-project, always listed first",
+        "mapping": "session:selectedSignalIds",
         "cardinality": "List"
       },
       {
-        "name": "activeProjectFilter",
+        "name": "groupingMode",
         "type": "String",
-        "example": "All",
-        "mapping": "session:activeProjectFilter",
+        "example": "None",
+        "mapping": "session:signalGroupingType (None / By Contact / By Contact+Group)",
         "cardinality": "Single"
       }
     ],
@@ -78,10 +99,10 @@
     "todoListElement": false,
     "createsAggregate": false,
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "rr50f5",
-  "timestamp": 1788212473671,
+  "hash": "1v9uuq7",
+  "timestamp": 1756535500000,
   "userId": null
 }
