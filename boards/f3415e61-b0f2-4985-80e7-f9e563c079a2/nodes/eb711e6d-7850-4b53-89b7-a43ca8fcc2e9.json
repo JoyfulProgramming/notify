@@ -11,9 +11,27 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "ProjectSlotsView"
+    "title": "ProjectSlotsView",
+    "fields": [
+      {
+        "name": "slotsRemaining",
+        "type": "Number",
+        "example": "4",
+        "mapping": "derived:6-count(ProjectCreated)",
+        "generated": true,
+        "cardinality": "Single"
+      },
+      {
+        "name": "slotsUsed",
+        "type": "Number",
+        "example": "2",
+        "mapping": "derived:count(ProjectCreated)",
+        "generated": true,
+        "cardinality": "Single"
+      }
+    ]
   },
-  "hash": "1h04b0l",
-  "timestamp": 1788140218533,
+  "hash": "tg5jpq",
+  "timestamp": 1756532200000,
   "userId": null
 }
