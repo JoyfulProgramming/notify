@@ -31,39 +31,18 @@
         "cardinality": "List"
       },
       {
-        "name": "exampleSender",
+        "name": "futureImpactStatement",
         "type": "String",
-        "example": "Mike",
-        "mapping": "ProjectDeletionImpactView.exampleSender",
-        "cardinality": "List"
-      },
-      {
-        "name": "exampleSourceApp",
-        "type": "String",
-        "example": "WhatsApp",
-        "mapping": "ProjectDeletionImpactView.exampleSourceApp",
-        "cardinality": "List"
-      },
-      {
-        "name": "exampleBody",
-        "type": "String",
-        "example": "Can you call Mum later, she's not feeling great",
-        "mapping": "ProjectDeletionImpactView.exampleBody",
-        "cardinality": "List"
-      },
-      {
-        "name": "futureAssignment",
-        "type": "String",
-        "example": "Unassigned",
-        "mapping": "ProjectDeletionImpactView.futureAssignment",
+        "example": "Future messages from Mike will not be assigned to this project",
+        "mapping": "ProjectDeletionImpactView.futureImpactStatement",
         "cardinality": "List"
       }
     ],
     "changedAttributes": [
-      "meta.pages"
+      "meta.fields"
     ]
   },
-  "hash": "fg0v6h",
-  "timestamp": 1788188586817,
+  "hash": "18zcreh",
+  "timestamp": 1756535101000,
   "userId": null
 }
