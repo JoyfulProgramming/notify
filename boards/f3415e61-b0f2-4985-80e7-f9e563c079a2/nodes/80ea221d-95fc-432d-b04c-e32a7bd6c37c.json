@@ -71,11 +71,15 @@
     "compact": true,
     "context": "INTERNAL",
     "version": 9,
+    "description": "Rows are hidden once receivedAt <= the latest SignalsArchived.archivedUpTo — pressing 'Done' sweeps everything currently visible out of the list without deleting the underlying signal history.",
     "listElement": false,
     "todoListElement": false,
-    "createsAggregate": false
+    "createsAggregate": false,
+    "changedAttributes": [
+      "meta.description"
+    ]
   },
-  "hash": "7u6dpo",
-  "timestamp": 1756536101000,
+  "hash": "1ihq4fb",
+  "timestamp": 1756536810000,
   "userId": null
 }

@@ -62,10 +62,13 @@
         "cardinality": "Single"
       }
     ],
-    "description": "One row per distinct sender — folds Signal Captured (to aggregate) and Signal Assigned To Project (for the current project badge). Powers the Signals screen's 'Contact' grouping mode.",
-    "listElement": true
+    "description": "Rows are hidden once receivedAt <= the latest SignalsArchived.archivedUpTo, same visibility rule as SignalsListView — pressing 'Done' on this grouped-by-contact screen fires the same ArchiveSignals command.",
+    "listElement": true,
+    "changedAttributes": [
+      "meta.description"
+    ]
   },
-  "hash": "1l2nver",
-  "timestamp": 1756536500000,
+  "hash": "793dsu",
+  "timestamp": 1756536811000,
   "userId": null
 }

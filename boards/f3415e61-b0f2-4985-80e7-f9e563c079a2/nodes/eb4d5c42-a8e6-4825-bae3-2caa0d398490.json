@@ -62,10 +62,13 @@
         "cardinality": "Single"
       }
     ],
-    "description": "One row per distinct groupId, PLUS a permanent 'None' row aggregating every signal with no group (a direct message). Folds Signal Captured (to aggregate and resolve the display name) and Signal Assigned To Project (for the current project badge). Powers the Signals screen's 'Group' grouping mode. Never keys or dedupes on groupName — only groupId, since two distinct groups can share a display name (the 'None' row is the one exception, since it has no real groupId at all).",
-    "listElement": true
+    "description": "Rows are hidden once receivedAt <= the latest SignalsArchived.archivedUpTo, same visibility rule as SignalsListView — pressing 'Done' on this grouped-by-group screen fires the same ArchiveSignals command.",
+    "listElement": true,
+    "changedAttributes": [
+      "meta.description"
+    ]
   },
-  "hash": "1j1tvtv",
-  "timestamp": 1756536501000,
+  "hash": "btm0ar",
+  "timestamp": 1756536812000,
   "userId": null
 }
