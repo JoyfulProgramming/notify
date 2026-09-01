@@ -9,10 +9,124 @@
     "type": "SCENARIO",
     "title": "",
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "3434001a-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "e243e369-0a82-4b45-b626-4db10d3a4f9f",
+              "type": "READMODEL",
+              "title": "Rules Pending Deletion",
+              "fields": [
+                {
+                  "name": "ruleId",
+                  "example": "rule_9"
+                },
+                {
+                  "name": "senderId",
+                  "example": "Mike"
+                },
+                {
+                  "name": "projectId",
+                  "example": "2M"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "3434001a-0000-4000-8000-0000000000q1",
+              "type": "QUERY",
+              "title": "View Rules Pending Deletion",
+              "fields": [
+                {
+                  "name": "query",
+                  "example": "list rules pending deletion"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "49affe6d-66d2-4b4e-b95d-30bae3ebcd20",
+              "type": "EVENT",
+              "title": "Sender Rule Created",
+              "fields": [
+                {
+                  "name": "ruleId",
+                  "example": "rule_9"
+                },
+                {
+                  "name": "senderId",
+                  "example": "Mike"
+                },
+                {
+                  "name": "assignMode",
+                  "example": "Contact"
+                }
+              ]
+            },
+            {
+              "id": "e1cf1a29-a225-4978-b3bd-95834e9f21d5",
+              "type": "EVENT",
+              "title": "ProjectDeleted",
+              "fields": [
+                {
+                  "name": "projectId",
+                  "example": "2M"
+                }
+              ]
+            }
+          ],
+          "title": "A sender rule appears once its project is deleted"
+        },
+        {
+          "id": "3434001a-0000-4000-8000-000000000002",
+          "then": [
+            {
+              "id": "e243e369-0a82-4b45-b626-4db10d3a4f9f",
+              "type": "READMODEL",
+              "title": "Rules Pending Deletion",
+              "fields": []
+            }
+          ],
+          "when": [
+            {
+              "id": "3434001a-0000-4000-8000-0000000000q2",
+              "type": "QUERY",
+              "title": "View Rules Pending Deletion",
+              "fields": [
+                {
+                  "name": "query",
+                  "example": "list rules pending deletion"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "49affe6d-66d2-4b4e-b95d-30bae3ebcd20",
+              "type": "EVENT",
+              "title": "Sender Rule Created",
+              "fields": [
+                {
+                  "name": "ruleId",
+                  "example": "rule_9"
+                },
+                {
+                  "name": "senderId",
+                  "example": "Mike"
+                }
+              ]
+            }
+          ],
+          "title": "A rule for a project that hasn't been deleted is not pending deletion",
+          "expectEmptyList": true
+        }
+      ]
     }
   },
-  "hash": "2f00c6",
-  "timestamp": 1788224424180,
+  "hash": "1f07wq6",
+  "timestamp": 1788224424403,
   "userId": null
 }
