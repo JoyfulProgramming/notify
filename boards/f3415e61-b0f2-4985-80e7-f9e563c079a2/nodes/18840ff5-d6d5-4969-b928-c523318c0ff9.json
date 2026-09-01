@@ -2,13 +2,11 @@
   "id": "18840ff5-d6d5-4969-b928-c523318c0ff9",
   "type": "sticky_note",
   "position": {
-    "x": 0,
-    "y": 0
+    "x": 5945,
+    "y": 507
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {
-    "title": "UniqueContactsView"
-  },
+  "data": {},
   "meta": {
     "type": "READMODEL",
     "title": "UniqueContactsView",
@@ -63,12 +61,9 @@
       }
     ],
     "description": "A signal is hidden once its signalId appears in any SignalsArchived.signalIds, same rule as SignalsListView — a contact row's count/preview reflect only its still-unarchived signals; the row itself disappears once all its signals are archived. A row's badge shows a grey '?' instead of a project number/colour when that contact's remaining signals span more than one assigned project.",
-    "listElement": true,
-    "changedAttributes": [
-      "meta.description"
-    ]
+    "listElement": true
   },
   "hash": "123yoci",
-  "timestamp": 1756795401000,
-  "userId": null
+  "timestamp": 1788221517349,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
