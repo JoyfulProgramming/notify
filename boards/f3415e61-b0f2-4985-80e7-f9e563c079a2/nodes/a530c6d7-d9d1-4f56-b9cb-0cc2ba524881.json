@@ -17,6 +17,7 @@
         "example": "rule_9",
         "mapping": "Sender Rule Created.ruleId",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -25,6 +26,7 @@
         "example": "Mike",
         "mapping": "Sender Rule Created.senderId",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -33,6 +35,7 @@
         "example": "Contact",
         "mapping": "Sender Rule Created.assignMode",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -41,11 +44,13 @@
         "example": "2M",
         "mapping": "Sender Rule Created.projectId",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       }
-    ]
+    ],
+    "version": 2
   },
-  "hash": "qnucms",
-  "timestamp": 1788222502485,
+  "hash": "so7u2",
+  "timestamp": 1788222723742,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
