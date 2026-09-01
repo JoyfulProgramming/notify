@@ -1,0 +1,18 @@
+{
+  "id": "3e9c6390-91de-43ca-9cb5-5b361dbd4a50",
+  "type": "spec_node",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": []
+    }
+  },
+  "hash": "2f00c6",
+  "timestamp": 1788224402125,
+  "userId": null
+}
