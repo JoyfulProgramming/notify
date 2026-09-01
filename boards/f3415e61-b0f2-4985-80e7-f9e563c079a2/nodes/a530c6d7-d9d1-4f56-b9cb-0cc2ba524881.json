@@ -1,10 +1,12 @@
 {
   "id": "a530c6d7-d9d1-4f56-b9cb-0cc2ba524881",
   "type": "sticky_note",
-  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {
-    "title": "Signals Pending Reassignment"
+  "position": {
+    "x": 4145,
+    "y": 507
   },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
   "meta": {
     "type": "READMODEL",
     "title": "Signals Pending Reassignment",
@@ -43,5 +45,7 @@
       }
     ]
   },
-  "hash": "qnucms"
+  "hash": "qnucms",
+  "timestamp": 1788222502485,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
