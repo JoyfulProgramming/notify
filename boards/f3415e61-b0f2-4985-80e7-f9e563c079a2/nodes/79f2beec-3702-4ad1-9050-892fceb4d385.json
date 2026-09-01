@@ -1,0 +1,19 @@
+{
+  "id": "79f2beec-3702-4ad1-9050-892fceb4d385",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "SelectAndAssign (None)"
+  },
+  "meta": {
+    "type": "COMMAND",
+    "title": "SelectAndAssign (None)"
+  },
+  "hash": "84cmxl",
+  "timestamp": 1788221053438,
+  "userId": null
+}
