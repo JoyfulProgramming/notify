@@ -13,7 +13,12 @@
   },
   "meta": {
     "type": "SLICE_BORDER",
-    "title": "slice-3"
+    "title": "Rules Pending Deletion",
+    "changedAttributes": [
+      "meta.title"
+    ]
   },
-  "hash": "1oppce2"
+  "hash": "1wwataa",
+  "timestamp": 1756796800000,
+  "userId": null
 }
