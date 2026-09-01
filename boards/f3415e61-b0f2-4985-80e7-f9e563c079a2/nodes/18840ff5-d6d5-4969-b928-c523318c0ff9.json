@@ -17,6 +17,7 @@
         "example": "Mike",
         "mapping": "Signal Captured.sender",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -25,6 +26,7 @@
         "example": "WhatsApp",
         "mapping": "latest:Signal Captured.sourceApp for this sender",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -33,6 +35,7 @@
         "example": "3",
         "mapping": "derived:count(Signal Captured where sender matches)",
         "generated": true,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -41,6 +44,7 @@
         "example": "Prescription's sorted...",
         "mapping": "latest:Signal Captured.body for this sender",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -49,6 +53,7 @@
         "example": "2026-08-29T00:02:00Z",
         "mapping": "latest:Signal Captured.receivedAt for this sender",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -57,13 +62,15 @@
         "example": "unassigned",
         "mapping": "latest:Signal Assigned To Project.projectId for this sender's most recent signal",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       }
     ],
+    "version": 5,
     "description": "A signal is hidden once its signalId appears in any SignalsArchived.signalIds, same rule as SignalsListView — a contact row's count/preview reflect only its still-unarchived signals; the row itself disappears once all its signals are archived. A row's badge shows a grey '?' instead of a project number/colour when that contact's remaining signals span more than one assigned project.",
     "listElement": true
   },
-  "hash": "123yoci",
-  "timestamp": 1788221517349,
+  "hash": "43i4or",
+  "timestamp": 1788221648889,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
