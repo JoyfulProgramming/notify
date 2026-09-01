@@ -1,10 +1,12 @@
 {
   "id": "a1b2c3d4-0001-4000-8000-000000000001",
   "type": "html_screen",
-  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {
-    "backgroundColor": "#ffffff"
+  "position": {
+    "x": 5955,
+    "y": 145
   },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
   "meta": {
     "type": "HTML_SCREEN",
     "pages": [
@@ -34,12 +36,9 @@
         "cardinality": "Single"
       }
     ],
-    "description": "Same screen as the base 'Signals List' (None grouping) but illustrating the state with 3 signals ticked (both Mike rows + Kathleen). Both Assign and Archive become active/dark once selection is non-empty. Pressing Archive here fires the real ArchiveSignals command with exactly these 3 signalIds — see 'Signals List — after archiving 3 of 9 signals' for the resulting partial removal (the other 6 rows are untouched).",
-    "changedAttributes": [
-      "meta.description"
-    ]
+    "description": "Same screen as the base 'Signals List' (None grouping) but illustrating the state with 3 signals ticked (both Mike rows + Kathleen). Both Assign and Archive become active/dark once selection is non-empty. Pressing Archive here fires the real ArchiveSignals command with exactly these 3 signalIds — see 'Signals List — after archiving 3 of 9 signals' for the resulting partial removal (the other 6 rows are untouched)."
   },
   "hash": "7tq0a6",
-  "timestamp": 1756796900000,
-  "userId": null
+  "timestamp": 1788286168876,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
