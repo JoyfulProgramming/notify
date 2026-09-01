@@ -559,6 +559,13 @@
           "rowId": "a9c61482-67bf-462e-b9be-6b79dbde6f6f",
           "nodeId": "bc1cad9c-c337-48e3-b2ec-8647b88ad684",
           "nodeType": "SCENARIO"
+        },
+        {
+          "id": "7d90b0f9-deb9-49c6-951e-01c903003353-d73ecf89-935e-47b5-a960-57067c2ad872",
+          "colId": "d73ecf89-935e-47b5-a960-57067c2ad872",
+          "rowId": "7d90b0f9-deb9-49c6-951e-01c903003353",
+          "nodeId": "a1b2c3d4-000c-4000-8000-00000000000c",
+          "nodeType": "HTML_SCREEN"
         }
       ],
       "columns": [
@@ -664,6 +671,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1788224892021,
+  "timestamp": 1788224900206,
   "userId": null
 }
