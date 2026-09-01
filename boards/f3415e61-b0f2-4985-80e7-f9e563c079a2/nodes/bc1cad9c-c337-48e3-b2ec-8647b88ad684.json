@@ -9,10 +9,109 @@
     "type": "SCENARIO",
     "title": "",
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "3434001b-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "7dc6497e-e611-4781-9cc0-e2ca27bff43b",
+              "type": "EVENT",
+              "title": "Sender Rule Deleted",
+              "fields": [
+                {
+                  "name": "ruleId",
+                  "example": "rule_9"
+                },
+                {
+                  "name": "senderId",
+                  "example": "Mike"
+                },
+                {
+                  "name": "reason",
+                  "example": "project_deleted"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "ae9bfd67-5bea-439f-ac9c-aea579d78fea",
+              "type": "COMMAND",
+              "title": "DeleteSenderRule",
+              "fields": [
+                {
+                  "name": "ruleId",
+                  "example": "rule_9"
+                },
+                {
+                  "name": "senderId",
+                  "example": "Mike"
+                },
+                {
+                  "name": "projectId",
+                  "example": "2M"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "49affe6d-66d2-4b4e-b95d-30bae3ebcd20",
+              "type": "EVENT",
+              "title": "Sender Rule Created",
+              "fields": [
+                {
+                  "name": "ruleId",
+                  "example": "rule_9"
+                },
+                {
+                  "name": "senderId",
+                  "example": "Mike"
+                }
+              ]
+            },
+            {
+              "id": "e1cf1a29-a225-4978-b3bd-95834e9f21d5",
+              "type": "EVENT",
+              "title": "ProjectDeleted",
+              "fields": [
+                {
+                  "name": "projectId",
+                  "example": "2M"
+                }
+              ]
+            }
+          ],
+          "title": "Deleting a project's rules removes each pending sender rule"
+        },
+        {
+          "id": "3434001b-0000-4000-8000-000000000002",
+          "then": [],
+          "when": [],
+          "given": [
+            {
+              "id": "49affe6d-66d2-4b4e-b95d-30bae3ebcd20",
+              "type": "EVENT",
+              "title": "Sender Rule Created",
+              "fields": [
+                {
+                  "name": "ruleId",
+                  "example": "rule_9"
+                },
+                {
+                  "name": "senderId",
+                  "example": "Mike"
+                }
+              ]
+            }
+          ],
+          "title": "Not triggered for a rule belonging to a different, still-active project",
+          "expectEmptyList": false
+        }
+      ]
     }
   },
-  "hash": "2f00c6",
-  "timestamp": 1788224430169,
+  "hash": "8cn5wo",
+  "timestamp": 1788224430397,
   "userId": null
 }
