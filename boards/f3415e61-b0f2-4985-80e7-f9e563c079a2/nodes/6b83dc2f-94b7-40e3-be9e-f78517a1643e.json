@@ -1,0 +1,19 @@
+{
+  "id": "6b83dc2f-94b7-40e3-be9e-f78517a1643e",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "SelectAndAssign (Contact)"
+  },
+  "meta": {
+    "type": "COMMAND",
+    "title": "SelectAndAssign (Contact)"
+  },
+  "hash": "6qj7f7",
+  "timestamp": 1788221063081,
+  "userId": null
+}
