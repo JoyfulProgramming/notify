@@ -11,9 +11,26 @@
   },
   "meta": {
     "type": "COMMAND",
-    "title": "SelectAndAssign (Group)"
+    "title": "SelectAndAssign (Group)",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_mumschat_1\",\"sig_mumschat_2\",\"sig_mumschat_3\",\"sig_mumschat_4\",\"sig_wsp_1\",\"sig_wsp_2\",\"sig_wsp_3\"]",
+        "mapping": "session:selectedSignalIds — all signals belonging to the ticked group rows",
+        "cardinality": "List"
+      },
+      {
+        "name": "defaultAssignMode",
+        "type": "String",
+        "example": "Group",
+        "mapping": "derived:'Group'",
+        "cardinality": "Single"
+      }
+    ],
+    "description": "Fired by pressing 'Assign' on the Group-grouping Signals List once one or more group-rows are ticked. Defaults the resulting Assign screen to 'By Group', matching the grouping the selection was made in."
   },
-  "hash": "10uljik",
-  "timestamp": 1788221071448,
+  "hash": "6vqa5k",
+  "timestamp": 1756796206000,
   "userId": null
 }

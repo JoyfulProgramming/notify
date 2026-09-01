@@ -11,9 +11,33 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "AssignFlowView (Group)"
+    "title": "AssignFlowView (Group)",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_mumschat_1\",\"sig_mumschat_2\",\"sig_mumschat_3\",\"sig_mumschat_4\",\"sig_wsp_1\",\"sig_wsp_2\",\"sig_wsp_3\"]",
+        "mapping": "AssignFlowOpened (Group).signalIds",
+        "cardinality": "List"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Group",
+        "mapping": "AssignFlowOpened (Group).assignMode",
+        "cardinality": "Single"
+      },
+      {
+        "name": "affectedGroups",
+        "type": "String",
+        "example": "[\"Mum's Chat\",\"Wed/Sat Play\"]",
+        "mapping": "derived:distinct(groupId) across signalIds",
+        "cardinality": "List"
+      }
+    ],
+    "description": "Drives the Assign Preview (Group selection) screen — the selected group rows' signals and their distinct groups, shown as icon chips under GROUPS."
   },
-  "hash": "hj61wq",
-  "timestamp": 1788221077008,
+  "hash": "6xau07",
+  "timestamp": 1756796208000,
   "userId": null
 }

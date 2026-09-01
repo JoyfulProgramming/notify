@@ -11,9 +11,25 @@
   },
   "meta": {
     "type": "EVENT",
-    "title": "AssignFlowOpened (Group)"
+    "title": "AssignFlowOpened (Group)",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_mumschat_1\",\"sig_mumschat_2\",\"sig_mumschat_3\",\"sig_mumschat_4\",\"sig_wsp_1\",\"sig_wsp_2\",\"sig_wsp_3\"]",
+        "mapping": "SelectAndAssign (Group).signalIds",
+        "cardinality": "List"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Group",
+        "mapping": "SelectAndAssign (Group).defaultAssignMode",
+        "cardinality": "Single"
+      }
+    ]
   },
-  "hash": "wyieeb",
-  "timestamp": 1788221074228,
+  "hash": "1cgsduh",
+  "timestamp": 1756796207000,
   "userId": null
 }

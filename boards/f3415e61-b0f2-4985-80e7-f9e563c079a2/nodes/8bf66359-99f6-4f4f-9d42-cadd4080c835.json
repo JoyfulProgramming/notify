@@ -11,9 +11,25 @@
   },
   "meta": {
     "type": "EVENT",
-    "title": "AssignFlowOpened (None)"
+    "title": "AssignFlowOpened (None)",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_1\",\"sig_2\",\"sig_4\"]",
+        "mapping": "SelectAndAssign (None).signalIds",
+        "cardinality": "List"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "SelectAndAssign (None).defaultAssignMode",
+        "cardinality": "Single"
+      }
+    ]
   },
-  "hash": "1y5qzyu",
-  "timestamp": 1788221057099,
+  "hash": "1nyxluj",
+  "timestamp": 1756796201000,
   "userId": null
 }

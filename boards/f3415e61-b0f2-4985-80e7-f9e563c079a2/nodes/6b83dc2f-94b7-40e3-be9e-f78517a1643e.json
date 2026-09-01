@@ -11,9 +11,26 @@
   },
   "meta": {
     "type": "COMMAND",
-    "title": "SelectAndAssign (Contact)"
+    "title": "SelectAndAssign (Contact)",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_mike_1\",\"sig_mike_2\",\"sig_kathleen\",\"sig_bobby\"]",
+        "mapping": "session:selectedSignalIds — all signals belonging to the ticked contact rows",
+        "cardinality": "List"
+      },
+      {
+        "name": "defaultAssignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "derived:'Contact'",
+        "cardinality": "Single"
+      }
+    ],
+    "description": "Fired by pressing 'Assign' on the Contact-grouping Signals List once one or more contact-rows are ticked. Defaults the resulting Assign screen to 'By Contact', matching the grouping the selection was made in."
   },
-  "hash": "6qj7f7",
-  "timestamp": 1788221063081,
+  "hash": "1emfomd",
+  "timestamp": 1756796203000,
   "userId": null
 }

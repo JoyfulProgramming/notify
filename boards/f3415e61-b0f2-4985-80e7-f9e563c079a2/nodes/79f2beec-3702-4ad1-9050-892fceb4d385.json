@@ -11,9 +11,26 @@
   },
   "meta": {
     "type": "COMMAND",
-    "title": "SelectAndAssign (None)"
+    "title": "SelectAndAssign (None)",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_1\",\"sig_2\",\"sig_4\"]",
+        "mapping": "session:selectedSignalIds",
+        "cardinality": "List"
+      },
+      {
+        "name": "defaultAssignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "derived:'Contact'",
+        "cardinality": "Single"
+      }
+    ],
+    "description": "Fired by pressing 'Assign' on the None-grouping Signals List once one or more individual signals are ticked. Defaults the resulting Assign screen to 'By Contact' since a None-grouping selection can span multiple unrelated contacts."
   },
-  "hash": "84cmxl",
-  "timestamp": 1788221053438,
+  "hash": "ldavl2",
+  "timestamp": 1756796200000,
   "userId": null
 }

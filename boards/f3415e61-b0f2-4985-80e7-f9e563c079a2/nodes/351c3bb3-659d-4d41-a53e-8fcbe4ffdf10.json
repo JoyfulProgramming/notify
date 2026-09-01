@@ -11,9 +11,33 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "AssignFlowView (Contact)"
+    "title": "AssignFlowView (Contact)",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_mike_1\",\"sig_mike_2\",\"sig_kathleen\",\"sig_bobby\"]",
+        "mapping": "AssignFlowOpened (Contact).signalIds",
+        "cardinality": "List"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "AssignFlowOpened (Contact).assignMode",
+        "cardinality": "Single"
+      },
+      {
+        "name": "affectedContacts",
+        "type": "String",
+        "example": "[\"Mike\",\"Kathleen\",\"Bobby Willis\"]",
+        "mapping": "derived:distinct(sender) across signalIds",
+        "cardinality": "List"
+      }
+    ],
+    "description": "Drives the Assign Preview (Contact selection) screen — the selected contact rows' signals and their distinct contacts, shown as icon chips under CONTACTS."
   },
-  "hash": "1kx6vhx",
-  "timestamp": 1788221068529,
+  "hash": "1di8vp",
+  "timestamp": 1756796205000,
   "userId": null
 }
