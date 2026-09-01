@@ -2,13 +2,11 @@
   "id": "8bf66359-99f6-4f4f-9d42-cadd4080c835",
   "type": "sticky_note",
   "position": {
-    "x": 0,
-    "y": 0
+    "x": 6845,
+    "y": 1147
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {
-    "title": "AssignFlowOpened (None)"
-  },
+  "data": {},
   "meta": {
     "type": "EVENT",
     "title": "AssignFlowOpened (None)",
@@ -18,6 +16,7 @@
         "type": "String",
         "example": "[\"sig_1\",\"sig_2\",\"sig_4\"]",
         "mapping": "SelectAndAssign (None).signalIds",
+        "subfields": [],
         "cardinality": "List"
       },
       {
@@ -25,11 +24,13 @@
         "type": "String",
         "example": "Contact",
         "mapping": "SelectAndAssign (None).defaultAssignMode",
+        "subfields": [],
         "cardinality": "Single"
       }
-    ]
+    ],
+    "version": 1
   },
-  "hash": "1nyxluj",
-  "timestamp": 1756796201000,
-  "userId": null
+  "hash": "vjzyee",
+  "timestamp": 1788221192306,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
