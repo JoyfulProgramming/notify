@@ -88,7 +88,7 @@
         "name": "archiveButton",
         "type": "String",
         "example": "Archive",
-        "mapping": "ArchiveSignals.signalIds (triggers the command with session:selectedSignalIds; disabled/inactive whenever the selection is empty)",
+        "mapping": "derived:count(session:selectedSignalIds) > 0 — this screenshot shows the at-rest/no-selection state, so the button renders disabled and does NOT fire ArchiveSignals here; once one or more rows are ticked it becomes active and, on press, calls ArchiveSignals.signalIds with session:selectedSignalIds. See the dedicated GWT scenarios on this column's spec node for the command's actual behaviour (selected signals disappear from the list, like archiving an inbox message).",
         "cardinality": "Single"
       }
     ],
@@ -97,9 +97,12 @@
     "version": 55,
     "listElement": false,
     "todoListElement": false,
-    "createsAggregate": false
+    "createsAggregate": false,
+    "changedAttributes": [
+      "meta.fields"
+    ]
   },
-  "hash": "1uggg81",
-  "timestamp": 1788221533812,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "1fsik5y",
+  "timestamp": 1756796300000,
+  "userId": null
 }
