@@ -74,12 +74,9 @@
     "description": "A row is hidden once its signalId appears in any SignalsArchived.signalIds — i.e. only the signals the user explicitly selected and archived disappear, not everything up to a point in time. The underlying signal history is never deleted.",
     "listElement": false,
     "todoListElement": false,
-    "createsAggregate": false,
-    "changedAttributes": [
-      "meta.description"
-    ]
+    "createsAggregate": false
   },
   "hash": "1cfw01r",
-  "timestamp": 1756795400000,
-  "userId": null
+  "timestamp": 1788222365078,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
