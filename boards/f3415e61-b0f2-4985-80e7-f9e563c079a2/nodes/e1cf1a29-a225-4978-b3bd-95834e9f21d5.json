@@ -2,12 +2,12 @@
   "id": "e1cf1a29-a225-4978-b3bd-95834e9f21d5",
   "type": "sticky_note",
   "position": {
-    "x": 0,
-    "y": 0
+    "x": 4145,
+    "y": 1147
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "title": "ProjectDeleted"
+    "linkedTo": "fafc2953-273b-41d1-9117-eec6b3a441d8"
   },
   "meta": {
     "type": "EVENT",
@@ -48,5 +48,7 @@
     ],
     "linkedTo": "fafc2953-273b-41d1-9117-eec6b3a441d8"
   },
-  "hash": "1k73qgg"
+  "hash": "1k73qgg",
+  "timestamp": 1788223466350,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
