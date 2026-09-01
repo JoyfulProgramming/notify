@@ -524,6 +524,13 @@
           "rowId": "128390f0-a930-4bff-b494-5128a62bd01d",
           "nodeId": "351c3bb3-659d-4d41-a53e-8fcbe4ffdf10",
           "nodeType": "READMODEL"
+        },
+        {
+          "id": "72ee9374-4c38-472f-88e8-f35e8675f8a2-ff5fd88e-262c-4271-b93f-fe20696a64f3",
+          "colId": "ff5fd88e-262c-4271-b93f-fe20696a64f3",
+          "rowId": "72ee9374-4c38-472f-88e8-f35e8675f8a2",
+          "nodeId": "465b695f-3feb-4f42-a271-1724572ef94b",
+          "nodeType": "COMMAND"
         }
       ],
       "columns": [
@@ -633,6 +640,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1788221068529,
+  "timestamp": 1788221071448,
   "userId": null
 }
