@@ -61,8 +61,132 @@
       }
     ],
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "3434000f-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "c8aca613-70c8-408a-949c-d34a0b9f508c",
+              "type": "EVENT",
+              "title": "SignalsArchived",
+              "fields": [
+                {
+                  "name": "signalIds",
+                  "example": "[\"sig_pete_1\",\"sig_rich_1\"]"
+                },
+                {
+                  "name": "archivedAt",
+                  "example": "2026-09-01T10:05:00Z"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "c28d92ab-c4fb-4883-bc3a-1181002e3491",
+              "type": "COMMAND",
+              "title": "ArchiveSignals",
+              "fields": [
+                {
+                  "name": "signalIds",
+                  "example": "[\"sig_pete_1\",\"sig_rich_1\"]"
+                }
+              ]
+            }
+          ],
+          "given": [],
+          "title": "Archive removes only the selected signals from the list"
+        },
+        {
+          "id": "3434000f-0000-4000-8000-000000000002",
+          "then": [
+            {
+              "id": "80ea221d-95fc-432d-b04c-e32a7bd6c37c",
+              "type": "READMODEL",
+              "title": "SignalsListView",
+              "fields": [
+                {
+                  "name": "signalId",
+                  "example": "sig_mike_1"
+                },
+                {
+                  "name": "signalId",
+                  "example": "sig_kathleen_1"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "3434000f-0000-4000-8000-0000000000q1",
+              "type": "QUERY",
+              "title": "View Signals List",
+              "fields": [
+                {
+                  "name": "query",
+                  "example": "list currently visible signals"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "c8aca613-70c8-408a-949c-d34a0b9f508c",
+              "type": "EVENT",
+              "title": "SignalsArchived",
+              "fields": [
+                {
+                  "name": "signalIds",
+                  "example": "[\"sig_pete_1\",\"sig_rich_1\"]"
+                }
+              ]
+            }
+          ],
+          "title": "Archived signals disappear from the Signals List, like an inbox"
+        },
+        {
+          "id": "3434000f-0000-4000-8000-000000000003",
+          "then": [
+            {
+              "id": "80ea221d-95fc-432d-b04c-e32a7bd6c37c",
+              "type": "READMODEL",
+              "title": "SignalsListView",
+              "fields": []
+            }
+          ],
+          "when": [
+            {
+              "id": "3434000f-0000-4000-8000-0000000000q2",
+              "type": "QUERY",
+              "title": "View Signals List",
+              "fields": [
+                {
+                  "name": "query",
+                  "example": "list currently visible signals"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "c8aca613-70c8-408a-949c-d34a0b9f508c",
+              "type": "EVENT",
+              "title": "SignalsArchived",
+              "fields": [
+                {
+                  "name": "signalIds",
+                  "example": "[\"sig_mike_1\",\"sig_kathleen_1\",\"sig_pete_1\",\"sig_rich_1\"]"
+                }
+              ]
+            }
+          ],
+          "title": "Archiving every visible signal clears the list completely (inbox zero)",
+          "expectEmptyList": true
+        }
+      ]
     }
   },
-  "hash": "1hnx7hm"
+  "hash": "1hqfv8k",
+  "timestamp": 1788221708337,
+  "userId": null
 }
