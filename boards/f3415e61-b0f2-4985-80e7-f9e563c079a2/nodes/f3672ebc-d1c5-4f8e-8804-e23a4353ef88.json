@@ -11,9 +11,19 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "SignalsListView (after partial archive)"
+    "title": "SignalsListView (after partial archive)",
+    "fields": [
+      {
+        "name": "signalId",
+        "type": "String",
+        "example": "sig_pete",
+        "mapping": "SignalsListView rows excluding any signalId present in SignalsArchived.signalIds",
+        "cardinality": "List"
+      }
+    ],
+    "description": "Local demonstration copy of SignalsListView's post-archive state used for this walkthrough: rows whose signalId is NOT in SignalsArchived.signalIds. Shows the partial-archive case (3 of 9 rows removed, 6 remain) as a companion to the full-archive/inbox-zero walkthrough built earlier."
   },
-  "hash": "a6ijq4",
-  "timestamp": 1788224996871,
+  "hash": "b1m9og",
+  "timestamp": 1756797000000,
   "userId": null
 }
