@@ -1,0 +1,124 @@
+{
+  "id": "3556f398-60ab-4224-93a1-89d7beaee6ec",
+  "type": "spec_node",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "34340019-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "eb4d5c42-a8e6-4825-bae3-2caa0d398490",
+              "type": "READMODEL",
+              "title": "SignalsByGroupView",
+              "fields": [
+                {
+                  "name": "groupId",
+                  "example": "grp_8821"
+                },
+                {
+                  "name": "signalCount",
+                  "example": "2"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "34340019-0000-4000-8000-0000000000q1",
+              "type": "QUERY",
+              "title": "View Signals by Group",
+              "fields": [
+                {
+                  "name": "query",
+                  "example": "list groups"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured",
+              "fields": [
+                {
+                  "name": "groupId",
+                  "example": "grp_8821"
+                }
+              ]
+            },
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured",
+              "fields": [
+                {
+                  "name": "groupId",
+                  "example": "grp_8821"
+                }
+              ]
+            }
+          ],
+          "title": "Group row accumulates a count for a specific WhatsApp group"
+        },
+        {
+          "id": "34340019-0000-4000-8000-000000000002",
+          "then": [
+            {
+              "id": "eb4d5c42-a8e6-4825-bae3-2caa0d398490",
+              "type": "READMODEL",
+              "title": "SignalsByGroupView",
+              "fields": [
+                {
+                  "name": "groupId",
+                  "example": ""
+                },
+                {
+                  "name": "groupName",
+                  "example": "None"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "34340019-0000-4000-8000-0000000000q2",
+              "type": "QUERY",
+              "title": "View Signals by Group",
+              "fields": [
+                {
+                  "name": "query",
+                  "example": "list groups"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured",
+              "fields": [
+                {
+                  "name": "groupId",
+                  "example": ""
+                }
+              ]
+            }
+          ],
+          "title": "Signals with no group roll up into the permanent 'None' row"
+        }
+      ]
+    }
+  },
+  "hash": "1abysoc",
+  "timestamp": 1788224417360,
+  "userId": null
+}
