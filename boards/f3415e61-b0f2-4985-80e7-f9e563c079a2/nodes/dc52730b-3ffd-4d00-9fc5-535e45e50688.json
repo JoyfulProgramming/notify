@@ -1,0 +1,19 @@
+{
+  "id": "dc52730b-3ffd-4d00-9fc5-535e45e50688",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "SwitchAssignByGroup"
+  },
+  "meta": {
+    "type": "COMMAND",
+    "title": "SwitchAssignByGroup"
+  },
+  "hash": "guw2yv",
+  "timestamp": 1788220912564,
+  "userId": null
+}
