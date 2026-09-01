@@ -9,7 +9,7 @@
   "data": {},
   "meta": {
     "type": "READMODEL",
-    "title": "UniqueContactsView",
+    "title": "SignalsByContactView",
     "fields": [
       {
         "name": "sender",
@@ -68,9 +68,12 @@
     ],
     "version": 5,
     "description": "A signal is hidden once its signalId appears in any SignalsArchived.signalIds, same rule as SignalsListView — a contact row's count/preview reflect only its still-unarchived signals; the row itself disappears once all its signals are archived. A row's badge shows a grey '?' instead of a project number/colour when that contact's remaining signals span more than one assigned project.",
-    "listElement": true
+    "listElement": true,
+    "changedAttributes": [
+      "meta.title"
+    ]
   },
-  "hash": "43i4or",
-  "timestamp": 1788221648889,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "ivxmrx",
+  "timestamp": 1756796400000,
+  "userId": null
 }

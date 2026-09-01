@@ -30,28 +30,28 @@
         "name": "groupDisplayName",
         "type": "String",
         "example": "Mum's Chat",
-        "mapping": "UniqueGroupsView.groupName, or 'None' when groupId is empty",
+        "mapping": "SignalsByGroupView.groupName, or 'None' when groupId is empty",
         "cardinality": "List"
       },
       {
         "name": "signalCount",
         "type": "Number",
         "example": "4",
-        "mapping": "UniqueGroupsView.signalCount",
+        "mapping": "SignalsByGroupView.signalCount",
         "cardinality": "List"
       },
       {
         "name": "latestPreview",
         "type": "String",
         "example": "Can you call Mum...",
-        "mapping": "derived:truncate(UniqueGroupsView.latestPreview, ~20 chars)",
+        "mapping": "derived:truncate(SignalsByGroupView.latestPreview, ~20 chars)",
         "cardinality": "List"
       },
       {
         "name": "latestReceivedAt",
         "type": "DateTime",
         "example": "2026-08-29T00:02:00Z",
-        "mapping": "UniqueGroupsView.latestReceivedAt",
+        "mapping": "SignalsByGroupView.latestReceivedAt",
         "cardinality": "List"
       },
       {
@@ -80,7 +80,7 @@
       "meta.fields"
     ]
   },
-  "hash": "m6vh8y",
-  "timestamp": 1756795502000,
+  "hash": "1qwjmj6",
+  "timestamp": 1756796403000,
   "userId": null
 }

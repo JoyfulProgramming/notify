@@ -9,7 +9,7 @@
   "data": {},
   "meta": {
     "type": "READMODEL",
-    "title": "UniqueGroupsView",
+    "title": "SignalsByGroupView",
     "fields": [
       {
         "name": "groupId",
@@ -61,9 +61,12 @@
       }
     ],
     "description": "A signal is hidden once its signalId appears in any SignalsArchived.signalIds, same rule as SignalsListView — a group row's count/preview reflect only its still-unarchived signals; the row itself disappears once all its signals are archived. The 'None' row (signals with no WhatsApp group, i.e. direct messages) is always sorted first regardless of recency; remaining rows sort by latestReceivedAt descending. A row's badge shows a grey '?' instead of a project number/colour when its remaining signals span more than one assigned project.",
-    "listElement": true
+    "listElement": true,
+    "changedAttributes": [
+      "meta.title"
+    ]
   },
-  "hash": "10wgy5q",
-  "timestamp": 1788221658467,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "109l7ug",
+  "timestamp": 1756796401000,
+  "userId": null
 }
