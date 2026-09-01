@@ -1,0 +1,19 @@
+{
+  "id": "5f6dcaa5-a4c5-4c7e-baab-06766530166b",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "AssignFlowOpened (Contact)"
+  },
+  "meta": {
+    "type": "EVENT",
+    "title": "AssignFlowOpened (Contact)"
+  },
+  "hash": "13nqabg",
+  "timestamp": 1788221065827,
+  "userId": null
+}
