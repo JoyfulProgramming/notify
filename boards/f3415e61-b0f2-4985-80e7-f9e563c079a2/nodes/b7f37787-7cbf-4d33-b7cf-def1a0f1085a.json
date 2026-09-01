@@ -9,10 +9,190 @@
     "type": "SCENARIO",
     "title": "",
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "34340018-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "18840ff5-d6d5-4969-b928-c523318c0ff9",
+              "type": "READMODEL",
+              "title": "SignalsByContactView",
+              "fields": [
+                {
+                  "name": "sender",
+                  "example": "Mike"
+                },
+                {
+                  "name": "signalCount",
+                  "example": "2"
+                },
+                {
+                  "name": "latestPreview",
+                  "example": "Might pop round to see..."
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "34340018-0000-4000-8000-0000000000q1",
+              "type": "QUERY",
+              "title": "View Signals by Contact",
+              "fields": [
+                {
+                  "name": "query",
+                  "example": "list contacts"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured",
+              "fields": [
+                {
+                  "name": "sender",
+                  "example": "Mike"
+                },
+                {
+                  "name": "body",
+                  "example": "Can you call Mum later..."
+                }
+              ]
+            },
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured",
+              "fields": [
+                {
+                  "name": "sender",
+                  "example": "Mike"
+                },
+                {
+                  "name": "body",
+                  "example": "Might pop round to see..."
+                }
+              ]
+            }
+          ],
+          "title": "Contact row accumulates count and shows the latest message"
+        },
+        {
+          "id": "34340018-0000-4000-8000-000000000002",
+          "then": [
+            {
+              "id": "18840ff5-d6d5-4969-b928-c523318c0ff9",
+              "type": "READMODEL",
+              "title": "SignalsByContactView",
+              "fields": [
+                {
+                  "name": "sender",
+                  "example": "Mike"
+                },
+                {
+                  "name": "assignedProject",
+                  "example": "2M"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "34340018-0000-4000-8000-0000000000q2",
+              "type": "QUERY",
+              "title": "View Signals by Contact",
+              "fields": [
+                {
+                  "name": "query",
+                  "example": "list contacts"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured",
+              "fields": [
+                {
+                  "name": "sender",
+                  "example": "Mike"
+                }
+              ]
+            },
+            {
+              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "type": "EVENT",
+              "title": "Signal Assigned To Project",
+              "fields": [
+                {
+                  "name": "senderId",
+                  "example": "Mike"
+                },
+                {
+                  "name": "projectId",
+                  "example": "2M"
+                }
+              ]
+            }
+          ],
+          "title": "Assigning a project updates the contact's assigned project"
+        },
+        {
+          "id": "34340018-0000-4000-8000-000000000003",
+          "then": [
+            {
+              "id": "18840ff5-d6d5-4969-b928-c523318c0ff9",
+              "type": "READMODEL",
+              "title": "SignalsByContactView",
+              "fields": [
+                {
+                  "name": "sender",
+                  "example": "Judith"
+                },
+                {
+                  "name": "assignedProject",
+                  "example": "unassigned"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "34340018-0000-4000-8000-0000000000q3",
+              "type": "QUERY",
+              "title": "View Signals by Contact",
+              "fields": [
+                {
+                  "name": "query",
+                  "example": "list contacts"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured",
+              "fields": [
+                {
+                  "name": "sender",
+                  "example": "Judith"
+                }
+              ]
+            }
+          ],
+          "title": "A contact with no assignment yet shows as unassigned"
+        }
+      ]
     }
   },
-  "hash": "2f00c6",
-  "timestamp": 1788224411072,
+  "hash": "mck9q9",
+  "timestamp": 1788224411317,
   "userId": null
 }
