@@ -531,6 +531,13 @@
           "rowId": "a9c61482-67bf-462e-b9be-6b79dbde6f6f",
           "nodeId": "3e9c6390-91de-43ca-9cb5-5b361dbd4a50",
           "nodeType": "SCENARIO"
+        },
+        {
+          "id": "a9c61482-67bf-462e-b9be-6b79dbde6f6f-a02806b4-4f8b-4cbc-81b5-9c9edd03ac54",
+          "colId": "a02806b4-4f8b-4cbc-81b5-9c9edd03ac54",
+          "rowId": "a9c61482-67bf-462e-b9be-6b79dbde6f6f",
+          "nodeId": "b7f37787-7cbf-4d33-b7cf-def1a0f1085a",
+          "nodeType": "SCENARIO"
         }
       ],
       "columns": [
@@ -632,6 +639,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1788224402125,
+  "timestamp": 1788224411072,
   "userId": null
 }
