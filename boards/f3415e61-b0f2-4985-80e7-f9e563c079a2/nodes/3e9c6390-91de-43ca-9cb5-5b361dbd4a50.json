@@ -9,10 +9,167 @@
     "type": "SCENARIO",
     "title": "",
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "34340017-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "adc95ef1-40fb-48a6-b283-e4595f1fa438",
+              "type": "READMODEL",
+              "title": "GroupsView",
+              "fields": [
+                {
+                  "name": "groupId",
+                  "example": "grp_8821"
+                },
+                {
+                  "name": "name",
+                  "example": "Mum's Chat"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "34340017-0000-4000-8000-0000000000q1",
+              "type": "QUERY",
+              "title": "View Groups",
+              "fields": [
+                {
+                  "name": "query",
+                  "example": "list known groups"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured",
+              "fields": [
+                {
+                  "name": "groupId",
+                  "example": "grp_8821"
+                },
+                {
+                  "name": "groupName",
+                  "example": "Mum's Chat"
+                }
+              ]
+            }
+          ],
+          "title": "Groups view records a new group the first time it's seen"
+        },
+        {
+          "id": "34340017-0000-4000-8000-000000000002",
+          "then": [
+            {
+              "id": "adc95ef1-40fb-48a6-b283-e4595f1fa438",
+              "type": "READMODEL",
+              "title": "GroupsView",
+              "fields": [
+                {
+                  "name": "groupId",
+                  "example": "grp_8821"
+                },
+                {
+                  "name": "name",
+                  "example": "Mum & Dad's Chat"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "34340017-0000-4000-8000-0000000000q2",
+              "type": "QUERY",
+              "title": "View Groups",
+              "fields": [
+                {
+                  "name": "query",
+                  "example": "list known groups"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured",
+              "fields": [
+                {
+                  "name": "groupId",
+                  "example": "grp_8821"
+                },
+                {
+                  "name": "groupName",
+                  "example": "Mum's Chat"
+                }
+              ]
+            },
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured",
+              "fields": [
+                {
+                  "name": "groupId",
+                  "example": "grp_8821"
+                },
+                {
+                  "name": "groupName",
+                  "example": "Mum & Dad's Chat"
+                }
+              ]
+            }
+          ],
+          "title": "Groups view uses the most recently seen name when a group is renamed"
+        },
+        {
+          "id": "34340017-0000-4000-8000-000000000003",
+          "then": [
+            {
+              "id": "adc95ef1-40fb-48a6-b283-e4595f1fa438",
+              "type": "READMODEL",
+              "title": "GroupsView",
+              "fields": []
+            }
+          ],
+          "when": [
+            {
+              "id": "34340017-0000-4000-8000-0000000000q3",
+              "type": "QUERY",
+              "title": "View Groups",
+              "fields": [
+                {
+                  "name": "query",
+                  "example": "list known groups"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured",
+              "fields": [
+                {
+                  "name": "groupId",
+                  "example": ""
+                }
+              ]
+            }
+          ],
+          "title": "A signal with no group does not create a row",
+          "expectEmptyList": true
+        }
+      ]
     }
   },
-  "hash": "2f00c6",
-  "timestamp": 1788224402125,
+  "hash": "1vt9oy7",
+  "timestamp": 1788224402355,
   "userId": null
 }
