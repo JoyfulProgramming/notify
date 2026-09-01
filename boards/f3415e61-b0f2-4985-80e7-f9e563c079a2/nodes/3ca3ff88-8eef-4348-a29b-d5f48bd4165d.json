@@ -7,8 +7,10 @@
   },
   "meta": {
     "type": "MARKDOWN",
-    "title": "Deferred - screen component split, and Signals Reassigned feedback loop",
-    "description": "## Deliberate simplifications for this slice\n\n1. **Assign Signal to Project (B1) has 2 visual components** (signal-context card, project radio list) fed by 2 different read models (SignalListView, ProjectListView). Per eventmodeling-identifying-outputs Step 5c, strict practice is to split this into 2 marked/highlighted screen copies, one per component. Kept as a single screen here since both fields groups are small and static-in-this-slice - flagging as accepted debt rather than fragmenting the model this early.\n2. **Signals Reassigned (column D) is not wired back into SignalListView.** The platform only allows a later EVENT -> READMODEL backward connection when the read model already feeds an AUTOMATION (todo-list pattern) - SignalListView feeds screens only, so this would require a *new* SignalListView copy in/after column D plus a matching Signals List screen copy there (never a backward link to the existing instance). Deferred as future scope - the Signals List screen currently shown does not yet reflect live reassignment."
+    "title": "Deferred - screen component split",
+    "description": "## Deliberate simplifications for this slice\n\n1. **Assign Signal to Project (B1) has 2 visual components** (signal-context card, project radio list) fed by 2 different read models (SignalListView, ProjectListView). Per eventmodeling-identifying-outputs Step 5c, strict practice is to split this into 2 marked/highlighted screen copies, one per component. Kept as a single screen here since both fields groups are small and static-in-this-slice - flagging as accepted debt rather than fragmenting the model this early.\n\n(Removed: the old 'Signals Reassigned' retroactive-reassignment flow was deliberately deleted from the model - event sourcing means past signals keep whatever assignment they had at the time; assigning a project only ever creates/updates the matching sender rule for *future* signals, it never reaches back to touch history.)"
   },
-  "hash": "78mbjn"
+  "hash": "s8x7pd",
+  "timestamp": 1756796700000,
+  "userId": null
 }
