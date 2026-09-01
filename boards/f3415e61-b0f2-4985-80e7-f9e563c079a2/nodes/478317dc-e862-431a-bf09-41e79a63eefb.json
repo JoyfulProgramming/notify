@@ -183,13 +183,6 @@
           "nodeType": "MARKDOWN"
         },
         {
-          "id": "128390f0-a930-4bff-b494-5128a62bd01d-23f4c4bc-301e-4955-92b1-018e75182410",
-          "colId": "23f4c4bc-301e-4955-92b1-018e75182410",
-          "rowId": "128390f0-a930-4bff-b494-5128a62bd01d",
-          "nodeId": "a530c6d7-d9d1-4f56-b9cb-0cc2ba524881",
-          "nodeType": "READMODEL"
-        },
-        {
           "id": "a9c61482-67bf-462e-b9be-6b79dbde6f6f-a920d228-c8f1-4a53-b73d-da37327f2642",
           "colId": "a920d228-c8f1-4a53-b73d-da37327f2642",
           "rowId": "a9c61482-67bf-462e-b9be-6b79dbde6f6f",
@@ -243,13 +236,6 @@
           "colId": "2705cdd1-bed1-418c-b955-8e51b2f52d9f",
           "rowId": "a9c61482-67bf-462e-b9be-6b79dbde6f6f",
           "nodeId": "1b0396ba-61eb-4fb7-ae4f-60ff0846722e",
-          "nodeType": "SCENARIO"
-        },
-        {
-          "id": "a9c61482-67bf-462e-b9be-6b79dbde6f6f-23f4c4bc-301e-4955-92b1-018e75182410",
-          "colId": "23f4c4bc-301e-4955-92b1-018e75182410",
-          "rowId": "a9c61482-67bf-462e-b9be-6b79dbde6f6f",
-          "nodeId": "10061f70-02fd-4c93-9f16-b3f08ad1155c",
           "nodeType": "SCENARIO"
         },
         {
@@ -577,10 +563,6 @@
           "width": 450
         },
         {
-          "id": "23f4c4bc-301e-4955-92b1-018e75182410",
-          "width": 450
-        },
-        {
           "id": "39b1dff0-0142-48cf-8472-7724eb7c1ed5"
         },
         {
@@ -643,6 +625,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1788222987813,
+  "timestamp": 1788222990195,
   "userId": null
 }
