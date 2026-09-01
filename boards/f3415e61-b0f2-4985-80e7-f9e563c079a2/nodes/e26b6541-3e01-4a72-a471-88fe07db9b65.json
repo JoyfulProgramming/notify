@@ -1,10 +1,12 @@
 {
   "id": "e26b6541-3e01-4a72-a471-88fe07db9b65",
   "type": "sticky_note",
-  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {
-    "title": "Unmatched Signals"
+  "position": {
+    "x": 995,
+    "y": 507
   },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
   "meta": {
     "type": "READMODEL",
     "title": "Unmatched Signals",
@@ -27,5 +29,7 @@
       }
     ]
   },
-  "hash": "41y8n7"
+  "hash": "41y8n7",
+  "timestamp": 1788222362494,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
