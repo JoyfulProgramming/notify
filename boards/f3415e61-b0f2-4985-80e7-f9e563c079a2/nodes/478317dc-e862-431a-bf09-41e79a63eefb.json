@@ -454,6 +454,13 @@
           "rowId": "77625114-bacb-438c-b37d-694909517e42",
           "nodeId": "5379bc58-5c30-4e35-b35e-e81beaf1245d",
           "nodeType": "EVENT"
+        },
+        {
+          "id": "128390f0-a930-4bff-b494-5128a62bd01d-33006389-b3ad-4e83-9b06-0ba723c51a08",
+          "colId": "33006389-b3ad-4e83-9b06-0ba723c51a08",
+          "rowId": "128390f0-a930-4bff-b494-5128a62bd01d",
+          "nodeId": "e56a7c6c-4025-4856-975c-bc50158631e3",
+          "nodeType": "READMODEL"
         }
       ],
       "columns": [
@@ -563,6 +570,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1788220907304,
+  "timestamp": 1788220909693,
   "userId": null
 }
