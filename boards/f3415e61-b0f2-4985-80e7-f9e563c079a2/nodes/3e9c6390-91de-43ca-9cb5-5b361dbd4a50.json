@@ -1,10 +1,12 @@
 {
   "id": "3e9c6390-91de-43ca-9cb5-5b361dbd4a50",
   "type": "spec_node",
-  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {
-    "title": ""
+  "position": {
+    "x": 46.5,
+    "y": 1421.8
   },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
   "meta": {
     "type": "SCENARIO",
     "title": "",
@@ -169,7 +171,7 @@
       ]
     }
   },
-  "hash": "1vt9oy7",
-  "timestamp": 1788224402355,
-  "userId": null
+  "hash": "1f7q1ov",
+  "timestamp": 1788296521362,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
