@@ -1,10 +1,12 @@
 {
   "id": "3cf85e1a-689f-4ab5-8d44-8a9a64b80106",
   "type": "html_screen",
-  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {
-    "backgroundColor": "#ffffff"
+  "position": {
+    "x": 5505,
+    "y": 145
   },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
   "meta": {
     "type": "HTML_SCREEN",
     "pages": [
@@ -75,12 +77,9 @@
         "mapping": "ArchiveSignals.signalIds (triggers the command with session:selectedSignalIds; disabled/inactive whenever the selection is empty)",
         "cardinality": "Single"
       }
-    ],
-    "changedAttributes": [
-      "meta.fields"
     ]
   },
   "hash": "1qwjmj6",
-  "timestamp": 1756796403000,
-  "userId": null
+  "timestamp": 1788223437605,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
