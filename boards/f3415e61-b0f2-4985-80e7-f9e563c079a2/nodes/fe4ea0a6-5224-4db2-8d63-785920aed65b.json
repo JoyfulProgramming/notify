@@ -1,0 +1,19 @@
+{
+  "id": "fe4ea0a6-5224-4db2-8d63-785920aed65b",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "AssignFlowOpened (Group)"
+  },
+  "meta": {
+    "type": "EVENT",
+    "title": "AssignFlowOpened (Group)"
+  },
+  "hash": "wyieeb",
+  "timestamp": 1788221074228,
+  "userId": null
+}
