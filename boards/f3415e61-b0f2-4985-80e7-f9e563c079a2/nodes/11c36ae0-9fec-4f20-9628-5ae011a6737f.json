@@ -11,9 +11,33 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "AssignModeView"
+    "title": "AssignModeView",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_2\",\"sig_3\",\"sig_4\"]",
+        "mapping": "AssignModeSwitchedToGroup.signalIds",
+        "cardinality": "List"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Group",
+        "mapping": "AssignModeSwitchedToGroup.assignMode",
+        "cardinality": "Single"
+      },
+      {
+        "name": "affectedGroups",
+        "type": "String",
+        "example": "[\"Brothers Chat\",\"Tennis Chat\"]",
+        "mapping": "derived:distinct(groupId) across signalIds, excluding empty groupId",
+        "cardinality": "List"
+      }
+    ],
+    "description": "Same in-progress Assign screen state as AssignFlowView, now with assignMode='Group' — affectedGroups is recomputed as distinct(groupId) across signalIds, dropping any signal whose groupId is empty (e.g. Pete's signal 2 in the example selection)."
   },
-  "hash": "pqqkxx",
-  "timestamp": 1788220918053,
+  "hash": "5wmprd",
+  "timestamp": 1756796105000,
   "userId": null
 }

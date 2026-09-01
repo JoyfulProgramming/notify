@@ -11,9 +11,25 @@
   },
   "meta": {
     "type": "EVENT",
-    "title": "AssignModeSwitchedToGroup"
+    "title": "AssignModeSwitchedToGroup",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_2\",\"sig_3\",\"sig_4\"]",
+        "mapping": "SwitchAssignByGroup.signalIds",
+        "cardinality": "List"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Group",
+        "mapping": "derived:'Group'",
+        "cardinality": "Single"
+      }
+    ]
   },
-  "hash": "1202w6m",
-  "timestamp": 1788220915291,
+  "hash": "194ta92",
+  "timestamp": 1756796104000,
   "userId": null
 }

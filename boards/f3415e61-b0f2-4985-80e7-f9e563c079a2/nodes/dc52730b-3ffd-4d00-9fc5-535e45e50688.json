@@ -11,9 +11,19 @@
   },
   "meta": {
     "type": "COMMAND",
-    "title": "SwitchAssignByGroup"
+    "title": "SwitchAssignByGroup",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_2\",\"sig_3\",\"sig_4\"]",
+        "mapping": "session:selectedSignalIds — unchanged from AssignFlowOpened",
+        "cardinality": "List"
+      }
+    ],
+    "description": "Fired by tapping the 'By Group' radio on the Assign screen while it's showing 'By Contact'. Doesn't change the underlying selection (session:selectedSignalIds is untouched) — it only flips how that selection is summarized: the CONTACTS chip row (all senders) is replaced by a GROUPS chip row (distinct groups among the selection, excluding any signal with no group)."
   },
-  "hash": "guw2yv",
-  "timestamp": 1788220912564,
+  "hash": "1cxgjx5",
+  "timestamp": 1756796103000,
   "userId": null
 }

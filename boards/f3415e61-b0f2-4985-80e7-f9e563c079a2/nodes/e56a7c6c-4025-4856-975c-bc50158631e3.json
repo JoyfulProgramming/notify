@@ -11,9 +11,26 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "AssignFlowView"
+    "title": "AssignFlowView",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_2\",\"sig_3\",\"sig_4\"]",
+        "mapping": "AssignFlowOpened.signalIds",
+        "cardinality": "List"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "AssignFlowOpened.assignMode, then overwritten by any later AssignModeSwitchedToGroup/Contact event",
+        "cardinality": "Single"
+      }
+    ],
+    "description": "Drives the in-progress Assign screen: which signals are being assigned and which Assign-By mode is currently selected (starts at the default from AssignFlowOpened, then updates in place when AssignModeSwitchedToGroup/Contact occurs — no navigation, same screen re-renders)."
   },
-  "hash": "1exqgpg",
-  "timestamp": 1788220909693,
+  "hash": "1x7ljkg",
+  "timestamp": 1756796102000,
   "userId": null
 }

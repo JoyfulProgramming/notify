@@ -11,9 +11,26 @@
   },
   "meta": {
     "type": "COMMAND",
-    "title": "SelectAndAssign"
+    "title": "SelectAndAssign",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_2\",\"sig_3\",\"sig_4\"]",
+        "mapping": "session:selectedSignalIds",
+        "cardinality": "List"
+      },
+      {
+        "name": "defaultAssignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "derived:signalGroupingType == 'Group' ? 'Group' : 'Contact'",
+        "cardinality": "Single"
+      }
+    ],
+    "description": "Fired by pressing 'Assign' on the Signals List once at least one signal is selected. Carries the current selection through to the Assign screen, which defaults its Assign-By mode based on the grouping the list was in (Contact for a None/Contact-grouping selection, Group for a Group-grouping selection)."
   },
-  "hash": "8wurw2",
-  "timestamp": 1788220904552,
+  "hash": "uwqime",
+  "timestamp": 1756796100000,
   "userId": null
 }
