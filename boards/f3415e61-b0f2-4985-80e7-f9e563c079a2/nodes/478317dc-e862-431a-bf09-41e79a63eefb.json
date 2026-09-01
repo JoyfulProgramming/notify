@@ -447,6 +447,13 @@
           "rowId": "72ee9374-4c38-472f-88e8-f35e8675f8a2",
           "nodeId": "b8c613ba-8789-4e2a-8419-34e460f9d509",
           "nodeType": "COMMAND"
+        },
+        {
+          "id": "77625114-bacb-438c-b37d-694909517e42-db36b725-6f37-454f-815f-5a81a680b05d",
+          "colId": "db36b725-6f37-454f-815f-5a81a680b05d",
+          "rowId": "77625114-bacb-438c-b37d-694909517e42",
+          "nodeId": "5379bc58-5c30-4e35-b35e-e81beaf1245d",
+          "nodeType": "EVENT"
         }
       ],
       "columns": [
@@ -556,6 +563,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1788220904552,
+  "timestamp": 1788220907304,
   "userId": null
 }
