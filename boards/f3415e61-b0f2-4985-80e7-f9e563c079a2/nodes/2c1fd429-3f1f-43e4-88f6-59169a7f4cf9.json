@@ -9,10 +9,42 @@
     "type": "SCENARIO",
     "title": "",
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "34340013-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "c8aca613-70c8-408a-949c-d34a0b9f508c",
+              "type": "EVENT",
+              "title": "SignalsArchived",
+              "fields": [
+                {
+                  "name": "signalIds",
+                  "example": "[\"sig_1\",\"sig_2\",\"sig_3\",\"sig_4\",\"sig_5\",\"sig_6\",\"sig_7\",\"sig_8\",\"sig_9\",\"sig_10\"]"
+                }
+              ]
+            }
+          ],
+          "when": [
+            {
+              "id": "c28d92ab-c4fb-4883-bc3a-1181002e3491",
+              "type": "COMMAND",
+              "title": "ArchiveSignals",
+              "fields": [
+                {
+                  "name": "signalIds",
+                  "example": "[\"sig_1\",\"sig_2\",\"sig_3\",\"sig_4\",\"sig_5\",\"sig_6\",\"sig_7\",\"sig_8\",\"sig_9\",\"sig_10\"]"
+                }
+              ]
+            }
+          ],
+          "given": [],
+          "title": "Select All then Archive clears the entire visible list"
+        }
+      ]
     }
   },
-  "hash": "2f00c6",
-  "timestamp": 1788222761964,
+  "hash": "12b0sa3",
+  "timestamp": 1788222762188,
   "userId": null
 }
