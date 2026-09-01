@@ -190,27 +190,6 @@
           "nodeType": "READMODEL"
         },
         {
-          "id": "7d90b0f9-deb9-49c6-951e-01c903003353-e28ba9f9-ac83-4c8c-871a-1a44c9702135",
-          "colId": "e28ba9f9-ac83-4c8c-871a-1a44c9702135",
-          "rowId": "7d90b0f9-deb9-49c6-951e-01c903003353",
-          "nodeId": "a7f90831-e266-49b1-9d5d-655a5db9e641",
-          "nodeType": "AUTOMATION"
-        },
-        {
-          "id": "128390f0-a930-4bff-b494-5128a62bd01d-e28ba9f9-ac83-4c8c-871a-1a44c9702135",
-          "colId": "e28ba9f9-ac83-4c8c-871a-1a44c9702135",
-          "rowId": "128390f0-a930-4bff-b494-5128a62bd01d",
-          "nodeId": "f6e36425-6e68-4920-b3dc-06acda24ce0a",
-          "nodeType": "COMMAND"
-        },
-        {
-          "id": "77625114-bacb-438c-b37d-694909517e42-e28ba9f9-ac83-4c8c-871a-1a44c9702135",
-          "colId": "e28ba9f9-ac83-4c8c-871a-1a44c9702135",
-          "rowId": "77625114-bacb-438c-b37d-694909517e42",
-          "nodeId": "225b290f-dcd1-4306-9c18-a1f5c4abf1d7",
-          "nodeType": "EVENT"
-        },
-        {
           "id": "a9c61482-67bf-462e-b9be-6b79dbde6f6f-a920d228-c8f1-4a53-b73d-da37327f2642",
           "colId": "a920d228-c8f1-4a53-b73d-da37327f2642",
           "rowId": "a9c61482-67bf-462e-b9be-6b79dbde6f6f",
@@ -222,13 +201,6 @@
           "colId": "c5528fe7-4218-47be-a11b-2f4b102889dd",
           "rowId": "a9c61482-67bf-462e-b9be-6b79dbde6f6f",
           "nodeId": "9b437eb0-cdaf-4168-a556-17c1d87e0e9b",
-          "nodeType": "SCENARIO"
-        },
-        {
-          "id": "a9c61482-67bf-462e-b9be-6b79dbde6f6f-e28ba9f9-ac83-4c8c-871a-1a44c9702135",
-          "colId": "e28ba9f9-ac83-4c8c-871a-1a44c9702135",
-          "rowId": "a9c61482-67bf-462e-b9be-6b79dbde6f6f",
-          "nodeId": "5713b818-8347-4836-9146-1a1f4c732ea3",
           "nodeType": "SCENARIO"
         },
         {
@@ -609,10 +581,6 @@
           "width": 450
         },
         {
-          "id": "e28ba9f9-ac83-4c8c-871a-1a44c9702135",
-          "width": 450
-        },
-        {
           "id": "39b1dff0-0142-48cf-8472-7724eb7c1ed5"
         },
         {
@@ -675,6 +643,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1788222761964,
+  "timestamp": 1788222987813,
   "userId": null
 }
