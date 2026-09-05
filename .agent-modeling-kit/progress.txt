@@ -1,0 +1,20 @@
+## [2026-08-29T00:12:52Z] — a29a6e8a-895f-490f-870a-7ef0fea1974f
+Prompts processed: Please create an initial screen
+Outcome: Created the first HTML_SCREEN node (Live Notification Feed) on the empty "Notify WhatsApp" chapter, placed at cell A1. Content grounded in project memory (Notify MVP: HTTP signal ingestion -> filter-service -> SSE delivery to browser) — shows matched notification cards (source, message, matched rule, timestamp), a connection-status pill, and today's filtered/surfaced counts. Added meta.fields mapped to a not-yet-modeled MatchedNotificationView read model.
+Learnings: Board had no prior HTML_SCREEN/COMMAND/EVENT nodes — only an empty CHAPTER with default rows (actor, interaction, swimlane, spec) and 3 blank columns. For a truly empty board, "create an initial screen" means placing the first HTML_SCREEN at the actor row of column A (cellName "A1"), designed from project-memory context about the app's purpose rather than from any existing board content.
+---
+## [2026-08-29T00:13:45Z] — 37bf8775-b232-4ec6-919d-400426ace770
+Prompts processed: so I want to
+Outcome: Prompt was cut off mid-sentence with no actionable content. Posted a comment on the chapter node asking the user to resend the full prompt; marked DONE without making any model changes.
+Learnings: This board's live comments endpoint (POST .../nodes/:nodeId/comments) rejects type=QUESTION — its swagger schema only allows COMMENT/TASK, contradicting the handle-comment skill and CLAUDE.md's documented QUESTION type. Use type=COMMENT (prefixed with "QUESTION:" in the text) as the working substitute until the skill/API are reconciled.
+---
+## [2026-08-29T00:14:28Z] — 7b5d42cd-c869-46da-903a-4efaa464ecf3
+Prompts processed: describe the application that is in the current Direct tree
+Outcome: No Skill Selection row matches (question about the project's codebase, not the board's model). Read README.md and internal/ service layout, then posted a description of the Notify app (Phoenix Architecture exploration; ingestor/rule-api/deliver+web pipeline over pkg/bus, SSE delivery) as a comment on the chapter node. No board content changed.
+Learnings: A prompt asking to "describe the application" is a codebase/README question, not a modeling request — none of the Skill Selection rows apply. Treat it like the escalation path: answer directly (reading repo files), post the answer as a comment for visibility, and mark DONE without invoking a modeling skill.
+---
+## [2026-08-29T00:14:48Z] — 245100f6-2461-4cc3-a683-9d3a1cdcf8df
+Prompts processed: can you do that for me
+Outcome: No clear referent for "that" — the immediately preceding prompt only asked for a description (no action proposed). Posted a comment on the chapter node asking for a specific action, marked DONE without changing the board.
+Learnings: none
+---

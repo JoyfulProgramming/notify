@@ -10,5 +10,11 @@
         ]
       }
     ]
+  },
+  "mcpServers": {
+    "eventmodelers": {
+      "type": "http",
+      "url": "https://api.eventmodelers.ai/mcp"
+    }
   }
 }

@@ -2,7 +2,16 @@
   "mcpServers": {
     "gopls": {
       "command": "/Users/johngallagher/go/bin/gopls",
-      "args": ["mcp"]
+      "args": [
+        "mcp"
+      ]
+    },
+    "eventmodelers": {
+      "type": "http",
+      "url": "https://api.eventmodelers.ai/mcp",
+      "headers": {
+        "x-token": "${EVENTMODELERS_TOKEN}"
+      }
     }
   }
 }
