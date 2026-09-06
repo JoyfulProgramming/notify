@@ -1,10 +1,12 @@
 {
   "id": "58212d65-848d-49bb-a39f-659efd916d70",
   "type": "html_screen",
-  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {
-    "backgroundColor": "#ffffff"
+  "position": {
+    "x": 2355,
+    "y": 145
   },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
   "meta": {
     "type": "HTML_SCREEN",
     "pages": [
@@ -83,11 +85,9 @@
         "cardinality": "Single"
       }
     ],
-    "changedAttributes": [
-      "meta.fields"
-    ]
+    "linkedTo": null
   },
   "hash": "pguhgo",
-  "timestamp": 1756796402000,
-  "userId": null
+  "timestamp": 1788724610131,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
