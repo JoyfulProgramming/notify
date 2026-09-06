@@ -95,14 +95,12 @@
     "compact": true,
     "context": "INTERNAL",
     "version": 55,
+    "linkedTo": null,
     "listElement": false,
     "todoListElement": false,
-    "createsAggregate": false,
-    "changedAttributes": [
-      "meta.fields"
-    ]
+    "createsAggregate": false
   },
   "hash": "cjfykw",
-  "timestamp": 1756796600000,
-  "userId": null
+  "timestamp": 1788724569209,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
