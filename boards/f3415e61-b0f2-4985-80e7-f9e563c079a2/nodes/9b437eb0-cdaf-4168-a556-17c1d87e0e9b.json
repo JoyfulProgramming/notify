@@ -1,13 +1,16 @@
 {
   "id": "9b437eb0-cdaf-4168-a556-17c1d87e0e9b",
   "type": "spec_node",
-  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {
-    "title": ""
+  "position": {
+    "x": 4546.5,
+    "y": 1421.8
   },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {},
   "meta": {
     "type": "SCENARIO",
     "title": "",
+    "linkedTo": null,
     "givenWhenThenScenario": {
       "scenarios": [
         {
@@ -120,5 +123,7 @@
       ]
     }
   },
-  "hash": "16uhj2l"
+  "hash": "gsj5rh",
+  "timestamp": 1788724717337,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
