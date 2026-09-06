@@ -2,7 +2,7 @@
   "id": "a1b2c3d4-0004-4000-8000-000000000004",
   "type": "html_screen",
   "position": {
-    "x": 8205,
+    "x": 6405,
     "y": 145
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
@@ -44,13 +44,10 @@
       }
     ],
     "version": 3,
-    "description": "What the Assign screen looks like after pressing Assign from the None-grouping multi-select (3 individual signals: Mike x2, Kathleen). Simplified/shortened per feedback: no heading, no per-signal message list, no redundant 'will create sender rules for' callout — just the distinct contacts as WhatsApp-icon chips, an Assign-By choice (Contact/Group only, 'These signals only' removed), and the project picker. Defaults to 'By Contact' since the selection spans multiple contacts.",
-    "changedAttributes": [
-      "meta.description",
-      "meta.fields"
-    ]
+    "linkedTo": null,
+    "description": "What the Assign screen looks like after pressing Assign from the None-grouping multi-select (3 individual signals: Mike x2, Kathleen). Simplified/shortened per feedback: no heading, no per-signal message list, no redundant 'will create sender rules for' callout — just the distinct contacts as WhatsApp-icon chips, an Assign-By choice (Contact/Group only, 'These signals only' removed), and the project picker. Defaults to 'By Contact' since the selection spans multiple contacts."
   },
   "hash": "126lc09",
-  "timestamp": 1756795800000,
-  "userId": null
+  "timestamp": 1788724684036,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
