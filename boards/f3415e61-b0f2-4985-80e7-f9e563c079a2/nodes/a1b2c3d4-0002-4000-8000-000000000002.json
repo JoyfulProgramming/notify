@@ -1,9 +1,13 @@
 {
   "id": "a1b2c3d4-0002-4000-8000-000000000002",
   "type": "html_screen",
+  "position": {
+    "x": 3705,
+    "y": 145
+  },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "backgroundColor": "#ffffff"
+    "linkedTo": null
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -35,12 +39,9 @@
       }
     ],
     "linkedTo": null,
-    "description": "Same screen as 'Signals List (grouped by Contact)' but illustrating the state with 3 contact-rows ticked (Mike (2), Kathleen, Bobby Willis — 5 signals total). Both Assign and Archive become active/dark once selection is non-empty.",
-    "changedAttributes": [
-      "meta.pages"
-    ]
+    "description": "Same screen as 'Signals List (grouped by Contact)' but illustrating the state with 3 contact-rows ticked (Mike (2), Kathleen, Bobby Willis — 5 signals total). Both Assign and Archive become active/dark once selection is non-empty."
   },
-  "hash": "3gyj6x",
-  "timestamp": 1789426317539,
-  "userId": null
+  "hash": "1577p6x",
+  "timestamp": 1789429470903,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
