@@ -663,18 +663,6 @@
           "width": 450
         },
         {
-          "id": "ef110ddd-561e-407d-9659-ed9cb14c2124",
-          "width": 450
-        },
-        {
-          "id": "8ab7139b-63e0-4849-8b61-3207b3274656",
-          "width": 450
-        },
-        {
-          "id": "f635acce-914c-4364-a9cf-7e736fa5436f",
-          "width": 450
-        },
-        {
           "id": "de4f53e4-40eb-4615-9e56-7f97efe65db4",
           "width": 450
         },
@@ -690,6 +678,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1789423608647,
+  "timestamp": 1789423614062,
   "userId": null
 }
