@@ -10,12 +10,12 @@
     "pages": [
       "<div style=\"min-height:100vh;background:#f4f5f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:32px;display:flex;align-items:flex-start;justify-content:center\">\n  <div style=\"max-width:440px;width:100%;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:24px;box-shadow:0 4px 16px rgba(0,0,0,0.06)\">\n\n    <div style=\"display:flex;align-items:center;gap:8px;margin-bottom:18px\">\n      <span style=\"font-size:12px;color:#9ca3af\">Signals</span>\n      <span style=\"font-size:12px;color:#d1d5db\">›</span>\n      <span style=\"font-size:12px;color:#111827;font-weight:600\">Assign to Project</span>\n    </div>\n\n    <label style=\"display:block;font-size:11px;color:#6b7280;font-weight:700;letter-spacing:0.03em;margin-bottom:8px\">CONTACTS</label>\n    <div style=\"display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px\">\n      <span style=\"display:inline-flex;align-items:center;gap:6px;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:999px;padding:5px 12px 5px 6px\">\n        <span style=\"width:20px;height:20px;border-radius:6px;background:#25d366;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700\">W</span>\n        <span style=\"font-size:13px;font-weight:600;color:#111827\">Bobby Willis</span>\n      </span>\n    </div>\n\n    <div style=\"margin-bottom:20px\">\n      <label style=\"display:block;font-size:11px;color:#6b7280;font-weight:700;letter-spacing:0.03em;margin-bottom:6px\">ASSIGN BY</label>\n      <div style=\"display:flex;flex-direction:column;gap:8px\">\n        <div style=\"display:flex;align-items:center;gap:10px;background:#f3f4f6;border:1.5px solid #111827;border-radius:8px;padding:10px 14px\">\n          <span style=\"width:16px;height:16px;border-radius:50%;border:5px solid #111827;background:#fff;display:inline-block;flex-shrink:0\"></span>\n          <span style=\"font-size:14px;font-weight:600;color:#111827\">By Contact</span>\n        </div>\n        <div style=\"display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px\">\n          <span style=\"width:16px;height:16px;border-radius:50%;border:1.5px solid #9ca3af;background:#fff;display:inline-block;flex-shrink:0\"></span>\n          <span style=\"font-size:14px;font-weight:600;color:#111827\">By Group</span>\n        </div>\n      </div>\n      <div style=\"font-size:11px;color:#9ca3af;margin-top:6px\">Every future signal from Bobby Willis will also be assigned to this project. Bobby's signal has a WhatsApp group, so \"By Group\" is available too.</div>\n    </div>\n\n    <label style=\"display:block;font-size:11px;color:#6b7280;font-weight:700;letter-spacing:0.03em;margin-bottom:6px\">PROJECT</label>\n    <div style=\"display:flex;flex-direction:column;gap:6px;margin-bottom:22px\">\n      <div style=\"display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px\">\n        <span style=\"display:flex;align-items:center;gap:8px;font-size:14px;color:#374151\"><span style=\"width:10px;height:10px;border-radius:3px;background:#4338ca;display:inline-block\"></span>1W Work</span>\n      </div>\n      <div style=\"display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px\">\n        <span style=\"display:flex;align-items:center;gap:8px;font-size:14px;color:#374151\"><span style=\"width:10px;height:10px;border-radius:3px;background:#be185d;display:inline-block\"></span>2M Mum</span>\n      </div>\n      <div style=\"display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px\">\n        <span style=\"display:flex;align-items:center;gap:8px;font-size:14px;color:#374151\"><span style=\"width:10px;height:10px;border-radius:3px;background:#047857;display:inline-block\"></span>3F Friends</span>\n      </div>\n    </div>\n\n    <div style=\"display:flex;gap:10px\">\n      <div style=\"flex:1;text-align:center;background:#e5e7eb;color:#9ca3af;border-radius:8px;padding:11px 0;font-size:14px;font-weight:700\">Confirm Assignment</div>\n      <div style=\"flex:1;text-align:center;background:#fff;color:#374151;border:1px solid #e5e7eb;border-radius:8px;padding:11px 0;font-size:14px;font-weight:600\">Cancel</div>\n    </div>\n\n  </div>\n</div>\n"
     ],
-    "title": "Assign Preview — By Contact enabled (Mike, Kathleen, Bobby)",
+    "title": "Assign Preview — By Contact enabled (Bobby Willis only)",
     "fields": [
       {
         "name": "affectedContacts",
         "type": "String",
-        "example": "[\"Mike\",\"Kathleen\",\"Bobby Willis\"]",
+        "example": "[\"Bobby Willis\"]",
         "mapping": "derived:distinct(sender) across session:selectedSignalIds",
         "cardinality": "List"
       },
@@ -42,12 +42,14 @@
       }
     ],
     "linkedTo": null,
-    "description": "Step 9: Assign screen reached from step 8's selection (Mike, Kathleen, Bobby Willis). Assign By defaults to Contact, showing all three as chips. Unlike step 7, By Group is enabled here since Bobby's signal belongs to Wed/Sat Play. No project chosen yet.",
+    "description": "Assign screen reached from the Bobby-only selection. Assign By defaults to Contact, showing Bobby as the only chip. By Group is enabled since Bobby's signal belongs to Wed/Sat Play. No project chosen yet.",
     "changedAttributes": [
-      "meta.pages"
+      "meta.title",
+      "meta.description",
+      "meta.fields"
     ]
   },
-  "hash": "o6lz66",
-  "timestamp": 1789429322625,
+  "hash": "14o3yuk",
+  "timestamp": 1789550000002,
   "userId": null
 }
