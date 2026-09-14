@@ -13,27 +13,29 @@
     "title": "Signals List — Select All, then Archive",
     "fields": [
       {
-        "name": "selectedCount",
-        "type": "Number",
-        "example": "10",
-        "mapping": "derived:count(session:selectedSignalIds) after Select All",
-        "cardinality": "Single"
+        "name": "signalId",
+        "type": "String",
+        "example": "sig_18f2",
+        "mapping": "session:selectedSignalIds",
+        "cardinality": "List"
       },
       {
         "name": "archiveButton",
         "type": "String",
         "example": "Archive",
-        "mapping": "ArchiveSignals.signalIds (active — triggers the command with session:selectedSignalIds, all 10 signals)",
+        "mapping": "ArchiveSignals.signalIds",
         "cardinality": "Single"
       }
     ],
     "linkedTo": null,
-    "description": "Simulates the real trigger path for ArchiveSignals: the user taps 'Select All' (every row ticked, 10 selected), which activates both Archive and Assign. Pressing Archive here fires the actual ArchiveSignals command with all 10 signalIds — unlike the E1 mockup (at-rest, no selection, Archive disabled and not wired to anything).",
+    "description": "Step 13: from the post-assignment listing (step 12), the user taps Select All — all 9 signals ticked, Archive and Assign active. Pressing Archive here fires the real ArchiveSignals command with all 9 signalIds.",
     "changedAttributes": [
-      "meta.pages"
+      "meta.title",
+      "meta.description",
+      "meta.fields"
     ]
   },
-  "hash": "12dlqvk",
-  "timestamp": 1789426877114,
+  "hash": "u0ytwg",
+  "timestamp": 1789430000009,
   "userId": null
 }
