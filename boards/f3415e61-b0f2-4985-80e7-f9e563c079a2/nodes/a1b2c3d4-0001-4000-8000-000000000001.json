@@ -45,12 +45,12 @@
     "pageUrls": [
       ""
     ],
-    "description": "Same screen as the base 'Signals List' (None grouping) but illustrating the state with 3 signals ticked (both Mike rows + Kathleen). Both Assign and Archive become active/dark once selection is non-empty. Pressing Archive here fires the real ArchiveSignals command with exactly these 3 signalIds — see 'Signals List — after archiving 3 of 9 signals' for the resulting partial removal (the other 6 rows are untouched).",
+    "description": "Step 4 of the redesigned Assign story: None-grouping list with exactly 2 signals ticked — one of Mike's two signals and Kathleen's signal. Both Mike and Kathleen are group-less senders. Archive and Assign become active once selection is non-empty.",
     "changedAttributes": [
-      "meta.pages"
+      "meta.description"
     ]
   },
-  "hash": "1x4bqtx",
-  "timestamp": 1789426245043,
+  "hash": "1lnmcbq",
+  "timestamp": 1789430000001,
   "userId": null
 }
