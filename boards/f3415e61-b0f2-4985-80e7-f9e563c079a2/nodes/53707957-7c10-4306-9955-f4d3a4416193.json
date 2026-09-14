@@ -1,9 +1,12 @@
 {
   "id": "53707957-7c10-4306-9955-f4d3a4416193",
   "type": "sticky_note",
+  "position": {
+    "x": 3245,
+    "y": 507
+  },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "title": "ProjectListView",
     "hasComments": true
   },
   "meta": {
@@ -34,7 +37,10 @@
         "generated": false,
         "cardinality": "List"
       }
-    ]
+    ],
+    "linkedTo": null
   },
-  "hash": "hc5229"
+  "hash": "hc5229",
+  "timestamp": 1789421345575,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
