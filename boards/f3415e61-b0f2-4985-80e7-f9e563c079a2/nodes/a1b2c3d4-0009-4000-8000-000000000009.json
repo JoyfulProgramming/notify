@@ -1,9 +1,13 @@
 {
   "id": "a1b2c3d4-0009-4000-8000-000000000009",
   "type": "html_screen",
+  "position": {
+    "x": 7305,
+    "y": 145
+  },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "backgroundColor": "#ffffff"
+    "linkedTo": null
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -41,15 +45,11 @@
         "cardinality": "Single"
       }
     ],
+    "version": 6,
     "linkedTo": null,
-    "description": "Assign screen reached from the Bobby-only selection. Assign By defaults to Contact, showing Bobby as the only chip. By Group is enabled since Bobby's signal belongs to Wed/Sat Play. No project chosen yet.",
-    "changedAttributes": [
-      "meta.title",
-      "meta.description",
-      "meta.fields"
-    ]
+    "description": "Assign screen reached from the Bobby-only selection. Assign By defaults to Contact, showing Bobby as the only chip. By Group is enabled since Bobby's signal belongs to Wed/Sat Play. No project chosen yet."
   },
-  "hash": "14o3yuk",
-  "timestamp": 1789550000002,
-  "userId": null
+  "hash": "mr2brq",
+  "timestamp": 1789429444828,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
