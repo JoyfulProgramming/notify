@@ -1,0 +1,20 @@
+{
+  "id": "08281ae3-97b1-4d8e-966a-eac634d814df",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "Signals Assigned To Project"
+  },
+  "meta": {
+    "type": "EVENT",
+    "title": "Signals Assigned To Project",
+    "linkedTo": null
+  },
+  "hash": "161dq33",
+  "timestamp": 1789428948611,
+  "userId": null
+}
