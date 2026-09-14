@@ -1,9 +1,13 @@
 {
   "id": "5b1e6d08-2cbd-434b-b2c8-1643de6ffe20",
   "type": "html_screen",
+  "position": {
+    "x": 4155,
+    "y": 145
+  },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "backgroundColor": "#ffffff"
+    "linkedTo": null
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -37,7 +41,7 @@
     "linkedTo": null,
     "description": "Step 6: the user had 1 Mike + 1 Kathleen signal ticked in the None-grouping list (step 4), then switched Group by to Group. Mike and Kathleen's signals have no WhatsApp group, so they fall into the pseudo-group 'None' alongside Steve's ungrouped signal (4 total). Since only 2 of those 4 are still selected, the None row's checkbox renders as an indeterminate dash rather than a full tick or empty box. The other real groups (Mum's Chat, Wed/Sat Play, Friends) are untouched, fully unticked."
   },
-  "hash": "os31ua",
-  "timestamp": 1789430000002,
-  "userId": null
+  "hash": "uuvdte",
+  "timestamp": 1789429463460,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
