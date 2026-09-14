@@ -1,9 +1,13 @@
 {
   "id": "3bcf8be9-72ae-4272-9321-03c3e5d8de01",
   "type": "html_screen",
+  "position": {
+    "x": 5055,
+    "y": 145
+  },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "backgroundColor": "#ffffff"
+    "linkedTo": null
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -37,7 +41,7 @@
     "linkedTo": null,
     "description": "Follows the Mike + Kathleen 'By Contact disabled' preview: the user has now clicked the '2M Mum' project row. Confirm Assignment is enabled."
   },
-  "hash": "69nbau",
-  "timestamp": 1789520000001,
-  "userId": null
+  "hash": "14zbdti",
+  "timestamp": 1789428736788,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
