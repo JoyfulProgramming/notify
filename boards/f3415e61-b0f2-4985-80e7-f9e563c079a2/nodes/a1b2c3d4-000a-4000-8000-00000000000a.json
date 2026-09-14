@@ -1,9 +1,13 @@
 {
   "id": "a1b2c3d4-000a-4000-8000-00000000000a",
   "type": "html_screen",
+  "position": {
+    "x": 9105,
+    "y": 145
+  },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "backgroundColor": "#ffffff"
+    "linkedTo": null
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -28,14 +32,9 @@
       }
     ],
     "linkedTo": null,
-    "description": "Step 13: from the post-assignment listing (step 12), the user taps Select All — all 9 signals ticked, Archive and Assign active. Pressing Archive here fires the real ArchiveSignals command with all 9 signalIds.",
-    "changedAttributes": [
-      "meta.title",
-      "meta.description",
-      "meta.fields"
-    ]
+    "description": "Step 13: from the post-assignment listing (step 12), the user taps Select All — all 9 signals ticked, Archive and Assign active. Pressing Archive here fires the real ArchiveSignals command with all 9 signalIds."
   },
   "hash": "u0ytwg",
-  "timestamp": 1789430000009,
-  "userId": null
+  "timestamp": 1789428598246,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
