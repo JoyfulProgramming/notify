@@ -1,9 +1,13 @@
 {
   "id": "747560c5-ddb4-48cb-8426-9a4e752de0db",
   "type": "html_screen",
+  "position": {
+    "x": 6855,
+    "y": 145
+  },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "backgroundColor": "#ffffff"
+    "linkedTo": null
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -37,7 +41,7 @@
     "linkedTo": null,
     "description": "Step 11: same screen as step 10, but the user has now clicked the '3F Friends' project row to select it. Ready to press Confirm Assignment."
   },
-  "hash": "voyq71",
-  "timestamp": 1789430000007,
-  "userId": null
+  "hash": "1knrn5p",
+  "timestamp": 1789428420717,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
