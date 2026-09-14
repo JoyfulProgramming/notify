@@ -1,9 +1,13 @@
 {
   "id": "a1b2c3d4-000c-4000-8000-00000000000c",
   "type": "html_screen",
+  "position": {
+    "x": 8655,
+    "y": 145
+  },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "backgroundColor": "#ffffff"
+    "linkedTo": null
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -28,14 +32,9 @@
       }
     ],
     "linkedTo": null,
-    "description": "Step 12: back at the base None-grouping list after Confirm Assignment. Since the assignment was made By Group, every signal in Wed/Sat Play (Bobby Willis, Rich, Michael) now shows the 3F Friends badge — not just Bobby's signal that was originally selected. Nothing is selected; Archive/Assign are back to their disabled at-rest state.",
-    "changedAttributes": [
-      "meta.title",
-      "meta.description",
-      "meta.fields"
-    ]
+    "description": "Step 12: back at the base None-grouping list after Confirm Assignment. Since the assignment was made By Group, every signal in Wed/Sat Play (Bobby Willis, Rich, Michael) now shows the 3F Friends badge — not just Bobby's signal that was originally selected. Nothing is selected; Archive/Assign are back to their disabled at-rest state."
   },
   "hash": "10idyho",
-  "timestamp": 1789430000008,
-  "userId": null
+  "timestamp": 1789428599693,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
