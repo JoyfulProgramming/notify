@@ -1,0 +1,20 @@
+{
+  "id": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "AssignSignalsToProject"
+  },
+  "meta": {
+    "type": "COMMAND",
+    "title": "AssignSignalsToProject",
+    "linkedTo": null
+  },
+  "hash": "1wv2zqd",
+  "timestamp": 1789428945802,
+  "userId": null
+}
