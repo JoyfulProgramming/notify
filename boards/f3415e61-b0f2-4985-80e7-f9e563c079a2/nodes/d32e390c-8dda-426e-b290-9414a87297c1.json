@@ -1,0 +1,20 @@
+{
+  "id": "d32e390c-8dda-426e-b290-9414a87297c1",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": "SignalsListView (after contact assignment)"
+  },
+  "meta": {
+    "type": "READMODEL",
+    "title": "SignalsListView (after contact assignment)",
+    "linkedTo": null
+  },
+  "hash": "2fnsvd",
+  "timestamp": 1789428951296,
+  "userId": null
+}
