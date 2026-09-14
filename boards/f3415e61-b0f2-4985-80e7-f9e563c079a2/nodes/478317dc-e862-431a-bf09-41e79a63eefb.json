@@ -632,10 +632,6 @@
           "width": 450
         },
         {
-          "id": "b995f28c-2829-43b4-96db-6a0b5498790b",
-          "width": 450
-        },
-        {
           "id": "80510d03-cdc2-446a-9f6c-3548bb1940da",
           "width": 450
         },
@@ -655,53 +651,17 @@
           "width": 450
         },
         {
-          "id": "dca6cd38-0298-4ce4-95b7-8240033da610",
-          "width": 450
-        },
-        {
           "id": "a920d228-c8f1-4a53-b73d-da37327f2642",
           "width": 450
         },
         {
-          "id": "63900290-3068-4459-b0e3-9ea90c8951ca",
-          "width": 450
-        },
-        {
-          "id": "7c035d2f-bfa5-421e-b0ce-866a411dd3f3",
-          "width": 450
-        },
-        {
-          "id": "590f5e1d-a02c-4bfa-889d-b968dd5d4876",
-          "width": 450
-        },
-        {
-          "id": "289851c1-1286-4be3-837c-ac1e4f3cdd54",
-          "width": 450
-        },
-        {
-          "id": "4cb2e887-32be-4aa7-aa0a-300e2027ebfb",
-          "width": 450
-        },
-        {
-          "id": "6b882def-42a8-4923-97a3-7b20f62e521e",
-          "width": 450
-        },
-        {
           "id": "de4f53e4-40eb-4615-9e56-7f97efe65db4",
-          "width": 450
-        },
-        {
-          "id": "3abe92a5-19c6-4a9d-bc94-3ea70b916d41",
-          "width": 450
-        },
-        {
-          "id": "d73ecf89-935e-47b5-a960-57067c2ad872",
           "width": 450
         }
       ]
     }
   },
   "hash": null,
-  "timestamp": 1789426996750,
+  "timestamp": 1789426998304,
   "userId": null
 }
