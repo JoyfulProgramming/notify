@@ -358,62 +358,6 @@
           "nodeType": "HTML_SCREEN"
         },
         {
-          "id": "72ee9374-4c38-472f-88e8-f35e8675f8a2-7c035d2f-bfa5-421e-b0ce-866a411dd3f3",
-          "colId": "7c035d2f-bfa5-421e-b0ce-866a411dd3f3",
-          "rowId": "72ee9374-4c38-472f-88e8-f35e8675f8a2",
-          "nodeId": "6b83dc2f-94b7-40e3-be9e-f78517a1643e",
-          "nodeType": "COMMAND"
-        },
-        {
-          "id": "77625114-bacb-438c-b37d-694909517e42-7c035d2f-bfa5-421e-b0ce-866a411dd3f3",
-          "colId": "7c035d2f-bfa5-421e-b0ce-866a411dd3f3",
-          "rowId": "77625114-bacb-438c-b37d-694909517e42",
-          "nodeId": "5f6dcaa5-a4c5-4c7e-baab-06766530166b",
-          "nodeType": "EVENT"
-        },
-        {
-          "id": "128390f0-a930-4bff-b494-5128a62bd01d-289851c1-1286-4be3-837c-ac1e4f3cdd54",
-          "colId": "289851c1-1286-4be3-837c-ac1e4f3cdd54",
-          "rowId": "128390f0-a930-4bff-b494-5128a62bd01d",
-          "nodeId": "351c3bb3-659d-4d41-a53e-8fcbe4ffdf10",
-          "nodeType": "READMODEL"
-        },
-        {
-          "id": "7d90b0f9-deb9-49c6-951e-01c903003353-4cb2e887-32be-4aa7-aa0a-300e2027ebfb",
-          "colId": "4cb2e887-32be-4aa7-aa0a-300e2027ebfb",
-          "rowId": "7d90b0f9-deb9-49c6-951e-01c903003353",
-          "nodeId": "a1b2c3d4-0003-4000-8000-000000000003",
-          "nodeType": "HTML_SCREEN"
-        },
-        {
-          "id": "72ee9374-4c38-472f-88e8-f35e8675f8a2-4cb2e887-32be-4aa7-aa0a-300e2027ebfb",
-          "colId": "4cb2e887-32be-4aa7-aa0a-300e2027ebfb",
-          "rowId": "72ee9374-4c38-472f-88e8-f35e8675f8a2",
-          "nodeId": "465b695f-3feb-4f42-a271-1724572ef94b",
-          "nodeType": "COMMAND"
-        },
-        {
-          "id": "77625114-bacb-438c-b37d-694909517e42-4cb2e887-32be-4aa7-aa0a-300e2027ebfb",
-          "colId": "4cb2e887-32be-4aa7-aa0a-300e2027ebfb",
-          "rowId": "77625114-bacb-438c-b37d-694909517e42",
-          "nodeId": "fe4ea0a6-5224-4db2-8d63-785920aed65b",
-          "nodeType": "EVENT"
-        },
-        {
-          "id": "7d90b0f9-deb9-49c6-951e-01c903003353-6b882def-42a8-4923-97a3-7b20f62e521e",
-          "colId": "6b882def-42a8-4923-97a3-7b20f62e521e",
-          "rowId": "7d90b0f9-deb9-49c6-951e-01c903003353",
-          "nodeId": "a1b2c3d4-0006-4000-8000-000000000006",
-          "nodeType": "HTML_SCREEN"
-        },
-        {
-          "id": "128390f0-a930-4bff-b494-5128a62bd01d-6b882def-42a8-4923-97a3-7b20f62e521e",
-          "colId": "6b882def-42a8-4923-97a3-7b20f62e521e",
-          "rowId": "128390f0-a930-4bff-b494-5128a62bd01d",
-          "nodeId": "6095d813-fe18-4b97-866e-55dbfd1c1542",
-          "nodeType": "READMODEL"
-        },
-        {
           "id": "a9c61482-67bf-462e-b9be-6b79dbde6f6f-de4f53e4-40eb-4615-9e56-7f97efe65db4",
           "colId": "de4f53e4-40eb-4615-9e56-7f97efe65db4",
           "rowId": "a9c61482-67bf-462e-b9be-6b79dbde6f6f",
@@ -738,6 +682,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1789426915814,
+  "timestamp": 1789426918608,
   "userId": null
 }
