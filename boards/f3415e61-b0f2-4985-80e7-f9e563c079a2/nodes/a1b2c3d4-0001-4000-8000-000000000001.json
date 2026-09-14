@@ -40,14 +40,14 @@
         "cardinality": "Single"
       }
     ],
-    "version": 21,
+    "version": 22,
     "linkedTo": null,
     "pageUrls": [
       ""
     ],
     "description": "Same screen as the base 'Signals List' (None grouping) but illustrating the state with 3 signals ticked (both Mike rows + Kathleen). Both Assign and Archive become active/dark once selection is non-empty. Pressing Archive here fires the real ArchiveSignals command with exactly these 3 signalIds — see 'Signals List — after archiving 3 of 9 signals' for the resulting partial removal (the other 6 rows are untouched)."
   },
-  "hash": "1kms3kr",
-  "timestamp": 1789422194979,
+  "hash": "197jwoo",
+  "timestamp": 1789422813600,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
