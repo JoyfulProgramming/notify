@@ -2,12 +2,12 @@
   "id": "a21fd82d-cfe0-444b-b86b-8c9203e57492",
   "type": "sticky_note",
   "position": {
-    "x": 0,
-    "y": 0
+    "x": 7295,
+    "y": 507
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "title": "AssignSignalsToProject"
+    "linkedTo": null
   },
   "meta": {
     "type": "COMMAND",
@@ -15,6 +15,6 @@
     "linkedTo": null
   },
   "hash": "1wv2zqd",
-  "timestamp": 1789426597560,
-  "userId": null
+  "timestamp": 1789428428422,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
