@@ -100,12 +100,9 @@
     "linkedTo": null,
     "listElement": false,
     "todoListElement": false,
-    "createsAggregate": false,
-    "changedAttributes": [
-      "meta.pages"
-    ]
+    "createsAggregate": false
   },
   "hash": "nkrgml",
-  "timestamp": 1789426001426,
-  "userId": null
+  "timestamp": 1789428115488,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
