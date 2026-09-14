@@ -76,11 +76,13 @@
     ],
     "version": 1,
     "linkedTo": null,
+    "description": "Single-signal Assign screen, restyled to match the finalized design system from \"Assign Preview (None selection)\" (col O): breadcrumb-only header (no redundant title), 24px card padding, 440px max-width, and \"By Contact\"/\"By Group\" radio labels. Content stays single-signal-specific — the WhatsApp message preview card and its fields are unchanged.",
     "changedAttributes": [
-      "meta.pages"
+      "meta.pages",
+      "meta.description"
     ]
   },
-  "hash": "8c7f0i",
-  "timestamp": 1789423112030,
+  "hash": "1diysnf",
+  "timestamp": 1789421500000,
   "userId": null
 }
