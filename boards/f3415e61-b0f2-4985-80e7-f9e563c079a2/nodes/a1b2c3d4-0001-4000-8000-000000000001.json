@@ -2,7 +2,7 @@
   "id": "a1b2c3d4-0001-4000-8000-000000000001",
   "type": "html_screen",
   "position": {
-    "x": 5505,
+    "x": 3255,
     "y": 145
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
@@ -45,12 +45,9 @@
     "pageUrls": [
       ""
     ],
-    "description": "Step 4 of the redesigned Assign story: None-grouping list with exactly 2 signals ticked — one of Mike's two signals and Kathleen's signal. Both Mike and Kathleen are group-less senders. Archive and Assign become active once selection is non-empty.",
-    "changedAttributes": [
-      "meta.description"
-    ]
+    "description": "Step 4 of the redesigned Assign story: None-grouping list with exactly 2 signals ticked — one of Mike's two signals and Kathleen's signal. Both Mike and Kathleen are group-less senders. Archive and Assign become active once selection is non-empty."
   },
   "hash": "1lnmcbq",
-  "timestamp": 1789430000001,
-  "userId": null
+  "timestamp": 1789428589359,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
