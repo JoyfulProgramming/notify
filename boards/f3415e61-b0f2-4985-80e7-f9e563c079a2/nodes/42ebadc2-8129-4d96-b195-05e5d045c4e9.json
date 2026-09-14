@@ -28,9 +28,12 @@
       }
     ],
     "linkedTo": null,
-    "description": "Result of confirming the By-Contact assignment (Mike + Kathleen → 2M Mum). Both of Mike's signals and Kathleen's signal now show the 2M badge. Fed by the same shared SignalsListView (after group assignment) readmodel as the Wed/Sat Play → 3F listing, since both confirmations route through the same AssignSignalsToProject command."
+    "description": "Result of confirming the By-Contact assignment (Mike + Kathleen → 2M Mum). Both of Mike's signals and Kathleen's signal now show the 2M badge. Now fed by its own dedicated AssignSignalsToProject command/event/readmodel chain, separate from the Group (Wed/Sat Play → 3F) path's chain, so this whole sequence sits immediately after the Mum-selected preview screen.",
+    "changedAttributes": [
+      "meta.description"
+    ]
   },
-  "hash": "1ypgit9",
-  "timestamp": 1789530000001,
+  "hash": "kblet8",
+  "timestamp": 1789540000001,
   "userId": null
 }
