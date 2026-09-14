@@ -20,9 +20,13 @@
         "cardinality": "Single"
       }
     ],
-    "description": "The result of the previous screen's Archive press: SignalsListView now returns zero rows because every signalId was in SignalsArchived.signalIds. Same empty-state pattern applies to the Contact/Group grouped views once every signal behind their rows has been archived."
+    "linkedTo": null,
+    "description": "Step 14: the result of pressing Archive from step 13 (Select All on all 9 signals). Every signal is archived and disappears from the list — inbox zero, Archive/Assign back to their disabled at-rest state.",
+    "changedAttributes": [
+      "meta.description"
+    ]
   },
-  "hash": "zn6suo",
-  "timestamp": 1756796501000,
+  "hash": "12hg0br",
+  "timestamp": 1789430000010,
   "userId": null
 }
