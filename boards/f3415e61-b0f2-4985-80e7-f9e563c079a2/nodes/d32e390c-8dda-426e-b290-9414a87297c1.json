@@ -2,12 +2,12 @@
   "id": "d32e390c-8dda-426e-b290-9414a87297c1",
   "type": "sticky_note",
   "position": {
-    "x": 0,
-    "y": 0
+    "x": 5945,
+    "y": 507
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "title": "SignalsListView (after contact assignment)"
+    "linkedTo": null
   },
   "meta": {
     "type": "READMODEL",
@@ -15,6 +15,6 @@
     "linkedTo": null
   },
   "hash": "2fnsvd",
-  "timestamp": 1789428951296,
-  "userId": null
+  "timestamp": 1789437611040,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
