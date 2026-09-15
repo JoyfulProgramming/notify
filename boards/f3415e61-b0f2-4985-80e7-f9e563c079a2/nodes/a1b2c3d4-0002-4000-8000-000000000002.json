@@ -39,14 +39,9 @@
       }
     ],
     "linkedTo": null,
-    "description": "Fed by the same SignalsByContactView readmodel as the base 'grouped by Contact' screen. Reflects the carried-over selection from step 4 (1 of Mike's 2 signals + Kathleen) — since only one of Mike's signals is in session:selectedSignalIds, his contact row renders indeterminate (dash) rather than fully checked. Kathleen has just 1 signal total, so hers is fully checked.",
-    "changedAttributes": [
-      "meta.title",
-      "meta.description",
-      "meta.fields"
-    ]
+    "description": "Fed by the same SignalsByContactView readmodel as the base 'grouped by Contact' screen. Reflects the carried-over selection from step 4 (1 of Mike's 2 signals + Kathleen) — since only one of Mike's signals is in session:selectedSignalIds, his contact row renders indeterminate (dash) rather than fully checked. Kathleen has just 1 signal total, so hers is fully checked."
   },
   "hash": "7nn2yd",
-  "timestamp": 1789560000001,
-  "userId": null
+  "timestamp": 1789437562773,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
