@@ -1,0 +1,23 @@
+{
+  "id": "12651cd6-67e4-439e-b039-c3897307d9ff",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "563145be-abb1-4d02-a113-6be537b32061",
+    "title": "GroupsView"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "563145be-abb1-4d02-a113-6be537b32061",
+    "title": "GroupsView",
+    "linkedTo": null
+  },
+  "hash": "15xlzdm",
+  "timestamp": 1789437296796,
+  "userId": null
+}
