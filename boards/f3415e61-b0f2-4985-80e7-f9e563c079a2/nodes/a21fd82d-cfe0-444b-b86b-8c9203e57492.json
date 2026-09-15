@@ -12,9 +12,32 @@
   "meta": {
     "type": "COMMAND",
     "title": "AssignSignalsToProject",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_bobby_1\"]",
+        "mapping": "session:selectedSignalIds",
+        "cardinality": "List"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Group",
+        "mapping": "session:assignMode — Contact or Group",
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectId",
+        "type": "String",
+        "example": "3F",
+        "mapping": "user-selected project row",
+        "cardinality": "Single"
+      }
+    ],
     "linkedTo": null
   },
-  "hash": "1wv2zqd",
-  "timestamp": 1789428428422,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "1ly4tiv",
+  "timestamp": 1789590000003,
+  "userId": null
 }

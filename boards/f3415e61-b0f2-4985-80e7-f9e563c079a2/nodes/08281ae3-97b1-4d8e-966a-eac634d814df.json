@@ -12,9 +12,46 @@
   "meta": {
     "type": "EVENT",
     "title": "Signals Assigned To Project",
+    "fields": [
+      {
+        "name": "signalIds",
+        "type": "String",
+        "example": "[\"sig_18f2\",\"sig_9a01\"]",
+        "mapping": "AssignSignalsToProject.signalIds",
+        "cardinality": "List"
+      },
+      {
+        "name": "assignMode",
+        "type": "String",
+        "example": "Contact",
+        "mapping": "AssignSignalsToProject.assignMode",
+        "cardinality": "Single"
+      },
+      {
+        "name": "projectId",
+        "type": "String",
+        "example": "2M",
+        "mapping": "AssignSignalsToProject.projectId",
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignedAt",
+        "type": "DateTime",
+        "example": "2026-08-29T00:05:00Z",
+        "mapping": "derived:server clock at handling time",
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignedBy",
+        "type": "String",
+        "example": "user",
+        "mapping": "session:currentUserId",
+        "cardinality": "Single"
+      }
+    ],
     "linkedTo": null
   },
-  "hash": "161dq33",
-  "timestamp": 1789428948611,
+  "hash": "12fvxw8",
+  "timestamp": 1789590000002,
   "userId": null
 }
