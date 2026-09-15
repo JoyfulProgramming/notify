@@ -11,7 +11,7 @@
   },
   "meta": {
     "type": "COMMAND",
-    "title": "AssignSignalsToProject",
+    "title": "AssignSignalsToProject (Group)",
     "fields": [
       {
         "name": "signalIds",
@@ -35,9 +35,12 @@
         "cardinality": "Single"
       }
     ],
-    "linkedTo": null
+    "linkedTo": null,
+    "changedAttributes": [
+      "meta.title"
+    ]
   },
-  "hash": "1ly4tiv",
-  "timestamp": 1789590000003,
+  "hash": "194cvop",
+  "timestamp": 1789620000002,
   "userId": null
 }
