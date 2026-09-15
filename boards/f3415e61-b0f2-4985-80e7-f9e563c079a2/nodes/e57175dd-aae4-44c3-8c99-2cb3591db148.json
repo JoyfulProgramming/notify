@@ -1,0 +1,55 @@
+{
+  "id": "e57175dd-aae4-44c3-8c99-2cb3591db148",
+  "type": "spec_node",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "aa000010-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "f3672ebc-d1c5-4f8e-8804-e23a4353ef88",
+              "type": "READMODEL",
+              "title": "SignalsListView (after partial archive)"
+            }
+          ],
+          "when": [
+            {
+              "id": "b0000010-0000-4000-8000-000000000001",
+              "type": "QUERY",
+              "title": "View signals list",
+              "fields": [
+                {
+                  "name": "groupingMode",
+                  "example": "None"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "c8aca613-70c8-408a-949c-d34a0b9f508c",
+              "type": "EVENT",
+              "title": "SignalsArchived"
+            }
+          ],
+          "title": "View empty signals list after archiving everything",
+          "examples": [
+            {
+              "remaining_signals": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hash": "1pe3vps",
+  "timestamp": 1789435808556,
+  "userId": null
+}
