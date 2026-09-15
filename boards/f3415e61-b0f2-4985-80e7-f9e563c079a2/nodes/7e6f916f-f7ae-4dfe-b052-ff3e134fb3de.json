@@ -1,0 +1,55 @@
+{
+  "id": "7e6f916f-f7ae-4dfe-b052-ff3e134fb3de",
+  "type": "spec_node",
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "bb000002-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "f28f2ddf-d396-496b-aaec-769deee81431",
+              "type": "READMODEL",
+              "title": "ProjectColourSelectionView"
+            }
+          ],
+          "when": [
+            {
+              "id": "cc000002-0000-4000-8000-000000000001",
+              "type": "QUERY",
+              "title": "View Create Project form",
+              "fields": [
+                {
+                  "name": "sessionId",
+                  "example": "sess_1"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "ce934a5a-70ba-46a8-9be7-685370937713",
+              "type": "EVENT",
+              "title": "ProjectColourSelected"
+            }
+          ],
+          "title": "View the Create Project screen with the auto-picked colour applied",
+          "examples": [
+            {
+              "selected_colour": "Pink"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hash": "y8omm1",
+  "timestamp": 1789436019319,
+  "userId": null
+}

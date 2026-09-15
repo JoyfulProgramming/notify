@@ -8,12 +8,90 @@
   "meta": {
     "type": "SCENARIO",
     "title": "",
-    "linkedTo": null,
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "bb000001-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "ce934a5a-70ba-46a8-9be7-685370937713",
+              "type": "EVENT",
+              "title": "ProjectColourSelected"
+            }
+          ],
+          "when": [
+            {
+              "id": "ea3f8457-0cfb-4d14-aa7a-c447daa212c4",
+              "type": "COMMAND",
+              "title": "SelectNextProjectColour"
+            }
+          ],
+          "given": [
+            {
+              "id": "e616d323-a2ef-4f31-99ce-f52711c9ec86",
+              "type": "EVENT",
+              "title": "ProjectCreated"
+            }
+          ],
+          "title": "Cycle to the next available project colour",
+          "examples": [
+            {
+              "selected_colour": "Pink",
+              "existing_project_colours": [
+                "Blue"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bb000001-0000-4000-8000-000000000002",
+          "then": [
+            {
+              "id": "ce934a5a-70ba-46a8-9be7-685370937713",
+              "type": "EVENT",
+              "title": "ProjectColourSelected"
+            }
+          ],
+          "when": [
+            {
+              "id": "ea3f8457-0cfb-4d14-aa7a-c447daa212c4",
+              "type": "COMMAND",
+              "title": "SelectNextProjectColour"
+            }
+          ],
+          "given": [
+            {
+              "id": "e616d323-a2ef-4f31-99ce-f52711c9ec86",
+              "type": "EVENT",
+              "title": "ProjectCreated"
+            },
+            {
+              "id": "e616d323-a2ef-4f31-99ce-f52711c9ec86",
+              "type": "EVENT",
+              "title": "ProjectCreated"
+            },
+            {
+              "id": "e616d323-a2ef-4f31-99ce-f52711c9ec86",
+              "type": "EVENT",
+              "title": "ProjectCreated"
+            }
+          ],
+          "title": "Wrap around to the first colour once all are taken",
+          "examples": [
+            {
+              "selected_colour": "Blue",
+              "existing_project_colours": [
+                "Blue",
+                "Pink",
+                "Green"
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
-  "hash": "ghyio1",
-  "timestamp": 1789436015661,
+  "hash": "1fq2q3z",
+  "timestamp": 1789436015861,
   "userId": null
 }
