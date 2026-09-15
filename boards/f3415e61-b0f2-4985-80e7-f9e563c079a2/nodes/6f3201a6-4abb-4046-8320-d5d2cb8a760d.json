@@ -1,0 +1,23 @@
+{
+  "id": "6f3201a6-4abb-4046-8320-d5d2cb8a760d",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "72a53a97-7945-4973-8583-5c460410bd41",
+    "title": "ProjectSlotsView"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "72a53a97-7945-4973-8583-5c460410bd41",
+    "title": "ProjectSlotsView",
+    "linkedTo": null
+  },
+  "hash": "1piajzc",
+  "timestamp": 1789438177455,
+  "userId": null
+}
