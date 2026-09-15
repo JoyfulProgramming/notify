@@ -1,9 +1,13 @@
 {
   "id": "42ebadc2-8129-4d96-b195-05e5d045c4e9",
   "type": "html_screen",
+  "position": {
+    "x": 5955,
+    "y": 145
+  },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "backgroundColor": "#ffffff"
+    "linkedTo": null
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -28,12 +32,9 @@
       }
     ],
     "linkedTo": null,
-    "description": "Result of confirming the By-Contact assignment (Mike + Kathleen → 2M Mum). Both of Mike's signals and Kathleen's signal now show the 2M badge. Now fed by its own dedicated AssignSignalsToProject command/event/readmodel chain, separate from the Group (Wed/Sat Play → 3F) path's chain, so this whole sequence sits immediately after the Mum-selected preview screen.",
-    "changedAttributes": [
-      "meta.description"
-    ]
+    "description": "Result of confirming the By-Contact assignment (Mike + Kathleen → 2M Mum). Both of Mike's signals and Kathleen's signal now show the 2M badge. Now fed by its own dedicated AssignSignalsToProject command/event/readmodel chain, separate from the Group (Wed/Sat Play → 3F) path's chain, so this whole sequence sits immediately after the Mum-selected preview screen."
   },
   "hash": "kblet8",
-  "timestamp": 1789540000001,
-  "userId": null
+  "timestamp": 1789472632064,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
