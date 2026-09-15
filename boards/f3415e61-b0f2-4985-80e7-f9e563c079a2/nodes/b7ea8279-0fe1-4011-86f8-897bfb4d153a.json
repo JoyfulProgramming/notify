@@ -1,0 +1,59 @@
+{
+  "id": "b7ea8279-0fe1-4011-86f8-897bfb4d153a",
+  "type": "spec_node",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "aa000002-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "29956c10-bb5d-4aa1-ad8d-6bd19d471288",
+              "type": "READMODEL",
+              "title": "AssignFlowView (None)"
+            }
+          ],
+          "when": [
+            {
+              "id": "b0000002-0000-4000-8000-000000000001",
+              "type": "QUERY",
+              "title": "View Assign preview",
+              "fields": [
+                {
+                  "name": "sessionId",
+                  "example": "sess_1"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "8bf66359-99f6-4f4f-9d42-cadd4080c835",
+              "type": "EVENT",
+              "title": "AssignFlowOpened (None)"
+            }
+          ],
+          "title": "View Assign preview for a group-less None-grouping selection",
+          "examples": [
+            {
+              "by_group_enabled": false,
+              "affected_contacts": [
+                "Mike",
+                "Kathleen"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hash": "a2p6q9",
+  "timestamp": 1789435759672,
+  "userId": null
+}
