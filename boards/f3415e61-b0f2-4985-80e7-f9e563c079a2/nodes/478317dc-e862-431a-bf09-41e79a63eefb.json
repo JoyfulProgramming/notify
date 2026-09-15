@@ -505,20 +505,6 @@
           "nodeType": "HTML_SCREEN"
         },
         {
-          "id": "128390f0-a930-4bff-b494-5128a62bd01d-4d0ff8c7-d721-44b7-8899-e5bf0a90d752",
-          "colId": "4d0ff8c7-d721-44b7-8899-e5bf0a90d752",
-          "rowId": "128390f0-a930-4bff-b494-5128a62bd01d",
-          "nodeId": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
-          "nodeType": "COMMAND"
-        },
-        {
-          "id": "77625114-bacb-438c-b37d-694909517e42-4d0ff8c7-d721-44b7-8899-e5bf0a90d752",
-          "colId": "4d0ff8c7-d721-44b7-8899-e5bf0a90d752",
-          "rowId": "77625114-bacb-438c-b37d-694909517e42",
-          "nodeId": "08281ae3-97b1-4d8e-966a-eac634d814df",
-          "nodeType": "EVENT"
-        },
-        {
           "id": "128390f0-a930-4bff-b494-5128a62bd01d-de94ab02-f5d2-4b01-b14a-16a9434ce5e9",
           "colId": "de94ab02-f5d2-4b01-b14a-16a9434ce5e9",
           "rowId": "128390f0-a930-4bff-b494-5128a62bd01d",
@@ -629,6 +615,20 @@
           "rowId": "a9c61482-67bf-462e-b9be-6b79dbde6f6f",
           "nodeId": "05deeaf8-1af0-49ed-a78b-c02e1e82b96d",
           "nodeType": "SCENARIO"
+        },
+        {
+          "id": "72ee9374-4c38-472f-88e8-f35e8675f8a2-5b8b9726-d8d1-4776-82be-de5806db3127",
+          "colId": "5b8b9726-d8d1-4776-82be-de5806db3127",
+          "rowId": "72ee9374-4c38-472f-88e8-f35e8675f8a2",
+          "nodeId": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
+          "nodeType": "COMMAND"
+        },
+        {
+          "id": "77625114-bacb-438c-b37d-694909517e42-5b8b9726-d8d1-4776-82be-de5806db3127",
+          "colId": "5b8b9726-d8d1-4776-82be-de5806db3127",
+          "rowId": "77625114-bacb-438c-b37d-694909517e42",
+          "nodeId": "08281ae3-97b1-4d8e-966a-eac634d814df",
+          "nodeType": "EVENT"
         }
       ],
       "columns": [
@@ -762,6 +762,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1789437835190,
+  "timestamp": 1789438505352,
   "userId": null
 }
