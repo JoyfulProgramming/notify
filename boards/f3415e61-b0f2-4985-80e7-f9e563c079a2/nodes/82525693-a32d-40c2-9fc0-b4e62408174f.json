@@ -1,0 +1,23 @@
+{
+  "id": "82525693-a32d-40c2-9fc0-b4e62408174f",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "5b8b9726-d8d1-4776-82be-de5806db3127",
+    "title": "AssignSignalsToProject (Contact)"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "5b8b9726-d8d1-4776-82be-de5806db3127",
+    "title": "AssignSignalsToProject (Contact)",
+    "linkedTo": null
+  },
+  "hash": "1jwi4ep",
+  "timestamp": 1789438516091,
+  "userId": null
+}
