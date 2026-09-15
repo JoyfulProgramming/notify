@@ -8,12 +8,49 @@
   "meta": {
     "type": "SCENARIO",
     "title": "",
-    "linkedTo": null,
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "dd000001-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "eb711e6d-7850-4b53-89b7-a43ca8fcc2e9",
+              "type": "READMODEL",
+              "title": "ProjectSlotsView"
+            }
+          ],
+          "when": [
+            {
+              "id": "ee000001-0000-4000-8000-000000000001",
+              "type": "QUERY",
+              "title": "View project slots",
+              "fields": [
+                {
+                  "name": "sessionId",
+                  "example": "sess_1"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "5b9e55a7-a1b7-47ce-a88f-db2624073662",
+              "type": "EVENT",
+              "title": "ProjectCreated"
+            }
+          ],
+          "title": "View remaining project slots",
+          "examples": [
+            {
+              "slots_used": 2,
+              "slots_remaining": 4
+            }
+          ]
+        }
+      ]
     }
   },
-  "hash": "ghyio1",
-  "timestamp": 1789438190034,
+  "hash": "glhtn7",
+  "timestamp": 1789438190246,
   "userId": null
 }
