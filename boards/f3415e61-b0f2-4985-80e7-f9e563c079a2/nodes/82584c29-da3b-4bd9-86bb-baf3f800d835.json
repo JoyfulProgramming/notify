@@ -37,11 +37,14 @@
               "title": "Signal Captured"
             }
           ],
-          "title": "Manually assign a signal to a project by Contact",
+          "title": "Manually assign one or more signals to a project by Contact",
           "examples": [
             {
-              "signal_id": "sig-mike-1",
               "project_id": "2M",
+              "signal_ids": [
+                "sig-mike-1",
+                "sig-mike-2"
+              ],
               "assign_mode": "Contact",
               "assigned_by": "user"
             }
@@ -70,11 +73,13 @@
               "title": "Signal Captured"
             }
           ],
-          "title": "Manually assign a signal to a project by Group",
+          "title": "Manually assign one or more signals to a project by Group",
           "examples": [
             {
-              "signal_id": "sig-humanists-1",
               "project_id": "3F",
+              "signal_ids": [
+                "sig-bobby-1"
+              ],
               "assign_mode": "Group",
               "assigned_by": "user"
             }
@@ -89,8 +94,8 @@
               "title": "Signals Assigned To Project",
               "fields": [
                 {
-                  "name": "signalId",
-                  "example": "sig_18f2"
+                  "name": "signalIds",
+                  "example": "[\"sig_18f2\"]"
                 },
                 {
                   "name": "assignMode",
@@ -118,8 +123,8 @@
               "title": "AssignSignalsToProject",
               "fields": [
                 {
-                  "name": "signalId",
-                  "example": "sig_18f2"
+                  "name": "signalIds",
+                  "example": "[\"sig_18f2\"]"
                 },
                 {
                   "name": "assignMode",
@@ -166,8 +171,8 @@
               "title": "Signals Assigned To Project",
               "fields": [
                 {
-                  "name": "signalId",
-                  "example": "sig_18f2"
+                  "name": "signalIds",
+                  "example": "[\"sig_18f2\"]"
                 },
                 {
                   "name": "assignMode",
@@ -188,12 +193,14 @@
               ]
             }
           ],
-          "title": "Reassign a previously-assigned signal to a different project",
+          "title": "Reassign previously-assigned signals to a different project",
           "context": [],
           "examples": [
             {
-              "signal_id": "sig-mike-1",
               "project_id": "1W",
+              "signal_ids": [
+                "sig-mike-1"
+              ],
               "assign_mode": "Contact",
               "assigned_by": "user"
             }
@@ -211,8 +218,8 @@
               "title": "AssignSignalsToProject",
               "fields": [
                 {
-                  "name": "signalId",
-                  "example": "sig_18f2"
+                  "name": "signalIds",
+                  "example": "[\"sig_18f2\"]"
                 },
                 {
                   "name": "assignMode",
@@ -267,11 +274,17 @@
             {
               "id": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
               "type": "COMMAND",
-              "title": "AssignSignalsToProject"
+              "title": "AssignSignalsToProject",
+              "fields": [
+                {
+                  "name": "signalIds",
+                  "example": "[]"
+                }
+              ]
             }
           ],
           "given": [],
-          "title": "Reject assignment for a signal that was never captured",
+          "title": "Reject assignment when none of the signals were ever captured",
           "examples": [],
           "expectError": true,
           "expectEmptyList": false,
@@ -305,11 +318,13 @@
               "title": "Signals Assigned To Project"
             }
           ],
-          "title": "Reassign a previously-assigned signal to a different project (corrected)",
+          "title": "Reassign previously-assigned signals to a different project (corrected)",
           "examples": [
             {
-              "signal_id": "sig-mike-1",
               "project_id": "1W",
+              "signal_ids": [
+                "sig-mike-1"
+              ],
               "assign_mode": "Contact",
               "assigned_by": "user",
               "previous_project_id": "2M"
@@ -319,7 +334,7 @@
       ]
     }
   },
-  "hash": "18n1was",
-  "timestamp": 1789570000001,
+  "hash": "1y7p1w9",
+  "timestamp": 1789580000001,
   "userId": null
 }
