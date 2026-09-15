@@ -1,0 +1,23 @@
+{
+  "id": "b1912c7f-ed0c-444b-bfad-4efb83b41748",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "704dff2a-5588-48e1-b55f-2f0b25106f4b",
+    "title": "AssignSignalsToProject (Group)"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "704dff2a-5588-48e1-b55f-2f0b25106f4b",
+    "title": "AssignSignalsToProject (Group)",
+    "linkedTo": null
+  },
+  "hash": "pogkii",
+  "timestamp": 1789437298009,
+  "userId": null
+}

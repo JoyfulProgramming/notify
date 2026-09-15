@@ -1,0 +1,23 @@
+{
+  "id": "2fbf4f42-7f88-418e-a771-612c0ff09515",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "0890d948-50eb-4bf3-a4d5-cfd509cf9af2",
+    "title": "SignalsByContactView"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "0890d948-50eb-4bf3-a4d5-cfd509cf9af2",
+    "title": "SignalsByContactView",
+    "linkedTo": null
+  },
+  "hash": "i7ed9e",
+  "timestamp": 1789437297026,
+  "userId": null
+}

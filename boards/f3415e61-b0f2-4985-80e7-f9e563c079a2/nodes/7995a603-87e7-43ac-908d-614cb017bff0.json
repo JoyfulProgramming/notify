@@ -1,0 +1,23 @@
+{
+  "id": "7995a603-87e7-43ac-908d-614cb017bff0",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "d457c6f2-83fb-44f9-a823-1dd7a8d5ff61",
+    "title": "SelectAndAssign"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "d457c6f2-83fb-44f9-a823-1dd7a8d5ff61",
+    "title": "SelectAndAssign",
+    "linkedTo": null
+  },
+  "hash": "b9hgnc",
+  "timestamp": 1789437297692,
+  "userId": null
+}

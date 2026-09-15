@@ -1,0 +1,23 @@
+{
+  "id": "c27449c9-7903-470f-b12e-679129f2448f",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "f18782cd-daa7-40a4-830f-9b604455f1a6",
+    "title": "SignalsListView (after partial archive)"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "f18782cd-daa7-40a4-830f-9b604455f1a6",
+    "title": "SignalsListView (after partial archive)",
+    "linkedTo": null
+  },
+  "hash": "4lmxp5",
+  "timestamp": 1789437298221,
+  "userId": null
+}

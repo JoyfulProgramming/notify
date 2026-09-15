@@ -1,0 +1,23 @@
+{
+  "id": "7e6c7183-cce2-4986-8380-b099d2a762b7",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "de94ab02-f5d2-4b01-b14a-16a9434ce5e9",
+    "title": "SignalsListView (after contact assignment)"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "de94ab02-f5d2-4b01-b14a-16a9434ce5e9",
+    "title": "SignalsListView (after contact assignment)",
+    "linkedTo": null
+  },
+  "hash": "1qygt5i",
+  "timestamp": 1789437297588,
+  "userId": null
+}
