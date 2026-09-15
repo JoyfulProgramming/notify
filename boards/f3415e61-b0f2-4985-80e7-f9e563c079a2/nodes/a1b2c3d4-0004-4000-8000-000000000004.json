@@ -2,7 +2,7 @@
   "id": "a1b2c3d4-0004-4000-8000-000000000004",
   "type": "html_screen",
   "position": {
-    "x": 6405,
+    "x": 4605,
     "y": 145
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
@@ -47,14 +47,9 @@
     ],
     "version": 3,
     "linkedTo": null,
-    "description": "Step 7: Assign screen reached from step 4's selection (1 Mike + 1 Kathleen signal). Assign By defaults to Contact and is the only usable option — By Group is rendered disabled/greyed because neither selected signal belongs to a WhatsApp group. No project chosen yet.",
-    "changedAttributes": [
-      "meta.pages",
-      "meta.description",
-      "meta.fields"
-    ]
+    "description": "Step 7: Assign screen reached from step 4's selection (1 Mike + 1 Kathleen signal). Assign By defaults to Contact and is the only usable option — By Group is rendered disabled/greyed because neither selected signal belongs to a WhatsApp group. No project chosen yet."
   },
   "hash": "elbm5n",
-  "timestamp": 1789430000003,
-  "userId": null
+  "timestamp": 1789438545151,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
