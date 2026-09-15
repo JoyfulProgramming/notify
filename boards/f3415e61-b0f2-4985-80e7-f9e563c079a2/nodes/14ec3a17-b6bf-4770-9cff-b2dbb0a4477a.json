@@ -8,12 +8,60 @@
   "meta": {
     "type": "SCENARIO",
     "title": "",
-    "linkedTo": null,
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "aa000007-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "dffaa071-c863-4469-bcb7-b6b2fffd84c5",
+              "type": "EVENT",
+              "title": "Signals Assigned To Project"
+            }
+          ],
+          "when": [
+            {
+              "id": "a21fd82d-cfe0-444b-b86b-8c9203e57492",
+              "type": "COMMAND",
+              "title": "AssignSignalsToProject",
+              "fields": [
+                {
+                  "name": "signalIds",
+                  "example": "[\"sig_bobby_1\"]"
+                },
+                {
+                  "name": "assignMode",
+                  "example": "Group"
+                },
+                {
+                  "name": "projectId",
+                  "example": "3F"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "ba97506b-2432-4977-a0eb-28ed0cf7cb07",
+              "type": "EVENT",
+              "title": "AssignModeSwitchedToGroup"
+            }
+          ],
+          "title": "Confirm assignment by Group",
+          "examples": [
+            {
+              "project_id": "3F",
+              "signal_ids": [
+                "sig_bobby_1"
+              ],
+              "assign_mode": "Group"
+            }
+          ]
+        }
+      ]
     }
   },
-  "hash": "ghyio1",
-  "timestamp": 1789435791290,
+  "hash": "36eznl",
+  "timestamp": 1789435791456,
   "userId": null
 }
