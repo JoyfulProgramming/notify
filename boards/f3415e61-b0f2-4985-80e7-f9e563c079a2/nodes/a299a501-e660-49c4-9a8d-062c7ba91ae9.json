@@ -2,11 +2,13 @@
   "id": "a299a501-e660-49c4-9a8d-062c7ba91ae9",
   "type": "sticky_note",
   "position": {
-    "x": 3245,
+    "x": 11795,
     "y": 507
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {},
+  "data": {
+    "linkedTo": null
+  },
   "meta": {
     "type": "READMODEL",
     "title": "Signals Awaiting Rule Creation",
@@ -46,12 +48,9 @@
     ],
     "version": 0,
     "linkedTo": null,
-    "listElement": true,
-    "changedAttributes": [
-      "meta.listElement"
-    ]
+    "listElement": true
   },
-  "hash": "1pk89z5",
-  "timestamp": 1789610000008,
-  "userId": null
+  "hash": "198t0o1",
+  "timestamp": 1789493670873,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
