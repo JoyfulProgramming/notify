@@ -14,7 +14,13 @@
   "meta": {
     "type": "SLICE_BORDER",
     "colId": "f10c2f3d-1bca-41cf-b982-1b9bb5a2835c",
-    "title": "ProjectRosterView"
+    "title": "ProjectRosterView (Create Project)",
+    "linkedTo": null,
+    "changedAttributes": [
+      "meta.title"
+    ]
   },
-  "hash": "nj8bbg"
+  "hash": "1vx5hd7",
+  "timestamp": 1789630000001,
+  "userId": null
 }

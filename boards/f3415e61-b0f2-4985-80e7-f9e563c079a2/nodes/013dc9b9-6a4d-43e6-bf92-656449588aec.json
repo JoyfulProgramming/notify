@@ -14,7 +14,13 @@
   "meta": {
     "type": "SLICE_BORDER",
     "colId": "1cd5ba72-27a8-4446-8351-41fced3269c7",
-    "title": "ProjectRosterView"
+    "title": "ProjectRosterView (Delete Project)",
+    "linkedTo": null,
+    "changedAttributes": [
+      "meta.title"
+    ]
   },
-  "hash": "qyuhlh"
+  "hash": "7lrnqn",
+  "timestamp": 1789630000002,
+  "userId": null
 }
