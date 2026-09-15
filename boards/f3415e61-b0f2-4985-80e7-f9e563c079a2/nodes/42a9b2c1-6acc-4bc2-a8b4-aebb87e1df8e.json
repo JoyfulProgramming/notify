@@ -14,11 +14,9 @@
   "meta": {
     "type": "SLICE_BORDER",
     "title": "Rules Pending Deletion",
-    "changedAttributes": [
-      "meta.title"
-    ]
+    "linkedTo": null
   },
-  "hash": "1wwataa",
-  "timestamp": 1756796800000,
+  "hash": "eubng5",
+  "timestamp": 1789640000001,
   "userId": null
 }
