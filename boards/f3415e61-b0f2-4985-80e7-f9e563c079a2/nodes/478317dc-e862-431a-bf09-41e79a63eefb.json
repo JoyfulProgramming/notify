@@ -674,10 +674,6 @@
           "width": 450
         },
         {
-          "id": "a920d228-c8f1-4a53-b73d-da37327f2642",
-          "width": 450
-        },
-        {
           "id": "de4f53e4-40eb-4615-9e56-7f97efe65db4",
           "width": 450
         }
@@ -685,6 +681,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1789434947394,
+  "timestamp": 1789434952265,
   "userId": null
 }
