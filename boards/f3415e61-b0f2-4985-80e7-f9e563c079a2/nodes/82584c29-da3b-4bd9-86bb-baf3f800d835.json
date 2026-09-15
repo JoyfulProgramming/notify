@@ -27,7 +27,7 @@
             {
               "id": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
               "type": "COMMAND",
-              "title": "AssignSignalsToProject"
+              "title": "AssignSignalsToProject (Contact)"
             }
           ],
           "given": [
@@ -63,7 +63,7 @@
             {
               "id": "a21fd82d-cfe0-444b-b86b-8c9203e57492",
               "type": "COMMAND",
-              "title": "AssignSignalsToProject"
+              "title": "AssignSignalsToProject (Group)"
             }
           ],
           "given": [
@@ -120,7 +120,7 @@
             {
               "id": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
               "type": "COMMAND",
-              "title": "AssignSignalsToProject",
+              "title": "AssignSignalsToProject (Contact)",
               "fields": [
                 {
                   "name": "signalIds",
@@ -215,7 +215,7 @@
             {
               "id": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
               "type": "COMMAND",
-              "title": "AssignSignalsToProject",
+              "title": "AssignSignalsToProject (Contact)",
               "fields": [
                 {
                   "name": "signalIds",
@@ -274,7 +274,7 @@
             {
               "id": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
               "type": "COMMAND",
-              "title": "AssignSignalsToProject",
+              "title": "AssignSignalsToProject (Contact)",
               "fields": [
                 {
                   "name": "signalIds",
@@ -303,7 +303,7 @@
             {
               "id": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
               "type": "COMMAND",
-              "title": "AssignSignalsToProject"
+              "title": "AssignSignalsToProject (Contact)"
             }
           ],
           "given": [
@@ -334,7 +334,7 @@
       ]
     }
   },
-  "hash": "1y7p1w9",
-  "timestamp": 1789580000001,
+  "hash": "k4mm12",
+  "timestamp": 1789620000003,
   "userId": null
 }

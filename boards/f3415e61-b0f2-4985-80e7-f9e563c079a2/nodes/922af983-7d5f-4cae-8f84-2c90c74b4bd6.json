@@ -8,64 +8,61 @@
   "meta": {
     "type": "SCENARIO",
     "title": "",
+    "linkedTo": null,
     "givenWhenThenScenario": {
       "scenarios": [
         {
-          "id": "aa000005-0000-4000-8000-000000000001",
+          "id": "aa000007-0000-4000-8000-000000000001",
           "then": [
+            {
+              "id": "dffaa071-c863-4469-bcb7-b6b2fffd84c5",
+              "type": "EVENT",
+              "title": "Signals Assigned To Project"
+            }
+          ],
+          "when": [
+            {
+              "id": "a21fd82d-cfe0-444b-b86b-8c9203e57492",
+              "type": "COMMAND",
+              "title": "AssignSignalsToProject (Group)",
+              "fields": [
+                {
+                  "name": "signalIds",
+                  "example": "[\"sig_bobby_1\"]"
+                },
+                {
+                  "name": "assignMode",
+                  "example": "Group"
+                },
+                {
+                  "name": "projectId",
+                  "example": "3F"
+                }
+              ]
+            }
+          ],
+          "given": [
             {
               "id": "ba97506b-2432-4977-a0eb-28ed0cf7cb07",
               "type": "EVENT",
               "title": "AssignModeSwitchedToGroup"
             }
           ],
-          "when": [
-            {
-              "id": "dc52730b-3ffd-4d00-9fc5-535e45e50688",
-              "type": "COMMAND",
-              "title": "SwitchAssignByGroup"
-            }
-          ],
-          "given": [
-            {
-              "id": "5379bc58-5c30-4e35-b35e-e81beaf1245d",
-              "type": "EVENT",
-              "title": "AssignFlowOpened"
-            }
-          ],
-          "title": "Switch Assign By from Contact to Group",
+          "title": "Confirm assignment by Group",
           "examples": [
             {
+              "project_id": "3F",
+              "signal_ids": [
+                "sig_bobby_1"
+              ],
               "assign_mode": "Group"
             }
           ]
-        },
-        {
-          "id": "aa000005-0000-4000-8000-000000000002",
-          "then": [],
-          "when": [
-            {
-              "id": "dc52730b-3ffd-4d00-9fc5-535e45e50688",
-              "type": "COMMAND",
-              "title": "SwitchAssignByGroup"
-            }
-          ],
-          "given": [
-            {
-              "id": "8bf66359-99f6-4f4f-9d42-cadd4080c835",
-              "type": "EVENT",
-              "title": "AssignFlowOpened (None)"
-            }
-          ],
-          "title": "Reject switching to Group when no selected signal has a group",
-          "examples": [],
-          "expectError": true,
-          "errorDescription": "no selected signal belongs to a WhatsApp group"
         }
       ]
     }
   },
-  "hash": "14n5r2y",
-  "timestamp": 1789435780582,
+  "hash": "3iub1k",
+  "timestamp": 1789620000004,
   "userId": null
 }
