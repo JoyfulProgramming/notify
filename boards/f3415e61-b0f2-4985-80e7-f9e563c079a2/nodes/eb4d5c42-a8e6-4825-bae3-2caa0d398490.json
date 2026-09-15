@@ -2,7 +2,7 @@
   "id": "eb4d5c42-a8e6-4825-bae3-2caa0d398490",
   "type": "sticky_note",
   "position": {
-    "x": 6395,
+    "x": 2795,
     "y": 507
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
@@ -60,13 +60,11 @@
         "cardinality": "Single"
       }
     ],
+    "linkedTo": null,
     "description": "A signal is hidden once its signalId appears in any SignalsArchived.signalIds, same rule as SignalsListView — a group row's count/preview reflect only its still-unarchived signals; the row itself disappears once all its signals are archived. The 'None' row (signals with no WhatsApp group, i.e. direct messages) is always sorted first regardless of recency; remaining rows sort by latestReceivedAt descending. A row's badge shows a grey '?' instead of a project number/colour when its remaining signals span more than one assigned project.",
-    "listElement": true,
-    "changedAttributes": [
-      "meta.title"
-    ]
+    "listElement": true
   },
   "hash": "109l7ug",
-  "timestamp": 1756796401000,
-  "userId": null
+  "timestamp": 1789437572093,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
