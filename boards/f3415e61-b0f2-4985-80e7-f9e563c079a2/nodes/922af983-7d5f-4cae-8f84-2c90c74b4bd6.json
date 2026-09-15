@@ -8,12 +8,64 @@
   "meta": {
     "type": "SCENARIO",
     "title": "",
-    "linkedTo": null,
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "aa000005-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "ba97506b-2432-4977-a0eb-28ed0cf7cb07",
+              "type": "EVENT",
+              "title": "AssignModeSwitchedToGroup"
+            }
+          ],
+          "when": [
+            {
+              "id": "dc52730b-3ffd-4d00-9fc5-535e45e50688",
+              "type": "COMMAND",
+              "title": "SwitchAssignByGroup"
+            }
+          ],
+          "given": [
+            {
+              "id": "5379bc58-5c30-4e35-b35e-e81beaf1245d",
+              "type": "EVENT",
+              "title": "AssignFlowOpened"
+            }
+          ],
+          "title": "Switch Assign By from Contact to Group",
+          "examples": [
+            {
+              "assign_mode": "Group"
+            }
+          ]
+        },
+        {
+          "id": "aa000005-0000-4000-8000-000000000002",
+          "then": [],
+          "when": [
+            {
+              "id": "dc52730b-3ffd-4d00-9fc5-535e45e50688",
+              "type": "COMMAND",
+              "title": "SwitchAssignByGroup"
+            }
+          ],
+          "given": [
+            {
+              "id": "8bf66359-99f6-4f4f-9d42-cadd4080c835",
+              "type": "EVENT",
+              "title": "AssignFlowOpened (None)"
+            }
+          ],
+          "title": "Reject switching to Group when no selected signal has a group",
+          "examples": [],
+          "expectError": true,
+          "errorDescription": "no selected signal belongs to a WhatsApp group"
+        }
+      ]
     }
   },
-  "hash": "ghyio1",
-  "timestamp": 1789435780344,
+  "hash": "14n5r2y",
+  "timestamp": 1789435780582,
   "userId": null
 }
