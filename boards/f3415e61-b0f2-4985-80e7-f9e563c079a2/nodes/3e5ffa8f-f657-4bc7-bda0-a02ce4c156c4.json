@@ -9,7 +9,7 @@
   "data": {},
   "meta": {
     "type": "READMODEL",
-    "title": "ProjectRosterView",
+    "title": "ProjectRosterView (Create Project)",
     "fields": [
       {
         "name": "projectId",
@@ -55,11 +55,15 @@
     "compact": true,
     "context": "INTERNAL",
     "version": 9,
+    "linkedTo": null,
     "listElement": true,
     "todoListElement": false,
-    "createsAggregate": false
+    "createsAggregate": false,
+    "changedAttributes": [
+      "meta.title"
+    ]
   },
-  "hash": "15r3n0z",
-  "timestamp": 1756533500000,
+  "hash": "6fp784",
+  "timestamp": 1789630000003,
   "userId": null
 }

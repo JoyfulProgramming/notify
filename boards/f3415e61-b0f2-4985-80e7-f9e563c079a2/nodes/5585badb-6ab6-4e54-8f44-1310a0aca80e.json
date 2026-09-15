@@ -9,7 +9,7 @@
   "data": {},
   "meta": {
     "type": "READMODEL",
-    "title": "ProjectRosterView",
+    "title": "ProjectRosterView (Delete Project)",
     "fields": [
       {
         "name": "projectId",
@@ -47,10 +47,10 @@
     "linkedTo": null,
     "listElement": true,
     "changedAttributes": [
-      "meta.listElement"
+      "meta.title"
     ]
   },
-  "hash": "1uo1h53",
-  "timestamp": 1789610000003,
+  "hash": "14dekcq",
+  "timestamp": 1789630000004,
   "userId": null
 }
