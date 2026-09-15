@@ -6,7 +6,9 @@
     "y": 507
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {},
+  "data": {
+    "linkedTo": null
+  },
   "meta": {
     "type": "READMODEL",
     "title": "Unmatched Signals",
@@ -17,6 +19,7 @@
         "example": "sig_18f2",
         "mapping": "Signal Captured.signalId",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       },
       {
@@ -25,16 +28,15 @@
         "example": "Mike",
         "mapping": "Signal Captured.sender",
         "generated": false,
+        "subfields": [],
         "cardinality": "Single"
       }
     ],
+    "version": 3,
     "linkedTo": null,
-    "listElement": true,
-    "changedAttributes": [
-      "meta.listElement"
-    ]
+    "listElement": true
   },
-  "hash": "c1edmw",
-  "timestamp": 1789610000007,
-  "userId": null
+  "hash": "g9cytz",
+  "timestamp": 1789437207219,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
