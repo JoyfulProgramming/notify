@@ -8,12 +8,79 @@
   "meta": {
     "type": "SCENARIO",
     "title": "",
-    "linkedTo": null,
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "aa000001-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "8bf66359-99f6-4f4f-9d42-cadd4080c835",
+              "type": "EVENT",
+              "title": "AssignFlowOpened (None)"
+            }
+          ],
+          "when": [
+            {
+              "id": "79f2beec-3702-4ad1-9050-892fceb4d385",
+              "type": "COMMAND",
+              "title": "SelectAndAssign (None)",
+              "fields": [
+                {
+                  "name": "signalIds",
+                  "example": "[\"sig_mike_1\",\"sig_kathleen_1\"]"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured"
+            }
+          ],
+          "title": "Open Assign flow from a None-grouping selection",
+          "examples": [
+            {
+              "signal_ids": [
+                "sig_mike_1",
+                "sig_kathleen_1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "aa000001-0000-4000-8000-000000000002",
+          "then": [],
+          "when": [
+            {
+              "id": "79f2beec-3702-4ad1-9050-892fceb4d385",
+              "type": "COMMAND",
+              "title": "SelectAndAssign (None)",
+              "fields": [
+                {
+                  "name": "signalIds",
+                  "example": "[]"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured"
+            }
+          ],
+          "title": "Reject opening Assign flow with nothing selected",
+          "examples": [],
+          "expectError": true,
+          "errorDescription": "signalIds must not be empty"
+        }
+      ]
     }
   },
-  "hash": "ghyio1",
-  "timestamp": 1789435754692,
+  "hash": "avogsu",
+  "timestamp": 1789435754913,
   "userId": null
 }
