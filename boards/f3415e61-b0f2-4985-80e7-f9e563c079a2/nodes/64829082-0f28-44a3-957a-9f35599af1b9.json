@@ -1,0 +1,51 @@
+{
+  "id": "64829082-0f28-44a3-957a-9f35599af1b9",
+  "type": "spec_node",
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "dd000002-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "0b933c18-d13f-4fe5-b115-726870095ff4",
+              "type": "READMODEL",
+              "title": "ScheduleOptionsView"
+            }
+          ],
+          "when": [
+            {
+              "id": "ee000002-0000-4000-8000-000000000001",
+              "type": "QUERY",
+              "title": "View schedule options",
+              "fields": [
+                {
+                  "name": "sessionId",
+                  "example": "sess_1"
+                }
+              ]
+            }
+          ],
+          "given": [],
+          "title": "View available schedule presets",
+          "examples": [
+            {
+              "name": "Evenings",
+              "schedule_id": "evenings",
+              "always_active": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hash": "1ql4gli",
+  "timestamp": 1789438194142,
+  "userId": null
+}
