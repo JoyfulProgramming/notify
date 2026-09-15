@@ -8,12 +8,51 @@
   "meta": {
     "type": "SCENARIO",
     "title": "",
-    "linkedTo": null,
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "cc000011-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "e56a7c6c-4025-4856-975c-bc50158631e3",
+              "type": "READMODEL",
+              "title": "AssignFlowView"
+            }
+          ],
+          "when": [
+            {
+              "id": "b0000011-0000-4000-8000-000000000001",
+              "type": "QUERY",
+              "title": "View Assign preview",
+              "fields": [
+                {
+                  "name": "sessionId",
+                  "example": "sess_1"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "5379bc58-5c30-4e35-b35e-e81beaf1245d",
+              "type": "EVENT",
+              "title": "AssignFlowOpened"
+            }
+          ],
+          "title": "View Assign preview for a single grouped signal",
+          "examples": [
+            {
+              "assign_mode": "Contact",
+              "affected_contacts": [
+                "Bobby Willis"
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
-  "hash": "ghyio1",
-  "timestamp": 1789437835190,
+  "hash": "171dhtj",
+  "timestamp": 1789437835418,
   "userId": null
 }
