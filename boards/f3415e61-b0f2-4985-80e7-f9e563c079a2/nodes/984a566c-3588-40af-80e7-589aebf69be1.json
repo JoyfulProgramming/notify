@@ -12,9 +12,62 @@
   "meta": {
     "type": "READMODEL",
     "title": "SignalsListView (after group assignment)",
-    "linkedTo": null
+    "fields": [
+      {
+        "name": "signalId",
+        "type": "UUID",
+        "example": "sig_bobby_1",
+        "mapping": "SignalsListView.signalId",
+        "cardinality": "Single"
+      },
+      {
+        "name": "sender",
+        "type": "String",
+        "example": "Bobby Willis",
+        "mapping": "SignalsListView.sender",
+        "cardinality": "Single"
+      },
+      {
+        "name": "sourceApp",
+        "type": "String",
+        "example": "WhatsApp",
+        "mapping": "SignalsListView.sourceApp",
+        "cardinality": "Single"
+      },
+      {
+        "name": "groupId",
+        "type": "String",
+        "example": "grp_wedsat",
+        "mapping": "SignalsListView.groupId",
+        "cardinality": "Single"
+      },
+      {
+        "name": "body",
+        "type": "String",
+        "example": "AGM moved to the 14th",
+        "mapping": "SignalsListView.body",
+        "cardinality": "Single"
+      },
+      {
+        "name": "receivedAt",
+        "type": "DateTime",
+        "example": "2026-08-29T00:05:00Z",
+        "mapping": "SignalsListView.receivedAt",
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignedProject",
+        "type": "String",
+        "example": "3F",
+        "mapping": "latest:Signals Assigned To Project.projectId for this signal, updated by the Group-path confirm — applies to every signal in the assigned group, not just the one originally selected",
+        "cardinality": "Single"
+      }
+    ],
+    "linkedTo": null,
+    "description": "Local demonstration copy of SignalsListView's post-assignment state: same rows as SignalsListView, but every signal in Wed/Sat Play (Bobby, Rich, Michael) now carries assignedProject='3F' after the By-Group confirm.",
+    "listElement": true
   },
-  "hash": "1e372xi",
-  "timestamp": 1789426626496,
+  "hash": "14q8vit",
+  "timestamp": 1789650000002,
   "userId": null
 }

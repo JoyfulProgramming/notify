@@ -12,9 +12,62 @@
   "meta": {
     "type": "READMODEL",
     "title": "SignalsListView (after contact assignment)",
-    "linkedTo": null
+    "fields": [
+      {
+        "name": "signalId",
+        "type": "UUID",
+        "example": "sig_18f2",
+        "mapping": "SignalsListView.signalId",
+        "cardinality": "Single"
+      },
+      {
+        "name": "sender",
+        "type": "String",
+        "example": "Mike",
+        "mapping": "SignalsListView.sender",
+        "cardinality": "Single"
+      },
+      {
+        "name": "sourceApp",
+        "type": "String",
+        "example": "WhatsApp",
+        "mapping": "SignalsListView.sourceApp",
+        "cardinality": "Single"
+      },
+      {
+        "name": "groupId",
+        "type": "String",
+        "example": "grp_8821",
+        "mapping": "SignalsListView.groupId",
+        "cardinality": "Single"
+      },
+      {
+        "name": "body",
+        "type": "String",
+        "example": "Can you call Mum later, she is not feeling great",
+        "mapping": "SignalsListView.body",
+        "cardinality": "Single"
+      },
+      {
+        "name": "receivedAt",
+        "type": "DateTime",
+        "example": "2026-08-29T00:02:00Z",
+        "mapping": "SignalsListView.receivedAt",
+        "cardinality": "Single"
+      },
+      {
+        "name": "assignedProject",
+        "type": "String",
+        "example": "2M",
+        "mapping": "latest:Signals Assigned To Project.projectId for this signal, updated by the Contact-path confirm",
+        "cardinality": "Single"
+      }
+    ],
+    "linkedTo": null,
+    "description": "Local demonstration copy of SignalsListView's post-assignment state: same rows as SignalsListView, but Mike's and Kathleen's signals now carry assignedProject='2M' after the By-Contact confirm.",
+    "listElement": true
   },
-  "hash": "2fnsvd",
-  "timestamp": 1789437611040,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "q7t547",
+  "timestamp": 1789650000001,
+  "userId": null
 }
