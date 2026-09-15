@@ -1,0 +1,58 @@
+{
+  "id": "b2af98c1-9201-44d9-936c-e5cbfc6df719",
+  "type": "spec_node",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "aa000006-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "11c36ae0-9fec-4f20-9628-5ae011a6737f",
+              "type": "READMODEL",
+              "title": "AssignModeView"
+            }
+          ],
+          "when": [
+            {
+              "id": "b0000006-0000-4000-8000-000000000001",
+              "type": "QUERY",
+              "title": "View Assign preview",
+              "fields": [
+                {
+                  "name": "sessionId",
+                  "example": "sess_1"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "ba97506b-2432-4977-a0eb-28ed0cf7cb07",
+              "type": "EVENT",
+              "title": "AssignModeSwitchedToGroup"
+            }
+          ],
+          "title": "View Assign preview after switching to By Group",
+          "examples": [
+            {
+              "project_choice": null,
+              "affected_groups": [
+                "Wed/Sat Play"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hash": "1ecd5ug",
+  "timestamp": 1789435785569,
+  "userId": null
+}
