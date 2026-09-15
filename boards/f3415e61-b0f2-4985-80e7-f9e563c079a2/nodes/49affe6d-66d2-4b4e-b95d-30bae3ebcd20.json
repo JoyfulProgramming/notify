@@ -2,11 +2,13 @@
   "id": "49affe6d-66d2-4b4e-b95d-30bae3ebcd20",
   "type": "sticky_note",
   "position": {
-    "x": 3695,
-    "y": 827
+    "x": 12245,
+    "y": 1147
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {},
+  "data": {
+    "hasComments": true
+  },
   "meta": {
     "type": "EVENT",
     "title": "Sender Rule Created",
@@ -57,7 +59,10 @@
         "cardinality": "Single"
       }
     ],
-    "version": 2
+    "version": 2,
+    "linkedTo": null
   },
-  "hash": "1wclp4"
+  "hash": "1c6m4zc",
+  "timestamp": 1789493525346,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
