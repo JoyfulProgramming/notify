@@ -1,0 +1,19 @@
+{
+  "id": "f24aab83-3c4f-4870-b113-b0f167d7405a",
+  "type": "spec_node",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "linkedTo": null,
+    "givenWhenThenScenario": {
+      "scenarios": []
+    }
+  },
+  "hash": "ghyio1",
+  "timestamp": 1789435754692,
+  "userId": null
+}
