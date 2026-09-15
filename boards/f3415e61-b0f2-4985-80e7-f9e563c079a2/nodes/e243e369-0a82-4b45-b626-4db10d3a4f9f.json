@@ -45,7 +45,14 @@
         "generated": false,
         "cardinality": "Single"
       }
+    ],
+    "linkedTo": null,
+    "listElement": true,
+    "changedAttributes": [
+      "meta.listElement"
     ]
   },
-  "hash": "1krx4zl"
+  "hash": "1wi2yve",
+  "timestamp": 1789610000005,
+  "userId": null
 }

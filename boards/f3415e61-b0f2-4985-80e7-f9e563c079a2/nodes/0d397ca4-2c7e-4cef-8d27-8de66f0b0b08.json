@@ -42,7 +42,14 @@
         "cardinality": "Single"
       }
     ],
-    "description": "Folds Sender Rule Created (add) and Sender Rule Deleted (remove by ruleId, e.g. when the owning project is deleted). Auto-Assign Signal reads this view, so a removed rule stops matching future signals immediately."
+    "linkedTo": null,
+    "description": "Folds Sender Rule Created (add) and Sender Rule Deleted (remove by ruleId, e.g. when the owning project is deleted). Auto-Assign Signal reads this view, so a removed rule stops matching future signals immediately.",
+    "listElement": true,
+    "changedAttributes": [
+      "meta.listElement"
+    ]
   },
-  "hash": "rj6uuj"
+  "hash": "hmgr34",
+  "timestamp": 1789610000006,
+  "userId": null
 }

@@ -44,9 +44,14 @@
         "cardinality": "List"
       }
     ],
-    "description": "Purely forward-looking. Says what stops happening going forward once this project is deleted — never implies anything about past/already-delivered notifications, which remain exactly as they were (immutable history)."
+    "linkedTo": null,
+    "description": "Purely forward-looking. Says what stops happening going forward once this project is deleted — never implies anything about past/already-delivered notifications, which remain exactly as they were (immutable history).",
+    "listElement": true,
+    "changedAttributes": [
+      "meta.listElement"
+    ]
   },
-  "hash": "1vs95ap",
-  "timestamp": 1756535100000,
+  "hash": "10vg2vu",
+  "timestamp": 1789610000004,
   "userId": null
 }

@@ -43,9 +43,14 @@
         "generated": false,
         "cardinality": "List"
       }
+    ],
+    "linkedTo": null,
+    "listElement": true,
+    "changedAttributes": [
+      "meta.listElement"
     ]
   },
-  "hash": "10alyss",
-  "timestamp": 1756533300000,
+  "hash": "1uo1h53",
+  "timestamp": 1789610000003,
   "userId": null
 }
