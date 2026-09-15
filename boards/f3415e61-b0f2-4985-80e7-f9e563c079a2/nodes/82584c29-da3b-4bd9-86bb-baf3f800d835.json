@@ -11,22 +11,23 @@
     "type": "SCENARIO",
     "title": "",
     "version": 5,
+    "linkedTo": null,
     "givenWhenThenScenario": {
       "scenarios": [
         {
           "id": "5e1a1000-0000-4000-8000-000000000001",
           "then": [
             {
-              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "id": "08281ae3-97b1-4d8e-966a-eac634d814df",
               "type": "EVENT",
-              "title": "Signal Assigned To Project"
+              "title": "Signals Assigned To Project"
             }
           ],
           "when": [
             {
-              "id": "432b78d0-0038-4acb-8edf-c819b4798de7",
+              "id": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
               "type": "COMMAND",
-              "title": "AssignSignalToProject"
+              "title": "AssignSignalsToProject"
             }
           ],
           "given": [
@@ -50,16 +51,16 @@
           "id": "5e1a1000-0000-4000-8000-000000000002",
           "then": [
             {
-              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "id": "dffaa071-c863-4469-bcb7-b6b2fffd84c5",
               "type": "EVENT",
-              "title": "Signal Assigned To Project"
+              "title": "Signals Assigned To Project"
             }
           ],
           "when": [
             {
-              "id": "432b78d0-0038-4acb-8edf-c819b4798de7",
+              "id": "a21fd82d-cfe0-444b-b86b-8c9203e57492",
               "type": "COMMAND",
-              "title": "AssignSignalToProject"
+              "title": "AssignSignalsToProject"
             }
           ],
           "given": [
@@ -83,9 +84,9 @@
           "id": "5e1a1000-0000-4000-8000-000000000003",
           "then": [
             {
-              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "id": "08281ae3-97b1-4d8e-966a-eac634d814df",
               "type": "EVENT",
-              "title": "Signal Assigned To Project",
+              "title": "Signals Assigned To Project",
               "fields": [
                 {
                   "name": "signalId",
@@ -112,9 +113,9 @@
           ],
           "when": [
             {
-              "id": "432b78d0-0038-4acb-8edf-c819b4798de7",
+              "id": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
               "type": "COMMAND",
-              "title": "AssignSignalToProject",
+              "title": "AssignSignalsToProject",
               "fields": [
                 {
                   "name": "signalId",
@@ -160,9 +161,9 @@
               ]
             },
             {
-              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "id": "08281ae3-97b1-4d8e-966a-eac634d814df",
               "type": "EVENT",
-              "title": "Signal Assigned To Project",
+              "title": "Signals Assigned To Project",
               "fields": [
                 {
                   "name": "signalId",
@@ -205,9 +206,9 @@
           "then": [],
           "when": [
             {
-              "id": "432b78d0-0038-4acb-8edf-c819b4798de7",
+              "id": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
               "type": "COMMAND",
-              "title": "AssignSignalToProject",
+              "title": "AssignSignalsToProject",
               "fields": [
                 {
                   "name": "signalId",
@@ -264,9 +265,9 @@
           "then": [],
           "when": [
             {
-              "id": "432b78d0-0038-4acb-8edf-c819b4798de7",
+              "id": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
               "type": "COMMAND",
-              "title": "AssignSignalToProject"
+              "title": "AssignSignalsToProject"
             }
           ],
           "given": [],
@@ -280,16 +281,16 @@
           "id": "5e1a1000-0000-4000-8000-000000000006",
           "then": [
             {
-              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "id": "08281ae3-97b1-4d8e-966a-eac634d814df",
               "type": "EVENT",
-              "title": "Signal Assigned To Project"
+              "title": "Signals Assigned To Project"
             }
           ],
           "when": [
             {
-              "id": "432b78d0-0038-4acb-8edf-c819b4798de7",
+              "id": "937dd09a-50e9-476a-aa2a-fa893ddbb0d4",
               "type": "COMMAND",
-              "title": "AssignSignalToProject"
+              "title": "AssignSignalsToProject"
             }
           ],
           "given": [
@@ -299,9 +300,9 @@
               "title": "Signal Captured"
             },
             {
-              "id": "8fb2030e-208f-4d43-b770-03328c36fb0d",
+              "id": "08281ae3-97b1-4d8e-966a-eac634d814df",
               "type": "EVENT",
-              "title": "Signal Assigned To Project"
+              "title": "Signals Assigned To Project"
             }
           ],
           "title": "Reassign a previously-assigned signal to a different project (corrected)",
@@ -318,5 +319,7 @@
       ]
     }
   },
-  "hash": "1vy63ng"
+  "hash": "18n1was",
+  "timestamp": 1789570000001,
+  "userId": null
 }
