@@ -1,0 +1,60 @@
+{
+  "id": "2ea7971a-0868-4677-a987-0ea74c2920e3",
+  "type": "spec_node",
+  "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
+  "data": {
+    "title": ""
+  },
+  "meta": {
+    "type": "SCENARIO",
+    "title": "",
+    "givenWhenThenScenario": {
+      "scenarios": [
+        {
+          "id": "aa000003-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "d32e390c-8dda-426e-b290-9414a87297c1",
+              "type": "READMODEL",
+              "title": "SignalsListView (after contact assignment)"
+            }
+          ],
+          "when": [
+            {
+              "id": "b0000003-0000-4000-8000-000000000001",
+              "type": "QUERY",
+              "title": "View signals list",
+              "fields": [
+                {
+                  "name": "groupingMode",
+                  "example": "None"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "08281ae3-97b1-4d8e-966a-eac634d814df",
+              "type": "EVENT",
+              "title": "Signals Assigned To Project"
+            }
+          ],
+          "title": "View signals list after a Contact-mode assignment",
+          "examples": [
+            {
+              "affected_signals": [
+                "sig_mike_1",
+                "sig_mike_2",
+                "sig_kathleen_1"
+              ],
+              "assigned_project_number": "2M"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hash": "xrd3vg",
+  "timestamp": 1789435764564,
+  "userId": null
+}
