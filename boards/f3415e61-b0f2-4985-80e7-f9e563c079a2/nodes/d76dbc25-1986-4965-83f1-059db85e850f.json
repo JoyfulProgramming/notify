@@ -8,12 +8,86 @@
   "meta": {
     "type": "SCENARIO",
     "title": "",
-    "linkedTo": null,
     "givenWhenThenScenario": {
-      "scenarios": []
+      "scenarios": [
+        {
+          "id": "aa000009-0000-4000-8000-000000000001",
+          "then": [
+            {
+              "id": "c8aca613-70c8-408a-949c-d34a0b9f508c",
+              "type": "EVENT",
+              "title": "SignalsArchived"
+            }
+          ],
+          "when": [
+            {
+              "id": "c28d92ab-c4fb-4883-bc3a-1181002e3491",
+              "type": "COMMAND",
+              "title": "ArchiveSignals",
+              "fields": [
+                {
+                  "name": "signalIds",
+                  "example": "[\"sig_1\",\"sig_2\",\"...\",\"sig_9\"]"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured"
+            }
+          ],
+          "title": "Archive all selected signals",
+          "examples": [
+            {
+              "signal_ids": [
+                "sig_1",
+                "sig_2",
+                "sig_3",
+                "sig_4",
+                "sig_5",
+                "sig_6",
+                "sig_7",
+                "sig_8",
+                "sig_9"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "aa000009-0000-4000-8000-000000000002",
+          "then": [],
+          "when": [
+            {
+              "id": "c28d92ab-c4fb-4883-bc3a-1181002e3491",
+              "type": "COMMAND",
+              "title": "ArchiveSignals",
+              "fields": [
+                {
+                  "name": "signalIds",
+                  "example": "[]"
+                }
+              ]
+            }
+          ],
+          "given": [
+            {
+              "id": "bafd390d-44b7-4754-8fdf-957c641774cd",
+              "type": "EVENT",
+              "title": "Signal Captured"
+            }
+          ],
+          "title": "Reject archiving with nothing selected",
+          "examples": [],
+          "expectError": true,
+          "errorDescription": "signalIds must not be empty"
+        }
+      ]
     }
   },
-  "hash": "ghyio1",
-  "timestamp": 1789435803856,
+  "hash": "u0pkzi",
+  "timestamp": 1789435804079,
   "userId": null
 }
