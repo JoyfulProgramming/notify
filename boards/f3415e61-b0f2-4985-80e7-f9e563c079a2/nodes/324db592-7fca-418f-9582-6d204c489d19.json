@@ -1,0 +1,23 @@
+{
+  "id": "324db592-7fca-418f-9582-6d204c489d19",
+  "type": "slice_border",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "bb4f520b-d356-44cb-beff-86a59e23d021",
+  "data": {
+    "type": "SLICE_BORDER",
+    "colId": "683a1d7f-ebf9-48c3-a9ba-fb36cd4a9085",
+    "title": "ScheduleTimeSlotsView"
+  },
+  "meta": {
+    "type": "SLICE_BORDER",
+    "colId": "683a1d7f-ebf9-48c3-a9ba-fb36cd4a9085",
+    "title": "ScheduleTimeSlotsView",
+    "linkedTo": null
+  },
+  "hash": "1frx7c2",
+  "timestamp": 1789438177732,
+  "userId": null
+}
