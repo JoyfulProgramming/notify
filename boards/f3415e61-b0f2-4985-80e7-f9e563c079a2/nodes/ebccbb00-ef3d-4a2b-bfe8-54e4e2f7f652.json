@@ -14,10 +14,13 @@
   "meta": {
     "type": "SLICE_BORDER",
     "colId": "8262dd16-3c78-4c16-b146-4b32f6387a00",
-    "title": "AssignFlowView (None)",
-    "linkedTo": null
+    "title": "AssignFlowView (from None-grouping list)",
+    "linkedTo": null,
+    "changedAttributes": [
+      "meta.title"
+    ]
   },
-  "hash": "btw1xc",
-  "timestamp": 1789437297344,
+  "hash": "wklykm",
+  "timestamp": 1789750000005,
   "userId": null
 }

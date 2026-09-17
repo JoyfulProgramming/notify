@@ -14,10 +14,13 @@
   "meta": {
     "type": "SLICE_BORDER",
     "colId": "1b73c2eb-7dd1-482c-a6d3-8229b98e8d62",
-    "title": "SelectAndAssign (None)",
-    "linkedTo": null
+    "title": "SelectAndAssign (from None-grouping list)",
+    "linkedTo": null,
+    "changedAttributes": [
+      "meta.title"
+    ]
   },
-  "hash": "1eh5flg",
-  "timestamp": 1789437297238,
+  "hash": "1cqxoxe",
+  "timestamp": 1789750000004,
   "userId": null
 }
