@@ -11,20 +11,20 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "AssignFlowView (None)",
+    "title": "AssignFlowView (from None-grouping list)",
     "fields": [
       {
         "name": "signalIds",
         "type": "String",
         "example": "[\"sig_1\",\"sig_2\",\"sig_4\"]",
-        "mapping": "AssignFlowOpened (None).signalIds",
+        "mapping": "AssignFlowOpened (from None-grouping list).signalIds",
         "cardinality": "List"
       },
       {
         "name": "assignMode",
         "type": "String",
         "example": "Contact",
-        "mapping": "AssignFlowOpened (None).assignMode",
+        "mapping": "AssignFlowOpened (from None-grouping list).assignMode",
         "cardinality": "Single"
       },
       {
@@ -35,9 +35,14 @@
         "cardinality": "List"
       }
     ],
-    "description": "Drives the Assign Preview (None selection) screen — the selected signals and their distinct contacts, shown as icon chips under CONTACTS."
+    "linkedTo": null,
+    "description": "Drives the Assign Preview (None selection) screen — the selected signals and their distinct contacts, shown as icon chips under CONTACTS.",
+    "changedAttributes": [
+      "meta.title",
+      "meta.fields"
+    ]
   },
-  "hash": "19d9ivh",
-  "timestamp": 1756796202000,
+  "hash": "lk7yl8",
+  "timestamp": 1789750000003,
   "userId": null
 }

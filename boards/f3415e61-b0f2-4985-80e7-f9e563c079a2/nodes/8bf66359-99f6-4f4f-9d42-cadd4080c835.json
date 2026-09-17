@@ -9,7 +9,7 @@
   "data": {},
   "meta": {
     "type": "EVENT",
-    "title": "AssignFlowOpened (None)",
+    "title": "AssignFlowOpened (from None-grouping list)",
     "fields": [
       {
         "name": "signalIds",
@@ -28,9 +28,13 @@
         "cardinality": "Single"
       }
     ],
-    "version": 1
+    "version": 1,
+    "linkedTo": null,
+    "changedAttributes": [
+      "meta.title"
+    ]
   },
-  "hash": "vjzyee",
-  "timestamp": 1788221192306,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "1tq4quv",
+  "timestamp": 1789750000002,
+  "userId": null
 }
