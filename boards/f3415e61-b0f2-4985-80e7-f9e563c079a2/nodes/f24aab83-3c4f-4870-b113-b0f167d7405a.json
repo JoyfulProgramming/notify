@@ -8,6 +8,7 @@
   "meta": {
     "type": "SCENARIO",
     "title": "",
+    "linkedTo": null,
     "givenWhenThenScenario": {
       "scenarios": [
         {
@@ -16,14 +17,14 @@
             {
               "id": "8bf66359-99f6-4f4f-9d42-cadd4080c835",
               "type": "EVENT",
-              "title": "AssignFlowOpened (None)"
+              "title": "AssignFlowOpened (from None-grouping list)"
             }
           ],
           "when": [
             {
               "id": "79f2beec-3702-4ad1-9050-892fceb4d385",
               "type": "COMMAND",
-              "title": "SelectAndAssign (None)",
+              "title": "SelectAndAssign (from None-grouping list)",
               "fields": [
                 {
                   "name": "signalIds",
@@ -56,7 +57,7 @@
             {
               "id": "79f2beec-3702-4ad1-9050-892fceb4d385",
               "type": "COMMAND",
-              "title": "SelectAndAssign (None)",
+              "title": "SelectAndAssign (from None-grouping list)",
               "fields": [
                 {
                   "name": "signalIds",
@@ -80,7 +81,7 @@
       ]
     }
   },
-  "hash": "avogsu",
-  "timestamp": 1789435754913,
+  "hash": "s3fvmn",
+  "timestamp": 1789750000006,
   "userId": null
 }

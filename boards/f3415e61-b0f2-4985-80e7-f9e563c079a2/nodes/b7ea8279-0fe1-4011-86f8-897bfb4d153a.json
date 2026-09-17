@@ -8,6 +8,7 @@
   "meta": {
     "type": "SCENARIO",
     "title": "",
+    "linkedTo": null,
     "givenWhenThenScenario": {
       "scenarios": [
         {
@@ -16,7 +17,7 @@
             {
               "id": "29956c10-bb5d-4aa1-ad8d-6bd19d471288",
               "type": "READMODEL",
-              "title": "AssignFlowView (None)"
+              "title": "AssignFlowView (from None-grouping list)"
             }
           ],
           "when": [
@@ -36,7 +37,7 @@
             {
               "id": "8bf66359-99f6-4f4f-9d42-cadd4080c835",
               "type": "EVENT",
-              "title": "AssignFlowOpened (None)"
+              "title": "AssignFlowOpened (from None-grouping list)"
             }
           ],
           "title": "View Assign preview for a group-less None-grouping selection",
@@ -53,7 +54,7 @@
       ]
     }
   },
-  "hash": "a2p6q9",
-  "timestamp": 1789435759672,
+  "hash": "16t5zye",
+  "timestamp": 1789750000007,
   "userId": null
 }
