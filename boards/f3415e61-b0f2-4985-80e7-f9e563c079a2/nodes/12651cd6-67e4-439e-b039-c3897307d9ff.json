@@ -13,11 +13,14 @@
   },
   "meta": {
     "type": "SLICE_BORDER",
-    "colId": "563145be-abb1-4d02-a113-6be537b32061",
+    "colId": "c61f2c62-662b-4c2c-811a-88d5263d9392",
     "title": "GroupsView",
-    "linkedTo": null
+    "linkedTo": null,
+    "changedAttributes": [
+      "meta.colId"
+    ]
   },
-  "hash": "15xlzdm",
-  "timestamp": 1789437296796,
+  "hash": "1u0zw3m",
+  "timestamp": 1789780000001,
   "userId": null
 }
