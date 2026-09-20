@@ -1,9 +1,17 @@
 {
   "id": "a1b2c3d4-0008-4000-8000-000000000008",
   "type": "html_screen",
+  "position": {
+    "x": 7819,
+    "y": 109
+  },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "backgroundColor": "#ffffff"
+    "linkedTo": null,
+    "previewZoom": [
+      1
+    ],
+    "screenOrientation": "portrait"
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -35,12 +43,9 @@
       }
     ],
     "linkedTo": null,
-    "description": "Step 10: after switching Assign By to Group on step 9's screen. Only Wed/Sat Play shows as a chip — Mike and Kathleen's signals are group-less so they're excluded. No project selected yet.",
-    "changedAttributes": [
-      "meta.pages"
-    ]
+    "description": "Step 10: after switching Assign By to Group on step 9's screen. Only Wed/Sat Play shows as a chip — Mike and Kathleen's signals are group-less so they're excluded. No project selected yet."
   },
   "hash": "1trizno",
-  "timestamp": 1789550000003,
-  "userId": null
+  "timestamp": 1789908120094,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
