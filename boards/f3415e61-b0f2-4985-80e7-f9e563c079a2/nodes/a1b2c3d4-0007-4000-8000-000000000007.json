@@ -2,12 +2,16 @@
   "id": "a1b2c3d4-0007-4000-8000-000000000007",
   "type": "html_screen",
   "position": {
-    "x": 5505,
-    "y": 145
+    "x": 6469,
+    "y": 109
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "linkedTo": null
+    "linkedTo": null,
+    "previewZoom": [
+      1
+    ],
+    "screenOrientation": "portrait"
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -32,15 +36,9 @@
       }
     ],
     "linkedTo": null,
-    "description": "Only Bobby Willis's signal is ticked here — Mike and Kathleen are left untouched in this flow to keep the By-Group story separate and unambiguous.",
-    "changedAttributes": [
-      "meta.pages",
-      "meta.title",
-      "meta.description",
-      "meta.fields"
-    ]
+    "description": "Only Bobby Willis's signal is ticked here — Mike and Kathleen are left untouched in this flow to keep the By-Group story separate and unambiguous."
   },
   "hash": "l7ljgk",
-  "timestamp": 1789550000001,
-  "userId": null
+  "timestamp": 1789908109139,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
