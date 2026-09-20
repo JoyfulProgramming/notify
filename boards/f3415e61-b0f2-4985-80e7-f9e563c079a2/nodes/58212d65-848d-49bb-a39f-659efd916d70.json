@@ -2,11 +2,17 @@
   "id": "58212d65-848d-49bb-a39f-659efd916d70",
   "type": "html_screen",
   "position": {
-    "x": 2355,
-    "y": 145
+    "x": 2419,
+    "y": 109
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
-  "data": {},
+  "data": {
+    "linkedTo": null,
+    "previewZoom": [
+      1
+    ],
+    "screenOrientation": "portrait"
+  },
   "meta": {
     "type": "HTML_SCREEN",
     "pages": [
@@ -85,12 +91,9 @@
         "cardinality": "Single"
       }
     ],
-    "linkedTo": null,
-    "changedAttributes": [
-      "meta.pages"
-    ]
+    "linkedTo": null
   },
   "hash": "q6ak8r",
-  "timestamp": 1789426128249,
-  "userId": null
+  "timestamp": 1789907927324,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
