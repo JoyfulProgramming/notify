@@ -35,6 +35,10 @@ if [[ "$host_goos/$host_goarch" != "linux/amd64" ]]; then
   build_target linux amd64
 fi
 
+# boxd machines are linux/amd64 too, so this reuses the Hetzner binary above
+# under a boxd-specific name rather than rebuilding.
+cp "$DIST_DIR/notify-local-linux-amd64" "$DIST_DIR/notify-local-boxd"
+
 echo
 echo "dist/:"
 ls -la "$DIST_DIR"
