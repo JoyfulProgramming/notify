@@ -379,13 +379,6 @@
           "nodeType": "READMODEL"
         },
         {
-          "id": "7d90b0f9-deb9-49c6-951e-01c903003353-f18782cd-daa7-40a4-830f-9b604455f1a6",
-          "colId": "f18782cd-daa7-40a4-830f-9b604455f1a6",
-          "rowId": "7d90b0f9-deb9-49c6-951e-01c903003353",
-          "nodeId": "a1b2c3d4-000b-4000-8000-00000000000b",
-          "nodeType": "HTML_SCREEN"
-        },
-        {
           "id": "7d90b0f9-deb9-49c6-951e-01c903003353-0890d948-50eb-4bf3-a4d5-cfd509cf9af2",
           "colId": "0890d948-50eb-4bf3-a4d5-cfd509cf9af2",
           "rowId": "7d90b0f9-deb9-49c6-951e-01c903003353",
@@ -759,6 +752,6 @@
     }
   },
   "hash": null,
-  "timestamp": 1789716339433,
-  "userId": null
+  "timestamp": 1789912352536,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
