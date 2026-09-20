@@ -2,12 +2,16 @@
   "id": "5b1e6d08-2cbd-434b-b2c8-1643de6ffe20",
   "type": "html_screen",
   "position": {
-    "x": 4155,
-    "y": 145
+    "x": 4219,
+    "y": 109
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
-    "linkedTo": null
+    "linkedTo": null,
+    "previewZoom": [
+      1
+    ],
+    "screenOrientation": "portrait"
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -39,12 +43,9 @@
       }
     ],
     "linkedTo": null,
-    "description": "Fed by the same SignalsByGroupView readmodel as the base 'grouped by Group' screen. Reflects the carried-over selection from step 4 (1 Mike + 1 Kathleen signal) — both are group-less, so they fall into the 'None' pseudo-group alongside Steve's ungrouped signal (4 total). Since only 2 of those 4 are selected, the None row renders indeterminate.",
-    "changedAttributes": [
-      "meta.description"
-    ]
+    "description": "Fed by the same SignalsByGroupView readmodel as the base 'grouped by Group' screen. Reflects the carried-over selection from step 4 (1 Mike + 1 Kathleen signal) — both are group-less, so they fall into the 'None' pseudo-group alongside Steve's ungrouped signal (4 total). Since only 2 of those 4 are selected, the None row renders indeterminate."
   },
   "hash": "nd71yf",
-  "timestamp": 1789560000002,
-  "userId": null
+  "timestamp": 1789908071390,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
