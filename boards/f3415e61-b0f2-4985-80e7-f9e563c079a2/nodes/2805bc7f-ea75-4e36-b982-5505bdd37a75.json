@@ -1,0 +1,48 @@
+{
+  "id": "2805bc7f-ea75-4e36-b982-5505bdd37a75",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "6536b753-4ecd-47fe-b06b-e397c24d6f60",
+  "data": {
+    "title": "ContactAdded"
+  },
+  "meta": {
+    "type": "EVENT",
+    "title": "ContactAdded",
+    "fields": [
+      {
+        "name": "contactId",
+        "type": "UUID",
+        "example": "c-001",
+        "generated": true,
+        "cardinality": "Single",
+        "idAttribute": true
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Alex Morgan",
+        "cardinality": "Single"
+      },
+      {
+        "name": "email",
+        "type": "String",
+        "example": "alex@example.com",
+        "cardinality": "Single"
+      },
+      {
+        "name": "role",
+        "type": "String",
+        "example": "Admin",
+        "cardinality": "Single"
+      }
+    ],
+    "linkedTo": null
+  },
+  "hash": "13f6wxm",
+  "timestamp": 1790029340866,
+  "userId": null
+}
