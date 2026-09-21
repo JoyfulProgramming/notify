@@ -1,0 +1,61 @@
+{
+  "id": "e6d35587-72c4-47fa-9473-789f75466b0a",
+  "type": "sticky_note",
+  "position": {
+    "x": 1445,
+    "y": 507
+  },
+  "parentId": "6536b753-4ecd-47fe-b06b-e397c24d6f60",
+  "data": {
+    "linkedTo": null
+  },
+  "meta": {
+    "type": "READMODEL",
+    "title": "ContactsView",
+    "fields": [
+      {
+        "name": "contacts",
+        "type": "Custom",
+        "subfields": [
+          {
+            "name": "contactId",
+            "type": "UUID",
+            "example": "c-001",
+            "cardinality": "Single",
+            "idAttribute": true
+          },
+          {
+            "pii": true,
+            "name": "name",
+            "type": "String",
+            "example": "Alex Morgan",
+            "cardinality": "Single"
+          },
+          {
+            "pii": true,
+            "name": "email",
+            "type": "String",
+            "example": "alex@example.com",
+            "cardinality": "Single"
+          },
+          {
+            "name": "role",
+            "type": "String",
+            "example": "Admin",
+            "cardinality": "Single"
+          }
+        ],
+        "cardinality": "List"
+      }
+    ],
+    "context": "INTERNAL",
+    "version": 3,
+    "linkedTo": null,
+    "listElement": true,
+    "todoListElement": false,
+    "createsAggregate": false
+  },
+  "hash": "1i15wtv",
+  "timestamp": 1790031029767,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+}
