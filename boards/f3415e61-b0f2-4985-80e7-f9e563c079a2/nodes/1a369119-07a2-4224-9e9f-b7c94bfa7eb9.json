@@ -2,19 +2,18 @@
   "id": "1a369119-07a2-4224-9e9f-b7c94bfa7eb9",
   "type": "html_screen",
   "position": {
-    "x": 1969,
-    "y": 109
+    "x": 1905,
+    "y": 145
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
     "linkedTo": null,
     "previewZoom": [
-      1,
-      1,
-      1
+      5,
+      5,
+      5
     ],
-    "defaultPageIndex": 0,
-    "screenOrientation": "portrait"
+    "defaultPageIndex": 0
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -128,7 +127,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "1p1c0bb",
-  "timestamp": 1790001500607,
+  "hash": "sfx15j",
+  "timestamp": 1790023060688,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
