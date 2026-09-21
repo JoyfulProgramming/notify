@@ -1,10 +1,17 @@
 {
   "id": "77b3a230-4393-4e87-b345-af448f1a53d8",
   "type": "html_screen",
+  "position": {
+    "x": 169,
+    "y": 109
+  },
   "parentId": "6536b753-4ecd-47fe-b06b-e397c24d6f60",
   "data": {
-    "title": "Bulma Form + Table",
-    "backgroundColor": "#ffffff"
+    "linkedTo": null,
+    "previewZoom": [
+      1
+    ],
+    "screenOrientation": "portrait"
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -42,12 +49,9 @@
         "cardinality": "List"
       }
     ],
-    "linkedTo": null,
-    "changedAttributes": [
-      "meta.fields"
-    ]
+    "linkedTo": null
   },
-  "hash": "ishafk",
-  "timestamp": 1790028095211,
-  "userId": null
+  "hash": "1a52hao",
+  "timestamp": 1790028213927,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
