@@ -17,7 +17,7 @@
         "name": "contactId",
         "type": "UUID",
         "example": "c-001",
-        "cardinality": "List",
+        "cardinality": "Single",
         "idAttribute": true
       },
       {
@@ -48,7 +48,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "1fbhxyn",
-  "timestamp": 1790031810078,
+  "hash": "1ogbt13",
+  "timestamp": 1790031819357,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
