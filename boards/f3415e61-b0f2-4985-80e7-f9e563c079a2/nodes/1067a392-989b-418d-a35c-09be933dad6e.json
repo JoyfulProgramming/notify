@@ -2,9 +2,10 @@
   "id": "1067a392-989b-418d-a35c-09be933dad6e",
   "type": "html_screen",
   "position": {
-    "x": 322.6070385748283,
-    "y": 8755.620207118996
+    "x": 555,
+    "y": 145
   },
+  "parentId": "6536b753-4ecd-47fe-b06b-e397c24d6f60",
   "data": {},
   "meta": {
     "type": "HTML_SCREEN",
@@ -15,6 +16,6 @@
     "backgroundColor": "#ffffff"
   },
   "hash": "bprpiv",
-  "timestamp": 1790028349567,
+  "timestamp": 1790028364096,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
