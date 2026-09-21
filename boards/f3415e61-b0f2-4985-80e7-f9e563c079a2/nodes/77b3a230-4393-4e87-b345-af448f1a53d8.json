@@ -20,15 +20,15 @@
         "id": "em-ipxb0oj",
         "color": "#e74c3c",
         "pageIndex": 0,
-        "blurOutside": true,
-        "whiteOutside": false
+        "blurOutside": false,
+        "whiteOutside": true
       },
       {
         "id": "em-pyj39ui",
         "color": "#e74c3c",
         "pageIndex": 0,
         "blurOutside": false,
-        "whiteOutside": true
+        "whiteOutside": false
       }
     ],
     "pages": [
@@ -70,7 +70,7 @@
       ""
     ]
   },
-  "hash": "mdgwir",
-  "timestamp": 1790028631018,
+  "hash": "vpygdk",
+  "timestamp": 1790028637359,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
