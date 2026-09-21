@@ -23,8 +23,8 @@
         "id": "em-yhpy9cb",
         "color": "#e74c3c",
         "pageIndex": 0,
-        "blurOutside": true,
-        "whiteOutside": false
+        "blurOutside": false,
+        "whiteOutside": true
       },
       {
         "id": "em-xppkdv9",
@@ -130,7 +130,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "15h25uk",
-  "timestamp": 1790027079989,
+  "hash": "1wa2gm4",
+  "timestamp": 1790027089686,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
