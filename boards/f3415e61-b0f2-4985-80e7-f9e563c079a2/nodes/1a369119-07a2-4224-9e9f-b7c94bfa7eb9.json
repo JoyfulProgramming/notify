@@ -2,18 +2,19 @@
   "id": "1a369119-07a2-4224-9e9f-b7c94bfa7eb9",
   "type": "html_screen",
   "position": {
-    "x": 1905,
-    "y": 145
+    "x": 1969,
+    "y": 109
   },
   "parentId": "478317dc-e862-431a-bf09-41e79a63eefb",
   "data": {
     "linkedTo": null,
     "previewZoom": [
-      5,
-      5,
-      5
+      1,
+      1,
+      1
     ],
-    "defaultPageIndex": 0
+    "defaultPageIndex": 0,
+    "screenOrientation": "portrait"
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -128,6 +129,6 @@
     "createsAggregate": false
   },
   "hash": "sfx15j",
-  "timestamp": 1790023089053,
+  "timestamp": 1790023092761,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
