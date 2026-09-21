@@ -2,18 +2,17 @@
   "id": "77b3a230-4393-4e87-b345-af448f1a53d8",
   "type": "html_screen",
   "position": {
-    "x": 169,
-    "y": 109
+    "x": 105,
+    "y": 145
   },
   "parentId": "6536b753-4ecd-47fe-b06b-e397c24d6f60",
   "data": {
     "linkedTo": null,
     "previewZoom": [
-      2,
-      2
+      5,
+      5
     ],
-    "defaultPageIndex": 0,
-    "screenOrientation": "portrait"
+    "defaultPageIndex": 0
   },
   "meta": {
     "type": "HTML_SCREEN",
@@ -66,6 +65,6 @@
     ]
   },
   "hash": "16f30x0",
-  "timestamp": 1790028312069,
+  "timestamp": 1790028336791,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
