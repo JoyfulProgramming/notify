@@ -2,12 +2,12 @@
   "id": "7cac2e29-73ce-4680-8a04-74b0fb330919",
   "type": "sticky_note",
   "position": {
-    "x": 0,
-    "y": 0
+    "x": 995,
+    "y": 507
   },
   "parentId": "6536b753-4ecd-47fe-b06b-e397c24d6f60",
   "data": {
-    "title": "ContactsView"
+    "linkedTo": null
   },
   "meta": {
     "type": "READMODEL",
@@ -41,12 +41,13 @@
         "cardinality": "Single"
       }
     ],
+    "context": "INTERNAL",
     "linkedTo": null,
-    "changedAttributes": [
-      "meta.fields"
-    ]
+    "listElement": true,
+    "todoListElement": false,
+    "createsAggregate": false
   },
-  "hash": "8j5f7e",
-  "timestamp": 1790029171194,
-  "userId": null
+  "hash": "bynypx",
+  "timestamp": 1790029843828,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
