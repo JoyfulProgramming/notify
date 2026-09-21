@@ -11,40 +11,33 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "ContactsView",
+    "title": "ContactsView (flat list fields)",
     "fields": [
       {
-        "name": "contacts",
-        "type": "Custom",
-        "subfields": [
-          {
-            "name": "contactId",
-            "type": "UUID",
-            "example": "c-001",
-            "cardinality": "Single",
-            "idAttribute": true
-          },
-          {
-            "pii": true,
-            "name": "name",
-            "type": "String",
-            "example": "Alex Morgan",
-            "cardinality": "Single"
-          },
-          {
-            "pii": true,
-            "name": "email",
-            "type": "String",
-            "example": "alex@example.com",
-            "cardinality": "Single"
-          },
-          {
-            "name": "role",
-            "type": "String",
-            "example": "Admin",
-            "cardinality": "Single"
-          }
-        ],
+        "name": "contactId",
+        "type": "UUID",
+        "example": "c-001",
+        "cardinality": "List",
+        "idAttribute": true
+      },
+      {
+        "pii": true,
+        "name": "name",
+        "type": "String",
+        "example": "Alex Morgan",
+        "cardinality": "List"
+      },
+      {
+        "pii": true,
+        "name": "email",
+        "type": "String",
+        "example": "alex@example.com",
+        "cardinality": "List"
+      },
+      {
+        "name": "role",
+        "type": "String",
+        "example": "Admin",
         "cardinality": "List"
       }
     ],
@@ -53,9 +46,13 @@
     "linkedTo": null,
     "listElement": true,
     "todoListElement": false,
-    "createsAggregate": false
+    "createsAggregate": false,
+    "changedAttributes": [
+      "meta.title",
+      "meta.fields"
+    ]
   },
-  "hash": "1i15wtv",
-  "timestamp": 1790031029767,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "j99mrk",
+  "timestamp": 1790031107647,
+  "userId": null
 }

@@ -11,7 +11,7 @@
   },
   "meta": {
     "type": "READMODEL",
-    "title": "ContactsView",
+    "title": "ContactsView (list of records)",
     "fields": [
       {
         "name": "contacts",
@@ -54,10 +54,10 @@
     "todoListElement": false,
     "createsAggregate": false,
     "changedAttributes": [
-      "meta.fields"
+      "meta.title"
     ]
   },
-  "hash": "1oudxu4",
-  "timestamp": 1790030075886,
+  "hash": "17xhkm0",
+  "timestamp": 1790031107647,
   "userId": null
 }
