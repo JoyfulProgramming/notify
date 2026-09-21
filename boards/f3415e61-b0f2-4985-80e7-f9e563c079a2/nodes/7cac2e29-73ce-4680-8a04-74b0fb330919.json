@@ -1,0 +1,47 @@
+{
+  "id": "7cac2e29-73ce-4680-8a04-74b0fb330919",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "6536b753-4ecd-47fe-b06b-e397c24d6f60",
+  "data": {
+    "title": "ContactsView"
+  },
+  "meta": {
+    "type": "READMODEL",
+    "title": "ContactsView",
+    "fields": [
+      {
+        "name": "contactId",
+        "type": "UUID",
+        "example": "c-001",
+        "cardinality": "Single",
+        "idAttribute": true
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Alex Morgan",
+        "cardinality": "Single"
+      },
+      {
+        "name": "email",
+        "type": "String",
+        "example": "alex@example.com",
+        "cardinality": "Single"
+      },
+      {
+        "name": "role",
+        "type": "String",
+        "example": "Admin",
+        "cardinality": "Single"
+      }
+    ],
+    "linkedTo": null
+  },
+  "hash": "1nffwre",
+  "timestamp": 1790029154756,
+  "userId": null
+}
