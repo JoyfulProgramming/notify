@@ -25,7 +25,7 @@
         "name": "name",
         "type": "String",
         "example": "Alex Morgan",
-        "cardinality": "List"
+        "cardinality": "Single"
       },
       {
         "pii": true,
@@ -48,7 +48,7 @@
     "todoListElement": false,
     "createsAggregate": false
   },
-  "hash": "1ogbt13",
-  "timestamp": 1790031819357,
+  "hash": "17mc14f",
+  "timestamp": 1790031824974,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
