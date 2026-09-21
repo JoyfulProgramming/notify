@@ -23,34 +23,38 @@
     "title": "Bulma Form + Table (Contacts View)",
     "fields": [
       {
-        "name": "contactId",
-        "type": "UUID",
-        "example": "c-001",
-        "mapping": "ContactsView.contactId",
-        "cardinality": "List",
-        "idAttribute": true
-      },
-      {
-        "pii": true,
-        "name": "name",
-        "type": "String",
-        "example": "Alex Morgan",
-        "mapping": "ContactsView.name",
-        "cardinality": "List"
-      },
-      {
-        "pii": true,
-        "name": "email",
-        "type": "String",
-        "example": "alex@example.com",
-        "mapping": "ContactsView.email",
-        "cardinality": "List"
-      },
-      {
-        "name": "role",
-        "type": "String",
-        "example": "Admin",
-        "mapping": "ContactsView.role",
+        "name": "contacts",
+        "type": "Custom",
+        "mapping": "ContactsView.contacts",
+        "subfields": [
+          {
+            "name": "contactId",
+            "type": "UUID",
+            "example": "c-001",
+            "cardinality": "Single",
+            "idAttribute": true
+          },
+          {
+            "pii": true,
+            "name": "name",
+            "type": "String",
+            "example": "Alex Morgan",
+            "cardinality": "Single"
+          },
+          {
+            "pii": true,
+            "name": "email",
+            "type": "String",
+            "example": "alex@example.com",
+            "cardinality": "Single"
+          },
+          {
+            "name": "role",
+            "type": "String",
+            "example": "Admin",
+            "cardinality": "Single"
+          }
+        ],
         "cardinality": "List"
       }
     ],
@@ -59,7 +63,7 @@
       "meta.fields"
     ]
   },
-  "hash": "1w0ltnq",
-  "timestamp": 1790029171194,
+  "hash": "icvvkj",
+  "timestamp": 1790030075886,
   "userId": null
 }
