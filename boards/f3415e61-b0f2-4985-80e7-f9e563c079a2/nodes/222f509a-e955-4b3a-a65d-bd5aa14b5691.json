@@ -1,0 +1,56 @@
+{
+  "id": "222f509a-e955-4b3a-a65d-bd5aa14b5691",
+  "type": "sticky_note",
+  "position": {
+    "x": 545,
+    "y": 507
+  },
+  "parentId": "6536b753-4ecd-47fe-b06b-e397c24d6f60",
+  "data": {},
+  "meta": {
+    "type": "COMMAND",
+    "title": "Bulma Form + Table Command",
+    "fields": [
+      {
+        "name": "name",
+        "type": "String",
+        "example": "Alex Morgan",
+        "mapping": "AddContact.name",
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "email",
+        "type": "String",
+        "example": "alex@example.com",
+        "mapping": "AddContact.email",
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "role",
+        "type": "String",
+        "example": "Admin",
+        "mapping": "AddContact.role",
+        "subfields": [],
+        "cardinality": "Single"
+      },
+      {
+        "name": "contacts",
+        "type": "Custom",
+        "example": "Alex Morgan, alex@example.com, Admin",
+        "mapping": "ContactsView.contacts",
+        "subfields": [],
+        "cardinality": "List"
+      }
+    ],
+    "context": "INTERNAL",
+    "linkedTo": null,
+    "listElement": false,
+    "todoListElement": false,
+    "createsAggregate": false
+  },
+  "hash": "qezvfw",
+  "timestamp": 1790028514068,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+}
