@@ -21,12 +21,14 @@
         "idAttribute": true
       },
       {
+        "pii": true,
         "name": "name",
         "type": "String",
         "example": "Alex Morgan",
         "cardinality": "Single"
       },
       {
+        "pii": true,
         "name": "email",
         "type": "String",
         "example": "alex@example.com",
@@ -39,9 +41,12 @@
         "cardinality": "Single"
       }
     ],
-    "linkedTo": null
+    "linkedTo": null,
+    "changedAttributes": [
+      "meta.fields"
+    ]
   },
-  "hash": "1nffwre",
-  "timestamp": 1790029154756,
+  "hash": "8j5f7e",
+  "timestamp": 1790029171194,
   "userId": null
 }

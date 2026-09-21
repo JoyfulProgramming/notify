@@ -12,6 +12,7 @@
     "title": "AddContact",
     "fields": [
       {
+        "pii": true,
         "name": "name",
         "type": "String",
         "example": "Alex Morgan",
@@ -19,6 +20,7 @@
         "cardinality": "Single"
       },
       {
+        "pii": true,
         "name": "email",
         "type": "String",
         "example": "alex@example.com",
@@ -39,11 +41,10 @@
     "todoListElement": false,
     "createsAggregate": false,
     "changedAttributes": [
-      "meta.title",
       "meta.fields"
     ]
   },
-  "hash": "1uqkdk9",
-  "timestamp": 1790028957320,
+  "hash": "2ferah",
+  "timestamp": 1790029171194,
   "userId": null
 }

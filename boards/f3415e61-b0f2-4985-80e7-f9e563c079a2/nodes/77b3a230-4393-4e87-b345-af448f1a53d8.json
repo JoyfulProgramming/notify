@@ -30,6 +30,7 @@
     "title": "Bulma Form + Table (Add Contact)",
     "fields": [
       {
+        "pii": true,
         "name": "name",
         "type": "String",
         "example": "Alex Morgan",
@@ -37,6 +38,7 @@
         "cardinality": "Single"
       },
       {
+        "pii": true,
         "name": "email",
         "type": "String",
         "example": "alex@example.com",
@@ -55,9 +57,12 @@
     "linkedTo": null,
     "pageUrls": [
       ""
+    ],
+    "changedAttributes": [
+      "meta.fields"
     ]
   },
-  "hash": "1peck8f",
-  "timestamp": 1790029048402,
-  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
+  "hash": "91kf5b",
+  "timestamp": 1790029171194,
+  "userId": null
 }
