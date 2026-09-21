@@ -1,9 +1,9 @@
 {
-  "id": "a80841a8-f791-46f3-9271-8821f22d9342",
+  "id": "fc4d1483-8ae4-4ef4-9295-a8bd8be939cb",
   "type": "html_screen",
   "position": {
-    "x": 921.6601662941484,
-    "y": 8806.337088101502
+    "x": 1097.1571075232828,
+    "y": 8859.948061664236
   },
   "data": {
     "linkedTo": "/app/board/f3415e61-b0f2-4985-80e7-f9e563c079a2/?moveToWidget=77b3a230-4393-4e87-b345-af448f1a53d8"
@@ -63,6 +63,6 @@
     "createsAggregate": false
   },
   "hash": "1nfuh55",
-  "timestamp": 1790028436934,
+  "timestamp": 1790028447583,
   "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
