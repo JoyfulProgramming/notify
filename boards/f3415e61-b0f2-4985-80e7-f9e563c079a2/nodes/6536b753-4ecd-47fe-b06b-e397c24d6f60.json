@@ -2,8 +2,8 @@
   "id": "6536b753-4ecd-47fe-b06b-e397c24d6f60",
   "type": "timeline",
   "position": {
-    "x": 0,
-    "y": 8492.006861432154
+    "x": -189.8040848890696,
+    "y": 8515.828426742117
   },
   "meta": {
     "type": "CHAPTER",
@@ -48,11 +48,15 @@
         {
           "id": "635a4374-0e61-4183-9fb7-b6dd97fb54de",
           "width": 450
+        },
+        {
+          "id": "f340f3af-e6d7-4a1a-a5f5-801ce7821c22",
+          "width": 450
         }
       ]
     }
   },
   "hash": null,
-  "timestamp": 1790028114991,
-  "userId": null
+  "timestamp": 1790028356631,
+  "userId": "65dd089f-4c31-4a78-bc8c-1d923d44e2bb"
 }
