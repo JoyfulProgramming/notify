@@ -1,0 +1,29 @@
+{
+  "id": "d6fd3d5b-5703-407a-a5fd-78809017fb3c",
+  "type": "sticky_note",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "parentId": "6536b753-4ecd-47fe-b06b-e397c24d6f60",
+  "data": {
+    "title": "ContactEdited"
+  },
+  "meta": {
+    "type": "EVENT",
+    "title": "ContactEdited",
+    "fields": [
+      {
+        "name": "contactId",
+        "type": "UUID",
+        "example": "c-001",
+        "cardinality": "Single",
+        "idAttribute": true
+      }
+    ],
+    "linkedTo": null
+  },
+  "hash": "8hex37",
+  "timestamp": 1790029341080,
+  "userId": null
+}
